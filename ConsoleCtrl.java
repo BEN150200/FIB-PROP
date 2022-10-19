@@ -14,6 +14,7 @@ public class ConsoleCtrl extends PresentationCtrl{
     Set<Integer> documents = new HashSet<Integer>();
 
 
+    
 
     String[] logo = {   "\n",
         "___  ___                                __ _     _    _               _ ",
