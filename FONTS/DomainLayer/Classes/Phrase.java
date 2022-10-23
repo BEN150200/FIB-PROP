@@ -1,4 +1,4 @@
-package Domain;
+package DomainLayer.Classes;
 
 public class Phrase {
     String phrase;

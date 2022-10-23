@@ -1,4 +1,4 @@
-package Domain;
+package DomainLayer.Classes;
 
 import java.util.ArrayList;
 import java.util.HashMap;
