@@ -1,22 +1,22 @@
-package DomainLayer.Classes;
+package Domain;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Words {
+public class WordCtrl {
     public static String invalidID = "";
-    private static Words instance = null;
+    private static WordCtrl instance = null;
 
     private HashMap<String, Word> words;
 
-    private Words() {
+    private WordCtrl() {
         words = new HashMap<String, Word>(0);
     }
 
-    public static Words getInstance() {
+    public static WordCtrl getInstance() {
         if (instance == null) {
-            instance = new Words();
+            instance = new WordCtrl();
         }
 
         return instance;

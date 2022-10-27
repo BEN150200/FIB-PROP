@@ -4,7 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class Author extends Phrase{
-    //Set<Document> documents = new HashSet<Document>();
+    Set<Document> documents = new HashSet<Document>();
     
     public Author(String p) {
         super(p);
@@ -20,6 +20,8 @@ public class Author extends Phrase{
     public String getAuthor() {
         return super.getString();
     }
+
+    
     
     /**
      * Setters

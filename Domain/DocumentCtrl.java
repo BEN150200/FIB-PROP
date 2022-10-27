@@ -1,24 +1,24 @@
-package DomainLayer.Classes;
+package Domain;
 
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 import javafx.util.Pair;
 
-public class DocumentSet {
-    private static DocumentSet instance = null;
+public class DocumentCtrl {
+    private static DocumentCtrl instance = null;
     private int usedID;
 
     private HashMap<Pair<String,String>, Document> documents;
 
-    public static DocumentSet getInstance() {
+    public static DocumentCtrl getInstance() {
         if (instance == null) {
-            instance = new DocumentSet();
+            instance = new DocumentCtrl();
         }
         return instance;
     }
 
-    public DocumentSet() {
+    public DocumentCtrl() {
         usedID = 0;
     }
 
@@ -33,7 +33,7 @@ public class DocumentSet {
         return null;
     }
 
-    public boolean exists() {
+    public boolean exists(String a, String t) {
 
         return true;
     }
