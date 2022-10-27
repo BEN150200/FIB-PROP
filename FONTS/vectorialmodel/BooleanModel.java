@@ -37,6 +37,10 @@ public class BooleanModel<SentenceId> {
         return null;
     }
     
+    /**
+     * 
+     * @return set of all the sentences ids
+     */
     public Set<SentenceId> all() {
         return index.directIndex.keySet();
     }
