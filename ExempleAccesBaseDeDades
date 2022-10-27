@@ -1,0 +1,23 @@
+// importat la factoria de controladors
+import DomainLayer.Factories.ControllerFactory
+
+
+// obtenir la factoria
+ControllerFactory cf = ControllerFactory.getInstance();
+
+
+/*
+Demanar a la factoria el controlador de la classe que volguem
+Disponibles(de moment):
+- Word
+- Author
+- Title
+- Document
+Les trobareu a DomainLayer/Interfaces junt amb les operacions disponibles per a cada controlador
+*/
+AuthorController ac = cf.getAuthorController();
+
+
+// Demanar coses al controlador 
+Author a = ac.getAuthor(authorName);
+

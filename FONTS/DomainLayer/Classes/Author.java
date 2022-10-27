@@ -1,13 +1,13 @@
-package Domain;
+package DomainLayer.Classes;
 
 import java.util.HashSet;
 import java.util.Set;
 
-public class Title extends Phrase {
+public class Author extends Phrase{
     Set<Document> documents = new HashSet<Document>();
     
-    public Title(String t) {
-        super(t);
+    public Author(String p) {
+        super(p);
     }
 
     /**
@@ -17,10 +17,12 @@ public class Title extends Phrase {
     /**
      * Getters
      */
-    public String getTitle() {
+    public String getAuthor() {
         return super.getString();
     }
 
+    
+    
     /**
      * Setters
      */

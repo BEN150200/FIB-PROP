@@ -1,4 +1,4 @@
-package Domain;
+package DomainLayer.Classes;
 
 import java.io.File;
 import java.io.FileNotFoundException;
