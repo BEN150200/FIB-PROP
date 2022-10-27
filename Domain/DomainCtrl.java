@@ -1,6 +1,10 @@
 package Domain;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
 
@@ -36,6 +40,28 @@ public class DomainCtrl {
     /**
      * Public Functions
      */
+    public boolean addAuthor(String aName) {
+        return AuthorCtrl.getInstance().addAuthor(aName);
+    }
+
+    public boolean addTitle(String title) {
+        return TitleCtrl.getInstance().addTitle(title);
+    }
+
+    public boolean addDocument(String a, String t, List<String> contnet) {
+        DocumentCtrl.getInstance().exists(a, t);
+        
+        return false;
+    }
+
+    public Set<Document> getDocs() {
+        return DocumentCtrl.getInstance().getAll();
+    }
+
+
+
+
+
 
      /**
      * File Managment Functions
@@ -45,16 +71,44 @@ public class DomainCtrl {
     //exc: the file is already in the system
     //post: the file is loaded into the system
     //      returns the docID of the new docuemnt
-    public Integer loadFile(String filePath) {
-        System.out.println("de moment el fitcher no s'ha carregat XD");
-        return -1;
-    }
+    public Boolean loadFile(String filePath) {
+        //System.out.println("de moment el fitcher no s'ha carregat XD");
+        try {
+            String extension = "";
 
+            int i = filePath.lastIndexOf('.');
+            if (i > 0) {
+                extension = filePath.substring(i+1);
+            }
+            if (extension != "txt") {
+                System.out.println("File is not a .txt");
+                return false;
+            }
+
+            File file = new File(filePath);
+            Scanner scanner = new Scanner(file);
+            String title;
+            String author;
+            if (scanner.hasNextLine()) {
+                title = scanner.nextLine();
+                if (scanner.hasNextLine()) author = scanner.nextLine(); 
+            }
+            //buscar si existeix el fitxer 
+            return false;
+
+        }
+        catch (FileNotFoundException e) {
+            System.out.println("File not found");
+            return false;
+        }
+
+        
+    }
 
     public Set<Integer> loadFileSet(Set<String> files) {
         Set<Integer> ids = new HashSet<>();
         for (String filePath : files) {
-            ids.add(loadFile(filePath));
+            loadFile(filePath);
         }
         return ids;
     }
@@ -68,12 +122,14 @@ public class DomainCtrl {
 
     //pre: doc is a document of the system and has ven modified
     //post: the doc is saved into his file
-    public void saveFile(Document doc) {
+    public void saveFile(int docID) {
         String path;
         try {
-            path = doc.getPath();
+            
 
-        } catch(NullPointerException e) {
+        } 
+        catch(NullPointerException e) {
+            
         }
 
         System.out.println("Funcio no implementada XD");
@@ -91,10 +147,5 @@ public class DomainCtrl {
         System.out.println("Funcio no implementada XD");
     }
 
-
-
-
-    public Set<Document> getDocs() {
-        return DocumentSet.getInstance().getAll();
-    }
+    
 }
