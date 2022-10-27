@@ -58,7 +58,7 @@ public class VectorialModel<DocId> {
             .collect(Collectors.toMap(
                 Function.identity(),
                 docId -> TFIDF.computeTFIDF(
-                    index.termFrequencies(docId),
+                    index.termsFrequencies(docId),
                     maxFrequencies.get(docId),
                     collection.size()
                 ),
