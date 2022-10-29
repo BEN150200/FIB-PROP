@@ -7,27 +7,30 @@ import java.util.Map.Entry;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-import helpers.Functional;
+import helpers.Maps;
+import helpers.Lists;
 
 public class VectorialModel<DocId> {
-    public static class Document {
-        public int maxFrequency() {return 0;}
-    }
 
     Index<DocId> index;
-    HashMap<DocId, Integer> maxFrequencies; // docId -> maxFreq of any String in the document
+    HashMap<DocId, Long> maxFrequencies; // docId -> maxFreq of any String in the document
     HashMap<DocId, HashMap<String, Double>> tfidfVectors;   // docId -> String -> [position]
 
-    private VectorialModel(Index<DocId> index, HashMap<DocId, Integer> maxFrequencies, HashMap<DocId, HashMap<String, Double>> tfidfVectors) {
+    private VectorialModel(Index<DocId> index, HashMap<DocId, Long> maxFrequencies, HashMap<DocId, HashMap<String, Double>> tfidfVectors) {
         this.index = index;
         this.maxFrequencies = maxFrequencies;
         this.tfidfVectors = tfidfVectors;
     }
 
+    /**
+     * 
+     * @param <DocId> document id type
+     * @return an empty VectorialModel, i.e., without no terms nor documents
+     */
     public static <DocId> VectorialModel<DocId> empty() {
         return new VectorialModel<DocId>(
             Index.empty(),
-            new HashMap<DocId, Integer>(),
+            new HashMap<DocId, Long>(),
             new HashMap<DocId, HashMap<String, Double>>()
         );
     }
@@ -38,17 +41,17 @@ public class VectorialModel<DocId> {
      * @param collection Mapping docId -> Document forall documents of the collection
      * @return a vectorial model representation of the collection
      */
-    static <DocId> VectorialModel<DocId> of(Map<DocId, List<String>> collection) {
+    public static <DocId> VectorialModel<DocId> of(Map<DocId, List<String>> collection) {
         // construct index
         Index<DocId> index = Index.of(collection);
 
         // map documents to their max frequencies
-        HashMap<DocId, Integer> maxFrequencies = collection.entrySet()
+        HashMap<DocId, Long> maxFrequencies = collection.entrySet()
             .stream().parallel()
             .collect(Collectors.toMap(
                     Entry::getKey,
-                    e -> e.getValue().size(), // TODO: frequency
-                    Functional::firstKey,
+                    e -> Lists.maxFrequency(e.getValue()),
+                    Maps::firstKey,
                     HashMap::new)
                 );
 
@@ -62,7 +65,7 @@ public class VectorialModel<DocId> {
                     maxFrequencies.get(docId),
                     collection.size()
                 ),
-                Functional::firstKey,
+                Maps::firstKey,
                 HashMap::new)
             );
 
@@ -86,13 +89,13 @@ public class VectorialModel<DocId> {
         var similarities = new HashMap<DocId, Double>();
 
         for(var tw : this.tfidfVectors.get(docId).entrySet()) {
-            var String = tw.getKey();
+            var term = tw.getKey();
             var weight = tw.getValue();
             
-            for(var dw : this.index.postingList(String).entrySet()) {
+            for(var dw : this.index.postingList(term).entrySet()) {
                 var otherId = dw.getKey();
-                var otherWeight = this.tfidfVectors.get(otherId).get(String);
-                similarities.merge(docId, weight*otherWeight, Functional.add);
+                var otherWeight = this.tfidfVectors.get(otherId).get(term);
+                similarities.merge(docId, weight*otherWeight, Maps.add);
             }
         }
 
