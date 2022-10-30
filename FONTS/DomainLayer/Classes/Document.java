@@ -1,12 +1,16 @@
 package DomainLayer.Classes;
 
+import java.time.LocalDateTime;
+
 public class Document {
 
     private Integer docID;
-    private Author  author = new Author(null);
-    private Title  title = new Title(null);
-    private String filePath = null;
+    private Author  author;
+    private Title  title;
+    private String filePath;
     private String fileName;
+    private LocalDateTime creationDate;
+    private LocalDateTime modificationDate;
     
     private enum Format {TXT, XML, PROP}
     private Format format;
@@ -22,16 +26,31 @@ public class Document {
         filePath = p;
     }
 
+    //getters
+    public Author getAuthor() {
+        return author;
+    }
+
+    public Title getTitle() {
+        return title;
+    }
 
     public String getPath() {
         return filePath;
     }
 
+    public LocalDateTime getCreationDate() {
+        return creationDate;
+    }
+
+    public LocalDateTime getModificationDate() {
+        return modificationDate;
+    }
+
+    //setters
     public void setPath(String p) {
         if (filePath == null) filePath = p;
     }
 
-    public String getTitle() {
-        return title.getTitle();
-    }
+    
 }

@@ -9,7 +9,8 @@ public class DocumentCtrl {
     private static DocumentCtrl instance = null;
     private int usedID;
 
-    private HashMap<Pair<String,String>, Document> documents;
+    private HashMap<Pair<String,String>, Integer> documentsID;
+    private HashMap<Integer, Document> documents;
 
     public static DocumentCtrl getInstance() {
         if (instance == null) {
@@ -22,14 +23,21 @@ public class DocumentCtrl {
         usedID = 0;
     }
 
-    
+
+    public Integer getDocumentID(String t, String a) {
+        return documentsID.get(new Pair<String,String>(t,a));
+    }
+
+    public Document getDocument(String t, String a) {
+        return documents.get(documentsID.get(new Pair<String,String>(t,a)));
+    }
 
     public Document getDocument(int id) {
         Document doc = documents.get(id);
         return doc;
     }
 
-    public Set<Document> getAll() {
+    public Set<Integer> getAllIDs() {
         return null;
     }
 
