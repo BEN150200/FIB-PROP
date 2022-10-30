@@ -26,7 +26,13 @@ public class Document {
         filePath = p;
     }
 
-    //getters
+    /**
+     * Public Functions
+     */
+
+    /**
+     * Getters
+     */
     public Author getAuthor() {
         return author;
     }
@@ -47,7 +53,9 @@ public class Document {
         return modificationDate;
     }
 
-    //setters
+    /**
+     * Setters
+     */
     public void setPath(String p) {
         if (filePath == null) filePath = p;
     }

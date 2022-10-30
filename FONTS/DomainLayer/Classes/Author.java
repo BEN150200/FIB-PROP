@@ -21,7 +21,7 @@ public class Author extends Phrase{
         return super.getString();
     }
 
-    public Set<Integer> getDocuments() {
+    public Set<Integer> getAllDocsID() {
         return documents;
     }
 
@@ -29,9 +29,10 @@ public class Author extends Phrase{
         return documents.contains(docID);
     }
 
-    
-    
     /**
      * Setters
      */
+    public boolean addDoc(Integer docID) {
+        return documents.add(docID);
+    }
 }

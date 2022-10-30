@@ -4,7 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class Title extends Phrase {
-    Set<Document> documents = new HashSet<Document>();
+    Set<Integer> documents = new HashSet<Integer>();
     
     public Title(String t) {
         super(t);
@@ -17,11 +17,22 @@ public class Title extends Phrase {
     /**
      * Getters
      */
-    public String getTitle() {
+    public String getTitleName() {
         return super.getString();
+    }
+
+    public Set<Integer> getAllDocsID() {
+        return documents;
+    }
+
+    public boolean isTitleOfDoc(Integer docID) {
+        return documents.contains(docID);
     }
 
     /**
      * Setters
      */
+    public boolean addDoc(Integer docID) {
+        return documents.add(docID);
+    }
 }

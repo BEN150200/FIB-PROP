@@ -3,6 +3,9 @@ package DomainLayer.Classes;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
+
+import javax.swing.text.StyledEditorKit.BoldAction;
+
 import javafx.util.Pair;
 
 public class DocumentCtrl {
@@ -19,11 +22,21 @@ public class DocumentCtrl {
         return instance;
     }
 
+    
     public DocumentCtrl() {
         usedID = 0;
     }
 
+    /**
+     * Public Functions
+     */
 
+    /**
+     * Getters
+     */
+    
+    public boolean existsDocumentID()
+    
     public Integer getDocumentID(String t, String a) {
         return documentsID.get(new Pair<String,String>(t,a));
     }
@@ -37,15 +50,19 @@ public class DocumentCtrl {
         return doc;
     }
 
-    public Set<Integer> getAllIDs() {
-        return null;
+    public Set<Integer> getAllDocsIDs() {
+        return new HashSet(documentsID.values());
     }
+
 
     public boolean exists(String a, String t) {
 
         return true;
     }
 
+    /**
+     * Setters
+     */
 
 
     
