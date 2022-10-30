@@ -1,12 +1,16 @@
 package vectorialmodel;
 
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
-import helpers.Functional;
+import helpers.Maps;
 
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 import java.util.function.Function;
 
@@ -21,14 +25,19 @@ public class Index<DocId> {
     }
 
     public static <DocId> Index<DocId> empty() {
-        return null;
+        return new Index<DocId>(
+            new HashMap<String, HashMap<DocId, Set<Integer>>>(),
+            new HashMap<DocId, HashMap<String, Set<Integer>>>()
+        );
     }
 
     public static Function<Map.Entry<String, Set<Integer>>, Set<Integer>> positions = Map.Entry::getValue;
 
-    // TODO: construct inverted and direct files
     public static <DocId> Index<DocId> of(Map<DocId, List<String>> collection) {
-        return null;
+        Index<DocId> index = Index.empty();
+        for(var entry : collection.entrySet())
+            index.insert(entry.getKey(), entry.getValue());
+        return index;
     }
 
     /**
@@ -57,8 +66,77 @@ public class Index<DocId> {
         .collect(Collectors.toMap(
             Map.Entry::getKey,
             positions.andThen(Set::size),
-            Functional::firstKey,
+            Maps::firstKey,
             HashMap::new
         ));
+    }
+
+
+    public void insert(DocId docId, List<String> content) {
+        // remove if previously existing
+        if(this.directIndex.containsKey(docId)) {
+            for(var entry : directIndex.get(docId).entrySet()) {
+                var term = entry.getKey();
+                this.invertedIndex.get(term).remove(docId);
+            }
+        }
+
+        // compute positions
+        var termPositions = new HashMap<String, Set<Integer>>();
+        for(int i = 0; i < content.size(); i++) {
+            var term = content.get(i);
+            if(termPositions.containsKey(term))
+                termPositions.get(term).add(i);
+            else {
+                var positions = new HashSet<Integer>();
+                positions.add(i);
+                termPositions.put(term, positions);
+            }
+        }
+
+        this.directIndex.put(docId, termPositions);
+
+        // add to inverted file
+        for(var entry : termPositions.entrySet()) {
+            var term = entry.getKey();
+            var positions = entry.getValue();
+            
+            if(this.invertedIndex.containsKey(term))
+                this.invertedIndex.get(term).put(docId, positions);
+            else {
+                var posting = new HashMap<DocId, Set<Integer>>();
+                posting.put(docId, positions);
+                this.invertedIndex.put(term, posting);
+            }
+        }
+
+        
+    }
+
+    public static <DocId> String print(Map.Entry<DocId, Set<Integer>> posting) {
+        return "(" + posting.getKey() + ", " + posting.getValue() + ")";
+    }
+
+    public static <DocId> String print(Map<?, ? extends Map<?, Set<Integer>>> invertedIndex) {
+        return invertedIndex.entrySet().stream()
+                .map(entry ->
+                    "%s : [%s]".formatted(
+                        entry.getKey(),
+                        entry.getValue().entrySet().stream()
+                            .map(Index::print)
+                            .collect(Collectors.joining(", "))
+                    )
+                )
+                .collect(Collectors.joining(",\n"));
+    }
+
+
+    public static <DocId> String print(Index<DocId> index) {
+        return "InvertedIndex {\n\t%s\n},\nDirectIndex {\n\t%s\n}".formatted(
+            print(index.invertedIndex)
+                .replace("\n", "\n\t"),
+                print(index.directIndex)
+                .replace("\n", "\n\t")
+        );
     }
 }

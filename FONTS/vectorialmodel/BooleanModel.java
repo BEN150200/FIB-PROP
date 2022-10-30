@@ -1,23 +1,44 @@
 package vectorialmodel;
 
-import java.util.Arrays;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.Map.Entry;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
-import helpers.Functional;
+import helpers.Lists;
+
+import static helpers.Maps.*;
 
 public class BooleanModel<SentenceId> {
 
-    Index<SentenceId> index;
+    private Index<SentenceId> index;
+
+    private BooleanModel(Index<SentenceId> index) {
+        this.index = index;
+    }
+
+    /**
+     * 
+     * @param <SentenceId>
+     * @return an empty BooleanModel
+     */
+    public static <SentenceId> BooleanModel<SentenceId> empty() {
+        return new BooleanModel<SentenceId>(Index.empty());
+    }
+
+    public static <SentenceId> BooleanModel<SentenceId> of(Index<SentenceId> index) {
+        return new BooleanModel<SentenceId>(index);
+    }
+
+    public static <SentenceId> BooleanModel<SentenceId> of(Map<SentenceId, List<String>> collection) {
+        return new BooleanModel<SentenceId>(
+            Index.of(collection)
+        );
+    }
 
     /**
      * 
@@ -34,12 +55,14 @@ public class BooleanModel<SentenceId> {
      * @return ids of sentences containing all the terms in set
      */
     public Set<SentenceId> querySet(Collection<String> set) {
-        var Ds = set.stream().map(this::queryTerm).toList();
-        var D = Ds.stream().min(Comparator.comparing(Set::size)).orElseGet(Set::of);
-        return D.stream()
-                .filter(d -> Ds.stream().filter(Di -> !Di.equals(D))
-                                .allMatch(Di -> Di.contains(d)))
-                .collect(Collectors.toSet());
+        return querySetStream(set).collect(Collectors.toSet());
+    }
+
+    public Stream<SentenceId> querySetStream(Collection<String> set) {
+        var Ds = set.stream().map(this::queryTerm).toList(); // sets of docids
+        var Dmin = Ds.stream().min(Comparator.comparing(Set::size)).orElseGet(Set::of); // smallest set
+        return Dmin.stream()
+                .filter(d -> Ds.stream().allMatch(Di -> Di.contains(d)));
     }
 
     /**
@@ -47,34 +70,29 @@ public class BooleanModel<SentenceId> {
      * @return ids of sentences containing all the terms of the sequence in order
      */
     public Set<SentenceId> querySequence(List<String> sequence) {
+        return querySequenceStream(sequence).collect(Collectors.toSet());
+    }
+
+    public Stream<SentenceId> querySequenceStream(List<String> sequence) {
         var Ds = sequence.stream().map(index::postingList).toList();
-        var m = IntStream.range(0, Ds.size()).boxed()
-                        .min(Comparator.comparing(i -> Ds.get(i).size()))
-                        .orElse(-1);
+        
+        if(Ds.isEmpty()) return Stream.empty();
 
-        if(m == -1) return Set.<SentenceId>of();
-
+        int m = Lists.minIndex(Ds, HashMap::size);
         var Dm = Ds.get(m);
 
         return Dm.entrySet()
             .stream().parallel()
-            .map(entry -> {
-                var d = entry.getKey();
-                var P = entry.getValue();
-
-                return Map.entry
-                (
-                    d,
-                    P.stream().parallel()
-                        .filter(pos -> Ds.stream().filter(Di -> !Di.equals(Dm))
-                                                .allMatch(Di -> Di.get(d).contains(pos + Ds.indexOf(Di) - m))
-                        )
-                        .collect(Collectors.toSet())
-                );
-            })
-            .filter(entry -> !entry.getValue().isEmpty())
-            .map(Map.Entry::getKey)
-            .collect(Collectors.toSet());
+            .map(value(
+                (d, P) -> P.stream().parallel()
+                 .filter(pos ->
+                    Lists.forall(
+                        Ds,
+                        (i, Di) -> Di.get(d).contains(pos + i - m)
+                    ))
+            ))
+            .filter(entry -> entry.getValue().count() > 0)
+            .map(Map.Entry::getKey);
     }
     
     /**

@@ -9,8 +9,8 @@ import helpers.Maths;
 
 public class TFIDF {
 
-    public static HashMap<String, Double> computeTFIDF(HashMap<String, Integer> StringFrequencies, int maxFrequency, long documentsCount) {
-        Function<Integer, Double> tfidf = frequency -> (frequency / (double) maxFrequency) * Maths.log2(documentsCount / maxFrequency);
+    public static HashMap<String, Double> computeTFIDF(HashMap<String, Integer> StringFrequencies, long maxFrequency, long documentsCount) {
+        Function<Integer, Double> tfidf = frequency -> (frequency / maxFrequency) * Maths.log2(documentsCount / maxFrequency);
         
         return StringFrequencies.entrySet().stream()
             .collect(Collectors.toMap(
