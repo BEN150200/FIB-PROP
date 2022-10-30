@@ -1,59 +1,49 @@
 package vectorialmodel;
 
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
-
-import helpers.Maps;
-
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import java.util.Set;
-import java.util.function.Function;
+import io.vavr.Tuple2;
+import io.vavr.collection.HashMap;
+import io.vavr.collection.HashSet;
+import io.vavr.collection.Map;
+import io.vavr.collection.Seq;
 
 public class Index<DocId> {
 
-    public HashMap<String, HashMap<DocId, Set<Integer>>> invertedIndex; // String -> docId -> [position]
-    public HashMap<DocId, HashMap<String, Set<Integer>>> directIndex;   // docId -> String -> [position]
+    public HashMap<String, HashMap<DocId, HashSet<Integer>>> invertedIndex; // String -> docId -> [position]
+    public HashMap<DocId, HashMap<String, HashSet<Integer>>> directIndex;   // docId -> String -> [position]
     
-    private Index(HashMap<String, HashMap<DocId, Set<Integer>>> invertedIndex, HashMap<DocId, HashMap<String, Set<Integer>>> directIndex) {
+    private Index(HashMap<String, HashMap<DocId, HashSet<Integer>>> invertedIndex, HashMap<DocId, HashMap<String, HashSet<Integer>>> directIndex) {
         this.invertedIndex = invertedIndex;
         this.directIndex = directIndex;
     }
 
     public static <DocId> Index<DocId> empty() {
         return new Index<DocId>(
-            new HashMap<String, HashMap<DocId, Set<Integer>>>(),
-            new HashMap<DocId, HashMap<String, Set<Integer>>>()
+            HashMap.empty(),
+            HashMap.empty()
         );
     }
 
-    public static Function<Map.Entry<String, Set<Integer>>, Set<Integer>> positions = Map.Entry::getValue;
-
-    public static <DocId> Index<DocId> of(Map<DocId, List<String>> collection) {
-        Index<DocId> index = Index.empty();
-        for(var entry : collection.entrySet())
-            index.insert(entry.getKey(), entry.getValue());
-        return index;
+    public static <DocId> Index<DocId> of(Map<DocId, Seq<String>> collection) {
+        return collection.foldLeft(
+            Index.<DocId>empty(),
+            Index::insert
+        );
     }
 
     /**
      * @param term term whose posting list we want to retrieve
      * @return a mapping docId -> [positions] forall documents containing the String parameter
      */
-    public HashMap<DocId, Set<Integer>> postingList(String term) {
-        return invertedIndex.get(term);
+    public HashMap<DocId, HashSet<Integer>> postingList(String term) {
+        return invertedIndex.get(term).orNull();
     }
     
     /**
      * @param docId id of the documents whose term frequencies we wish to retrieve
      * @return a mapping term -> [positions] forall terms of the document identified by docId
      */
-    public HashMap<String, Set<Integer>> termsPositions(DocId docId) {
-        return directIndex.get(docId);
+    public HashMap<String, HashSet<Integer>> termsPositions(DocId docId) {
+        return directIndex.get(docId).orNull();
     }
 
     /**
@@ -61,82 +51,90 @@ public class Index<DocId> {
      * @return a mapping term -> [positions] forall terms of the document identified by docId
      */
     public HashMap<String, Integer> termsFrequencies(DocId docId) {
-        return directIndex.get(docId).entrySet()
-        .stream().parallel()
-        .collect(Collectors.toMap(
-            Map.Entry::getKey,
-            positions.andThen(Set::size),
-            Maps::firstKey,
-            HashMap::new
-        ));
+        return directIndex.get(docId).map(
+                document ->
+                    document.mapValues(HashSet::size)).orNull();
     }
 
+    public Index<DocId> insert(Tuple2<DocId, Seq<String>> document) {
+        return this.insert(document._1, document._2);
+    }
 
-    public void insert(DocId docId, List<String> content) {
-        // remove if previously existing
-        if(this.directIndex.containsKey(docId)) {
-            for(var entry : directIndex.get(docId).entrySet()) {
-                var term = entry.getKey();
-                this.invertedIndex.get(term).remove(docId);
-            }
-        }
-
+    /**
+     * 
+     * @param docId id of the document to be inserted
+     * @param content content of the document to be inserted
+     * @return a new index with the document inserted. If it previously existed, it is replaced
+     */
+    public Index<DocId> insert(DocId docId, Seq<String> content) {
         // compute positions
-        var termPositions = new HashMap<String, Set<Integer>>();
-        for(int i = 0; i < content.size(); i++) {
-            var term = content.get(i);
-            if(termPositions.containsKey(term))
-                termPositions.get(term).add(i);
-            else {
-                var positions = new HashSet<Integer>();
-                positions.add(i);
-                termPositions.put(term, positions);
-            }
-        }
+        var termsPositions = content.iterator()
+            .zipWithIndex()
+            .foldLeft(HashMap.<String, HashSet<Integer>>empty(),
+                (positions, termIndex) -> positions.merge(
+                    HashMap.of(termIndex._1, HashSet.of(termIndex._2)),
+                    HashSet::union
+                )
+            );
 
-        this.directIndex.put(docId, termPositions);
+        var newDirectIndex = this.directIndex.put(docId, termsPositions);
+
+        // remove if previously existing
+        var removedInverted = this.directIndex.get(docId).map(
+            doc -> doc.keySet().foldLeft(this.invertedIndex, HashMap::remove)
+        )
+        .getOrElse(this.invertedIndex);
+
 
         // add to inverted file
-        for(var entry : termPositions.entrySet()) {
-            var term = entry.getKey();
-            var positions = entry.getValue();
-            
-            if(this.invertedIndex.containsKey(term))
-                this.invertedIndex.get(term).put(docId, positions);
-            else {
-                var posting = new HashMap<DocId, Set<Integer>>();
-                posting.put(docId, positions);
-                this.invertedIndex.put(term, posting);
-            }
-        }
-
+        var newInvertedIndex = termsPositions
+            .foldLeft(removedInverted, (inverted, termPositions) -> inverted.merge(
+                HashMap.of(termPositions._1, HashMap.of(docId, termPositions._2)),
+                HashMap::merge
+            ));
         
+            return new Index<DocId>(newInvertedIndex, newDirectIndex);
     }
 
-    public static <DocId> String print(Map.Entry<DocId, Set<Integer>> posting) {
-        return "(" + posting.getKey() + ", " + posting.getValue() + ")";
-    }
-
-    public static <DocId> String print(Map<?, ? extends Map<?, Set<Integer>>> invertedIndex) {
-        return invertedIndex.entrySet().stream()
-                .map(entry ->
-                    "%s : [%s]".formatted(
-                        entry.getKey(),
-                        entry.getValue().entrySet().stream()
-                            .map(Index::print)
-                            .collect(Collectors.joining(", "))
-                    )
-                )
-                .collect(Collectors.joining(",\n"));
-    }
-
-
-    public static <DocId> String print(Index<DocId> index) {
-        return "InvertedIndex {\n\t%s\n},\nDirectIndex {\n\t%s\n}".formatted(
-            print(index.invertedIndex)
-                .replace("\n", "\n\t"),
-                print(index.directIndex)
-                .replace("\n", "\n\t")
+    private HashMap<String, HashMap<DocId, HashSet<Integer>>> invertedWithout(DocId docId) {
+        return this.invertedIndex.removeAll(
+            this.directIndex.get(docId)
+                .map(HashMap::keySet)
+                .getOrElse(HashSet::empty)
         );
     }
+
+    public Index<DocId> remove(DocId docId) {
+        return new Index<DocId>(
+            this.invertedWithout(docId),
+            this.directIndex.remove(docId)
+        );
+    }
+
+    // public static <DocId> String print(Map.Entry<DocId, Set<Integer>> posting) {
+    //     return "(" + posting.getKey() + ", " + posting.getValue() + ")";
+    // }
+
+    // public static <DocId> String print(Map<?, ? extends Map<?, Set<Integer>>> invertedIndex) {
+    //     return invertedIndex.entrySet().stream()
+    //             .map(entry ->
+    //                 "%s : [%s]".formatted(
+    //                     entry.getKey(),
+    //                     entry.getValue().entrySet().stream()
+    //                         .map(Index::print)
+    //                         .collect(Collectors.joining(", "))
+    //                 )
+    //             )
+    //             .collect(Collectors.joining(",\n"));
+    // }
+
+
+    // public static <DocId> String print(Index<DocId> index) {
+    //     return "InvertedIndex {\n\t%s\n},\nDirectIndex {\n\t%s\n}".formatted(
+    //         print(index.invertedIndex)
+    //             .replace("\n", "\n\t"),
+    //             print(index.directIndex)
+    //             .replace("\n", "\n\t")
+    //     );
+    // }
 }
