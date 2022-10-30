@@ -4,8 +4,6 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.swing.text.StyledEditorKit.BoldAction;
-
 import javafx.util.Pair;
 
 public class DocumentCtrl {
@@ -35,37 +33,59 @@ public class DocumentCtrl {
      * Getters
      */
     
-    public boolean existsDocumentID()
+    public boolean existsDocument(Integer docID) {
+        return documentsID.containsValue(docID);
+    }
+
+    public boolean existsDocument(String titleName, String authorName) {
+        return documentsID.containsKey(new Pair<String,String>(titleName,authorName));
+    }
+
+    public boolean existsDocument(Document doc) {
+        return documents.containsValue(doc);
+    }
     
-    public Integer getDocumentID(String t, String a) {
-        return documentsID.get(new Pair<String,String>(t,a));
+    public Integer getDocumentID(String titleName, String authorName) {
+        return documentsID.get(new Pair<String,String>(titleName,authorName));
     }
 
-    public Document getDocument(String t, String a) {
-        return documents.get(documentsID.get(new Pair<String,String>(t,a)));
+    public Document getDocument(String titleName, String authorName) {
+        return documents.get(documentsID.get(new Pair<String,String>(titleName,authorName)));
     }
 
-    public Document getDocument(int id) {
-        Document doc = documents.get(id);
+    public Document getDocument(int docID) {
+        Document doc = documents.get(docID);
         return doc;
     }
 
     public Set<Integer> getAllDocsIDs() {
-        return new HashSet(documentsID.values());
+        return documents.keySet();
     }
 
+    public Set<Pair<String,String>> getAllDocsTitlesAuthors() {
+        return documentsID.keySet();
+    }
 
-    public boolean exists(String a, String t) {
-
-        return true;
+    public Set<Document> getAllDocuments() {
+        return new HashSet<Document>(documents.values());
     }
 
     /**
      * Setters
      */
 
+    public boolean addDocument(Document doc) {
+        Title t = doc.getTitle();
+        Author a = doc.getAuthor();
+        boolean exists = documentsID.containsKey(new Pair<String, String> (t.getString(),a.getString()));
+        if (exists) return false;
+        else {
+            ++usedID;
+            doc.setDocumentID(usedID);
+            documentsID.put(new Pair<String, String> (t.getString(),a.getString()), usedID);
+            documents.put(usedID, doc);
+            return true;
+        }
+    }
 
-    
-
-    
 }

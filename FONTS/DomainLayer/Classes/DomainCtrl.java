@@ -1,14 +1,15 @@
 package DomainLayer.Classes;
 
+/* 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.util.HashSet;
+import javax.xml.catalog.CatalogFeatures.Feature;
+*/
+
 import java.util.List;
-import java.util.Scanner;
 import java.util.Set;
 
-import javax.xml.catalog.CatalogFeatures.Feature;
 
 public class DomainCtrl {
 
@@ -35,27 +36,57 @@ public class DomainCtrl {
         return instance;
     }
 
-    
-
     /**
      * Public Functions
      */
-    public boolean addAuthor(String aName) {
-        return AuthorCtrl.getInstance().addAuthor(aName);
-    }
 
-    public boolean addTitle(String title) {
-        return TitleCtrl.getInstance().addTitle(title);
-    }
-
-    public boolean addDocument(String a, String t, List<String> contnet) {
-        DocumentCtrl.getInstance().exists(a, t);
-        
+    /**
+     * Add Elements
+     */
+    public boolean addAuthor(String authorName) {
+        if (!AuthorCtrl.getInstance().existsAuthorName(authorName)) {
+            Author a = new Author(authorName);
+            AuthorCtrl.getInstance().addAuthor(a);
+            return true;
+        }
         return false;
     }
 
+    public boolean addTitle(String titleName) {
+        if (!TitleCtrl.getInstance().existsTitleName(titleName)) {
+            Title t = new Title(titleName);
+            TitleCtrl.getInstance().addTitle(t);
+            return true;
+        }
+        return false;
+    }
+
+    public boolean addDocument(String authorName, String titleName, List<String> contnet) {
+        boolean exists = DocumentCtrl.getInstance().existsDocument(authorName, titleName);
+        if (!exists) {
+            Title t = TitleCtrl.getInstance().getTitle(titleName);
+            Author a = AuthorCtrl.getInstance().getAuthor(authorName);
+            if (t == null) {
+                t = new Title(titleName);
+                TitleCtrl.getInstance().addTitle(t);
+            }
+            if (a == null) {
+                a = new Author(authorName);
+                AuthorCtrl.getInstance().addAuthor(a);
+            }
+            Document d = new Document(t, a);
+            DocumentCtrl.getInstance().addDocument(d);
+            Integer ID = d.getID();
+            t.addDoc(ID);
+            a.addDoc(ID);
+            return true;
+        }
+        return false;
+    }
+
+
     public Set<Document> getDocs() {
-        return DocumentCtrl.getInstance().getAll();
+        return DocumentCtrl.getInstance().getAllDocuments();
     }
 
 
@@ -71,6 +102,7 @@ public class DomainCtrl {
     //exc: the file is already in the system
     //post: the file is loaded into the system
     //      returns the docID of the new docuemnt
+    /* 
     public Boolean loadFile(String filePath) {
         //System.out.println("de moment el fitcher no s'ha carregat XD");
         try {
@@ -100,11 +132,10 @@ public class DomainCtrl {
         catch (FileNotFoundException e) {
             System.out.println("File not found");
             return false;
-        }
-
-        
+        } 
     }
-
+    */
+    /* 
     public Set<Integer> loadFileSet(Set<String> files) {
         Set<Integer> ids = new HashSet<>();
         for (String filePath : files) {
@@ -134,11 +165,13 @@ public class DomainCtrl {
 
         System.out.println("Funcio no implementada XD");
     }
+    */
 
 
     /**
      * Export Functions
      */
+    /* 
     public void exportTXT(Document doc, String path, String name) {
         System.out.println("Funcio no implementada XD");
     }
@@ -146,6 +179,8 @@ public class DomainCtrl {
     public void exportXML(Document doc, String path, String name) {
         System.out.println("Funcio no implementada XD");
     }
+    */
+
 
     
 }

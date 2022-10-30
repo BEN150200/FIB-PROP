@@ -8,12 +8,12 @@ public class Document {
     private Author  author;
     private Title  title;
     private String filePath;
-    private String fileName;
+    //private String fileName;
     private LocalDateTime creationDate;
     private LocalDateTime modificationDate;
     
-    private enum Format {TXT, XML, PROP}
-    private Format format;
+    //private enum Format {TXT, XML, PROP}
+    //private Format format;
 
     public Document(int id) {
         docID = id;
@@ -24,6 +24,16 @@ public class Document {
         author = new Author(a);
         title = new Title(t);
         filePath = p;
+    }
+
+    public Document(String titleName, String authorName, String path) {
+        author = new Author(authorName);
+        title = new Title(titleName);
+    }
+
+    public Document(Title t, Author a) {
+        title = t;
+        author = a;
     }
 
     /**
@@ -45,6 +55,10 @@ public class Document {
         return filePath;
     }
 
+    public Integer getID() {
+        return docID;
+    }
+
     public LocalDateTime getCreationDate() {
         return creationDate;
     }
@@ -56,8 +70,20 @@ public class Document {
     /**
      * Setters
      */
-    public void setPath(String p) {
-        if (filePath == null) filePath = p;
+    public boolean setPath(String path) {
+        if (filePath == null) {
+            filePath = path;
+            return true;
+        }
+        return false;
+    }
+
+    public boolean setDocumentID(Integer id) {
+        if (docID == null) {
+            docID = id;
+            return true;
+        }
+        return false;
     }
 
     

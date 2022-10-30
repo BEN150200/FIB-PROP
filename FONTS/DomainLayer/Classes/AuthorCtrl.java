@@ -22,8 +22,12 @@ public class AuthorCtrl {
     /**
      * Getters
      */
-    public boolean existsAuthor(String authorName) {
+    public boolean existsAuthorName(String authorName) {
         return authors.containsKey(authorName);
+    }
+
+    public boolean existsAuthor(Author a) {
+        return authors.containsValue(a);
     }
 
     public Author getAuthor(String authorName) {
@@ -31,7 +35,7 @@ public class AuthorCtrl {
     }
 
     public Set<Author> getAllAuthors() {
-        return new HashSet(authors.values());
+        return new HashSet<Author>(authors.values());
     }
 
     public Set<String> getAllAuthorsNames() {
@@ -41,13 +45,17 @@ public class AuthorCtrl {
     /**
      * Setters
      */
-    public boolean addAuthor(String authorName) {
+    public boolean addAuthorName(String authorName) {
         boolean exists = authors.containsKey(authorName);
         if (!exists) {
             Author author = new Author(authorName);
             authors.put(authorName, author);
         }
         return exists;
+    }
+
+    public void addAuthor(Author a) {
+        authors.put(a.getAuthorName(),a);
     }
 
     public boolean deleteAuthor(String authorName) {

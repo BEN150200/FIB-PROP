@@ -1,5 +1,6 @@
-import Domain.Document;
-import Domain.DomainCtrl;
+import DomainLayer.Classes.AuthorCtrl;
+import DomainLayer.Classes.DomainCtrl;
+import DomainLayer.Classes.TitleCtrl;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -32,11 +33,19 @@ public class ConsoleCtrl extends PresentationCtrl{
                         "These are the avileble commands:",
                         "   1   Add a document in the sistem",
                         "   2   Add an autor in the sistem",
-                        "   3   Add a new title in the sistem",
-                        "   ",
-                        "   7   Make a search",
-                        "   8   Exit the program",
-                        "   9   List all the docs on the sistem",
+                        "   3   Add a title in the sistem",
+                        "   4   Add a Boolean expresion in the sistem",
+                        "   5   Make a Search",
+                        "   0   Print this messatge"
+    };
+
+    String[] search = {   "\n",
+                        "These are the avileble seaches:",
+                        "   1   List all the Authors",
+                        "   2   List all the Titles",
+                        "   3   List all the Documents with his ID, Title and Author",
+                        "   4   List all the Boolean expresions",
+                        "   5   List the Document Title of an Author",
                         "   0   Print this messatge"
     };
     Scanner in = new Scanner(System.in);
@@ -63,7 +72,8 @@ public class ConsoleCtrl extends PresentationCtrl{
 
         while (true) {
             boolean result;
-            System.out.print(">");
+            //System.out.print(">");
+            
             command = in.nextInt();
             switch (command) {
                 case 0:
@@ -73,35 +83,29 @@ public class ConsoleCtrl extends PresentationCtrl{
                     addDocument();
                     break;
                 case 2:
-                    System.out.println("Enter Author name:");
-                    result = domain.addAuthor(in.nextLine());
-                    System.out.println(result);
+                    System.out.print("Enter Author name:");
+                    String a = in.nextLine();
+                    
                     break;
                 case 3:
                     System.out.println("Enter Title name:");
+
                     result = domain.addTitle(in.nextLine());
                     System.out.println(result);
                     break;
-
-                case 7:
-                    System.out.println("Enter the full file path:");
-                    result = domain.loadFile(in.nextLine());
-                    System.out.println(result);
+                case 4:
+                    System.out.println("Enter the Boolean Expresion:");
+                    in.nextLine();
+                    System.out.println("This do nothing");
                     break;
-                case 8:
-                case 9:
-                    Set<Document> docs = DomainCtrl.getInstance().getDocs();
-                    for (Document document : docs) {
-                        System.out.println(document.getTitle());
-                        
-                    }
-                    break;
+                case 5:
+                    search();
                 default:
                     System.out.println("invalid command, please enter a valid command or help for help");
                     break;
-
                      
             }
+            //in.close();
         }
     }
 
@@ -125,19 +129,41 @@ public class ConsoleCtrl extends PresentationCtrl{
 
     private void addDocument() {
         System.out.println("Enter Author name:");
-        String a = in.nextLine();
+        String authorName = in.nextLine();
         System.out.println("Enter Title name:");
-        String t = in.nextLine();
+        String titleName = in.nextLine();
         System.out.println("Enter the Document content:");
         List<String> content = new ArrayList<String>();
         while (in.hasNextLine()) {
             content.add(in.nextLine());
         }
-        domain.addDocument(a, t, content);
+        System.out.println(domain.addDocument(titleName, authorName, content));
     }
-    
-    private Set<Document> getDocuments() {
-        return DomainCtrl.getInstance().getDocs();
-    } 
+
+    private void search() {
+        for (String s : search){
+            System.out.println(s);
+        }
+        System.out.println("");
+        System.out.println("Enter a command:");
+        Integer command = in.nextInt();
+        switch (command) {
+            case 1:
+                Set<String> a = AuthorCtrl.getInstance().getAllAuthorsNames();
+                for (String string : a) {
+                    System.out.println(string);
+                }
+                break;
+            case 2:
+                Set<String> t = TitleCtrl.getInstance().getAllTitlesNames();
+                for (String string : t) {
+                    System.out.println(string);
+                }
+                break;
+            default:
+                break;
+        }
+    }
+
 
 }
