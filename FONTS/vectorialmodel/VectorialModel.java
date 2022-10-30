@@ -1,11 +1,14 @@
 package vectorialmodel;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.function.BiFunction;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+
+import io.vavr.Tuple;
+import io.vavr.collection.HashMap;
 
 import helpers.Maps;
 import helpers.Lists;
@@ -30,8 +33,8 @@ public class VectorialModel<DocId> {
     public static <DocId> VectorialModel<DocId> empty() {
         return new VectorialModel<DocId>(
             Index.empty(),
-            new HashMap<DocId, Long>(),
-            new HashMap<DocId, HashMap<String, Double>>()
+            HashMap.empty(),
+            HashMap.empty()
         );
     }
 
@@ -42,32 +45,26 @@ public class VectorialModel<DocId> {
      * @return a vectorial model representation of the collection
      */
     public static <DocId> VectorialModel<DocId> of(Map<DocId, List<String>> collection) {
+        
         // construct index
-        Index<DocId> index = Index.of(collection);
+        Index<DocId> index = Index.of(
+            io.vavr.collection.HashMap.ofAll(collection)
+        );
 
         // map documents to their max frequencies
-        HashMap<DocId, Long> maxFrequencies = collection.entrySet()
-            .stream().parallel()
-            .collect(Collectors.toMap(
-                    Entry::getKey,
-                    e -> Lists.maxFrequency(e.getValue()),
-                    Maps::firstKey,
-                    HashMap::new)
-                );
+        var hashedCollection = HashMap.ofAll(collection);
+
+        HashMap<DocId, Long> maxFrequencies = hashedCollection.mapValues(Lists::maxFrequency);
 
         // map documents to their tfidf vectors
-        HashMap<DocId, HashMap<String, Double>> tfidfs = collection.keySet()
-            .stream().parallel()
-            .collect(Collectors.toMap(
-                Function.identity(),
-                docId -> TFIDF.computeTFIDF(
-                    index.termsFrequencies(docId),
-                    maxFrequencies.get(docId),
-                    collection.size()
-                ),
-                Maps::firstKey,
-                HashMap::new)
-            );
+        HashMap<DocId, HashMap<String, Double>> tfidfs = hashedCollection.map(
+            (docId, __) -> Tuple.of(docId,
+            TFIDF.computeTFIDF(
+                index.termsFrequencies(docId),
+                maxFrequencies.get(docId).get(),
+                collection.size()    
+            ))
+        );
 
         return new VectorialModel<DocId>(index, maxFrequencies, tfidfs);
     }
@@ -77,24 +74,24 @@ public class VectorialModel<DocId> {
      * @param docId
      * @return mapping String -> tf-idf weight for all the Strings of the document docId
      */
-    public HashMap<String, Double> tfidfVector(DocId docId) {
-        return tfidfVectors.get(docId);
+    public java.util.HashMap<String, Double> tfidfVector(DocId docId) {
+        return tfidfVectors.get(docId).map(HashMap::toJavaMap).get();
     }
 
     /**
      * @param docId
      * @return mapping doc_id -> cosine_similarity for all documents with similarity > 0 with docId
      */
-    public HashMap<DocId, Double> querySimilars(DocId docId) {
-        var similarities = new HashMap<DocId, Double>();
+    public java.util.HashMap<DocId, Double> querySimilars(DocId docId) {
+        var similarities = new java.util.HashMap<DocId, Double>();
 
-        for(var tw : this.tfidfVectors.get(docId).entrySet()) {
+        for(var tw : this.tfidfVector(docId).entrySet()) {
             var term = tw.getKey();
             var weight = tw.getValue();
             
-            for(var dw : this.index.postingList(term).entrySet()) {
-                var otherId = dw.getKey();
-                var otherWeight = this.tfidfVectors.get(otherId).get(term);
+            for(var posting : this.index.postingList(term)) {
+                var otherId = posting._1;
+                var otherWeight = this.tfidfVector(otherId).get(term);
                 similarities.merge(docId, weight*otherWeight, Maps.add);
             }
         }

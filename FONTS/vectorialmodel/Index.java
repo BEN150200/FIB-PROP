@@ -1,10 +1,14 @@
 package vectorialmodel;
 
+
+import java.util.stream.Collectors;
+
 import io.vavr.Tuple2;
 import io.vavr.collection.HashMap;
 import io.vavr.collection.HashSet;
+import io.vavr.collection.List;
 import io.vavr.collection.Map;
-import io.vavr.collection.Seq;
+import io.vavr.collection.Set;
 
 public class Index<DocId> {
 
@@ -23,7 +27,7 @@ public class Index<DocId> {
         );
     }
 
-    public static <DocId> Index<DocId> of(Map<DocId, Seq<String>> collection) {
+    public static <DocId> Index<DocId> of(Map<DocId, Iterable<String>> collection) {
         return collection.foldLeft(
             Index.<DocId>empty(),
             Index::insert
@@ -56,7 +60,7 @@ public class Index<DocId> {
                     document.mapValues(HashSet::size)).orNull();
     }
 
-    public Index<DocId> insert(Tuple2<DocId, Seq<String>> document) {
+    public Index<DocId> insert(Tuple2<DocId, Iterable<String>> document) {
         return this.insert(document._1, document._2);
     }
 
@@ -66,9 +70,9 @@ public class Index<DocId> {
      * @param content content of the document to be inserted
      * @return a new index with the document inserted. If it previously existed, it is replaced
      */
-    public Index<DocId> insert(DocId docId, Seq<String> content) {
+    public Index<DocId> insert(DocId docId, Iterable<String> content) {
         // compute positions
-        var termsPositions = content.iterator()
+        var termsPositions = List.ofAll(content)
             .zipWithIndex()
             .foldLeft(HashMap.<String, HashSet<Integer>>empty(),
                 (positions, termIndex) -> positions.merge(
@@ -110,31 +114,10 @@ public class Index<DocId> {
             this.directIndex.remove(docId)
         );
     }
-
-    // public static <DocId> String print(Map.Entry<DocId, Set<Integer>> posting) {
-    //     return "(" + posting.getKey() + ", " + posting.getValue() + ")";
-    // }
-
-    // public static <DocId> String print(Map<?, ? extends Map<?, Set<Integer>>> invertedIndex) {
-    //     return invertedIndex.entrySet().stream()
-    //             .map(entry ->
-    //                 "%s : [%s]".formatted(
-    //                     entry.getKey(),
-    //                     entry.getValue().entrySet().stream()
-    //                         .map(Index::print)
-    //                         .collect(Collectors.joining(", "))
-    //                 )
-    //             )
-    //             .collect(Collectors.joining(",\n"));
-    // }
-
-
-    // public static <DocId> String print(Index<DocId> index) {
-    //     return "InvertedIndex {\n\t%s\n},\nDirectIndex {\n\t%s\n}".formatted(
-    //         print(index.invertedIndex)
-    //             .replace("\n", "\n\t"),
-    //             print(index.directIndex)
-    //             .replace("\n", "\n\t")
-    //     );
-    // }
+    public static <DocId> String print(Index<DocId> index) {
+        return "InvertedIndex {\n%s\n},\nDirectIndex {\n%s\n}".formatted(
+            index.invertedIndex.mkString("\t", "\n\t", ""),
+            index.directIndex.mkString("\t", "\n\t", "")
+        );
+    }
 }
