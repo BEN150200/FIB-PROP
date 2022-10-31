@@ -1,5 +1,7 @@
 package DomainLayer.Classes;
 
+import java.util.HashSet;
+
 /* 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -78,14 +80,22 @@ public class DomainCtrl {
             Integer ID = d.getID();
             t.addDoc(ID);
             a.addDoc(ID);
+            d.updateContent(content);
             return true;
         }
         return false;
     }
 
-
-    public Set<Document> getDocs() {
-        return DocumentCtrl.getInstance().getAllDocuments();
+    /**
+     * Search Elements
+    **/
+    public Set<DocumentInfo> getAllDocumentsInfo() {
+        Set<Document> docs = DocumentCtrl.getInstance().getAllDocuments();
+        Set<DocumentInfo> info = new HashSet<DocumentInfo>();
+        for (Document d : docs) {
+            info.add(d.getInfo());
+        }
+        return info;
     }
 
     public Set<String> getAllTitles() {

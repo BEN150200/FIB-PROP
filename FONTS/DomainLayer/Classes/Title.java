@@ -3,7 +3,7 @@ package DomainLayer.Classes;
 import java.util.HashSet;
 import java.util.Set;
 
-public class Title extends Phrase {
+public class Title extends Sentence {
     Set<Integer> documents = new HashSet<Integer>();
     
     public Title(String t) {

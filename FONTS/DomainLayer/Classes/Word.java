@@ -12,29 +12,29 @@ public class Word {
      */
 
     private String word;
-    private Map<Document, Integer> docs;
+    private HashMap<Integer, Integer> ocurrences = new HashMap<Integer, Integer>();
      
     /**
      * Constructor / Destructor
-     */
+    **/
 
     public Word() {
     }
 
     public Word(String w) {
-        this.word = w;
+        word = w;
     }
 
     /*
      * Getters / Setters
-     */
+    **/
 
     public String getWord() {
         return word;
     }
 
-    public void setWord() {
-        
+    public Integer getOcurrencesDoc(Integer docID) {
+        return ocurrences.get(docID);
     }
 
 }

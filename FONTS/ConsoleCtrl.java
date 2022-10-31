@@ -1,3 +1,4 @@
+import DomainLayer.Classes.DocumentInfo;
 import DomainLayer.Classes.DomainCtrl;
 
 import java.util.ArrayList;
@@ -243,7 +244,7 @@ public class ConsoleCtrl extends PresentationCtrl{
         while (contentReader.hasNextLine()) {
             content.add(contentReader.nextLine());
         }
-        contentReader.close();
+        //contentReader.close();
         boolean result = domain.addDocument(titleName, authorName, content);
         System.out.println(result);
     }
@@ -287,7 +288,10 @@ public class ConsoleCtrl extends PresentationCtrl{
     }
 
     public void searchAllDocuments() {
-        
+        Set<DocumentInfo> info = domain.getAllDocumentsInfo();
+        for (DocumentInfo documentInfo : info) {
+            documentInfo.printCMD();
+        }
 
     }
 

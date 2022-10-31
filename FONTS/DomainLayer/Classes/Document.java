@@ -1,6 +1,7 @@
 package DomainLayer.Classes;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 public class Document {
 
@@ -67,6 +68,10 @@ public class Document {
         return modificationDate;
     }
 
+    public DocumentInfo getInfo() {
+        return new DocumentInfo(docID, title.getTitleName(), author.getAuthorName(), creationDate, modificationDate);
+    }
+
     /**
      * Setters
      */
@@ -85,6 +90,8 @@ public class Document {
         }
         return false;
     }
+
+    public void updateContent(List<String> content) {}
 
     
 }
