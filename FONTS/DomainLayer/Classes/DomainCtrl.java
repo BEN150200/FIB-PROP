@@ -1,5 +1,6 @@
 package DomainLayer.Classes;
 
+import java.util.HashMap;
 import java.util.HashSet;
 
 /* 
@@ -106,6 +107,39 @@ public class DomainCtrl {
         return AuthorCtrl.getInstance().getAllAuthorsNames();
     }
 
+    public Set<String> getAllAuthorTitles(String authorName) {
+        Author author = AuthorCtrl.getInstance().getAuthor(authorName);
+        if (author == null) System.out.println("The author is not in the System");
+        else {
+            Set<Integer> docsID = author.getAllDocsID();
+            Set<Document> docs = DocumentCtrl.getInstance().getDocuments(docsID);
+            Set<String> docsTitlesNames = new HashSet<String>();
+            for (Document doc : docs) {
+                docsTitlesNames.add(doc.getTitle().getTitleName());
+            }
+            return docsTitlesNames;
+        }
+        return null;
+    }
+
+    public Set<String> getAllTitleAuthors(String titleName) {
+        Title title = TitleCtrl.getInstance().getTitle(titleName);
+        if (title == null) System.out.println("The title is not in the System");
+        else {
+            Set<Integer> docsID = title.getAllDocsID();
+            Set<Document> docs = DocumentCtrl.getInstance().getDocuments(docsID);
+            Set<String> docsAuthorsNames = new HashSet<String>();
+            for (Document doc : docs) {
+                docsAuthorsNames.add(doc.getAuthor().getAuthorName());
+            }
+            return docsAuthorsNames;
+        }
+        return null;
+    }
+
+    public HashMap<String,String> getAllBooleanExpresions() {
+        return null;
+    }
 
 
 

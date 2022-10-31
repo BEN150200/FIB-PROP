@@ -1,6 +1,7 @@
 package DomainLayer.Classes;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class DocumentInfo {
     private Integer docID;
@@ -8,6 +9,10 @@ public class DocumentInfo {
     private String authorName;
     private LocalDateTime creationDate;
     private LocalDateTime modificationDate;
+
+    private void print(String s) {
+        System.out.println(s);
+    }
 
     public DocumentInfo(Integer docID, String titleName, String authorName, LocalDateTime creationDate, LocalDateTime modificationDate) {
         this.docID = docID;
@@ -17,8 +22,19 @@ public class DocumentInfo {
         this.modificationDate = modificationDate;
     }
 
+    public void printCMDoneLine() {
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");  
+        print("    " + docID + "    " + titleName + "    " + authorName + "    " + dtf.format(creationDate) + "    " + modificationDate);
+    }
+
     public void printCMD() {
-        System.out.println("    " + docID + "    " + titleName + "    " + authorName + "    " + creationDate + "    " + modificationDate);
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");  
+        print("Document:  " + docID );
+        print("    -Title:  " + titleName);
+        print("    -Author:  " + authorName);
+        print("    -Dates:");
+        print("        Creation: "+ dtf.format(creationDate) + "    Modification: " + dtf.format(modificationDate));
+        print("\n");
     }
 
     public Integer id() {

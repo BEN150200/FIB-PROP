@@ -1,6 +1,6 @@
 package DomainLayer.Classes;
 
-import java.time.LocalDateTime;
+import java.time.*;
 import java.util.List;
 
 public class Document {
@@ -33,6 +33,8 @@ public class Document {
     }
 
     public Document(Title t, Author a) {
+        creationDate = LocalDateTime.now();
+        modificationDate = creationDate;
         title = t;
         author = a;
     }

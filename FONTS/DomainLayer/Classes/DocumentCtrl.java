@@ -68,6 +68,14 @@ public class DocumentCtrl {
         return new HashSet<Document>(documents.values());
     }
 
+    public Set<Document> getDocuments(Set<Integer> docsID) {
+        Set<Document> docs = new HashSet<Document>();
+        for (Integer id : docsID) {
+            docs.add(documents.get(id));
+        }
+        return docs;
+    }
+
     /**
      * Setters
     **/

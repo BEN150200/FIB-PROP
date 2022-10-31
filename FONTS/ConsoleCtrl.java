@@ -1,3 +1,4 @@
+import DomainLayer.Classes.AuthorCtrl;
 import DomainLayer.Classes.DocumentInfo;
 import DomainLayer.Classes.DomainCtrl;
 
@@ -6,6 +7,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
+import java.util.HashMap;
 
 public class ConsoleCtrl extends PresentationCtrl{
     
@@ -25,15 +27,16 @@ public class ConsoleCtrl extends PresentationCtrl{
 		"\n"
     };
 
-    String[] mainMenuOptions = {   "\n",
+    String[] mainMenuOptions = {   
                         "_____________________________________________________",
                         "Choose the type of operation:",
                         "   1   Add information to the System",
                         "   2   Make a Search in the System",
-                        "   0   Exit the program"
+                        "   0   Exit the program",
+                        ""
     };
 
-    String[] addMenuOptions = {   "\n",
+    String[] addMenuOptions = {
                         "_____________________________________________________",
                         "_____________________Add Menu________________________",
                         "Choose the type of operation:",
@@ -41,19 +44,22 @@ public class ConsoleCtrl extends PresentationCtrl{
                         "   2   Add an autor in the sistem",
                         "   3   Add a title in the sistem",
                         "   4   Add a Boolean expresion in the sistem",
-                        "   0   Exit Add Menu"
+                        "   0   Exit Add Menu",
+                        ""
     };
                     
-    String[] searchMenuOptions = {   "\n",
+    String[] searchMenuOptions = {
                         "_____________________________________________________",
                         "____________________Search Menu______________________",
                         "Choose the type of operation:",
-                        "   1   List all the Authors",
+                        "   1   List all the Documents with his ID, Title and Author",
                         "   2   List all the Titles",
-                        "   3   List all the Documents with his ID, Title and Author",
+                        "   3   List all the Authors",
                         "   4   List all the Boolean expresions",
-                        "   5   List the Document Title of an Author",
-                        "   0   Exit Search Menu"
+                        "   5   List all the Document's Titles of an Author",
+                        "   6   List all the Document's Author of a Title",
+                        "   0   Exit Search Menu",
+                        ""
     };
                 
     Scanner terminalIn = new Scanner(System.in);
@@ -149,10 +155,8 @@ public class ConsoleCtrl extends PresentationCtrl{
         while (true) {
 
             printMainMenu();
-
             Integer command = getInputAsInt(0, 2);
-            printCmd("\n");
-            
+            printCmd("");
             switch (command) {
                 case 1:
                     addMenu();
@@ -175,10 +179,8 @@ public class ConsoleCtrl extends PresentationCtrl{
         while (true) {
 
             printAddMenu();
-
             Integer command = getInputAsInt(0, 4);
-            printCmd("\n");
-            
+            printCmd("");
             switch (command) {
                 case 1:
                     addDocument();
@@ -206,22 +208,27 @@ public class ConsoleCtrl extends PresentationCtrl{
         while (true) {
 
             printSearchMenu();
-
-            Integer command = getInputAsInt(0, 5);
-            printCmd("\n");
-
+            Integer command = getInputAsInt(0, 6);
+            printCmd("");
+            
             switch (command) {
                 case 1:
-                    searchAllAuthors();
+                    searchAllDocuments();
                     break;
                 case 2:
                     searchAllTitles();
                     break;
                 case 3:
-                    searchAllDocuments();
+                    searchAllAuthors();
                     break;
                 case 4:
                     searchAllBooleanExpresions();
+                    break;
+                case 5:
+                    searchAllAuthorTitles();
+                    break;
+                case 6:
+                    searchAllTitleAuthors();
                     break;
                 case 0:
                     return;
@@ -234,11 +241,11 @@ public class ConsoleCtrl extends PresentationCtrl{
 
     public void addDocument() {
         getInputAsLine();
-        printCmd("Enter Title name:");
+        printCmd("-Enter Title name:");
         String titleName = getInputAsLine();
-        printCmd("Enter Author name:");
+        printCmd("-Enter Author name:");
         String authorName = getInputAsLine();
-        printCmd("Enter the Document content: ( CTRL+D to finish)");
+        printCmd("-Enter the Document content: ( CTRL+D to finish)");
         Scanner contentReader = new Scanner(System.in);
         List<String> content = new ArrayList<String>();
         while (contentReader.hasNextLine()) {
@@ -254,14 +261,14 @@ public class ConsoleCtrl extends PresentationCtrl{
     **/
     public void addAuthor() {
         getInputAsLine();
-        printCmd("Enter Author name:");
+        printCmd("-Enter Author name:");
         String authorName = getInputAsLine();
         System.out.println(domain.addAuthor(authorName));
     }
 
     public void addTitle() {
         getInputAsLine();
-        printCmd("Enter Title name:");
+        printCmd("-Enter Title name:");
         String titleName = getInputAsLine();
         System.out.println(domain.addTitle(titleName));
     }
@@ -271,6 +278,14 @@ public class ConsoleCtrl extends PresentationCtrl{
     /**
      * Search Functions
     **/
+    public void searchAllDocuments() {
+        Set<DocumentInfo> info = domain.getAllDocumentsInfo();
+        for (DocumentInfo documentInfo : info) {
+            documentInfo.printCMD();
+        }
+
+    }
+
     public void searchAllAuthors() {
         printCmd("____Authors____");
         Set<String> authors = domain.getAllAuthors();
@@ -283,19 +298,42 @@ public class ConsoleCtrl extends PresentationCtrl{
         printCmd("____Titles____");
         Set<String> titles = domain.getAllTitles();
         for (String string : titles) {
-            System.out.println(string);
+            printCmd(string);
+        }
+    }
+    
+    public void searchAllBooleanExpresions() {
+        printCmd("____Boolean Expresions____");
+        HashMap<String,String> expresions = domain.getAllBooleanExpresions();
+        for (String string : expresions.keySet()) {
+            printCmd(string + "    " + expresions.get(string)); 
         }
     }
 
-    public void searchAllDocuments() {
-        Set<DocumentInfo> info = domain.getAllDocumentsInfo();
-        for (DocumentInfo documentInfo : info) {
-            documentInfo.printCMD();
+    public void searchAllAuthorTitles() {
+        getInputAsLine();
+        printCmd("-Enter Author name:");
+        String authorName = getInputAsLine();
+        Set<String> titles = domain.getAllAuthorTitles(authorName);
+        printCmd("____Titles of " + authorName + "____");
+        for (String string : titles) {
+            printCmd(string);
         }
-
     }
 
-    public void searchAllBooleanExpresions() {}
+    public void searchAllTitleAuthors() {
+        getInputAsLine();
+        printCmd("-Enter Title name:");
+        String titleName = getInputAsLine();
+        printCmd("____Authors of " + titleName + "____");
+        Set<String> authors = domain.getAllTitleAuthors(titleName);
+        for (String string : authors) {
+            printCmd(string);
+        }
+    }
+
+    
+
 
 
 }
