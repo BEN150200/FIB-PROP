@@ -1,4 +1,4 @@
-import Domain.DomainCtrl;
+import DomainLayer.Classes.DomainCtrl;
 import UI.MainWindow;
 
 import javax.swing.*;

@@ -17,11 +17,11 @@ public class TitleCtrl {
 
     /**
      * Public Functions
-     */
+    **/
 
     /**
      * Getters
-     */
+    **/
     public boolean existsTitleName(String titleName) {
         return titles.containsKey(titleName);
     }
@@ -44,7 +44,7 @@ public class TitleCtrl {
 
     /**
      * Setters
-     */
+    **/
     public boolean addTitleName(String titleName) {
         boolean exists = titles.containsKey(titleName);
         if (!exists) {

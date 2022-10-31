@@ -15,12 +15,12 @@ public class DomainCtrl {
 
     /**
      * Attributes
-     */
+    **/
     private static DomainCtrl instance = null;
     
     /**
      * Constructor
-     */
+    **/
     public DomainCtrl() {
         iniCtrlDomain();
     }
@@ -38,11 +38,11 @@ public class DomainCtrl {
 
     /**
      * Public Functions
-     */
+    **/
 
     /**
      * Add Elements
-     */
+    **/
     public boolean addAuthor(String authorName) {
         if (!AuthorCtrl.getInstance().existsAuthorName(authorName)) {
             Author a = new Author(authorName);
@@ -61,9 +61,8 @@ public class DomainCtrl {
         return false;
     }
 
-    public boolean addDocument(String authorName, String titleName, List<String> contnet) {
-        boolean exists = DocumentCtrl.getInstance().existsDocument(authorName, titleName);
-        if (!exists) {
+    public boolean addDocument(String titleName, String authorName, List<String> content) {
+        if (!DocumentCtrl.getInstance().existsDocument(titleName, authorName)) {
             Title t = TitleCtrl.getInstance().getTitle(titleName);
             Author a = AuthorCtrl.getInstance().getAuthor(authorName);
             if (t == null) {
@@ -89,14 +88,22 @@ public class DomainCtrl {
         return DocumentCtrl.getInstance().getAllDocuments();
     }
 
+    public Set<String> getAllTitles() {
+        return TitleCtrl.getInstance().getAllTitlesNames();
+    }
+
+    public Set<String> getAllAuthors() {
+        return AuthorCtrl.getInstance().getAllAuthorsNames();
+    }
 
 
 
 
 
-     /**
+
+    /**
      * File Managment Functions
-     */
+    **/
 
     //pre: the filePath is the path of an existing file
     //exc: the file is already in the system

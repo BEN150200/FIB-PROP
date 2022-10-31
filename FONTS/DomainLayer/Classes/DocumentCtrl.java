@@ -9,9 +9,9 @@ import javafx.util.Pair;
 public class DocumentCtrl {
     private static DocumentCtrl instance = null;
     private int usedID;
-
-    private HashMap<Pair<String,String>, Integer> documentsID;
-    private HashMap<Integer, Document> documents;
+    
+    private HashMap<Pair<String,String>, Integer> documentsID = new HashMap<Pair<String,String>, Integer>();
+    private HashMap<Integer, Document> documents = new HashMap<Integer, Document>();
 
     public static DocumentCtrl getInstance() {
         if (instance == null) {
@@ -19,7 +19,6 @@ public class DocumentCtrl {
         }
         return instance;
     }
-
     
     public DocumentCtrl() {
         usedID = 0;
@@ -27,18 +26,17 @@ public class DocumentCtrl {
 
     /**
      * Public Functions
-     */
+    **/
 
     /**
      * Getters
-     */
-    
+    **/
     public boolean existsDocument(Integer docID) {
-        return documentsID.containsValue(docID);
+        return documents.containsKey(docID);
     }
 
     public boolean existsDocument(String titleName, String authorName) {
-        return documentsID.containsKey(new Pair<String,String>(titleName,authorName));
+        return documentsID.containsKey(new Pair<String,String>(titleName, authorName));
     }
 
     public boolean existsDocument(Document doc) {
@@ -46,11 +44,11 @@ public class DocumentCtrl {
     }
     
     public Integer getDocumentID(String titleName, String authorName) {
-        return documentsID.get(new Pair<String,String>(titleName,authorName));
+        return documentsID.get(new Pair<String,String>(titleName, authorName));
     }
 
     public Document getDocument(String titleName, String authorName) {
-        return documents.get(documentsID.get(new Pair<String,String>(titleName,authorName)));
+        return documents.get(documentsID.get(new Pair<String,String>(titleName, authorName)));
     }
 
     public Document getDocument(int docID) {
@@ -72,20 +70,18 @@ public class DocumentCtrl {
 
     /**
      * Setters
-     */
+    **/
 
     public boolean addDocument(Document doc) {
         Title t = doc.getTitle();
         Author a = doc.getAuthor();
-        boolean exists = documentsID.containsKey(new Pair<String, String> (t.getString(),a.getString()));
-        if (exists) return false;
-        else {
-            ++usedID;
-            doc.setDocumentID(usedID);
-            documentsID.put(new Pair<String, String> (t.getString(),a.getString()), usedID);
-            documents.put(usedID, doc);
-            return true;
-        }
+        ++usedID;
+        doc.setDocumentID(usedID);
+        documentsID.put(new Pair<String,String>(t.getTitleName(), a.getAuthorName()), usedID);
+        documents.put(usedID, doc);
+        return true;
     }
 
 }
+
+

@@ -17,11 +17,11 @@ public class AuthorCtrl {
 
     /**
      * Public Functions
-     */
+    **/
 
     /**
      * Getters
-     */
+    **/
     public boolean existsAuthorName(String authorName) {
         return authors.containsKey(authorName);
     }
@@ -44,7 +44,7 @@ public class AuthorCtrl {
 
     /**
      * Setters
-     */
+    **/
     public boolean addAuthorName(String authorName) {
         boolean exists = authors.containsKey(authorName);
         if (!exists) {
