@@ -42,6 +42,16 @@ public class AuthorCtrl {
         return authors.keySet();
     }
 
+    public Set<String> getAuthorsNamesPrefix(String prefix) {
+        Set<String> authorsWithPrefix = new HashSet<String>();
+        for (String author : authors.keySet()) {
+            if (author.startsWith(prefix)) {
+                authorsWithPrefix.add(author);
+            }
+        }
+        return authorsWithPrefix;
+    }
+
     /**
      * Setters
     **/

@@ -42,6 +42,16 @@ public class TitleCtrl {
         return titles.keySet();
     }
 
+    public Set<String> getTitlesNamesPrefix(String prefix) {
+        Set<String> titlesWithPrefix = new HashSet<String>();
+        for (String title : titles.keySet()) {
+            if (title.startsWith(prefix)) {
+                titlesWithPrefix.add(title);
+            }
+        }
+        return titlesWithPrefix;
+    }
+
     /**
      * Setters
     **/
