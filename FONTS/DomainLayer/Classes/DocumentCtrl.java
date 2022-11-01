@@ -1,5 +1,6 @@
 package DomainLayer.Classes;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
@@ -56,20 +57,20 @@ public class DocumentCtrl {
         return doc;
     }
 
-    public Set<Integer> getAllDocsIDs() {
-        return documents.keySet();
+    public ArrayList<Integer> getAllDocsIDs() {
+        return new ArrayList<Integer>(documents.keySet());
     }
 
-    public Set<Pair<String,String>> getAllDocsTitlesAuthors() {
-        return documentsID.keySet();
+    public ArrayList<Pair<String,String>> getAllDocsTitlesAuthors() {
+        return new ArrayList<Pair<String, String>>(documentsID.keySet());
     }
 
-    public Set<Document> getAllDocuments() {
-        return new HashSet<Document>(documents.values());
+    public ArrayList<Document> getAllDocuments() {
+        return new ArrayList<Document>(documents.values());
     }
 
-    public Set<Document> getDocuments(Set<Integer> docsID) {
-        Set<Document> docs = new HashSet<Document>();
+    public ArrayList<Document> getDocuments(Set<Integer> docsID) {
+        ArrayList<Document> docs = new ArrayList<Document>();
         for (Integer id : docsID) {
             docs.add(documents.get(id));
         }

@@ -1,7 +1,7 @@
 package DomainLayer.Classes;
 
+import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 
 /* 
 import java.io.File;
@@ -82,30 +82,30 @@ public class DomainCtrl {
     /**
      * Search Elements
     **/
-    public Set<DocumentInfo> getAllDocumentsInfo() {
-        Set<Document> docs = DocumentCtrl.getInstance().getAllDocuments();
-        Set<DocumentInfo> info = new HashSet<DocumentInfo>();
+    public ArrayList<DocumentInfo> getAllDocumentsInfo() {
+        ArrayList<Document> docs = DocumentCtrl.getInstance().getAllDocuments();
+        ArrayList<DocumentInfo> info = new ArrayList<DocumentInfo>();
         for (Document d : docs) {
             info.add(d.getInfo());
         }
         return info;
     }
 
-    public Set<String> getAllTitles() {
+    public ArrayList<String> getAllTitles() {
         return TitleCtrl.getInstance().getAllTitlesNames();
     }
 
-    public Set<String> getAllAuthors() {
+    public ArrayList<String> getAllAuthors() {
         return AuthorCtrl.getInstance().getAllAuthorsNames();
     }
 
-    public Set<String> getAllAuthorTitles(String authorName) {
+    public ArrayList<String> getAllAuthorTitles(String authorName) {
         Author author = AuthorCtrl.getInstance().getAuthor(authorName);
         if (author == null) System.out.println("The author is not in the System");
         else {
             Set<Integer> docsID = author.getAllDocsID();
-            Set<Document> docs = DocumentCtrl.getInstance().getDocuments(docsID);
-            Set<String> docsTitlesNames = new HashSet<String>();
+            ArrayList<Document> docs = DocumentCtrl.getInstance().getDocuments(docsID);
+            ArrayList<String> docsTitlesNames = new ArrayList<String>();
             for (Document doc : docs) {
                 docsTitlesNames.add(doc.getTitle().getTitleName());
             }
@@ -114,13 +114,13 @@ public class DomainCtrl {
         return null;
     }
 
-    public Set<String> getAllTitleAuthors(String titleName) {
+    public ArrayList<String> getAllTitleAuthors(String titleName) {
         Title title = TitleCtrl.getInstance().getTitle(titleName);
         if (title == null) System.out.println("The title is not in the System");
         else {
             Set<Integer> docsID = title.getAllDocsID();
-            Set<Document> docs = DocumentCtrl.getInstance().getDocuments(docsID);
-            Set<String> docsAuthorsNames = new HashSet<String>();
+            ArrayList<Document> docs = DocumentCtrl.getInstance().getDocuments(docsID);
+            ArrayList<String> docsAuthorsNames = new ArrayList<String>();
             for (Document doc : docs) {
                 docsAuthorsNames.add(doc.getAuthor().getAuthorName());
             }

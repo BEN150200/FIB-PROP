@@ -1,8 +1,7 @@
 package DomainLayer.Classes;
 
 import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
 
 public class AuthorCtrl {
     private static AuthorCtrl instance = null;
@@ -30,16 +29,16 @@ public class AuthorCtrl {
         return authors.get(authorName);
     }
 
-    public Set<Author> getAllAuthors() {
-        return new HashSet<Author>(authors.values());
+    public ArrayList<Author> getAllAuthors() {
+        return new ArrayList<Author>(authors.values());
     }
 
-    public Set<String> getAllAuthorsNames() {
-        return authors.keySet();
+    public ArrayList<String> getAllAuthorsNames() {
+        return new ArrayList<String>(authors.keySet());
     }
 
-    public Set<String> getAuthorsNamesPrefix(String prefix) {
-        Set<String> authorsWithPrefix = new HashSet<String>();
+    public ArrayList<String> getAuthorsNamesPrefix(String prefix) {
+        ArrayList<String> authorsWithPrefix = new ArrayList<String>();
         for (String author : authors.keySet()) {
             if (author.startsWith(prefix)) {
                 authorsWithPrefix.add(author);

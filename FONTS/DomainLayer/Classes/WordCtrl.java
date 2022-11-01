@@ -1,8 +1,7 @@
 package DomainLayer.Classes;
 
+import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Set;
-import java.util.HashSet;
 
 public class WordCtrl {
     //public static String invalidID = "";
@@ -34,8 +33,8 @@ public class WordCtrl {
         return words.get(word);
     }
 
-    public Set<Word> getAllWords(){
-        return new HashSet<Word>(words.values());
+    public ArrayList<Word> getAllWords(){
+        return new ArrayList<Word>(words.values());
     }
     
     /**

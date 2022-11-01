@@ -1,8 +1,7 @@
 package DomainLayer.Classes;
 
+import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Set;
 
 public class TitleCtrl {
     private static TitleCtrl instance = null;
@@ -30,16 +29,16 @@ public class TitleCtrl {
         return titles.get(titleName);
     }
 
-    public Set<Title> getAllTitles() {
-        return new HashSet<Title>(titles.values());
+    public ArrayList<Title> getAllTitles() {
+        return new ArrayList<Title>(titles.values());
     }
 
-    public Set<String> getAllTitlesNames() {
-        return titles.keySet();
+    public ArrayList<String> getAllTitlesNames() {
+        return new ArrayList<String>(titles.keySet());
     }
 
-    public Set<String> getTitlesNamesPrefix(String prefix) {
-        Set<String> titlesWithPrefix = new HashSet<String>();
+    public ArrayList<String> getTitlesNamesPrefix(String prefix) {
+        ArrayList<String> titlesWithPrefix = new ArrayList<String>();
         for (String title : titles.keySet()) {
             if (title.startsWith(prefix)) {
                 titlesWithPrefix.add(title);
@@ -58,7 +57,6 @@ public class TitleCtrl {
             return true;
         }
         return false;
-        
     }
 
     public boolean deleteTitle(String titleName) {

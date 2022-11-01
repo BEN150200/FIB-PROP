@@ -1,8 +1,7 @@
 package DomainLayer.Classes;
 
+import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Set;
-import java.util.HashSet;
 
 public class SentenceCtrl {
 
@@ -32,8 +31,8 @@ public class SentenceCtrl {
         return sentences.get(sentence);
     }
 
-    public Set<Sentence> getAllSentences(){
-        return new HashSet<Sentence>(sentences.values());
+    public ArrayList<Sentence> getAllSentences(){
+        return new ArrayList<Sentence>(sentences.values());
     }
     
     /**
