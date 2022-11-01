@@ -2,10 +2,6 @@ package vectorialmodel;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
-import java.util.function.BiFunction;
-import java.util.function.Function;
-import java.util.stream.Collectors;
 
 import io.vavr.Tuple;
 import io.vavr.collection.HashMap;
@@ -67,6 +63,31 @@ public class VectorialModel<DocId> {
         );
 
         return new VectorialModel<DocId>(index, maxFrequencies, tfidfs);
+    }
+
+    /**
+     * 
+     * @param docId id of the document to be inserted
+     * @param content content of the document to be inserted
+     * @return a new VectorialModel with the document inserted. If it previously existed, it is replaced
+     */
+    public VectorialModel<DocId> insert(DocId docId, Iterable<String> content) {
+        var newIndex = this.index.insert(docId, content);
+        var newMaxFrequencies = this.maxFrequencies; // TODO
+        var newTfidfVectors = this.tfidfVectors; // TODO
+        return new VectorialModel<DocId>(newIndex, newMaxFrequencies, newTfidfVectors);
+    }
+    
+    /**
+     * 
+     * @param docId
+     * @return a new VectorialModel with docId (and its term occurrences) removed (if it existed)
+     */
+    public VectorialModel<DocId> remove(DocId docId) {
+        var newIndex = this.index.remove(docId);
+        var newMaxFrequencies = this.maxFrequencies; // TODO
+        var newTfidfVectors = this.tfidfVectors; // TODO
+        return new VectorialModel<DocId>(newIndex, newMaxFrequencies, newTfidfVectors);
     }
 
     /**
