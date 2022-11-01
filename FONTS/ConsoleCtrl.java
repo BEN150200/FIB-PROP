@@ -279,7 +279,7 @@ public class ConsoleCtrl extends PresentationCtrl{
      * Search Functions
     **/
     public void searchAllDocuments() {
-        Set<DocumentInfo> info = domain.getAllDocumentsInfo();
+        ArrayList<DocumentInfo> info = domain.getAllDocumentsInfo();
         for (DocumentInfo documentInfo : info) {
             documentInfo.printCMD();
         }
@@ -288,7 +288,7 @@ public class ConsoleCtrl extends PresentationCtrl{
 
     public void searchAllAuthors() {
         printCmd("____Authors____");
-        Set<String> authors = domain.getAllAuthors();
+        ArrayList<String> authors = domain.getAllAuthors();
         for (String string : authors) {
             System.out.println(string);
         }
@@ -296,7 +296,7 @@ public class ConsoleCtrl extends PresentationCtrl{
 
     public void searchAllTitles() {
         printCmd("____Titles____");
-        Set<String> titles = domain.getAllTitles();
+        ArrayList<String> titles = domain.getAllTitles();
         for (String string : titles) {
             printCmd(string);
         }
@@ -314,7 +314,7 @@ public class ConsoleCtrl extends PresentationCtrl{
         getInputAsLine();
         printCmd("-Enter Author name:");
         String authorName = getInputAsLine();
-        Set<String> titles = domain.getAllAuthorTitles(authorName);
+        ArrayList<String> titles = domain.getAllAuthorTitles(authorName);
         printCmd("____Titles of " + authorName + "____");
         for (String string : titles) {
             printCmd(string);
@@ -326,7 +326,7 @@ public class ConsoleCtrl extends PresentationCtrl{
         printCmd("-Enter Title name:");
         String titleName = getInputAsLine();
         printCmd("____Authors of " + titleName + "____");
-        Set<String> authors = domain.getAllTitleAuthors(titleName);
+        ArrayList<String> authors = domain.getAllTitleAuthors(titleName);
         for (String string : authors) {
             printCmd(string);
         }
