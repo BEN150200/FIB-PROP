@@ -26,9 +26,12 @@ public class Word {
     }
 
     /*
-     * Getters / Setters
+     * Public Functions
     **/
 
+    /*
+     * Getters
+    **/
     public String getWord() {
         return word;
     }
@@ -37,4 +40,17 @@ public class Word {
         return ocurrences.get(docID);
     }
 
+    /*
+     * Setters
+    **/
+    public Integer addOcurrencesDoc(Integer docID, Integer num) {
+        if (ocurrences.containsKey(docID)) {
+            num += ocurrences.get(docID);
+            ocurrences.put(docID, num);
+        }
+        else {
+            ocurrences.put(docID, num);
+        }
+        return num;
+    }
 }

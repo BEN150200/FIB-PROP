@@ -47,6 +47,16 @@ public class AuthorCtrl {
         return authorsWithPrefix;
     }
 
+    public ArrayList<Author> getAuthorsPrefix(String prefix) {
+        ArrayList<Author> authorsWithPrefix = new ArrayList<Author>();
+        for (String author : authors.keySet()) {
+            if (author.startsWith(prefix)) {
+                authorsWithPrefix.add(authors.get(author));
+            }
+        }
+        return authorsWithPrefix;
+    }
+
     /**
      * Setters
     **/

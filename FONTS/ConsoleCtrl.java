@@ -57,6 +57,9 @@ public class ConsoleCtrl extends PresentationCtrl{
                         "   4   List all the Boolean expresions",
                         "   5   List all the Document's Titles of an Author",
                         "   6   List all the Document's Author of a Title",
+                        "   7   List all the Documents of a Author",
+                        "   8   List all the Documents of a Title",
+                        "       ",
                         "   0   Exit Search Menu",
                         ""
     };
@@ -207,7 +210,7 @@ public class ConsoleCtrl extends PresentationCtrl{
         while (true) {
 
             printSearchMenu();
-            Integer command = getInputAsInt(0, 6);
+            Integer command = getInputAsInt(0, 8);
             printCmd("");
             
             switch (command) {
@@ -228,6 +231,12 @@ public class ConsoleCtrl extends PresentationCtrl{
                     break;
                 case 6:
                     searchAllTitleAuthors();
+                    break;
+                case 7:
+                    searchAllAuthorDocs();
+                    break;
+                case 8:
+                    searchAllTitleDocs();
                     break;
                 case 0:
                     return;
@@ -251,6 +260,10 @@ public class ConsoleCtrl extends PresentationCtrl{
             content.add(contentReader.nextLine());
         }
         //contentReader.close();
+        if (domain.addDocument(titleName, authorName, content)) {
+            printCmd("Document added successfully");
+        }
+        else printCmd("The Document identified by the Title '" + titleName + "' and the Author '" + authorName + "'is already in the System");
         boolean result = domain.addDocument(titleName, authorName, content);
         System.out.println(result);
     }
@@ -262,17 +275,33 @@ public class ConsoleCtrl extends PresentationCtrl{
         getInputAsLine();
         printCmd("-Enter Author name:");
         String authorName = getInputAsLine();
-        System.out.println(domain.addAuthor(authorName));
+        if (domain.addAuthor(authorName)) {
+            printCmd("Author added successfully");
+        }
+        else printCmd("This Author is already in the System");
     }
 
     public void addTitle() {
         getInputAsLine();
         printCmd("-Enter Title name:");
         String titleName = getInputAsLine();
-        System.out.println(domain.addTitle(titleName));
+        if (domain.addTitle(titleName)) {
+            printCmd("Title added successfully");
+        }
+        else printCmd("This Title is already in the System");
     }
 
-    public void addBooleanExpresion() {}
+    public void addBooleanExpresion() {
+        getInputAsLine();
+        printCmd("-Enter the Boolean Expresion Name:");
+        String boolExpName = getInputAsLine();
+        printCmd("-Enter a Boolean Expresion:");
+        String boolExp = getInputAsLine();
+        if (domain.addBooleanExpresion(boolExpName, boolExp)) {
+            printCmd("Title added successfully");
+        }
+        else printCmd("This Title is already in the System");
+    }
 
     /**
      * Search Functions
@@ -328,6 +357,28 @@ public class ConsoleCtrl extends PresentationCtrl{
         ArrayList<String> authors = domain.getAllTitleAuthors(titleName);
         for (String string : authors) {
             printCmd(string);
+        }
+    }
+
+    public void searchAllAuthorDocs() {
+        getInputAsLine();
+        printCmd("-Enter Author name or a prefix of the name:");
+        String authorName = getInputAsLine();
+        ArrayList<DocumentInfo> titles = domain.getAllAuthorDocuments(authorName);
+        printCmd("____Titles of " + authorName + "____");
+        for (DocumentInfo documentInfo : titles) {
+            documentInfo.printCMD();
+        }
+    }
+
+    public void searchAllTitleDocs() {
+        getInputAsLine();
+        printCmd("-Enter Title name or a prefix of the name:");
+        String titleName = getInputAsLine();
+        printCmd("____Authors of " + titleName + "____");
+        ArrayList<DocumentInfo> authors = domain.getAllTitleDocuments(titleName);
+        for (DocumentInfo documentInfo : authors) {
+            documentInfo.printCMD();
         }
     }
 

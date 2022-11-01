@@ -13,6 +13,8 @@ import javax.xml.catalog.CatalogFeatures.Feature;
 import java.util.List;
 import java.util.Set;
 
+import java.util.HashSet;
+
 
 public class DomainCtrl {
 
@@ -46,16 +48,6 @@ public class DomainCtrl {
     /**
      * Add Elements
     **/
-    public boolean addAuthor(String authorName) {
-        Author a = new Author(authorName);
-        return AuthorCtrl.getInstance().addAuthor(a);
-    }
-
-    public boolean addTitle(String titleName) {
-        Title t = new Title(titleName);
-        return TitleCtrl.getInstance().addTitle(t);
-    }
-
     public boolean addDocument(String titleName, String authorName, List<String> content) {
         if (!DocumentCtrl.getInstance().existsDocument(titleName, authorName)) {
             Title t = TitleCtrl.getInstance().getTitle(titleName);
@@ -79,6 +71,21 @@ public class DomainCtrl {
         return false;
     }
 
+    public boolean addTitle(String titleName) {
+        Title t = new Title(titleName);
+        return TitleCtrl.getInstance().addTitle(t);
+    }
+
+    public boolean addAuthor(String authorName) {
+        Author a = new Author(authorName);
+        return AuthorCtrl.getInstance().addAuthor(a);
+    }
+
+    public boolean addBooleanExpresion(String boolExpName, String boolExp) {
+        return false;
+    }
+    
+
     /**
      * Search Elements
     **/
@@ -97,6 +104,10 @@ public class DomainCtrl {
 
     public ArrayList<String> getAllAuthors() {
         return AuthorCtrl.getInstance().getAllAuthorsNames();
+    }
+
+    public HashMap<String,String> getAllBooleanExpresions() {
+        return null;
     }
 
     public ArrayList<String> getAllAuthorTitles(String authorName) {
@@ -129,8 +140,34 @@ public class DomainCtrl {
         return null;
     }
 
-    public HashMap<String,String> getAllBooleanExpresions() {
-        return null;
+    public ArrayList<DocumentInfo> getAllAuthorDocuments(String authorName) {
+        ArrayList<DocumentInfo> docsInfo = new ArrayList<DocumentInfo>();
+        ArrayList<Author> authors = AuthorCtrl.getInstance().getAuthorsPrefix(authorName);
+        HashSet<Integer> docsID = new HashSet<Integer>();
+        for (Author author : authors) {
+            docsID.addAll(author.getAllDocsID());
+        }
+        for (Integer docID : docsID) {
+            Document doc = DocumentCtrl.getInstance().getDocument(docID);
+            docsInfo.add(doc.getInfo());
+        }
+        return docsInfo;
     }
+
+    public ArrayList<DocumentInfo> getAllTitleDocuments(String titleName) {
+        ArrayList<DocumentInfo> docsInfo = new ArrayList<DocumentInfo>();
+        ArrayList<Title> titles = TitleCtrl.getInstance().getTitlesPrefix(titleName);
+        HashSet<Integer> docsID = new HashSet<Integer>();
+        for (Title title : titles) {
+            docsID.addAll(title.getAllDocsID());
+        }
+        for (Integer docID : docsID) {
+            Document doc = DocumentCtrl.getInstance().getDocument(docID);
+            docsInfo.add(doc.getInfo());
+        }
+        return docsInfo;
+    }
+
+    
     
 }
