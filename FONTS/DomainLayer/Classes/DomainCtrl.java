@@ -47,21 +47,13 @@ public class DomainCtrl {
      * Add Elements
     **/
     public boolean addAuthor(String authorName) {
-        if (!AuthorCtrl.getInstance().existsAuthorName(authorName)) {
-            Author a = new Author(authorName);
-            AuthorCtrl.getInstance().addAuthor(a);
-            return true;
-        }
-        return false;
+        Author a = new Author(authorName);
+        return AuthorCtrl.getInstance().addAuthor(a);
     }
 
     public boolean addTitle(String titleName) {
-        if (!TitleCtrl.getInstance().existsTitleName(titleName)) {
-            Title t = new Title(titleName);
-            TitleCtrl.getInstance().addTitle(t);
-            return true;
-        }
-        return false;
+        Title t = new Title(titleName);
+        return TitleCtrl.getInstance().addTitle(t);
     }
 
     public boolean addDocument(String titleName, String authorName, List<String> content) {

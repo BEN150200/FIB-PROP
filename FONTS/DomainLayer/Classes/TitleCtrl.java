@@ -22,12 +22,8 @@ public class TitleCtrl {
     /**
      * Getters
     **/
-    public boolean existsTitleName(String titleName) {
+    public boolean existsTitle(String titleName) {
         return titles.containsKey(titleName);
-    }
-
-    public boolean existsTitle(Title t) {
-        return titles.containsValue(t);
     }
 
     public Title getTitle(String titleName) {
@@ -55,20 +51,21 @@ public class TitleCtrl {
     /**
      * Setters
     **/
-    public boolean addTitleName(String titleName) {
-        boolean exists = titles.containsKey(titleName);
-        if (!exists) {
-            Title title = new Title(titleName);
-            titles.put(titleName, title);
-        }
-        return exists;
-    }
 
-    public void addTitle(Title t) {
-        titles.put(t.getTitleName(),t);
+    public boolean addTitle(Title t) {
+        if (!existsTitle(t.getTitleName())){
+            titles.put(t.getTitleName(),t);
+            return true;
+        }
+        return false;
+        
     }
 
     public boolean deleteTitle(String titleName) {
+        if (existsTitle(titleName)){
+            titles.remove(titleName);
+            return true;
+        }
         return false;
     }
 }

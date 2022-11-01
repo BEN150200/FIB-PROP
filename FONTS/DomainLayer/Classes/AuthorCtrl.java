@@ -22,12 +22,8 @@ public class AuthorCtrl {
     /**
      * Getters
     **/
-    public boolean existsAuthorName(String authorName) {
+    public boolean existsAuthor(String authorName) {
         return authors.containsKey(authorName);
-    }
-
-    public boolean existsAuthor(Author a) {
-        return authors.containsValue(a);
     }
 
     public Author getAuthor(String authorName) {
@@ -55,20 +51,20 @@ public class AuthorCtrl {
     /**
      * Setters
     **/
-    public boolean addAuthorName(String authorName) {
-        boolean exists = authors.containsKey(authorName);
-        if (!exists) {
-            Author author = new Author(authorName);
-            authors.put(authorName, author);
-        }
-        return exists;
-    }
 
-    public void addAuthor(Author a) {
-        authors.put(a.getAuthorName(),a);
+    public boolean addAuthor(Author a) {
+        if (!existsAuthor(a.getAuthorName())){
+            authors.put(a.getAuthorName(),a);
+            return true;
+        }
+        return false;
     }
 
     public boolean deleteAuthor(String authorName) {
+        if (existsAuthor(authorName)){
+            authors.remove(authorName);
+            return true;
+        }
         return false;
     }
 }
