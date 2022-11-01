@@ -108,12 +108,18 @@ public class Index<DocId> {
         );
     }
 
+    /**
+     * 
+     * @param docId
+     * @return a new index with docId (and its term occurrences) removed (if it existed)
+     */
     public Index<DocId> remove(DocId docId) {
         return new Index<DocId>(
             this.invertedWithout(docId),
             this.directIndex.remove(docId)
         );
     }
+    
     public static <DocId> String print(Index<DocId> index) {
         return "InvertedIndex {\n%s\n},\nDirectIndex {\n%s\n}".formatted(
             index.invertedIndex.mkString("\t", "\n\t", ""),
