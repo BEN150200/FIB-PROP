@@ -9,13 +9,14 @@ import java.util.Set;
 
 import org.junit.Test;
 
+import io.vavr.collection.HashMap;
 import vectorialmodel.BooleanModel;
 import vectorialmodel.Index;
 
 public class TestIndex {
     @Test
     public void testPrint() {
-        var index = Index.of(Map.of(
+        var index = Index.of(HashMap.of(
             1, List.of("hello", "there", "hello"),
             2, List.of("there", "after")
         ));
@@ -34,6 +35,5 @@ public class TestIndex {
 
         assertEquals(model.querySequence(List.of("how", "are", "you")), Set.of(1, 2));
         assertEquals(model.querySequence(List.of("how", "are", "you", "ma")), Set.of(1));
-
     }
 }
