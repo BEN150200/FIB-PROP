@@ -8,15 +8,10 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import helpers.Lists;
 import io.vavr.Tuple;
-import io.vavr.Tuple2;
 import io.vavr.collection.HashMap;
 import io.vavr.collection.HashSet;
-import io.vavr.collection.Map;
-import io.vavr.collection.Seq;
 
-import static helpers.Maps.*;
 
 public class BooleanModel<SentenceId> {
 
@@ -45,6 +40,27 @@ public class BooleanModel<SentenceId> {
                 HashMap.ofAll(collection)
             )
         );
+    }
+
+    /**
+     * 
+     * @param sentenceId
+     * @param content
+     * @return a new BooleanModel with the document inserted. If it previously existed, it is replaced
+     */
+    public BooleanModel<SentenceId> insert(SentenceId sentenceId, Iterable<String> content) {
+        var newIndex = this.index.insert(sentenceId, content);
+        return BooleanModel.of(newIndex);
+    }
+
+    /**
+     * 
+     * @param sentenceId
+     * @return a new BooleanModel with the sentenceId (and its term occurrences) removed (if it existed)
+     */
+    public BooleanModel<SentenceId> remove(SentenceId sentenceId) {
+        var newIndex = this.index.remove(sentenceId);
+        return BooleanModel.of(newIndex);
     }
 
     /**
