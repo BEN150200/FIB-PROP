@@ -7,6 +7,7 @@ public class SentenceCtrl {
 
     private static SentenceCtrl instance = null;
     private HashMap<String, Sentence> sentences = new HashMap<String, Sentence>();
+    private HashMap<String, Integer> sentencesID = new HashMap<String, Integer>();
     
     public static SentenceCtrl getInstance() {
         if (instance == null) {

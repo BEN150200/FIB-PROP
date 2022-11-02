@@ -13,6 +13,8 @@ import javax.xml.catalog.CatalogFeatures.Feature;
 import java.util.List;
 import java.util.Set;
 
+import java.util.HashSet;
+
 
 public class DomainCtrl {
 
@@ -46,16 +48,6 @@ public class DomainCtrl {
     /**
      * Add Elements
     **/
-    public boolean addAuthor(String authorName) {
-        Author a = new Author(authorName);
-        return AuthorCtrl.getInstance().addAuthor(a);
-    }
-
-    public boolean addTitle(String titleName) {
-        Title t = new Title(titleName);
-        return TitleCtrl.getInstance().addTitle(t);
-    }
-
     public boolean addDocument(String titleName, String authorName, List<String> content) {
         if (!DocumentCtrl.getInstance().existsDocument(titleName, authorName)) {
             Title t = TitleCtrl.getInstance().getTitle(titleName);
@@ -79,6 +71,21 @@ public class DomainCtrl {
         return false;
     }
 
+    public boolean addTitle(String titleName) {
+        Title t = new Title(titleName);
+        return TitleCtrl.getInstance().addTitle(t);
+    }
+
+    public boolean addAuthor(String authorName) {
+        Author a = new Author(authorName);
+        return AuthorCtrl.getInstance().addAuthor(a);
+    }
+
+    public boolean addBooleanExpresion(String boolExpName, String boolExp) {
+        return false;
+    }
+    
+
     /**
      * Search Elements
     **/
@@ -91,139 +98,76 @@ public class DomainCtrl {
         return info;
     }
 
-    public ArrayList<String> getAllTitles() {
-        return TitleCtrl.getInstance().getAllTitlesNames();
+    public ArrayList<String> getAllTitles(String titleName) {
+        if (titleName.isEmpty()) return TitleCtrl.getInstance().getAllTitlesNames();
+        return TitleCtrl.getInstance().getTitlesNamesPrefix(titleName);
     }
 
-    public ArrayList<String> getAllAuthors() {
-        return AuthorCtrl.getInstance().getAllAuthorsNames();
-    }
-
-    public ArrayList<String> getAllAuthorTitles(String authorName) {
-        Author author = AuthorCtrl.getInstance().getAuthor(authorName);
-        if (author == null) System.out.println("The author is not in the System");
-        else {
-            Set<Integer> docsID = author.getAllDocsID();
-            ArrayList<Document> docs = DocumentCtrl.getInstance().getDocuments(docsID);
-            ArrayList<String> docsTitlesNames = new ArrayList<String>();
-            for (Document doc : docs) {
-                docsTitlesNames.add(doc.getTitle().getTitleName());
-            }
-            return docsTitlesNames;
-        }
-        return null;
-    }
-
-    public ArrayList<String> getAllTitleAuthors(String titleName) {
-        Title title = TitleCtrl.getInstance().getTitle(titleName);
-        if (title == null) System.out.println("The title is not in the System");
-        else {
-            Set<Integer> docsID = title.getAllDocsID();
-            ArrayList<Document> docs = DocumentCtrl.getInstance().getDocuments(docsID);
-            ArrayList<String> docsAuthorsNames = new ArrayList<String>();
-            for (Document doc : docs) {
-                docsAuthorsNames.add(doc.getAuthor().getAuthorName());
-            }
-            return docsAuthorsNames;
-        }
-        return null;
+    public ArrayList<String> getAllAuthors(String authorName) {
+        if (authorName.isEmpty()) return AuthorCtrl.getInstance().getAllAuthorsNames();
+        return AuthorCtrl.getInstance().getAuthorsNamesPrefix(authorName);
     }
 
     public HashMap<String,String> getAllBooleanExpresions() {
         return null;
     }
 
-
-
-
-
-    /**
-     * File Managment Functions
-    **/
-
-    //pre: the filePath is the path of an existing file
-    //exc: the file is already in the system
-    //post: the file is loaded into the system
-    //      returns the docID of the new docuemnt
-    /* 
-    public Boolean loadFile(String filePath) {
-        //System.out.println("de moment el fitcher no s'ha carregat XD");
-        try {
-            String extension = "";
-
-            int i = filePath.lastIndexOf('.');
-            if (i > 0) {
-                extension = filePath.substring(i+1);
-            }
-            if (extension != "txt") {
-                System.out.println("File is not a .txt");
-                return false;
-            }
-
-            File file = new File(filePath);
-            Scanner scanner = new Scanner(file);
-            String title;
-            String author;
-            if (scanner.hasNextLine()) {
-                title = scanner.nextLine();
-                if (scanner.hasNextLine()) author = scanner.nextLine(); 
-            }
-            //buscar si existeix el fitxer 
-            return false;
-
+    public ArrayList<String> getAllAuthorTitles(String authorName) {
+        ArrayList<String> titles = new ArrayList<String>();
+        ArrayList<Author> authors = AuthorCtrl.getInstance().getAuthorsPrefix(authorName);
+        Set<Integer> docsID = new HashSet<Integer>();
+        for (Author author : authors) {
+            docsID.addAll(author.getAllDocsID());
         }
-        catch (FileNotFoundException e) {
-            System.out.println("File not found");
-            return false;
-        } 
-    }
-    */
-    /* 
-    public Set<Integer> loadFileSet(Set<String> files) {
-        Set<Integer> ids = new HashSet<>();
-        for (String filePath : files) {
-            loadFile(filePath);
+        for (Integer integer : docsID) {
+            titles.add(DocumentCtrl.getInstance().getDocument(integer).getTitle().getTitleName());
         }
-        return ids;
+        return titles;
     }
 
-    public Set<Integer> loadFolder(String dir) {
-        Set<Integer> ids = new HashSet<>();
-
-        return ids;
-    }
-
-
-    //pre: doc is a document of the system and has ven modified
-    //post: the doc is saved into his file
-    public void saveFile(int docID) {
-        String path;
-        try {
-            
-
-        } 
-        catch(NullPointerException e) {
-            
+    public ArrayList<String> getAllTitleAuthors(String titleName) {
+        ArrayList<String> authors = new ArrayList<String>();
+        ArrayList<Title> titles = TitleCtrl.getInstance().getTitlesPrefix(titleName);
+        Set<Integer> docsID = new HashSet<Integer>();
+        for (Title title : titles) {
+            docsID.addAll(title.getAllDocsID());
         }
-
-        System.out.println("Funcio no implementada XD");
-    }
-    */
-
-
-    /**
-     * Export Functions
-     */
-    /* 
-    public void exportTXT(Document doc, String path, String name) {
-        System.out.println("Funcio no implementada XD");
+        for (Integer integer : docsID) {
+            authors.add(DocumentCtrl.getInstance().getDocument(integer).getAuthor().getAuthorName());
+        }
+        return authors;
     }
 
-    public void exportXML(Document doc, String path, String name) {
-        System.out.println("Funcio no implementada XD");
+    public ArrayList<DocumentInfo> getAllAuthorDocuments(String authorName) {
+        ArrayList<DocumentInfo> docsInfo = new ArrayList<DocumentInfo>();
+        ArrayList<Author> authors = AuthorCtrl.getInstance().getAuthorsPrefix(authorName);
+        HashSet<Integer> docsID = new HashSet<Integer>();
+        for (Author author : authors) {
+            docsID.addAll(author.getAllDocsID());
+        }
+        for (Integer docID : docsID) {
+            Document doc = DocumentCtrl.getInstance().getDocument(docID);
+            docsInfo.add(doc.getInfo());
+        }
+        return docsInfo;
     }
-    */
 
+    public ArrayList<DocumentInfo> getAllTitleDocuments(String titleName) {
+        ArrayList<DocumentInfo> docsInfo = new ArrayList<DocumentInfo>();
+        ArrayList<Title> titles = TitleCtrl.getInstance().getTitlesPrefix(titleName);
+        HashSet<Integer> docsID = new HashSet<Integer>();
+        for (Title title : titles) {
+            docsID.addAll(title.getAllDocsID());
+        }
+        for (Integer docID : docsID) {
+            Document doc = DocumentCtrl.getInstance().getDocument(docID);
+            docsInfo.add(doc.getInfo());
+        }
+        return docsInfo;
+    }
 
+    
+
+    
     
 }
