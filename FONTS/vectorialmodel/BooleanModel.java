@@ -2,15 +2,11 @@ package vectorialmodel;
 
 import java.util.Collection;
 import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import io.vavr.Tuple;
 import io.vavr.collection.HashMap;
 import io.vavr.collection.HashSet;
+import io.vavr.collection.Set;
 
 
 public class BooleanModel<SentenceId> {
@@ -68,8 +64,12 @@ public class BooleanModel<SentenceId> {
      * @param term term to search
      * @return ids of sentences containing term
      */
-    public Set<SentenceId> queryTerm(String term) {
-        return index.postingList(term).keySet().toJavaSet();
+    public java.util.Set<SentenceId> queryTerm(String term) {
+        return queryTermVavr(term).toJavaSet();
+    }
+
+    private Set<SentenceId> queryTermVavr(String term) {
+        return index.postingList(term).keySet();
     }
     
     /**
@@ -77,45 +77,45 @@ public class BooleanModel<SentenceId> {
      * @param set collection of terms to search
      * @return ids of sentences containing all the terms in set
      */
-    public Set<SentenceId> querySet(Collection<String> set) {
-        return querySetStream(set).collect(Collectors.toSet());
+    public java.util.Set<SentenceId> querySet(Collection<String> set) {
+        return querySetVavr(set).toJavaSet();
     }
 
-    public Stream<SentenceId> querySetStream(Collection<String> set) {
-        var Ds = set.stream().map(this::queryTerm).toList(); // sets of docids
-        var Dmin = Ds.stream().min(Comparator.comparing(Set::size)).orElseGet(Set::of); // smallest set
-        return Dmin.stream()
-                .filter(d -> Ds.stream().allMatch(Di -> Di.contains(d)));
+    @SuppressWarnings("deprecation")
+    public Set<SentenceId> querySetVavr(Collection<String> set) {
+        var Ds = io.vavr.collection.Array.ofAll(set).map(this::queryTermVavr);
+        var Dmin = Ds.<Integer>minBy(Set::size).getOrElse(HashSet::empty);
+        return Dmin.filter(d -> Ds.forAll(Di -> Di.contains(d)));
     }
 
     /**
      * @param sequence sequence of terms to search
      * @return ids of sentences containing all the terms of the sequence in order
      */
-    public Set<SentenceId> querySequence(List<String> sequence) {
+    @SuppressWarnings("deprecation") // forall is getting de-deprecated!
+    public java.util.Set<SentenceId> querySequence(java.util.List<String> sequence) {
 
         var Ds = io.vavr.collection.Array.ofAll(sequence).map(index::postingList);
-        
-        if(Ds.isEmpty()) return Collections.emptySet();
 
-        var Dm = Ds.minBy(HashMap::size).get();
-        int m = Ds.indexOf(Dm);
-
-        return Dm.map((d, P) -> Tuple.of(d,
+        return Ds.minBy(HashMap::size).map(
+            Dmin -> Dmin.map((d, P) -> Tuple.of(d,
                     P.filter(
                         pos -> Ds.zipWithIndex()
-                        .forAll(t -> t._1.get(d).map(positions -> positions.contains(pos + t._2 - m)).getOrElse(false))
+                        .forAll(t -> t._1.containsKey(d) &&
+                                     t._1.get(d).get().contains(pos + t._2 - Ds.indexOf(Dmin)))
                     ))
                 )
                 .filterValues(HashSet::nonEmpty)
-                .keySet().toJavaSet();
+                .keySet().toJavaSet()
+        )
+        .getOrElse(Collections::emptySet);
     }
     
     /**
      * 
      * @return set of all the sentences ids
      */
-    public Set<SentenceId> all() {
+    public java.util.Set<SentenceId> all() {
         return index.directIndex.keySet().toJavaSet();
     }
     

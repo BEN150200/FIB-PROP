@@ -1,11 +1,10 @@
 package vectorialmodel;
 
-import java.util.List;
 import java.util.Map;
 
 import io.vavr.Tuple;
 import io.vavr.collection.HashMap;
-
+import io.vavr.collection.HashSet;
 import helpers.Maps;
 import helpers.Lists;
 
@@ -40,7 +39,7 @@ public class VectorialModel<DocId> {
      * @param collection Mapping docId -> Document forall documents of the collection
      * @return a vectorial model representation of the collection
      */
-    public static <DocId> VectorialModel<DocId> of(Map<DocId, List<String>> collection) {
+    public static <DocId> VectorialModel<DocId> of(Map<DocId, Iterable<String>> collection) {
         
         // construct index
         Index<DocId> index = Index.of(
@@ -58,11 +57,19 @@ public class VectorialModel<DocId> {
             TFIDF.computeTFIDF(
                 index.termsFrequencies(docId),
                 maxFrequencies.get(docId).get(),
-                collection.size()    
+                index.documentsCount()  
             ))
         );
 
         return new VectorialModel<DocId>(index, maxFrequencies, tfidfs);
+    }
+
+    private static <DocId> HashMap<String, Double> computeTfidf(Index<DocId> index, DocId docId) {
+        return TFIDF.computeTFIDF(
+                    index.termsFrequencies(docId),
+                    Lists.maxFrequency(index.termsFrequencies(docId)),
+                    index.documentsCount()
+                );
     }
 
     /**
@@ -73,8 +80,40 @@ public class VectorialModel<DocId> {
      */
     public VectorialModel<DocId> insert(DocId docId, Iterable<String> content) {
         var newIndex = this.index.insert(docId, content);
-        var newMaxFrequencies = this.maxFrequencies; // TODO
-        var newTfidfVectors = this.tfidfVectors; // TODO
+        // terms changed = (new U old) - (new int old)
+        var oldTerms = this.index.terms(docId);
+        var newTerms = newIndex.terms(docId);
+        
+        var removedTerms = oldTerms.diff(newTerms);
+        var addedTerms = newTerms.diff(oldTerms);
+
+        var newMaxFrequency = Lists.maxFrequency(newTerms);
+        var newMaxFrequencies = this.maxFrequencies.put(docId, newMaxFrequency);
+
+        var newTfidf = TFIDF.computeTFIDF(
+            newIndex.termsFrequencies(docId),
+            newMaxFrequency,
+            this.index.documentsCount()
+        );
+        
+        var removedDirty = removedTerms.foldLeft(
+            HashSet.<DocId>empty(),
+            (dirty, removedTerm) -> dirty.union(this.index.documents(removedTerm))
+        );
+
+        var addedDirty = addedTerms.foldLeft(
+            HashSet.<DocId>empty(),
+            (dirty, addedTerm) -> dirty.union(newIndex.documents(addedTerm))
+        );
+
+        var newTfidfVectors = removedDirty.union(addedDirty).foldLeft(
+            this.tfidfVectors.put(docId, newTfidf),
+            (tfidfs, dirtyDocId) -> tfidfs.put(
+                dirtyDocId,
+                VectorialModel.computeTfidf(newIndex, dirtyDocId)
+            )
+        );
+
         return new VectorialModel<DocId>(newIndex, newMaxFrequencies, newTfidfVectors);
     }
     
@@ -85,8 +124,8 @@ public class VectorialModel<DocId> {
      */
     public VectorialModel<DocId> remove(DocId docId) {
         var newIndex = this.index.remove(docId);
-        var newMaxFrequencies = this.maxFrequencies; // TODO
-        var newTfidfVectors = this.tfidfVectors; // TODO
+        var newMaxFrequencies = this.maxFrequencies.remove(docId);
+        var newTfidfVectors = this.tfidfVectors.remove(docId);
         return new VectorialModel<DocId>(newIndex, newMaxFrequencies, newTfidfVectors);
     }
 

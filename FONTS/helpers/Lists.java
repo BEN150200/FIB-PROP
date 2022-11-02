@@ -8,6 +8,8 @@ import java.util.function.BiPredicate;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
+import java.util.stream.StreamSupport;
 
 public class Lists {
     /**
@@ -16,8 +18,8 @@ public class Lists {
      * @param list
      * @return a mapping of the elements of the list to their frequencies (on the list)
      */
-    public static <T> Map<T, Long> frequencies(List<T> list) {
-        return list.stream()
+    public static <T> Map<T, Long> frequencies(Stream<T> stream) {
+        return stream
             .collect(
                 Collectors.groupingBy(
                     Function.identity(),
@@ -31,8 +33,8 @@ public class Lists {
      * @param list
      * @return max frequency of elements in list
      */
-    public static <T> Long maxFrequency(List<T> list) {
-        return Lists.frequencies(list)
+    public static <T> Long maxFrequency(Iterable<T> iterable) {
+        return Lists.frequencies(StreamSupport.stream(iterable.spliterator(), true))
                 .entrySet().stream()
                 .max(Map.Entry.comparingByValue())
                 .map(Map.Entry::getValue)

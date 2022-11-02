@@ -1,8 +1,5 @@
 package vectorialmodel;
 
-
-import java.util.stream.Collectors;
-
 import io.vavr.Tuple2;
 import io.vavr.collection.HashMap;
 import io.vavr.collection.HashSet;
@@ -41,6 +38,10 @@ public class Index<DocId> {
     public HashMap<DocId, HashSet<Integer>> postingList(String term) {
         return invertedIndex.get(term).orNull();
     }
+
+    public Set<DocId> documents(String term) {
+        return invertedIndex.get(term).map(HashMap::keySet).orNull();
+    }
     
     /**
      * @param docId id of the documents whose term frequencies we wish to retrieve
@@ -48,6 +49,14 @@ public class Index<DocId> {
      */
     public HashMap<String, HashSet<Integer>> termsPositions(DocId docId) {
         return directIndex.get(docId).orNull();
+    }
+
+    /**
+     * @param docId id of the documents whose term frequencies we wish to retrieve
+     * @return a mapping term -> [positions] forall terms of the document identified by docId
+     */
+    public Set<String> terms(DocId docId) {
+        return directIndex.get(docId).map(HashMap::keySet).orNull();
     }
 
     /**
@@ -62,6 +71,10 @@ public class Index<DocId> {
 
     public Index<DocId> insert(Tuple2<DocId, Iterable<String>> document) {
         return this.insert(document._1, document._2);
+    }
+
+    public int documentsCount() {
+        return this.directIndex.size();
     }
 
     /**
