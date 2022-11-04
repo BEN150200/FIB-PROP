@@ -5,6 +5,7 @@ import java.util.Map;
 import io.vavr.Tuple;
 import io.vavr.collection.HashMap;
 import io.vavr.collection.HashSet;
+import io.vavr.collection.Set;
 import helpers.Maps;
 import helpers.Lists;
 
@@ -33,6 +34,27 @@ public class VectorialModel<DocId> {
         );
     }
 
+    public static <DocId> VectorialModel<DocId> of(Index<DocId> index) {
+        var maxFrequencies = index.directIndex.map(
+            (docId, termsVector) -> Tuple.of(
+                docId,
+                (long) termsVector.mapValues(HashSet::size).values().max().get()
+            )
+        );
+
+        var tfidfs = index.directIndex.map(
+            (docId, __) -> Tuple.of(docId,
+            TFIDF.computeTFIDF(
+                index.termsFrequencies(docId),
+                maxFrequencies.get(docId).get(),
+                index.documentsCount(),
+                index.termsDocumentFrequencies(docId)
+            ))
+        );
+
+        return new VectorialModel<DocId>(index, maxFrequencies, tfidfs);
+    }
+
     /**
      * @param <String> Type used to represent Strings
      * @param <DocId> Type used to represent document IDs
@@ -57,7 +79,8 @@ public class VectorialModel<DocId> {
             TFIDF.computeTFIDF(
                 index.termsFrequencies(docId),
                 maxFrequencies.get(docId).get(),
-                index.documentsCount()  
+                index.documentsCount(),
+                index.termsDocumentFrequencies(docId)
             ))
         );
 
@@ -68,7 +91,8 @@ public class VectorialModel<DocId> {
         return TFIDF.computeTFIDF(
                     index.termsFrequencies(docId),
                     Lists.maxFrequency(index.termsFrequencies(docId)),
-                    index.documentsCount()
+                    index.documentsCount(),
+                    index.termsDocumentFrequencies(docId)
                 );
     }
 
@@ -93,7 +117,8 @@ public class VectorialModel<DocId> {
         var newTfidf = TFIDF.computeTFIDF(
             newIndex.termsFrequencies(docId),
             newMaxFrequency,
-            this.index.documentsCount()
+            newIndex.documentsCount(),
+            newIndex.termsDocumentFrequencies(docId)
         );
         
         var removedDirty = removedTerms.foldLeft(
@@ -125,7 +150,20 @@ public class VectorialModel<DocId> {
     public VectorialModel<DocId> remove(DocId docId) {
         var newIndex = this.index.remove(docId);
         var newMaxFrequencies = this.maxFrequencies.remove(docId);
-        var newTfidfVectors = this.tfidfVectors.remove(docId);
+
+        var removedTerms = this.index.terms(docId);
+        var dirtyDocuments = removedTerms
+            .map(this.index::documents)
+            .fold(HashSet.empty(), Set::union);
+
+        var newTfidfVectors = dirtyDocuments.foldLeft(
+            this.tfidfVectors.remove(docId),
+            (tfidfs, dirtyDocId) -> tfidfs.put(
+                dirtyDocId,
+                VectorialModel.computeTfidf(index, dirtyDocId)
+            )
+        );
+
         return new VectorialModel<DocId>(newIndex, newMaxFrequencies, newTfidfVectors);
     }
 
@@ -143,19 +181,39 @@ public class VectorialModel<DocId> {
      * @return mapping doc_id -> cosine_similarity for all documents with similarity > 0 with docId
      */
     public java.util.HashMap<DocId, Double> querySimilars(DocId docId) {
+        return this.querySimilars(this.tfidfVector(docId));
+    }
+
+    /**
+     * 
+     * @param termsWeights
+     * @return mapping doc_id -> cosine_similarity for all documents with similarity > 0 with the given (term, tfidf weight) vector
+     */
+    public java.util.HashMap<DocId, Double> querySimilars(Map<String, Double> termsWeights) {
         var similarities = new java.util.HashMap<DocId, Double>();
 
-        for(var tw : this.tfidfVector(docId).entrySet()) {
+        for(var tw : termsWeights.entrySet()) {
             var term = tw.getKey();
             var weight = tw.getValue();
             
             for(var posting : this.index.postingList(term)) {
-                var otherId = posting._1;
-                var otherWeight = this.tfidfVector(otherId).get(term);
+                var docId = posting._1;
+                var otherWeight = this.tfidfVector(docId).get(term);
                 similarities.merge(docId, weight*otherWeight, Maps.add);
             }
         }
 
         return similarities;
+    }
+
+    @Override
+    @SuppressWarnings({"unchecked", "deprecation"})
+    public boolean equals(Object obj) {
+        if(!(this.getClass().isInstance(obj))) return false;
+        
+        var other = (VectorialModel<DocId>) obj;
+        return this.index.equals(other.index) &&
+                this.maxFrequencies.eq(other.maxFrequencies) &&
+                this.tfidfVectors.eq(other.tfidfVectors);
     }
 }
