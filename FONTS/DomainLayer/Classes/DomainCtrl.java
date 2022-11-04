@@ -84,7 +84,29 @@ public class DomainCtrl {
     public boolean addBooleanExpresion(String boolExpName, String boolExp) {
         return false;
     }
+
+    /**
+     * Delete Elements
+    **/
     
+    public boolean deleteDocument(String titleName, String authorName){
+        if (!DocumentCtrl.getInstance().existsDocument(titleName, authorName)) {
+            Document d = DocumentCtrl.getInstance().getDocument(titleName, authorName);
+            DocumentCtrl.getInstance().deleteDocument(titleName, authorName);
+            Author a = d.getAuthor();
+            a.deleteDocument(d.getID());
+            if(a.getNbDocuments() == 0){
+                AuthorCtrl.getInstance().deleteAuthor(a.getAuthorName());
+            }
+            Title t = d.getTitle();
+            t.deleteDocument(d.getID());
+            if(t.getNbDocuments() == 0){
+                TitleCtrl.getInstance().deleteTitle(t.getTitleName());
+            }
+            return true;
+        }
+        return false;
+    }
 
     /**
      * Search Elements

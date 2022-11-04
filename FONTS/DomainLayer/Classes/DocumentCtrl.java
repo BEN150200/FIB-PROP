@@ -38,10 +38,6 @@ public class DocumentCtrl {
     public boolean existsDocument(String titleName, String authorName) {
         return documentsID.containsKey(new Pair<String,String>(titleName, authorName));
     }
-
-    public boolean existsDocument(Document doc) {
-        return documents.containsValue(doc);
-    }
     
     public Integer getDocumentID(String titleName, String authorName) {
         return documentsID.get(new Pair<String,String>(titleName, authorName));
@@ -88,6 +84,16 @@ public class DocumentCtrl {
         documentsID.put(new Pair<String,String>(t.getTitleName(), a.getAuthorName()), usedID);
         documents.put(usedID, doc);
         return true;
+    }
+
+    public boolean deleteDocument(String titleName, String authorName){
+        if(existsDocument(titleName, authorName)){
+            Pair<String, String> p = new Pair<String, String>(titleName, authorName);
+            documents.remove(getDocumentID(titleName, authorName));
+            documentsID.remove(p);
+            return true;
+        }
+        return false;
     }
 
 }

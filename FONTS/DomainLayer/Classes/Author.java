@@ -29,10 +29,22 @@ public class Author extends Sentence{
         return documents.contains(docID);
     }
 
+    public int getNbDocuments(){
+        return documents.size();
+    }
+
     /**
      * Setters
      */
     public boolean addDoc(Integer docID) {
         return documents.add(docID);
+    }
+
+    public boolean deleteDocument(Integer docID){
+        if(isAuthorOfDoc(docID)){
+            documents.remove(docID);
+            return true;
+        }
+        return false;
     }
 }
