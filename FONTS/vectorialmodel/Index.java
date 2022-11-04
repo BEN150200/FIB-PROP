@@ -1,5 +1,6 @@
 package vectorialmodel;
 
+import io.vavr.Tuple;
 import io.vavr.Tuple2;
 import io.vavr.collection.HashMap;
 import io.vavr.collection.HashSet;
@@ -69,12 +70,30 @@ public class Index<DocId> {
                     document.mapValues(HashSet::size)).orNull();
     }
 
+    public int documentFrequency(String term) {
+        return this.invertedIndex.get(term).get().size();
+    }
+
+    public HashMap<String, Integer> termsDocumentFrequencies(DocId docId) {
+        return directIndex.get(docId).map(
+            document ->
+                document.map((term, __) -> Tuple.of(
+                    term, this.documentFrequency(term)
+                ))
+        )
+        .orNull();
+    }
+
     public Index<DocId> insert(Tuple2<DocId, Iterable<String>> document) {
         return this.insert(document._1, document._2);
     }
 
     public int documentsCount() {
         return this.directIndex.size();
+    }
+
+    public Set<DocId> allDocIds() {
+        return this.directIndex.keySet();
     }
 
     /**
@@ -138,5 +157,15 @@ public class Index<DocId> {
             index.invertedIndex.mkString("\t", "\n\t", ""),
             index.directIndex.mkString("\t", "\n\t", "")
         );
+    }
+
+    @Override
+    @SuppressWarnings({"unchecked", "deprecation"})
+    public boolean equals(Object obj) {
+        if(!(this.getClass().isInstance(obj))) return false;
+
+        var other = (Index<DocId>) obj;
+
+        return this.directIndex.eq(other.directIndex) && this.invertedIndex.eq(other.invertedIndex);
     }
 }

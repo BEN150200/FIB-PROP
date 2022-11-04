@@ -116,7 +116,7 @@ public class BooleanModel<SentenceId> {
      * @return set of all the sentences ids
      */
     public java.util.Set<SentenceId> all() {
-        return index.directIndex.keySet().toJavaSet();
+        return this.index.allDocIds().toJavaSet();
     }
     
 }
