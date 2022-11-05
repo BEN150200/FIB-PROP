@@ -61,7 +61,7 @@ public class ConsoleCtrl extends PresentationCtrl{
                         "   6   List all the Document's Author of a Title",
                         "   7   List all the Documents of a Author",
                         "   8   List all the Documents of a Title",
-                        "       ",
+                        "   9   List all the Documents of a Title and an Author",
                         "   0   Exit Search Menu",
                         ""
     };
@@ -212,7 +212,7 @@ public class ConsoleCtrl extends PresentationCtrl{
         while (true) {
 
             printSearchMenu();
-            Integer command = getInputAsInt(0, 8);
+            Integer command = getInputAsInt(0, 9);
             printCmd("");
             
             switch (command) {
@@ -240,6 +240,8 @@ public class ConsoleCtrl extends PresentationCtrl{
                 case 8:
                     searchAllTitleDocs();
                     break;
+                case 9:
+                    searchDocsByTitleAndAuthor();
                 case 0:
                     return;
                 default:
@@ -402,8 +404,9 @@ public class ConsoleCtrl extends PresentationCtrl{
         getInputAsLine();
         printCmd("-Enter Author name or a prefix of the name:");
         String authorName = getInputAsLine();
+        printCmd("");
         ArrayList<DocumentInfo> titles = domain.getAllAuthorDocuments(authorName);
-        printCmd("____Titles of " + authorName + "____");
+        printCmd("____Documents of " + authorName + "____");
         for (DocumentInfo documentInfo : titles) {
             documentInfo.printCMD();
         }
@@ -413,13 +416,27 @@ public class ConsoleCtrl extends PresentationCtrl{
         getInputAsLine();
         printCmd("-Enter Title name or a prefix of the name:");
         String titleName = getInputAsLine();
-        printCmd("____Authors of " + titleName + "____");
+        printCmd("");
+        printCmd("____Documents of " + titleName + "____");
         ArrayList<DocumentInfo> authors = domain.getAllTitleDocuments(titleName);
         for (DocumentInfo documentInfo : authors) {
             documentInfo.printCMD();
         }
     }
 
+    public void searchDocsByTitleAndAuthor() {
+        getInputAsLine();
+        printCmd("-Enter Title name or a prefix of the name:");
+        String titleName = getInputAsLine();
+        printCmd("-Enter Author name or a prefix of the name:");
+        String authorName = getInputAsLine();
+        printCmd("");
+        printCmd("____Documents of " + titleName + " and " + authorName + "____");
+        ArrayList<DocumentInfo> docsInfo = domain.getDocsByTitleAndAuthor(titleName, authorName);
+        for (DocumentInfo documentInfo : docsInfo) {
+            documentInfo.printCMD();
+        }
+    }
     
 
 

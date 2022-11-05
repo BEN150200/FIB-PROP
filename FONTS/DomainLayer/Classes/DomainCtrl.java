@@ -188,6 +188,34 @@ public class DomainCtrl {
         return docsInfo;
     }
 
+    public ArrayList<DocumentInfo> getDocsByTitleAndAuthor(String titleName, String authorName) {
+        ArrayList<Title> titles = TitleCtrl.getInstance().getTitlesPrefix(titleName);
+        ArrayList<Author> authors = AuthorCtrl.getInstance().getAuthorsPrefix(authorName);
+        Set<Integer> titlesDocsIDs = new HashSet<Integer>();
+        Set<Integer> authorsDocsIDs = new HashSet<Integer>();
+        Set<Integer> docsIDs = new HashSet<Integer>();
+        for (Title title : titles) {
+            titlesDocsIDs.addAll(title.getAllDocsID());
+        }
+        for (Author author : authors) {
+            authorsDocsIDs.addAll(author.getAllDocsID());
+        }
+        for (Integer integer : authorsDocsIDs) {
+            if (titlesDocsIDs.contains(integer)) {
+                docsIDs.add(integer);
+            }
+        }
+
+        ArrayList<Document> docs = DocumentCtrl.getInstance().getDocuments(docsIDs);
+        ArrayList<DocumentInfo> docsInfo = new ArrayList<DocumentInfo> ();
+
+        for (Document doc : docs) {
+            docsInfo.add(doc.getInfo());
+        }
+
+        return docsInfo;
+    }
+
     
 
     
