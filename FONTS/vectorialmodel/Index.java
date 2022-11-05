@@ -1,6 +1,8 @@
 package vectorialmodel;
 
-import io.vavr.Tuple;
+import java.security.InvalidParameterException;
+import java.util.function.Function;
+
 import io.vavr.Tuple2;
 import io.vavr.collection.HashMap;
 import io.vavr.collection.HashSet;
@@ -18,6 +20,11 @@ public class Index<DocId> {
         this.directIndex = directIndex;
     }
 
+    /**
+     * 
+     * @param <DocId>
+     * @return an empty Index
+     */
     public static <DocId> Index<DocId> empty() {
         return new Index<DocId>(
             HashMap.empty(),
@@ -25,77 +32,89 @@ public class Index<DocId> {
         );
     }
 
+    /**
+     * 
+     * @param <DocId>
+     * @param collection
+     * @return a new Index representing the given collection
+     */
     public static <DocId> Index<DocId> of(Map<DocId, Iterable<String>> collection) {
         return collection.foldLeft(
-            Index.<DocId>empty(),
+            Index.empty(),
             Index::insert
         );
     }
 
     /**
      * @param term term whose posting list we want to retrieve
-     * @return a mapping docId -> [positions] forall documents containing the String parameter
+     * @return a mapping docId -> [positions] forall documents containing the String parameter (or empty, if there are none)
      */
     public HashMap<DocId, HashSet<Integer>> postingList(String term) {
-        return invertedIndex.get(term).orNull();
+        return invertedIndex.get(term).getOrElse(HashMap::empty);
     }
 
     public Set<DocId> documents(String term) {
-        return invertedIndex.get(term).map(HashMap::keySet).orNull();
+        return this.postingList(term).keySet();
     }
     
     /**
      * @param docId id of the documents whose term frequencies we wish to retrieve
-     * @return a mapping term -> [positions] forall terms of the document identified by docId
+     * @return a mapping term -> [positions] forall terms of the document identified by docId. Throws if docId doesn't exist! (an empty document is still a document)
      */
     public HashMap<String, HashSet<Integer>> termsPositions(DocId docId) {
-        return directIndex.get(docId).orNull();
+        return directIndex.get(docId).getOrElseThrow(() -> new InvalidParameterException("DocId " + docId + " is not in the index"));
     }
 
     /**
      * @param docId id of the documents whose term frequencies we wish to retrieve
-     * @return a mapping term -> [positions] forall terms of the document identified by docId
+     * @return a mapping term -> [positions] forall terms of the document identified by docId. Throws if docId doesn't exist! (an empty document is still a document)
      */
     public Set<String> terms(DocId docId) {
-        return directIndex.get(docId).map(HashMap::keySet).orNull();
+        return this.termsPositions(docId).keySet();
     }
 
     /**
      * @param docId id of the documents whose term frequencies we wish to retrieve
-     * @return a mapping term -> [positions] forall terms of the document identified by docId
+     * @return a mapping term -> [positions] forall terms of the document identified by docId. Throws if docId doesn't exist! (an empty document is still a document)
      */
     public HashMap<String, Integer> termsFrequencies(DocId docId) {
-        return directIndex.get(docId).map(
-                document ->
-                    document.mapValues(HashSet::size)).orNull();
+        return this.termsPositions(docId).mapValues(HashSet::size);
     }
 
     public int documentFrequency(String term) {
         return this.invertedIndex.get(term).get().size();
     }
 
+    /**
+     * 
+     * @param docId
+     * @return a mapping term -> document_frequency forall terms of the document. Throws if docId doesn't exist! (an empty document is still a document)
+     */
+    @SuppressWarnings("deprecation") // de-deprecated, not released yet
     public HashMap<String, Integer> termsDocumentFrequencies(DocId docId) {
-        return directIndex.get(docId).map(
-            document ->
-                document.map((term, __) -> Tuple.of(
-                    term, this.documentFrequency(term)
-                ))
-        )
-        .orNull();
+        return (HashMap<String, Integer>) this.terms(docId).toMap(
+            Function.identity(),
+            this::documentFrequency
+        );
     }
 
-    public Index<DocId> insert(Tuple2<DocId, Iterable<String>> document) {
-        return this.insert(document._1, document._2);
-    }
-
+    
+    /**
+     * 
+     * @return number of documents in the index
+     */
     public int documentsCount() {
         return this.directIndex.size();
     }
-
+    
+    /**
+     * 
+     * @return Set of all docIds in the index
+     */
     public Set<DocId> allDocIds() {
         return this.directIndex.keySet();
     }
-
+    
     /**
      * 
      * @param docId id of the document to be inserted
@@ -110,34 +129,30 @@ public class Index<DocId> {
                 (positions, termIndex) -> positions.merge(
                     HashMap.of(termIndex._1, HashSet.of(termIndex._2)),
                     HashSet::union
-                )
-            );
-
-        var newDirectIndex = this.directIndex.put(docId, termsPositions);
-
-        // remove if previously existing
-        var removedInverted = this.directIndex.get(docId).map(
-            doc -> doc.keySet().foldLeft(this.invertedIndex, HashMap::remove)
-        )
-        .getOrElse(this.invertedIndex);
-
-
+                    )
+                    );
+                    
+                    var newDirectIndex = this.directIndex.put(docId, termsPositions);
+                    
+                    // remove if previously existing
+                    var removedInverted = this.directIndex.get(docId).map(
+                        doc -> doc.keySet().foldLeft(this.invertedIndex, HashMap::remove)
+                        )
+                        .getOrElse(this.invertedIndex);
+                        
+                        
         // add to inverted file
         var newInvertedIndex = termsPositions
-            .foldLeft(removedInverted, (inverted, termPositions) -> inverted.merge(
-                HashMap.of(termPositions._1, HashMap.of(docId, termPositions._2)),
-                HashMap::merge
+        .foldLeft(removedInverted, (inverted, termPositions) -> inverted.merge(
+            HashMap.of(termPositions._1, HashMap.of(docId, termPositions._2)),
+            HashMap::merge
             ));
-        
+            
             return new Index<DocId>(newInvertedIndex, newDirectIndex);
     }
 
-    private HashMap<String, HashMap<DocId, HashSet<Integer>>> invertedWithout(DocId docId) {
-        return this.invertedIndex.removeAll(
-            this.directIndex.get(docId)
-                .map(HashMap::keySet)
-                .getOrElse(HashSet::empty)
-        );
+    public Index<DocId> insert(Tuple2<DocId, Iterable<String>> docIdContent) {
+        return this.insert(docIdContent._1, docIdContent._2);
     }
 
     /**
@@ -146,10 +161,12 @@ public class Index<DocId> {
      * @return a new index with docId (and its term occurrences) removed (if it existed)
      */
     public Index<DocId> remove(DocId docId) {
-        return new Index<DocId>(
-            this.invertedWithout(docId),
-            this.directIndex.remove(docId)
-        );
+        return this.allDocIds().contains(docId)
+            ? new Index<DocId>(
+                this.invertedIndex.removeAll(this.terms(docId)),
+                this.directIndex.remove(docId)
+            )
+            : this;
     }
     
     public static <DocId> String print(Index<DocId> index) {
