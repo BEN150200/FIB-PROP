@@ -61,6 +61,7 @@ public class ConsoleCtrl extends PresentationCtrl{
                         "   7   List all the Documents of a Author",
                         "   8   List all the Documents of a Title",
                         "   9   List all the Documents of a Title and an Author",
+                        "   10  Show Docuement Content",
                         "   0   Exit Search Menu",
                         ""
     };
@@ -211,7 +212,7 @@ public class ConsoleCtrl extends PresentationCtrl{
         while (true) {
 
             printSearchMenu();
-            Integer command = getInputAsInt(0, 9);
+            Integer command = getInputAsInt(0, 10);
             printCmd("");
             
             switch (command) {
@@ -241,6 +242,8 @@ public class ConsoleCtrl extends PresentationCtrl{
                     break;
                 case 9:
                     searchDocsByTitleAndAuthor();
+                case 10:
+                    showDocument();
                 case 0:
                     return;
                 default:
@@ -435,6 +438,27 @@ public class ConsoleCtrl extends PresentationCtrl{
         for (DocumentInfo documentInfo : docsInfo) {
             documentInfo.printCMD();
         }
+    }
+
+    public void showDocument() {
+        getInputAsLine();
+        printCmd("-Enter the Document ID:");
+        Integer docID = getInputAsInt(1, 2^31-1);
+        ArrayList<String> content = domain.getDocumentContent(docID);
+        getInputAsLine();
+        printCmd("");
+        if(content != null) {
+            printCmd("- Title: " + content.get(0));
+            printCmd("- Author: " + content.get(1));
+            printCmd("");
+            content.remove(0);
+            content.remove(1);
+            for (String sentence : content) {
+                printCmd(sentence);
+            }
+        }
+        else printCmd("There in no document with this ID in the System");
+        
     }
     
 

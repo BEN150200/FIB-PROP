@@ -3,6 +3,7 @@ package domain.core;
 import domain.DocumentInfo;
 
 import java.time.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Document {
@@ -14,6 +15,8 @@ public class Document {
     //private String fileName;
     private LocalDateTime creationDate;
     private LocalDateTime modificationDate;
+
+    private ArrayList<Sentence> sentences = new ArrayList<Sentence>();
     
     //private enum Format {TXT, XML, PROP}
     //private Format format;
@@ -78,6 +81,10 @@ public class Document {
         return new DocumentInfo(docID, title.toString(), author.toString(), creationDate, modificationDate);
     }
 
+    public ArrayList<Sentence> getSentences() {
+        return sentences;
+    }
+
     /**
      * Setters
      */
@@ -95,6 +102,10 @@ public class Document {
             return true;
         }
         return false;
+    }
+
+    public void addSentence(Sentence sentence) {
+        sentences.add(sentence);
     }
 
     public void updateContent(List<String> content) {}

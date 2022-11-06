@@ -3,6 +3,7 @@ package domain.controllers;
 import domain.core.Author;
 import domain.core.Document;
 import domain.core.Title;
+import domain.core.Sentence;
 
 import domain.DocumentInfo;
 
@@ -61,7 +62,21 @@ public class DomainCtrl {
             Integer ID = d.getID();
             t.addDoc(ID);
             a.addDoc(ID);
-            d.updateContent(content);
+
+            for (String sentenceDoc : content) {
+                Sentence sentence;
+                if(!SentenceCtrl.getInstance().existsSentence(sentenceDoc)) {
+                    sentence = new Sentence(sentenceDoc);
+                    SentenceCtrl.getInstance().addSentence(sentence);
+                }
+                else {
+                    sentence = SentenceCtrl.getInstance().getSentence(sentenceDoc);
+                }
+                d.addSentence(sentence);
+                sentence.addDoc(ID);
+            }
+
+            //d.updateContent(content);
             return true;
         }
         return false;
@@ -210,6 +225,21 @@ public class DomainCtrl {
         }
 
         return docsInfo;
+    }
+
+    public ArrayList<String> getDocumentContent(Integer docId) {
+        Document doc = DocumentCtrl.getInstance().getDocument(docId);
+        if (doc == null) return null;
+        else {
+            ArrayList<String> sentencesStrings = new ArrayList<String>();
+            ArrayList<Sentence> sentences = doc.getSentences();
+            sentencesStrings.add(doc.getTitle().toString());
+            sentencesStrings.add(doc.getAuthor().toString());
+            for (Sentence sentence : sentences) {
+                sentencesStrings.add(sentence.toString());
+            }
+            return sentencesStrings;
+        }
     }
 
     
