@@ -62,8 +62,8 @@ public class AuthorCtrl {
     **/
 
     public boolean addAuthor(Author a) {
-        if (!existsAuthor(a.getAuthorName())){
-            authors.put(a.getAuthorName(),a);
+        if (!existsAuthor(a.toString())){
+            authors.put(a.toString(),a);
             return true;
         }
         return false;

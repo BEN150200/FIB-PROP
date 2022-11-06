@@ -62,8 +62,8 @@ public class TitleCtrl {
     **/
 
     public boolean addTitle(Title t) {
-        if (!existsTitle(t.getTitleName())){
-            titles.put(t.getTitleName(),t);
+        if (!existsTitle(t.toString())){
+            titles.put(t.toString(),t);
             return true;
         }
         return false;

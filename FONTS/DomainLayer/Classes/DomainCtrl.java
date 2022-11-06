@@ -96,12 +96,12 @@ public class DomainCtrl {
             Author a = d.getAuthor();
             a.deleteDocument(d.getID());
             if(a.getNbDocuments() == 0){
-                AuthorCtrl.getInstance().deleteAuthor(a.getAuthorName());
+                AuthorCtrl.getInstance().deleteAuthor(a.toString());
             }
             Title t = d.getTitle();
             t.deleteDocument(d.getID());
             if(t.getNbDocuments() == 0){
-                TitleCtrl.getInstance().deleteTitle(t.getTitleName());
+                TitleCtrl.getInstance().deleteTitle(t.toString());
             }
             return true;
         }
@@ -142,7 +142,7 @@ public class DomainCtrl {
             docsID.addAll(author.getAllDocsID());
         }
         for (Integer integer : docsID) {
-            titles.add(DocumentCtrl.getInstance().getDocument(integer).getTitle().getTitleName());
+            titles.add(DocumentCtrl.getInstance().getDocument(integer).getTitle().toString());
         }
         return titles;
     }
@@ -155,7 +155,7 @@ public class DomainCtrl {
             docsID.addAll(title.getAllDocsID());
         }
         for (Integer integer : docsID) {
-            authors.add(DocumentCtrl.getInstance().getDocument(integer).getAuthor().getAuthorName());
+            authors.add(DocumentCtrl.getInstance().getDocument(integer).getAuthor().toString());
         }
         return authors;
     }

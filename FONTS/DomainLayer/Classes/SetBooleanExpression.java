@@ -13,9 +13,9 @@ public class SetBooleanExpression {
         ArrayList<String> names= new ArrayList<String>(0);//ara mateix nomes va amb mida 2
         Iterator<String> it = savedExpressions.keySet().iterator();
         while(it.hasNext()){
-        String clave = it.next();
-        names.add(clave);
-        System.out.println(clave);
+            String clave = it.next();
+            names.add(clave);
+            System.out.println(clave);
         }
         return names;
     }
@@ -38,7 +38,7 @@ public class SetBooleanExpression {
 
     public boolean saveExpression(String exp, String name){
         BooleanExpression newexp=new BooleanExpression(exp);
-        if(newexp.checkExpression()==false)return false;
+        if(newexp.checkExpression()==false) return false;
         savedExpressions.put(name,newexp);
         return true;
     }

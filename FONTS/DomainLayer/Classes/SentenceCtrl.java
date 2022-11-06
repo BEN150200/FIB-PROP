@@ -41,8 +41,8 @@ public class SentenceCtrl {
     **/
 
     public boolean addSentence(Sentence s) {
-        if (!existsSentence(s.getString())){
-            sentences.put(s.getString(), s);
+        if (!existsSentence(s.toString())){
+            sentences.put(s.toString(), s);
             return true;
         }
         return false;
