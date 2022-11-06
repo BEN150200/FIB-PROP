@@ -1,4 +1,6 @@
-package DomainLayer.Classes;
+package domain.controllers;
+
+import domain.core.Author;
 
 import java.util.HashMap;
 import java.util.ArrayList;

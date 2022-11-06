@@ -1,4 +1,4 @@
-package preprocessing;
+package domain.preprocessing;
 
 import java.nio.file.Files;
 import java.nio.file.Paths;

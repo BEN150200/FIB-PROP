@@ -1,4 +1,4 @@
-package DomainLayer.Classes;
+package domain.core;
 
 import java.io.*;
 import java.util.*;

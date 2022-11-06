@@ -1,7 +1,6 @@
-package DomainLayer.Classes;
+package domain.core;
 
 import java.util.ArrayList;
-
 import java.util.HashSet;
 import java.util.Set;
 

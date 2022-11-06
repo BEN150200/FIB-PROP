@@ -9,9 +9,9 @@ import java.util.Set;
 
 import org.junit.Test;
 
+import domain.indexing.BooleanModel;
+import domain.indexing.Index;
 import io.vavr.collection.HashMap;
-import vectorialmodel.BooleanModel;
-import vectorialmodel.Index;
 
 public class TestIndex {
     @Test

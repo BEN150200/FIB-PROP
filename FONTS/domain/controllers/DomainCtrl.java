@@ -1,20 +1,16 @@
-package DomainLayer.Classes;
+package domain.controllers;
+
+import domain.core.Author;
+import domain.core.Document;
+import domain.core.Title;
+
+import domain.DocumentInfo;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-
-/* 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import javax.xml.catalog.CatalogFeatures.Feature;
-*/
-
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
-import java.util.HashSet;
-
 
 public class DomainCtrl {
 

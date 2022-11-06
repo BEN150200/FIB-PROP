@@ -4,12 +4,12 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
+import domain.indexing.Index;
+import domain.indexing.VectorialModel;
 import helpers.Maths;
 import io.vavr.collection.HashMap;
 import io.vavr.collection.List;
 import io.vavr.collection.Map;
-import vectorialmodel.Index;
-import vectorialmodel.VectorialModel;
 
 public class TestVectorialModel {
 

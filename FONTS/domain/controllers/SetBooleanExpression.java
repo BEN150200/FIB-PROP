@@ -1,7 +1,10 @@
-package DomainLayer.Classes;
+package domain.controllers;
+
+import domain.core.BooleanExpression;
 
 import java.io.*;
 import java.util.*;
+
 public class SetBooleanExpression {
     private Map<String,BooleanExpression> savedExpressions= new TreeMap<String,BooleanExpression>();//no val la pena ordenarho no?, potser valdria la pena un map
     private Stack<BooleanExpression> historial=new Stack<BooleanExpression>();//aqui si que un vector aixi queden ordenats per entrada, aixo o una queue i quan poso 1 trec el primer si la cua te mida 10 (o la del historial)

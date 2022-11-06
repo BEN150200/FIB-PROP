@@ -1,9 +1,6 @@
-package DomainLayer.Classes;
+package domain.core;
 
 import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
-
 
 public class Word {
 

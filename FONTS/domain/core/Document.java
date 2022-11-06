@@ -1,4 +1,6 @@
-package DomainLayer.Classes;
+package domain.core;
+
+import domain.DocumentInfo;
 
 import java.time.*;
 import java.util.List;
@@ -73,7 +75,7 @@ public class Document {
     }
 
     public DocumentInfo getInfo() {
-        return new DocumentInfo(docID, title.getTitleName(), author.getAuthorName(), creationDate, modificationDate);
+        return new DocumentInfo(docID, title.toString(), author.toString(), creationDate, modificationDate);
     }
 
     /**

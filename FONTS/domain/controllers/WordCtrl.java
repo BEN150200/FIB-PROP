@@ -1,4 +1,6 @@
-package DomainLayer.Classes;
+package domain.controllers;
+
+import domain.core.Word;
 
 import java.util.ArrayList;
 import java.util.HashMap;

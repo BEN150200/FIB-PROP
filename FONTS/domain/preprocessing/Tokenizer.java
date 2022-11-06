@@ -1,4 +1,4 @@
-package preprocessing;
+package domain.preprocessing;
 
 public class Tokenizer {
     /**
@@ -7,7 +7,9 @@ public class Tokenizer {
      */
     public static String[] tokenize(String sentence) {
         return sentence.split(" ");
+
     }
+    
 
     /**
      * @param text

@@ -1,4 +1,4 @@
-package vectorialmodel;
+package domain.indexing;
 
 import java.security.InvalidParameterException;
 import java.util.function.Function;

@@ -1,9 +1,12 @@
-package DomainLayer.Classes;
+package domain.controllers;
+
+import domain.core.Author;
+import domain.core.Document;
+import domain.core.Title;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Set;
-
 import javafx.util.Pair;
 
 public class DocumentCtrl {
@@ -82,7 +85,7 @@ public class DocumentCtrl {
         Author a = doc.getAuthor();
         ++usedID;
         doc.setDocumentID(usedID);
-        documentsID.put(new Pair<String,String>(t.getTitleName(), a.getAuthorName()), usedID);
+        documentsID.put(new Pair<String,String>(t.toString(), a.toString()), usedID);
         documents.put(usedID, doc);
         return true;
     }

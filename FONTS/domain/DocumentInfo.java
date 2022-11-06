@@ -1,4 +1,4 @@
-package DomainLayer.Classes;
+package domain;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;

@@ -1,4 +1,4 @@
-package vectorialmodel;
+package domain.indexing;
 
 import helpers.Maths;
 import io.vavr.Tuple;

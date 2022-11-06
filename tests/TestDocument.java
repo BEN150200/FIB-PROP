@@ -1,7 +1,5 @@
 package tests;
 
-import DomainLayer.Classes.DomainCtrl;
-
 import java.util.*;
 
 import static org.junit.Assert.*;
@@ -12,6 +10,8 @@ import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
+
+import domain.controllers.DomainCtrl;
 
 public class TestDocument {
     DomainCtrl domain;

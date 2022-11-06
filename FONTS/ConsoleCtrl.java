@@ -1,7 +1,6 @@
-import DomainLayer.Classes.DocumentInfo;
-import DomainLayer.Classes.DomainCtrl;
+import domain.controllers.DomainCtrl;
+import domain.DocumentInfo;
 
-import java.io.EOFException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;

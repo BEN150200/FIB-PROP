@@ -1,7 +1,4 @@
-package DomainLayer.Classes;
-
-import java.util.HashSet;
-import java.util.Set;
+package domain.core;
 
 public class Title extends Sentence {
     
