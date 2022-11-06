@@ -11,9 +11,9 @@ public class Tokenizer {
 
     /**
      * @param text
-     * @return an array of phrases (in String form) of the text
+     * @return an array of sentences (in String form) of the text
      */
-    public static String[] splitPhrases(String text) {
+    public static String[] splitSentences(String text) {
         return text.split(".");
     }
 }
