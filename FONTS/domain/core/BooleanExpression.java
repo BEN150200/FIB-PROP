@@ -8,11 +8,14 @@ public class BooleanExpression{
     ExpressionTreeNode root;
 
 
-    //funcions
-
+    //funcions publiques
 
     public BooleanExpression(String expr){
         expression=expr;
+    }
+
+    public String getExpression(){
+        return expression;
     }
 
     public boolean checkExpression(){
@@ -20,7 +23,16 @@ public class BooleanExpression{
         return buildTree(root,expression);
     }
 
-    
+    public HashSet<Long> solveExpression(){
+        return root.solveExpression();
+    }
+
+
+    public void printTree(){//nomes per veure si va be, eliminar desprs
+        print(root);
+    }
+
+    //funcions privades
 
     private boolean buildTree(ExpressionTreeNode rot,String s){
         
@@ -131,13 +143,7 @@ public class BooleanExpression{
         else return false;
     }
 
-    public String getExpression(){
-        return expression;
-    }
-
-    public void printTree(){//nomes per veure si va be, eliminar desprs
-        print(root);
-    }
+    
     private void print(ExpressionTreeNode r){
         if(r.right!=null & r.left!=null){
             System.out.print('[');
@@ -155,7 +161,7 @@ public class BooleanExpression{
 
     }
 
-    public boolean parentesis(String s){//comprova si hi ha un parentesis que conté la expressió sencera
+    private boolean parentesis(String s){//comprova si hi ha un parentesis que conté la expressió sencera
         int count=0;
         if(s.length()>1 && s.charAt(0)=='(' && s.charAt(s.length()-1)==')'){
             for(int i=0;i<s.length();i++){
@@ -172,7 +178,5 @@ public class BooleanExpression{
 
 
     
-    public HashSet<Long> solveExpression(){
-        return root.solveExpression();
-    }
+    
 }
