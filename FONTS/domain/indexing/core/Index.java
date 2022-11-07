@@ -1,4 +1,4 @@
-package domain.indexing;
+package domain.indexing.core;
 
 import java.security.InvalidParameterException;
 import java.util.function.Function;

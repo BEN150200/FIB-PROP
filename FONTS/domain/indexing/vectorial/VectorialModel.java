@@ -1,7 +1,8 @@
-package domain.indexing;
+package domain.indexing.vectorial;
 
 import java.util.Map;
 
+import domain.indexing.core.Index;
 import io.vavr.Tuple;
 import io.vavr.collection.HashMap;
 import io.vavr.collection.HashSet;
