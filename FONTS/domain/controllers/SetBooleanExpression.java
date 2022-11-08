@@ -11,7 +11,10 @@ public class SetBooleanExpression {
     private int midaHistorial=10;
 
     public SetBooleanExpression(){}
-
+    /**
+     * @cost 0(n) n=number of saved expressions
+     * @return Names of all the saved expressions 
+     */
     public ArrayList<String> getSavedExpressionsNames(){//Torna els noms de les expressions guardades
         ArrayList<String> names= new ArrayList<String>(0);
         Iterator<String> it = savedExpressions.keySet().iterator();
@@ -22,12 +25,22 @@ public class SetBooleanExpression {
         }
         return names;
     }
+
+    /**
+     * @cost 0(1)
+     * @param The name of the desired expression
+     * @return If it exists returns the expression, else exception
+     */
     public String getExpression(String name){//retorna una string buida si no existeix
         BooleanExpression aux=savedExpressions.get(name);
         if(aux==null) return null;
         return aux.getExpression(); 
     }
 
+    /**
+     * @cost 0(1)
+     * @return The most recent expressions
+     */
     public ArrayList<String> getHistorialExpressions(){//Torna les expressions recents
         ArrayList<String> exp= new ArrayList<String>(0);
         for(int i=0; i<historial.size();i++){
@@ -38,6 +51,11 @@ public class SetBooleanExpression {
         return exp;
     }
 
+    /**
+     * @cost 
+     * @param The expression and its name 
+     * @return Return true if the expression is valid, false if invalid
+     */
     public boolean saveExpression(String exp, String name){
         BooleanExpression newexp=new BooleanExpression(exp);
         if(newexp.checkExpression()==false) return false;
@@ -45,6 +63,11 @@ public class SetBooleanExpression {
         return true;
     }
 
+    /**
+     * @cost 
+     * @param Name of the expression you want to solve 
+     * @return Return null if the expression do not exist, else returns a HashSet with all the Sentences id that obey the expression
+     */
     public HashSet<Long> solveSavedExpression(String name){
         BooleanExpression aux=savedExpressions.get(name);
         if(aux==null) return null; //si no existeix return null (canviare a excepcio)
@@ -52,6 +75,11 @@ public class SetBooleanExpression {
         return aux.solveExpression();
     }
 
+    /**
+     * @cost 
+     * @param The expression to be solved 
+     * @return returns null if the expression is not correct, else returns a HashSet with all the Sentences id that obey the expression
+     */
     public HashSet<Long> solveExpression(String exp){
 
         BooleanExpression newexp=new BooleanExpression(exp);
@@ -60,12 +88,22 @@ public class SetBooleanExpression {
         return newexp.solveExpression();
     }
     
-    public void deleteExpression (String name){
+    /**
+     * @cost 0(1)
+     * @param The name of the expression to be deleted
+     * @return false if the expression did not exist, else true
+     */
+    public boolean deleteExpression (String name){
         BooleanExpression aux=savedExpressions.get(name);
-        if(aux==null)  ;//si no existeix return excepcio
+        if(aux==null)  return false;//si no existeix return excepcio
         else savedExpressions.remove(name);
+        return true;
     }
 
+    /**
+     * @cost 0(1)
+     * @param a boolean expression
+     */
     private void addHistorial(BooleanExpression expr){
         historial.add(expr);
         if(historial.size()>midaHistorial) historial.remove(0);

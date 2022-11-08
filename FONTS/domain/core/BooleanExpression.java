@@ -10,30 +10,51 @@ public class BooleanExpression{
 
     //funcions publiques
 
+    /**
+     * @cost 0(1) 
+     * @param the string of the expression 
+     */
     public BooleanExpression(String expr){
         expression=expr;
     }
 
+    /**
+     * @cost 0(1) 
+     * @return the string of the expression 
+     */
     public String getExpression(){
         return expression;
     }
 
+    /**
+     * @cost 
+     * @return true if the expression is valid, else false
+     */
     public boolean checkExpression(){
         root=new ExpressionTreeNode(expression);
         return buildTree(root,expression);
     }
 
+     /**
+     * @cost 
+     * @param 
+     * @return returns a HashSet with all the Sentences id that obey the expression
+     */
     public HashSet<Long> solveExpression(){
         return root.solveExpression();
     }
 
-
+    
     public void printTree(){//nomes per veure si va be, eliminar desprs
         print(root);
     }
 
     //funcions privades
-
+    /**
+     * @cost 
+     * @param the root of the tree and the expression to be converted to a tree
+     * @return true if the expression is correct, else false
+     */
     private boolean buildTree(ExpressionTreeNode rot,String s){
         
         //if(s.charAt(0)=='|' || s.charAt(0)=='&' || s.charAt(s.length()-1)=='|' || s.charAt(s.length()-1)=='&') return false;
@@ -77,6 +98,11 @@ public class BooleanExpression{
         }
     }
 
+    /**
+     * @cost 
+     * @param a expression 
+     * @return the index of the last operation that should be computed, -1 if its not correct, -2 if there arent any operations
+     */
     private int findLastOperation(String s){
         char[] x = s.toCharArray();
         int[] ranking = new int[s.length()];
@@ -135,6 +161,11 @@ public class BooleanExpression{
         return indexMin;//si torna -1 és expressió incorrecta, si torna -2 vol dir que no queden operacions 
     }
 
+    /**
+     * @cost 0(1)
+     * @param two operators (|,&,!)
+     * @return true if iact has lower preference, else return false
+     */
     private Boolean hasLowerPreference(char iact, char imin) {
         if (imin == '|') return false;
         if (iact == '|') return true;
@@ -143,7 +174,6 @@ public class BooleanExpression{
         else return false;
     }
 
-    
     private void print(ExpressionTreeNode r){
         if(r.right!=null & r.left!=null){
             System.out.print('[');
@@ -161,6 +191,11 @@ public class BooleanExpression{
 
     }
 
+    /**
+     * @cost 0(n) ,n=mida s
+     * @param a string s
+     * @return returns true if it has a parentesis that contains everything else
+     */
     private boolean parentesis(String s){//comprova si hi ha un parentesis que conté la expressió sencera
         int count=0;
         if(s.length()>1 && s.charAt(0)=='(' && s.charAt(s.length()-1)==')'){
