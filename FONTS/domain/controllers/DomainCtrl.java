@@ -47,41 +47,30 @@ public class DomainCtrl {
     **/
     public boolean addDocument(String titleName, String authorName, List<String> content) {
         if (!DocumentCtrl.getInstance().existsDocument(titleName, authorName)) {
-            Title t = TitleCtrl.getInstance().getTitle(titleName);
-            Author a = AuthorCtrl.getInstance().getAuthor(authorName);
-            if (t == null) {
-                t = new Title(titleName);
-                TitleCtrl.getInstance().addTitle(t);
+            Title title = TitleCtrl.getInstance().getTitle(titleName);
+            Author author = AuthorCtrl.getInstance().getAuthor(authorName);
+            if (title == null) {
+                title = new Title(titleName);
+                TitleCtrl.getInstance().addTitle(title);
             }
-            if (a == null) {
-                a = new Author(authorName);
-                AuthorCtrl.getInstance().addAuthor(a);
+            if (author == null) {
+                author = new Author(authorName);
+                AuthorCtrl.getInstance().addAuthor(author);
             }
-            Document d = new Document(t, a);
-            DocumentCtrl.getInstance().addDocument(d);
-            Integer ID = d.getID();
-            t.addDoc(ID);
-            a.addDoc(ID);
+            Document doc = new Document(title, author);
+            DocumentCtrl.getInstance().addDocument(doc);
+            Integer ID = doc.getID();
+            title.addDoc(ID);
+            author.addDoc(ID);
 
-            for (String sentenceDoc : content) {
-                Sentence sentence;
-                if(!SentenceCtrl.getInstance().existsSentence(sentenceDoc)) {
-                    sentence = new Sentence(sentenceDoc);
-                    SentenceCtrl.getInstance().addSentence(sentence);
-                }
-                else {
-                    sentence = SentenceCtrl.getInstance().getSentence(sentenceDoc);
-                }
-                d.addSentence(sentence);
-                sentence.addDoc(ID);
-            }
+            updateDocumentContent(doc, content);
 
-            //d.updateContent(content);
             return true;
         }
         return false;
     }
 
+    /*
     public boolean addTitle(String titleName) {
         Title t = new Title(titleName);
         return TitleCtrl.getInstance().addTitle(t);
@@ -91,9 +80,38 @@ public class DomainCtrl {
         Author a = new Author(authorName);
         return AuthorCtrl.getInstance().addAuthor(a);
     }
+    */
 
     public boolean addBooleanExpresion(String boolExpName, String boolExp) {
         return false;
+    }
+
+    /**
+     * Update Elements
+    **/
+
+    public boolean updateDocument(String titleName, String authorName, List<String> content) {
+        Document doc = DocumentCtrl.getInstance().getDocument(titleName, authorName);
+        if (doc == null) return false;
+
+        updateDocumentContent(doc, content);
+        
+        return true;
+    }
+
+    private void updateDocumentContent(Document doc, List<String> content) {
+        for (String sentenceDoc : content) {
+            Sentence sentence;
+            if(!SentenceCtrl.getInstance().existsSentence(sentenceDoc)) {
+                sentence = new Sentence(sentenceDoc);
+                SentenceCtrl.getInstance().addSentence(sentence);
+            }
+            else {
+                sentence = SentenceCtrl.getInstance().getSentence(sentenceDoc);
+            }
+            doc.addSentence(sentence);
+            sentence.addDoc(doc.getID());
+        }
     }
 
     /**

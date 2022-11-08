@@ -41,9 +41,7 @@ public class ConsoleCtrl extends PresentationCtrl{
                         "_____________________Add Menu________________________",
                         "Choose the type of operation:",
                         "   1   Add a document in the sistem",
-                        "   2   Add an autor in the sistem",
-                        "   3   Add a title in the sistem",
-                        "   4   Add a Boolean expresion in the sistem",
+                        "   2   Add a Boolean expresion in the sistem",
                         "   0   Exit Add Menu",
                         ""
     };
@@ -183,19 +181,21 @@ public class ConsoleCtrl extends PresentationCtrl{
         while (true) {
 
             printAddMenu();
-            Integer command = getInputAsInt(0, 4);
+            Integer command = getInputAsInt(0, 2);
             printCmd("");
             switch (command) {
                 case 1:
                     addDocument();
                     break;
+                /* 
                 case 2:
                     addAuthor();
                     break;
                 case 3:
                     addTitle();
                     break;
-                case 4:
+                */
+                case 2:
                     addBooleanExpresion();
                     break;
                 case 0:
@@ -253,6 +253,9 @@ public class ConsoleCtrl extends PresentationCtrl{
         }
     }
 
+    /**
+     * Add Functions
+    **/
     public void addDocument() {
         getInputAsLine();
 
@@ -284,9 +287,7 @@ public class ConsoleCtrl extends PresentationCtrl{
         else printCmd("The Document identified by the Title '" + titleName + "' and the Author '" + authorName + "'is already in the System");
     }
 
-    /**
-     * Add Functions
-    **/
+    /*
     public void addAuthor() {
         getInputAsLine();
         printCmd("-Enter Author name:");
@@ -306,6 +307,7 @@ public class ConsoleCtrl extends PresentationCtrl{
         }
         else printCmd("This Title is already in the System");
     }
+    */
 
     public void addBooleanExpresion() {
         getInputAsLine();
