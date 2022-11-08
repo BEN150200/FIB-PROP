@@ -7,6 +7,7 @@ import io.vavr.Tuple;
 import io.vavr.collection.HashMap;
 import io.vavr.collection.HashSet;
 import io.vavr.collection.Set;
+import io.vavr.control.Option;
 import helpers.Maps;
 import helpers.Lists;
 
@@ -173,16 +174,16 @@ public class VectorialModel<DocId> {
      * @param docId
      * @return mapping String -> tf-idf weight for all the Strings of the document docId
      */
-    public java.util.HashMap<String, Double> tfidfVector(DocId docId) {
-        return tfidfVectors.get(docId).map(HashMap::toJavaMap).get();
+    public Option<java.util.HashMap<String, Double>> tfidfVector(DocId docId) {
+        return tfidfVectors.get(docId).map(HashMap::toJavaMap);
     }
 
     /**
      * @param docId
      * @return mapping doc_id -> cosine_similarity for all documents with similarity > 0 with docId
      */
-    public java.util.HashMap<DocId, Double> querySimilars(DocId docId) {
-        return this.querySimilars(this.tfidfVector(docId));
+    public Option<java.util.HashMap<DocId, Double>> querySimilars(DocId docId) {
+        return this.tfidfVector(docId).map(this::querySimilars);
     }
 
     /**
@@ -197,9 +198,8 @@ public class VectorialModel<DocId> {
             var term = tw.getKey();
             var weight = tw.getValue();
             
-            for(var posting : this.index.postingList(term)) {
-                var docId = posting._1;
-                var otherWeight = this.tfidfVector(docId).get(term);
+            for(var docId : this.index.documents(term)) {
+                var otherWeight = this.tfidfVector(docId).get().get(term);
                 similarities.merge(docId, weight*otherWeight, Maps.add);
             }
         }
