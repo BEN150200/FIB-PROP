@@ -1,13 +1,20 @@
 package domain.core;
 
+import domain.controllers.SearchCtrl;
+import domain.preprocessing.TokenFilter;
+import domain.preprocessing.Tokenizer;
+
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 public class Sentence {
     private String sentence;
     //private ArrayList<String> words = new ArrayList<String>();
     private Set<Integer> documents = new HashSet<Integer>();
+    private ArrayList<String> tokens = new ArrayList<>();
+    private Integer id;
 
     
     
@@ -39,6 +46,9 @@ public class Sentence {
         return documents.size();
     }
 
+    public ArrayList<String> getTokens() {
+        return tokens;
+    }
     /**
      * Setters
      */
@@ -54,8 +64,28 @@ public class Sentence {
         return false;
     }
 
+    public void setID(Integer sentID) {
+        id = sentID;
+    }
+
 
     // cridar tokenize
+    public void compute() {
+        filter();
+        addToBooleanModel();
+    }
 
+    private void filter() {
+        String[] tok = Tokenizer.tokenize(sentence);
+        for (String s : tok) {
+            Optional<String> token = TokenFilter.filter(s);
+            if (token.isPresent()) {
+                tokens.add(token.get());
+            }
+        }
+    }
 
+    private void addToBooleanModel() {
+        SearchCtrl.getInstance().addSentence(this.id, tokens);
+    }
 }

@@ -105,6 +105,7 @@ public class DomainCtrl {
             if(!SentenceCtrl.getInstance().existsSentence(sentenceDoc)) {
                 sentence = new Sentence(sentenceDoc);
                 SentenceCtrl.getInstance().addSentence(sentence);
+                sentence.compute();
             }
             else {
                 sentence = SentenceCtrl.getInstance().getSentence(sentenceDoc);
@@ -112,6 +113,7 @@ public class DomainCtrl {
             doc.addSentence(sentence);
             sentence.addDoc(doc.getID());
         }
+        doc.compute();
     }
 
     /**
@@ -264,7 +266,6 @@ public class DomainCtrl {
         }
     }
 
-    
 
     
     

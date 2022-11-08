@@ -1,9 +1,11 @@
 package domain.core;
 
 import domain.DocumentInfo;
+import domain.controllers.SearchCtrl;
 
 import java.time.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class Document {
@@ -108,7 +110,22 @@ public class Document {
         sentences.add(sentence);
     }
 
-    public void updateContent(List<String> content) {}
+    public void compute() {
+        //HashMap<String,Integer> ocurrences = new HashMap<>();
+        ArrayList<String> tokens = new ArrayList<>();
+        for (Sentence sentence : sentences) {
+            tokens.addAll(sentence.getTokens());
+            /*
+            for (String string : tokens) {
+                if (ocurrences.containsKey(string)) {
+                    ocurrences.put(string, ocurrences.get(string) + 1);
+                }
+                else ocurrences.put(string, 1);
+            } 
+            */
+        }
+        SearchCtrl.getInstance().addDocument(this.docID, tokens);
+    }
 
     
 }

@@ -10,12 +10,17 @@ public class SentenceCtrl {
     private static SentenceCtrl instance = null;
     private HashMap<String, Sentence> sentences = new HashMap<String, Sentence>();
     private HashMap<String, Integer> sentencesID = new HashMap<String, Integer>();
-    
+    private int usedID;
+
     public static SentenceCtrl getInstance() {
         if (instance == null) {
             instance = new SentenceCtrl();
         }
         return instance;
+    }
+
+    public SentenceCtrl() {
+        usedID = 0;
     }
 
     /**
@@ -44,7 +49,10 @@ public class SentenceCtrl {
 
     public boolean addSentence(Sentence s) {
         if (!existsSentence(s.toString())){
+            ++usedID;
+            s.setID(usedID);
             sentences.put(s.toString(), s);
+            sentencesID.put(s.toString(),usedID);
             return true;
         }
         return false;

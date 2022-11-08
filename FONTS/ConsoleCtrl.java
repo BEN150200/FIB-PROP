@@ -1,4 +1,5 @@
 import domain.controllers.DomainCtrl;
+import domain.controllers.SearchCtrl;
 import domain.DocumentInfo;
 
 import java.util.ArrayList;
@@ -62,6 +63,7 @@ public class ConsoleCtrl extends PresentationCtrl{
                         "   8   List all the Documents of a Title",
                         "   9   List all the Documents of a Title and an Author",
                         "   10  Show Docuement Content",
+                        "   11  Search similar documents",
                         "   0   Exit Search Menu",
                         ""
     };
@@ -245,6 +247,8 @@ public class ConsoleCtrl extends PresentationCtrl{
                     searchDocsByTitleAndAuthor();
                 case 10:
                     showDocument();
+                case 11:
+                    searchSimilarDocuments();
                 case 0:
                     return;
                 default:
@@ -482,6 +486,19 @@ public class ConsoleCtrl extends PresentationCtrl{
         
     }
     
+    public void searchSimilarDocuments() {
+        getInputAsLine();
+        printCmd("-Enter Title name or a prefix of the name:");
+        String titleName = getInputAsLine();
+        printCmd("-Enter Author name or a prefix of the name:");
+        String authorName = getInputAsLine();
+        printCmd("-Enter the number of documents showed:");
+        int k = terminalIn.nextInt();
+        List<DocumentInfo> docsInfo = SearchCtrl.getInstance().searchSimilarDocuments(titleName, authorName, k);
+        for (DocumentInfo documentInfo : docsInfo) {
+            documentInfo.printCMD();
+        }
+    }
 
 
 
