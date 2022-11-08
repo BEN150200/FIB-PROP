@@ -83,7 +83,7 @@ public class DomainCtrl {
     */
 
     public boolean addBooleanExpresion(String boolExpName, String boolExp) {
-        return false;
+        return SetBooleanExpression.getInstance().saveExpression(boolExp, boolExpName);
     }
 
     /**
@@ -135,6 +135,10 @@ public class DomainCtrl {
             return true;
         }
         return false;
+    }
+
+    public void deleteBooleanExpression(String boolExpName) {
+        SetBooleanExpression.getInstance().deleteExpression(boolExpName);
     }
 
     /**
