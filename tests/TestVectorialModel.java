@@ -4,8 +4,8 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import domain.indexing.Index;
-import domain.indexing.VectorialModel;
+import domain.indexing.core.Index;
+import domain.indexing.vectorial.VectorialModel;
 import helpers.Maths;
 import io.vavr.collection.HashMap;
 import io.vavr.collection.List;

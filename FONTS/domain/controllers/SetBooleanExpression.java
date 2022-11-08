@@ -10,6 +10,15 @@ public class SetBooleanExpression {
     private ArrayList<BooleanExpression> historial=new ArrayList<BooleanExpression>();//aqui si que un vector aixi queden ordenats per entrada, aixo o una queue i quan poso 1 trec el primer si la cua te mida 10 (o la del historial)
     private int midaHistorial=10;
 
+    private static SetBooleanExpression instance = null;
+
+    public static SetBooleanExpression getInstance() {
+        if (instance == null) {
+            instance = new SetBooleanExpression();
+        }
+        return instance;
+    }
+
     public SetBooleanExpression(){}
     /**
      * @cost 0(n) n=number of saved expressions

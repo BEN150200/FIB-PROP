@@ -1,8 +1,9 @@
-package domain.indexing;
+package domain.indexing.booleanmodel;
 
 import java.util.Collection;
 import java.util.Collections;
 
+import domain.indexing.core.Index;
 import io.vavr.Tuple;
 import io.vavr.collection.Array;
 import io.vavr.collection.HashMap;

@@ -40,10 +40,10 @@ public class ConsoleCtrl extends PresentationCtrl{
                         "_____________________________________________________",
                         "_____________________Add Menu________________________",
                         "Choose the type of operation:",
-                        "   1   Add a document in the sistem",
-                        "   2   Add an autor in the sistem",
-                        "   3   Add a title in the sistem",
-                        "   4   Add a Boolean expresion in the sistem",
+                        "   1   Add a Document in the System",
+                        "   2   Add a Boolean Expression in the System",
+                        "   3   Delete Document from the System",
+                        "   4   Delete Boolean Espression from the System",
                         "   0   Exit Add Menu",
                         ""
     };
@@ -189,14 +189,15 @@ public class ConsoleCtrl extends PresentationCtrl{
                 case 1:
                     addDocument();
                     break;
+                 
                 case 2:
-                    addAuthor();
+                    addBooleanExpresion();
                     break;
                 case 3:
-                    addTitle();
+                    deleteDocument();
                     break;
                 case 4:
-                    addBooleanExpresion();
+                    deleteBooleanExpression();
                     break;
                 case 0:
                     return;
@@ -253,6 +254,9 @@ public class ConsoleCtrl extends PresentationCtrl{
         }
     }
 
+    /**
+     * Add Functions
+    **/
     public void addDocument() {
         getInputAsLine();
 
@@ -284,9 +288,7 @@ public class ConsoleCtrl extends PresentationCtrl{
         else printCmd("The Document identified by the Title '" + titleName + "' and the Author '" + authorName + "'is already in the System");
     }
 
-    /**
-     * Add Functions
-    **/
+    /*
     public void addAuthor() {
         getInputAsLine();
         printCmd("-Enter Author name:");
@@ -306,6 +308,7 @@ public class ConsoleCtrl extends PresentationCtrl{
         }
         else printCmd("This Title is already in the System");
     }
+    */
 
     public void addBooleanExpresion() {
         getInputAsLine();
@@ -319,6 +322,24 @@ public class ConsoleCtrl extends PresentationCtrl{
         else printCmd("This Title is already in the System");
     }
 
+    public void deleteDocument() {
+        getInputAsLine();
+
+        printCmd("-Enter Title name:");
+        String titleName = getInputAsLine();
+
+        printCmd("\n -Enter Author name:");
+        String authorName = getInputAsLine();
+        domain.deleteDocument(titleName, authorName);
+
+    }
+
+    public void deleteBooleanExpression() {
+        getInputAsLine();
+        printCmd("-Enter the Boolean Expresion Name:");
+        String boolExpName = getInputAsLine();
+        domain.deleteBooleanExpression(boolExpName);
+    }
     /**
      * Search Functions
     **/
