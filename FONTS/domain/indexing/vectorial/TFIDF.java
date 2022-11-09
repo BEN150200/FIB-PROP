@@ -21,10 +21,6 @@ public class TFIDF {
             (frequency / (double) maxFrequency) * Maths.log2(documentsCount / (double) documentFrequencies.get(term).get())
         ));
 
-        var norm = Math.sqrt(
-            v.values().map(Maths::square).sum().doubleValue()
-        );
-
-        return Option.of(v.mapValues(Maths.divideBy(norm))); // normalized v
+        return Option.of(Maths.normalized(v));
     }
 }
