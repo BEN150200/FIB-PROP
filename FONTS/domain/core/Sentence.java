@@ -69,6 +69,10 @@ public class Sentence {
         id = sentID;
     }
 
+    public int id() {
+        return this.id;
+    }
+
 
     /**
      * Compute
