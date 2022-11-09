@@ -49,9 +49,10 @@ public class Sentence {
     public ArrayList<String> getTokens() {
         return tokens;
     }
+
     /**
      * Setters
-     */
+    **/
     public boolean addDoc(Integer docID) {
         return documents.add(docID);
     }
@@ -69,7 +70,9 @@ public class Sentence {
     }
 
 
-    // cridar tokenize
+    /**
+     * Compute
+    **/
     public void compute() {
         filter();
         addToBooleanModel();
@@ -86,6 +89,6 @@ public class Sentence {
     }
 
     private void addToBooleanModel() {
-        SearchCtrl.getInstance().addSentence(this.id, tokens);
+        if (!tokens.isEmpty()) SearchCtrl.getInstance().addSentence(this.id, tokens);
     }
 }

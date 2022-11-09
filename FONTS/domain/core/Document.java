@@ -124,7 +124,7 @@ public class Document {
             } 
             */
         }
-        SearchCtrl.getInstance().addDocument(this.docID, tokens);
+        if (!tokens.isEmpty()) SearchCtrl.getInstance().addDocument(this.docID, tokens);
     }
 
     
