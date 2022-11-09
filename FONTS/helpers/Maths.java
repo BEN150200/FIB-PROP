@@ -5,6 +5,10 @@ import java.util.function.Function;
 import io.vavr.collection.HashMap;
 
 public class Maths {
+    public static double add(double x, double y) {
+        return x + y;
+    }
+
     public static double log2(double x) {
         return Math.log(x) / Math.log(2);
     }
