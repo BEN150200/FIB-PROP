@@ -54,4 +54,8 @@ public class IndexingController<DocId, SentenceId> {
     public Either<Exception, Iterable<SentenceId>> booleanQuery(ExpressionTree expressionTree) {
         return Either.left(new UnsupportedOperationException("Not yet implemented"));
     }
+
+    public Either<Exception, Iterable<DocId>> weightedQuery(String query) {
+        return Either.left(new UnsupportedOperationException("Not yet implemented"));;
+    }
 }
