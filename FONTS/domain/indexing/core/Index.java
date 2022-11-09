@@ -9,6 +9,7 @@ import io.vavr.collection.HashSet;
 import io.vavr.collection.List;
 import io.vavr.collection.Map;
 import io.vavr.collection.Set;
+import io.vavr.control.Option;
 
 public class Index<DocId> {
 
@@ -61,24 +62,24 @@ public class Index<DocId> {
      * @param docId id of the documents whose term frequencies we wish to retrieve
      * @return a mapping term -> [positions] forall terms of the document identified by docId. Throws if docId doesn't exist! (an empty document is still a document)
      */
-    public HashMap<String, HashSet<Integer>> termsPositions(DocId docId) {
-        return directIndex.get(docId).getOrElseThrow(() -> new InvalidParameterException("DocId " + docId + " is not in the index"));
+    public Option<HashMap<String, HashSet<Integer>>> termsPositions(DocId docId) {
+        return directIndex.get(docId);
     }
 
     /**
      * @param docId id of the documents whose term frequencies we wish to retrieve
      * @return a mapping term -> [positions] forall terms of the document identified by docId. Throws if docId doesn't exist! (an empty document is still a document)
      */
-    public Set<String> terms(DocId docId) {
-        return this.termsPositions(docId).keySet();
+    public Option<Set<String>> terms(DocId docId) {
+        return this.termsPositions(docId).map(HashMap::keySet);
     }
 
     /**
      * @param docId id of the documents whose term frequencies we wish to retrieve
      * @return a mapping term -> [positions] forall terms of the document identified by docId. Throws if docId doesn't exist! (an empty document is still a document)
      */
-    public HashMap<String, Integer> termsFrequencies(DocId docId) {
-        return this.termsPositions(docId).mapValues(HashSet::size);
+    public Option<HashMap<String, Integer>> termsFrequencies(DocId docId) {
+        return this.termsPositions(docId).map(tv -> tv.mapValues(HashSet::size));
     }
 
     public int documentFrequency(String term) {
@@ -91,11 +92,11 @@ public class Index<DocId> {
      * @return a mapping term -> document_frequency forall terms of the document. Throws if docId doesn't exist! (an empty document is still a document)
      */
     @SuppressWarnings("deprecation") // de-deprecated, not released yet
-    public HashMap<String, Integer> termsDocumentFrequencies(DocId docId) {
-        return (HashMap<String, Integer>) this.terms(docId).toMap(
+    public Option<HashMap<String, Integer>> termsDocumentFrequencies(DocId docId) {
+        return this.terms(docId).map(terms -> (HashMap<String, Integer>) terms.toMap(
             Function.identity(),
             this::documentFrequency
-        );
+        ));
     }
 
     
@@ -163,7 +164,7 @@ public class Index<DocId> {
     public Index<DocId> remove(DocId docId) {
         return this.allDocIds().contains(docId)
             ? new Index<DocId>(
-                this.invertedIndex.removeAll(this.terms(docId)),
+                this.invertedIndex.removeAll(this.terms(docId).get()),
                 this.directIndex.remove(docId)
             )
             : this;

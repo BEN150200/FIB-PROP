@@ -47,11 +47,11 @@ public class VectorialModel<DocId> {
         var tfidfs = index.directIndex.map(
             (docId, __) -> Tuple.of(docId,
             TFIDF.computeTFIDF(
-                index.termsFrequencies(docId),
+                index.termsFrequencies(docId).get(),
                 maxFrequencies.get(docId).get(),
                 index.documentsCount(),
-                index.termsDocumentFrequencies(docId)
-            ))
+                index.termsDocumentFrequencies(docId).get()
+            ).get())
         );
 
         return new VectorialModel<DocId>(index, maxFrequencies, tfidfs);
@@ -79,11 +79,12 @@ public class VectorialModel<DocId> {
         HashMap<DocId, HashMap<String, Double>> tfidfs = hashedCollection.map(
             (docId, __) -> Tuple.of(docId,
             TFIDF.computeTFIDF(
-                index.termsFrequencies(docId),
+                index.termsFrequencies(docId).getOrElse(HashMap::empty),
                 maxFrequencies.get(docId).get(),
                 index.documentsCount(),
-                index.termsDocumentFrequencies(docId)
-            ))
+                index.termsDocumentFrequencies(docId).getOrElse(HashMap::empty)
+            )
+            .getOrElse(HashMap::empty))
         );
 
         return new VectorialModel<DocId>(index, maxFrequencies, tfidfs);
@@ -91,11 +92,12 @@ public class VectorialModel<DocId> {
 
     private static <DocId> HashMap<String, Double> computeTfidf(Index<DocId> index, DocId docId) {
         return TFIDF.computeTFIDF(
-                    index.termsFrequencies(docId),
+                    index.termsFrequencies(docId).getOrElse(HashMap::empty),
                     Lists.maxFrequency(index.termsFrequencies(docId)),
                     index.documentsCount(),
-                    index.termsDocumentFrequencies(docId)
-                );
+                    index.termsDocumentFrequencies(docId).getOrElse(HashMap::empty)
+                )
+                .getOrElse(HashMap::empty);
     }
 
     /**
@@ -107,8 +109,8 @@ public class VectorialModel<DocId> {
     public VectorialModel<DocId> insert(DocId docId, Iterable<String> content) {
         var newIndex = this.index.insert(docId, content);
         // terms changed = (new U old) - (new int old)
-        var oldTerms = this.index.terms(docId);
-        var newTerms = newIndex.terms(docId);
+        var oldTerms = this.index.terms(docId).getOrElse(HashSet::empty);
+        var newTerms = newIndex.terms(docId).getOrElse(HashSet::empty);
         
         var removedTerms = oldTerms.diff(newTerms);
         var addedTerms = newTerms.diff(oldTerms);
@@ -116,12 +118,13 @@ public class VectorialModel<DocId> {
         var newMaxFrequency = Lists.maxFrequency(newTerms);
         var newMaxFrequencies = this.maxFrequencies.put(docId, newMaxFrequency);
 
-        var newTfidf = TFIDF.computeTFIDF(
-            newIndex.termsFrequencies(docId),
-            newMaxFrequency,
-            newIndex.documentsCount(),
-            newIndex.termsDocumentFrequencies(docId)
-        );
+        HashMap<String, Double> newTfidf = TFIDF.computeTFIDF(
+                newIndex.termsFrequencies(docId).getOrElse(HashMap::empty),
+                newMaxFrequency,
+                newIndex.documentsCount(),
+                newIndex.termsDocumentFrequencies(docId).getOrElse(HashMap::empty)
+            )
+            .getOrElse(HashMap::empty);
         
         var removedDirty = removedTerms.foldLeft(
             HashSet.<DocId>empty(),
@@ -153,7 +156,7 @@ public class VectorialModel<DocId> {
         var newIndex = this.index.remove(docId);
         var newMaxFrequencies = this.maxFrequencies.remove(docId);
 
-        var removedTerms = this.index.terms(docId);
+        var removedTerms = this.index.terms(docId).getOrElse(HashSet::empty);
         var dirtyDocuments = removedTerms
             .map(this.index::documents)
             .fold(HashSet.empty(), Set::union);
