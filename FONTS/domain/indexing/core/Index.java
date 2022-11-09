@@ -170,10 +170,11 @@ public class Index<DocId> {
     }
     
     public static <DocId> String print(Index<DocId> index) {
-        return "InvertedIndex {\n%s\n},\nDirectIndex {\n%s\n}".formatted(
-            index.invertedIndex.mkString("\t", "\n\t", ""),
-            index.directIndex.mkString("\t", "\n\t", "")
-        );
+        return "InvertedIndex {\n" +
+            index.invertedIndex.mkString("\t", "\n\t", "") +
+            "},\nDirectIndex {\n" +
+            index.directIndex.mkString("\t", "\n\t", "") +
+            "\n}";
     }
 
     @Override
