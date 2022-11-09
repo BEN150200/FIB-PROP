@@ -8,8 +8,8 @@ import java.util.HashMap;
 public class SentenceCtrl {
 
     private static SentenceCtrl instance = null;
-    private HashMap<String, Sentence> sentences = new HashMap<String, Sentence>();
-    private HashMap<String, Integer> sentencesID = new HashMap<String, Integer>();
+    private HashMap<String, Sentence> sentencesByKey = new HashMap<String, Sentence>();
+    private HashMap<Integer, Sentence> sentencesById = new HashMap<Integer, Sentence>();
     private int usedID;
 
     public static SentenceCtrl getInstance() {
@@ -32,15 +32,23 @@ public class SentenceCtrl {
     **/
 
     public Boolean existsSentence(String sentence){
-        return sentences.containsKey(sentence);
+        return sentencesByKey.containsKey(sentence);
+    }
+
+    public boolean existsSentence(int sentenceId){
+        return sentencesById.containsKey(sentenceId);
     }
 
     public Sentence getSentence(String sentence){
-        return sentences.get(sentence);
+        return sentencesByKey.get(sentence);
+    }
+
+    public Sentence sentenceById(int sentenceId) {
+        return this.sentencesById.get(sentenceId);
     }
 
     public ArrayList<Sentence> getAllSentences(){
-        return new ArrayList<Sentence>(sentences.values());
+        return new ArrayList<Sentence>(sentencesByKey.values());
     }
     
     /**
@@ -51,8 +59,8 @@ public class SentenceCtrl {
         if (!existsSentence(s.toString())){
             ++usedID;
             s.setID(usedID);
-            sentences.put(s.toString(), s);
-            sentencesID.put(s.toString(),usedID);
+            sentencesByKey.put(s.toString(), s);
+            sentencesById.put(usedID, s);
             return true;
         }
         return false;
@@ -60,7 +68,9 @@ public class SentenceCtrl {
 
     public Boolean deleteSentence(String sentence){
         if (existsSentence(sentence)){
-            sentences.remove(sentence);
+            var id = sentencesByKey.get(sentence).id();
+            sentencesByKey.remove(sentence);
+            sentencesById.remove(id);
             return true;
         }
         return false;
