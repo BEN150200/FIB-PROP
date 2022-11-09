@@ -51,7 +51,7 @@ public class TestVectorialModel {
             System.out.println(docId + " = " + model.tfidfVector(docId));
         }
 
-        var similars = model.querySimilars("d3");
+        var similars = model.querySimilars("d3").get();
 
         assertEquals(
             0.035,
@@ -62,7 +62,7 @@ public class TestVectorialModel {
         for(var entry : similars.entrySet()) {
             var docId = entry.getKey();
             var similarity = entry.getValue();
-            System.out.println("%s: %f".formatted(docId, similarity));
+            System.out.println(docId + ": " + similarity);
         }
     }
 }
