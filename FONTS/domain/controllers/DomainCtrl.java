@@ -266,7 +266,19 @@ public class DomainCtrl {
         }
     }
 
-
+    public ArrayList<String> getDocumentContent(String titleName, String authorName){
+        Document doc = DocumentCtrl.getInstance().getDocument(titleName, authorName);
+        if(doc != null){
+            ArrayList<Sentence> sentences = doc.getSentences();
+            ArrayList<String> content = new ArrayList<>();
+            for(Sentence s: sentences){
+                content.add(s.toString());
+            }
+            return content;
+        } else {
+            return null;
+        }
+    }
     
     
 }

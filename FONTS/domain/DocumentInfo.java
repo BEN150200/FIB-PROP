@@ -10,9 +10,9 @@ public class DocumentInfo {
     private LocalDateTime creationDate;
     private LocalDateTime modificationDate;
 
-    private void print(String s) {
+    /*private void print(String s) {
         System.out.println(s);
-    }
+    }*/
 
     public DocumentInfo(Integer docID, String titleName, String authorName, LocalDateTime creationDate, LocalDateTime modificationDate) {
         this.docID = docID;
@@ -22,7 +22,7 @@ public class DocumentInfo {
         this.modificationDate = modificationDate;
     }
 
-    public void printCMDoneLine() {
+    /*public void printCMDoneLine() {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");  
         print("    " + docID + "    " + titleName + "    " + authorName + "    " + dtf.format(creationDate) + "    " + modificationDate);
     }
@@ -35,6 +35,10 @@ public class DocumentInfo {
         print("    -Dates:");
         print("        Creation: "+ dtf.format(creationDate) + "    Modification: " + dtf.format(modificationDate));
         print("\n");
+    }*/
+    public String toString(){
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+        return  titleName + "    " + authorName + "    " + dtf.format(creationDate) + "    " + dtf.format(modificationDate);
     }
 
     public Integer id() {
