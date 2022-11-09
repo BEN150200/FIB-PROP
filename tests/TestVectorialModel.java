@@ -6,15 +6,15 @@ import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.Duration;
+import java.time.Instant;
 import java.util.stream.Collectors;
 
 import org.junit.Test;
 
 import domain.indexing.core.Index;
 import domain.indexing.vectorial.VectorialModel;
-import domain.preprocessing.Tokenizer;
-import io.vavr.Tuple;
-import io.vavr.Tuple2;
+import helpers.Parsing;
 import io.vavr.collection.HashMap;
 import io.vavr.collection.List;
 import io.vavr.collection.Map;
@@ -23,30 +23,20 @@ import io.vavr.control.Try;
 
 public class TestVectorialModel {
 
-    static public Tuple2<String, ? extends Iterable<String>> parseDocument(Path filepath) {
-        return Try.of(() -> Files.readString(filepath, Charset.forName("ISO-8859-1")))
-            .map(Tokenizer::tokenize)
-            .map(Stream::of)
-            .map(s -> Tuple.of(filepath.toString(), s))
-            .get();
-    }
-
+    
     @Test
     public void testNews() {
         var folderPath = "..\\pracs-caim\\s1\\data\\raw\\20_newsgroups";
         
-        var files = Try.of(() ->
-            Files.walk(Paths.get(folderPath))
-                .filter(Files::isRegularFile)
-                .map(TestVectorialModel::parseDocument)
-        )
-        .get().collect(Collectors.toList());
+        var files = Parsing.parseFolder(folderPath);
 
         Map<String, Iterable<String>> corpus = HashMap.ofEntries(files);
 
+        var start = Instant.now();
         var model = VectorialModel.of(corpus.toJavaMap());
+        var end = Instant.now();
 
-        System.out.println("Created");
+        System.out.println("Created in " + Duration.between(start, end).toMillis() + "ms");
 
         var query = java.util.Map.of(
             "god", 1.0d

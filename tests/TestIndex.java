@@ -2,6 +2,8 @@ package tests;
 
 import static org.junit.Assert.assertEquals;
 
+import java.time.Duration;
+import java.time.Instant;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -11,6 +13,7 @@ import org.junit.Test;
 
 import domain.indexing.booleanmodel.BooleanModel;
 import domain.indexing.core.Index;
+import helpers.Parsing;
 import io.vavr.collection.HashMap;
 
 public class TestIndex {
@@ -35,5 +38,30 @@ public class TestIndex {
 
         assertEquals(model.querySequence(List.of("how", "are", "you")), Set.of(1, 2));
         assertEquals(model.querySequence(List.of("how", "are", "you", "ma")), Set.of(1));
+    }
+
+    @Test
+    public void testConstruction() {
+        var folderPath = "..\\pracs-caim\\s1\\data\\raw\\20_newsgroups";
+        var files = Parsing.parseFolder(folderPath);
+
+        var corpus = HashMap.ofEntries(files);
+
+        var start = Instant.now();
+        var foldedIndex = corpus.foldLeft(
+            Index.<String>empty(),
+            Index::insert
+        );
+        var mid = Instant.now();
+        var constructedIndex = Index.of(corpus);
+        var end = Instant.now();
+
+        var timeFolded = Duration.between(start, mid);
+        var timeConstructed = Duration.between(mid, end);
+
+        System.out.println(
+            "Folded took " + timeFolded.toMillis() + "ms\n" +
+            "Constructed took " + timeConstructed.toMillis() + "ms"
+        );
     }
 }
