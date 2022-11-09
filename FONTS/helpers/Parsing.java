@@ -11,7 +11,11 @@ import domain.preprocessing.Tokenizer;
 import io.vavr.Tuple;
 import io.vavr.Tuple2;
 import io.vavr.collection.Stream;
+import io.vavr.control.Either;
+import io.vavr.control.Option;
 import io.vavr.control.Try;
+import io.vavr.control.Validation;
+import io.vavr.control.Validation.Valid;
 
 public class Parsing {
     static public Tuple2<String, ? extends Iterable<String>> parseDocument(Path filepath) {
@@ -29,5 +33,23 @@ public class Parsing {
                 .map(Parsing::parseDocument)
         )
         .get().collect(Collectors.toList());
+    }
+
+    @SuppressWarnings("deprecation")
+    public static Either<String, Tuple2<String, Double>> parseWeightedTerm(String string) {
+        var splited = string.split("\\^");
+        if(splited.length == 0)
+            return Either.left("Unexpected standalone '^' found");
+        else if(!Strings.isAlphaNumeric(splited[0])) {
+            return Either.left("Unexpected non-alphanumeric token '" + splited[0] + "'");
+        }
+        else if(splited.length > 2)
+            return Either.left("Only one '^' expected");
+        else if(splited.length == 1)
+            return Either.right(Tuple.of(splited[0], 1.0));
+        else
+            return Try.of(() -> Double.parseDouble(splited[1]))
+                .map(weight -> Tuple.of(splited[0], weight))
+                .toEither("Invalid weight '" + splited[1] + "'");
     }
 }
