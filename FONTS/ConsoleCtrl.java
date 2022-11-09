@@ -215,7 +215,7 @@ public class ConsoleCtrl extends PresentationCtrl{
         while (true) {
 
             printSearchMenu();
-            Integer command = getInputAsInt(0, 10);
+            Integer command = getInputAsInt(0, 11);
             printCmd("");
             
             switch (command) {

@@ -2,7 +2,7 @@ package domain.core;
 
 import java.io.*;
 import java.util.*;
-import domain.indexing.BooleanModel;
+import domain.indexing.booleanmodel.BooleanModel;
 
 public class ExpressionTreeNode{
     ExpressionTreeNode right, left;
