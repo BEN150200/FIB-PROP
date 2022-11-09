@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
 import java.util.Map.Entry;
@@ -67,6 +68,11 @@ public class SearchCtrl {
 
         return null;
     }
+
+    public Set<Integer> booleanQuery(String boolExpName) {
+        return null;
+    }
+
 
     public void addSentence(Integer sentenceId, Iterable<String> content) {
         indexingCtrl.addSentence(sentenceId, content);

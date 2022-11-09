@@ -5,21 +5,21 @@ import domain.core.BooleanExpression;
 import java.io.*;
 import java.util.*;
 
-public class SetBooleanExpression {
+public class BooleanExpressionCtrl {
     private Map<String,BooleanExpression> savedExpressions= new TreeMap<String,BooleanExpression>();//no val la pena ordenarho no?, potser valdria la pena un map
     private ArrayList<BooleanExpression> historial=new ArrayList<BooleanExpression>();//aqui si que un vector aixi queden ordenats per entrada, aixo o una queue i quan poso 1 trec el primer si la cua te mida 10 (o la del historial)
     private int midaHistorial=10;
 
-    private static SetBooleanExpression instance = null;
+    private static BooleanExpressionCtrl instance = null;
 
-    public static SetBooleanExpression getInstance() {
+    public static BooleanExpressionCtrl getInstance() {
         if (instance == null) {
-            instance = new SetBooleanExpression();
+            instance = new BooleanExpressionCtrl();
         }
         return instance;
     }
 
-    public SetBooleanExpression(){}
+    public BooleanExpressionCtrl(){}
     /**
      * @cost 0(n) n=number of saved expressions
      * @return Names of all the saved expressions 

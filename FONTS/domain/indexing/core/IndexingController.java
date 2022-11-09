@@ -16,6 +16,11 @@ public class IndexingController<DocId, SentenceId> {
     
     // TODO: return boolean of wheter inserted new or updated,
     // or exception plus add `updateDocument` method?
+    public IndexingController() {
+        vectorialModel = VectorialModel.empty();
+        booleanModel = BooleanModel.empty();
+    }
+    
     public void addDocument(DocId docId, Iterable<String> content) {
         this.vectorialModel = this.vectorialModel.insert(docId, content);
     }
