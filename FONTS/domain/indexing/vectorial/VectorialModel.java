@@ -1,15 +1,14 @@
 package domain.indexing.vectorial;
 
-import java.util.Map;
-
 import domain.indexing.core.Index;
 import io.vavr.Tuple;
 import io.vavr.collection.HashMap;
 import io.vavr.collection.HashSet;
+import io.vavr.collection.Map;
 import io.vavr.collection.Set;
 import io.vavr.control.Option;
-import helpers.Maps;
 import helpers.Lists;
+import helpers.Maths;
 
 public class VectorialModel<DocId> {
 
@@ -63,15 +62,13 @@ public class VectorialModel<DocId> {
      * @param collection Mapping docId -> Document forall documents of the collection
      * @return a vectorial model representation of the collection
      */
-    public static <DocId> VectorialModel<DocId> of(Map<DocId, Iterable<String>> collection) {
+    public static <DocId> VectorialModel<DocId> of(java.util.Map<DocId, Iterable<String>> collection) {
         
-        // construct index
-        Index<DocId> index = Index.of(
-            io.vavr.collection.HashMap.ofAll(collection)
-        );
-
         // map documents to their max frequencies
         var hashedCollection = HashMap.ofAll(collection);
+
+        // construct index
+        Index<DocId> index = Index.of(hashedCollection);
 
         HashMap<DocId, Long> maxFrequencies = hashedCollection.mapValues(Lists::maxFrequency);
 
@@ -177,15 +174,15 @@ public class VectorialModel<DocId> {
      * @param docId
      * @return mapping String -> tf-idf weight for all the Strings of the document docId
      */
-    public Option<java.util.HashMap<String, Double>> tfidfVector(DocId docId) {
-        return tfidfVectors.get(docId).map(HashMap::toJavaMap);
+    public Option<HashMap<String, Double>> tfidfVector(DocId docId) {
+        return tfidfVectors.get(docId);
     }
 
     /**
      * @param docId
      * @return mapping doc_id -> cosine_similarity for all documents with similarity > 0 with docId
      */
-    public Option<java.util.HashMap<DocId, Double>> querySimilars(DocId docId) {
+    public Option<HashMap<DocId, Double>> querySimilars(DocId docId) {
         return this.tfidfVector(docId).map(this::querySimilars);
     }
 
@@ -194,20 +191,18 @@ public class VectorialModel<DocId> {
      * @param termsWeights
      * @return mapping doc_id -> cosine_similarity for all documents with similarity > 0 with the given (term, tfidf weight) vector
      */
-    public java.util.HashMap<DocId, Double> querySimilars(Map<String, Double> termsWeights) {
-        var similarities = new java.util.HashMap<DocId, Double>();
-
-        for(var tw : termsWeights.entrySet()) {
-            var term = tw.getKey();
-            var weight = tw.getValue();
-            
-            for(var docId : this.index.documents(term)) {
-                var otherWeight = this.tfidfVector(docId).get().get(term);
-                similarities.merge(docId, weight*otherWeight, Maps.add);
-            }
-        }
-
-        return similarities;
+    @SuppressWarnings("deprecation")
+    public HashMap<DocId, Double> querySimilars(Map<String, Double> termsWeights) {
+        return termsWeights.map(
+            (term, weight) -> Tuple.of(term, (HashMap<DocId, Double>) this.index.documents(term).toMap(
+                docId -> docId,
+                docId -> this.tfidfVector(docId).get().get(term).get()*weight
+            ))
+        )
+        .foldLeft(
+            HashMap.<DocId, Double>empty(),
+            (acc, cur) -> acc.merge(cur._2, Maths::add)
+        );
     }
 
     @Override
