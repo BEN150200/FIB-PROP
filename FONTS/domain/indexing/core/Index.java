@@ -1,9 +1,6 @@
 package domain.indexing.core;
 
-import java.util.Map.Entry;
 import java.util.function.Function;
-
-import javax.print.Doc;
 
 import helpers.Maps;
 import io.vavr.Tuple;
@@ -13,7 +10,6 @@ import io.vavr.collection.HashSet;
 import io.vavr.collection.List;
 import io.vavr.collection.Map;
 import io.vavr.collection.Set;
-import io.vavr.collection.Stream;
 import io.vavr.control.Option;
 
 public class Index<DocId> {

@@ -2,24 +2,15 @@ package domain.indexing.core;
 
 import java.util.Map;
 
-import domain.core.Sentence;
 import domain.indexing.booleanmodel.BooleanModel;
 import domain.indexing.booleanmodel.ExpressionTree;
 import domain.indexing.vectorial.VectorialModel;
-import helpers.Maps;
 import helpers.Maths;
 import helpers.Parsing;
 import helpers.Strings;
-import io.vavr.Tuple;
-import io.vavr.Tuple2;
-import io.vavr.collection.List;
+import io.vavr.collection.HashMap;
 import io.vavr.collection.Stream;
 import io.vavr.control.Either;
-import io.vavr.control.Try;
-import io.vavr.control.Validation;
-
-import java.security.InvalidParameterException;
-import java.util.HashMap;
 
 public class IndexingController<DocId, SentenceId> {
     private VectorialModel<DocId> vectorialModel;
@@ -62,13 +53,13 @@ public class IndexingController<DocId, SentenceId> {
         this.booleanModel = this.booleanModel.remove(sentenceId);
     }
 
-    public HashMap<DocId, Double> weightedQuery(Map<String, Double> termsWeights) {
-        return this.vectorialModel.querySimilars(termsWeights);
+    public java.util.HashMap<DocId, Double> weightedQuery(Map<String, Double> termsWeights) {
+        return this.vectorialModel.querySimilars(HashMap.ofAll(termsWeights)).toJavaMap();
     }
 
     @SuppressWarnings("deprecation")
-    public Either<String, HashMap<DocId, Double>> querySimilarDocuments(DocId docId) {
-        return this.vectorialModel.querySimilars(docId).toEither("DocId " + docId + " does not exist");
+    public Either<String, java.util.HashMap<DocId, Double>> querySimilarDocuments(DocId docId) {
+        return this.vectorialModel.querySimilars(docId).map(HashMap::toJavaMap).toEither("DocId " + docId + " does not exist");
     }
     
     // TODO
@@ -93,7 +84,6 @@ public class IndexingController<DocId, SentenceId> {
                 )
             )
             .map(Maths::normalized)
-            .map(io.vavr.collection.HashMap::toJavaMap)
             .map(vectorialModel::querySimilars)
             .mapLeft(Strings::joinEndLine);
     }

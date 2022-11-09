@@ -38,7 +38,7 @@ public class TestVectorialModel {
 
         System.out.println("Created in " + Duration.between(start, end).toMillis() + "ms");
 
-        var query = java.util.Map.of(
+        var query = HashMap.of(
             "god", 1.0d
         );
 
