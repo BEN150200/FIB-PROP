@@ -15,6 +15,7 @@ import org.junit.Test;
 import domain.indexing.core.Index;
 import domain.indexing.vectorial.VectorialModel;
 import helpers.Parsing;
+import io.vavr.Tuple2;
 import io.vavr.collection.HashMap;
 import io.vavr.collection.List;
 import io.vavr.collection.Map;
@@ -25,6 +26,7 @@ public class TestVectorialModel {
 
     
     @Test
+    @SuppressWarnings("deprecation")
     public void testNews() {
         var folderPath = "..\\pracs-caim\\s1\\data\\raw\\20_newsgroups";
         
@@ -42,19 +44,19 @@ public class TestVectorialModel {
             "god", 1.0d
         );
 
-        var results = Stream.ofAll(model.querySimilars(query).entrySet())
-            .sortBy(e -> e.getValue())
-            .reverse()
-            .take(5);
+        var results = model.querySimilars(query).toStream()
+        .sortBy(Tuple2::_2)
+        .reverse()
+        .take(5);
 
-        results.forEach(entry ->
-            System.out.println(
-                "Doc " + entry.getKey() + " (score=" + entry.getValue() + ")\n" +
-                "-----------------------------------\n" +
-                Try.of(() -> Files.readString(Paths.get(entry.getKey()), Charset.forName("ISO-8859-1"))).get() +
-                "\n-----------------------------------\n"
-            )
-        );
+    results.forEach(entry ->
+        System.out.println(
+            "Doc " + entry._1 + " (score=" + entry._2 + ")\n" +
+            "-----------------------------------\n" +
+            Try.of(() -> Files.readString(Paths.get(entry._1), Charset.forName("ISO-8859-1"))).get() +
+            "\n-----------------------------------\n"
+        )
+    );
     }
 
     static final Map<String, Iterable<String>> corpus = HashMap.of(
@@ -99,14 +101,10 @@ public class TestVectorialModel {
 
         assertEquals(
             0.035,
-            similars.get("d4"),
+            similars.get("d4").get(),
             0.001 // up to 3 decimal places
         );
 
-        for(var entry : similars.entrySet()) {
-            var docId = entry.getKey();
-            var similarity = entry.getValue();
-            System.out.println(docId + ": " + similarity);
-        }
+        similars.forEach((docId, similarity) -> System.out.println(docId + ": " + similarity));
     }
 }
