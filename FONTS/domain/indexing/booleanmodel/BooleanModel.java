@@ -116,11 +116,13 @@ public class BooleanModel<SentenceId> {
      * @param sequence sequence of terms to search
      * @return ids of sentences containing all the terms of the sequence in order
      */
-    @SuppressWarnings("deprecation") // forall is getting de-deprecated!
-    public java.util.Set<SentenceId> querySequence(java.util.List<String> sequence) {
+    public java.util.Set<SentenceId> querySequence(Iterable<String> sequence) {
+        return this.querySequenceVavr(sequence).toJavaSet();
+    }
 
+    @SuppressWarnings("deprecation")
+    public Set<SentenceId> querySequenceVavr(Iterable<String> sequence) {
         var postingLists = Array.ofAll(sequence).map(index::postingList);
-
         return postingLists.minBy(HashMap::size).map(
             minList -> {
                 int i = postingLists.indexOf(minList);
@@ -131,10 +133,10 @@ public class BooleanModel<SentenceId> {
                     ))
                 )
                 .filterValues(HashSet::nonEmpty)
-                .keySet().toJavaSet();
+                .keySet();
             }
         )
-        .getOrElse(Collections::emptySet);
+        .getOrElse(HashSet::empty);
     }
     
     /**
