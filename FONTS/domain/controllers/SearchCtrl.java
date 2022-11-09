@@ -33,7 +33,7 @@ public class SearchCtrl {
     public List<DocumentInfo> searchSimilarDocuments(String titleName, String authorName, Integer k) {
         Integer docId = DocumentCtrl.getInstance().getDocumentID(titleName, authorName);
         if(docId != null) {
-            Either<Exception, HashMap<Integer, Double>> similar = indexingCtrl.querySimilarDocuments(docId);
+            Either<String, HashMap<Integer, Double>> similar = indexingCtrl.querySimilarDocuments(docId);
             if (similar.isLeft()) {
                 return null;
             }
