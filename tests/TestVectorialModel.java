@@ -2,16 +2,70 @@ package tests;
 
 import static org.junit.Assert.assertEquals;
 
+import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.stream.Collectors;
+
 import org.junit.Test;
 
 import domain.indexing.core.Index;
 import domain.indexing.vectorial.VectorialModel;
-import helpers.Maths;
+import domain.preprocessing.Tokenizer;
+import io.vavr.Tuple;
+import io.vavr.Tuple2;
 import io.vavr.collection.HashMap;
 import io.vavr.collection.List;
 import io.vavr.collection.Map;
+import io.vavr.collection.Stream;
+import io.vavr.control.Try;
 
 public class TestVectorialModel {
+
+    static public Tuple2<String, ? extends Iterable<String>> parseDocument(Path filepath) {
+        return Try.of(() -> Files.readString(filepath, Charset.forName("ISO-8859-1")))
+            .map(Tokenizer::tokenize)
+            .map(Stream::of)
+            .map(s -> Tuple.of(filepath.toString(), s))
+            .get();
+    }
+
+    @Test
+    public void testNews() {
+        var folderPath = "..\\pracs-caim\\s1\\data\\raw\\20_newsgroups";
+        
+        var files = Try.of(() ->
+            Files.walk(Paths.get(folderPath))
+                .filter(Files::isRegularFile)
+                .map(TestVectorialModel::parseDocument)
+        )
+        .get().collect(Collectors.toList());
+
+        Map<String, Iterable<String>> corpus = HashMap.ofEntries(files);
+
+        var model = VectorialModel.of(corpus.toJavaMap());
+
+        System.out.println("Created");
+
+        var query = java.util.Map.of(
+            "god", 1.0d
+        );
+
+        var results = Stream.ofAll(model.querySimilars(query).entrySet())
+            .sortBy(e -> e.getValue())
+            .reverse()
+            .take(5);
+
+        results.forEach(entry ->
+            System.out.println(
+                "Doc " + entry.getKey() + " (score=" + entry.getValue() + ")\n" +
+                "-----------------------------------\n" +
+                Try.of(() -> Files.readString(Paths.get(entry.getKey()), Charset.forName("ISO-8859-1"))).get() +
+                "\n-----------------------------------\n"
+            )
+        );
+    }
 
     static final Map<String, Iterable<String>> corpus = HashMap.of(
             "d1", "0 0 1 0 1 0",
