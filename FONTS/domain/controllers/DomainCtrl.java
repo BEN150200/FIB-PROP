@@ -129,7 +129,7 @@ public class DomainCtrl {
     **/
     
     public boolean deleteDocument(String titleName, String authorName){
-        if (!DocumentCtrl.getInstance().existsDocument(titleName, authorName)) {
+        if (DocumentCtrl.getInstance().existsDocument(titleName, authorName)) {
             Document d = DocumentCtrl.getInstance().getDocument(titleName, authorName);
             DocumentCtrl.getInstance().deleteDocument(titleName, authorName);
             
