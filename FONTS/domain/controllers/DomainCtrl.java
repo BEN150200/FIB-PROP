@@ -301,6 +301,9 @@ public class DomainCtrl {
             return null;
         }
     }
-    
+
+    public List<DocumentInfo> searchSimilarDocuments(String titleName, String authorName, Integer k) {
+        return SearchCtrl.getInstance().searchSimilarDocuments(titleName, authorName, k);
+    }
     
 }

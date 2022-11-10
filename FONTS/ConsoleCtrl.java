@@ -333,6 +333,7 @@ public class ConsoleCtrl extends PresentationCtrl{
         }
     }
 
+
     private ArrayList<String> sortStringList(ArrayList<String> l){
         printToConsole(sortingArrayMenu);
         Integer command = getInputAsInt(0, 2, "Enter an option number:");
@@ -386,7 +387,7 @@ public class ConsoleCtrl extends PresentationCtrl{
 
     private void similarDocumentsSearch(String titleName, String authorName){
         int k = getInputAsInt(0, 100,"Enter the number of documents showed:");
-        ArrayList<DocumentInfo> similarDocuments = new ArrayList<DocumentInfo>(SearchCtrl.getInstance().searchSimilarDocuments(titleName, authorName, k));
+        ArrayList<DocumentInfo> similarDocuments = new ArrayList<DocumentInfo>(domain.searchSimilarDocuments(titleName, authorName, k));
         while(true){
             printToConsole(similarDocumentsHeader);
             for(int i = 0; i < similarDocuments.size(); ++i){
