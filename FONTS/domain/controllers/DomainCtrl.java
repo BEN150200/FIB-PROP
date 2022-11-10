@@ -86,6 +86,10 @@ public class DomainCtrl {
         return BooleanExpressionCtrl.getInstance().saveExpression(boolExp, boolExpName);
     }
 
+     public boolean existsBooleanExpression(String boolExpName){
+        return BooleanExpressionCtrl.getInstance().existsBooleanExpression(boolExpName);
+    }
+
     /**
      * Update Elements
     **/

@@ -2,6 +2,7 @@ package domain.indexing.core;
 
 import java.util.Map;
 
+import domain.core.ExpressionTreeNode;
 import domain.indexing.booleanmodel.BooleanModel;
 import domain.indexing.booleanmodel.ExpressionTree;
 import domain.indexing.vectorial.VectorialModel;
@@ -63,7 +64,8 @@ public class IndexingController<DocId, SentenceId> {
     }
     
     // TODO
-    public Either<String, Iterable<SentenceId>> booleanQuery(ExpressionTree expressionTree) {
+    public Iterable<SentenceId> booleanQuery(ExpressionTreeNode root) {
+        
         return Either.left("Not yet implemented");
     }
     

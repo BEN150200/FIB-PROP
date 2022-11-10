@@ -12,10 +12,7 @@ import io.vavr.Tuple;
 import io.vavr.Tuple2;
 import io.vavr.collection.Stream;
 import io.vavr.control.Either;
-import io.vavr.control.Option;
 import io.vavr.control.Try;
-import io.vavr.control.Validation;
-import io.vavr.control.Validation.Valid;
 
 public class Parsing {
     static public Tuple2<String, ? extends Iterable<String>> parseDocument(Path filepath) {
