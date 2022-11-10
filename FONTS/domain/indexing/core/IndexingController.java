@@ -1,15 +1,18 @@
 package domain.indexing.core;
 
+import java.util.Arrays;
 import java.util.Map;
 
 import domain.core.ExpressionTreeNode;
 import domain.indexing.booleanmodel.BooleanModel;
+import domain.indexing.booleanmodel.ExpressionTree;
 import domain.indexing.vectorial.VectorialModel;
 import helpers.Maths;
 import helpers.Parsing;
 import helpers.Strings;
 import io.vavr.collection.HashMap;
 import io.vavr.collection.HashSet;
+import io.vavr.collection.List;
 import io.vavr.collection.Stream;
 import io.vavr.control.Either;
 
@@ -70,39 +73,29 @@ public class IndexingController<DocId, SentenceId> {
             case '&':
                 return solveQuery(root.getLeft()).intersect(solveQuery(root.getRight()));
             case '|':
-                break;
+                return solveQuery(root.getLeft()).union(solveQuery(root.getRight()));
+            case '!':
+                return this.booleanModel.all().diff(solveQuery(root.getRight()));
+            case '{':
+                var set = Arrays.asList(value.substring(1, value.length()-2).split(" "));
+                return this.booleanModel.querySet(set);
+            case '"':
+                var seq = Arrays.asList(value.substring(1, value.length()-2).split(" "));
+                return this.booleanModel.querySequence(seq);
+            default:
+                return this.booleanModel.queryTerm(value);
         }
     }
-
-    /* 
-    public HashSet<SentenceId> booleanQuery(ExpressionTreeNode expressionTree) {
-        String value=expressionTree.getValue();
-        if(value.charAt(0)=='&') return intersection(booleanQuery(expressionTree.getLeft()),booleanQuery(expressionTree.getRight()));
-        else if(value.charAt(0)=='|') return union(booleanQuery(expressionTree.getLeft()),booleanQuery(expressionTree.getRight()));
-        else if(value.charAt(0)=='!') return negate(booleanQuery(expressionTree.getRight()));
-        //sino vol dir que és node final
-        //String aux = eraseSpacesValue();
-        if(value.charAt(0)=='{'){//llista de paraules
-            String aux=value.substring(1,value.length()-1);//treiem els {}
-            String[] list=aux.split(" ");
-            //Set<String> SetList = new HashSet<String>();
-            return new HashSet<SentenceId> (booleanModel.querySet(Arrays.asList(list)));
-
-        }
-        else if(value.charAt(0)=='"'){//cadena de paraules
-            String aux=value.substring(1,value.length()-1);//treiem els ""
-            String[] list=aux.split(" ");
-
-            return new HashSet<SentenceId> (booleanModel.querySequence(Arrays.asList(list))); //ha de tornar totes les frases que tenen la frase.................................
-
-        }
-        else return new HashSet<SentenceId> (booleanModel.queryTerm(value));//.........................................................
-    }
-    */
     
-    // TODO
-    public Either<String, Iterable<SentenceId>> booleanQuery(ExpressionTreeNode root) {
-        return Either.left("Not yet implemented");
+    public HashSet<DocId> booleanQueryDocs(ExpressionTreeNode root){
+        HashSet<SentenceId> sentences = booleanQuery(root);
+        for(SentenceId sent : sentences){
+            
+        } 
+        return null;
+    }
+    public HashSet<SentenceId> booleanQuery(ExpressionTreeNode root) {
+        return this.solveQuery(root);
     }
     
     public Either<String, HashMap<DocId, Double>> weightedQuery(String query) {
