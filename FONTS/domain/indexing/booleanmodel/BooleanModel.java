@@ -1,13 +1,13 @@
 package domain.indexing.booleanmodel;
 
 import java.util.Collection;
-import java.util.Collections;
 
 import domain.indexing.core.Index;
 import io.vavr.Tuple;
 import io.vavr.collection.Array;
 import io.vavr.collection.HashMap;
 import io.vavr.collection.HashSet;
+import io.vavr.collection.List;
 import io.vavr.collection.Set;
 
 
@@ -77,7 +77,7 @@ public class BooleanModel<SentenceId> {
      * @return ids of sentences containing term
      */
     public java.util.Set<SentenceId> queryTerm(String term) {
-        return queryTermVavr(term).toJavaSet();
+        return this.queryTermVavr(term).toJavaSet();
     }
     
     /**
@@ -85,8 +85,8 @@ public class BooleanModel<SentenceId> {
      * @param term
      * @return a vavr Set of the sentenceIds containing term
      */
-    public Set<SentenceId> queryTermVavr(String term) {
-        return index.postingList(term).keySet();
+    public HashSet<SentenceId> queryTermVavr(String term) {
+        return (HashSet<SentenceId>) this.index.postingList(term).keySet();
     }
     
     /**
@@ -104,8 +104,8 @@ public class BooleanModel<SentenceId> {
      * @return a vavr Set of the sentenceIds containing all the terms in set
      */
     @SuppressWarnings("deprecation")
-    public Set<SentenceId> querySetVavr(Collection<String> set) {
-        var Ds = Array.ofAll(set).map(this::queryTermVavr);
+    public HashSet<SentenceId> querySetVavr(Collection<String> set) {
+        var Ds = List.ofAll(set).map(this::queryTermVavr);
         return Ds.minBy(Set::size) // compare all using the smallest set
             .map(Dmin ->  Dmin.filter(d -> Ds.forAll(Di -> Di.contains(d))))
             .getOrElse(HashSet::empty);
@@ -121,12 +121,14 @@ public class BooleanModel<SentenceId> {
     }
 
     @SuppressWarnings("deprecation")
-    public Set<SentenceId> querySequenceVavr(Iterable<String> sequence) {
-        var postingLists = Array.ofAll(sequence).map(index::postingList);
-        return postingLists.minBy(HashMap::size).map(
-            minList -> {
-                int i = postingLists.indexOf(minList);
-                return minList.map((d, P) -> Tuple.of(d,
+    public HashSet<SentenceId> querySequenceVavr(Iterable<String> sequence) {
+        var postingLists = List.ofAll(sequence).map(index::postingList);
+        var minListIndex = postingLists.zipWithIndex().minBy(t -> t._1.size());
+        return minListIndex.map(
+            MI -> {
+                var minList = MI._1;
+                int i = MI._2;
+                return (HashSet<SentenceId>) minList.map((d, P) -> Tuple.of(d,
                     P.filter(
                         pos -> postingLists.zipWithIndex() // tuples (_1: postingList, _2: index)
                         .forAll(t -> t._1.get(d).getOrElse(HashSet::empty).contains(pos + t._2 - i))
