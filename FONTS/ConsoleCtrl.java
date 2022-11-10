@@ -352,6 +352,17 @@ public class ConsoleCtrl extends PresentationCtrl{
             else System.out.println("The expression is not correct");
         }
     }
+
+
+
+
+
+
+
+
+
+
+
     
     private void searchMenu() {
             while (true) {
@@ -681,6 +692,33 @@ public class ConsoleCtrl extends PresentationCtrl{
     }
 
     public void searchDocumentByBooleanExpression(){
-         System.out.println("")
+         //System.out.println("");
+         Integer command = getInputAsInt(0, 1, "Enter an option number:");
+         if(command==1){
+            System.out.println("-Enter the Boolean Expresion Name:");
+            String boolExpName = terminalIn.nextLine();
+             if(!domain.existsBooleanExpression(boolExpName)){
+                printCmd("There is not a expression with this name");
+                return;
+             }
+             else{
+                ExpressionTreeNode root = domain.getSavedExpressionTree(boolExpName);
+             }
+
+         }
+         else{
+            System.out.println("-Enter the Boolean Expresion:");
+            String boolExp = terminalIn.nextLine();
+            ExpressionTreeNode root = domain.createExpressionTree(boolExp);
+            if(root==null) {
+                printCmd("Invalid expression");
+                return;
+            }
+         }
+
+        HashSet<DocumentsId> docs = IndexingController.getInstance().booleanQueryDocs(root);
+        for(SentenceId doc : docs){
+           
+        }
     }
 }
