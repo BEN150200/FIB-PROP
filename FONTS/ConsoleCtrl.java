@@ -370,7 +370,7 @@ public class ConsoleCtrl extends PresentationCtrl{
                     break;
                 case 4:
                     System.out.println("Cerca per expressio booleana");
-                    //searchDocumentByBooleanExpression();
+                    searchDocumentByBooleanExpression();
                     break;
                 case 5:
                     System.out.println("Cerca per query");
@@ -678,5 +678,9 @@ public class ConsoleCtrl extends PresentationCtrl{
                 }
             }
         }
+    }
+
+    public void searchDocumentByBooleanExpression(){
+         System.out.println("")
     }
 }

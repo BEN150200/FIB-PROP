@@ -157,10 +157,9 @@ public class Index<DocId> {
      * 
      * @return Set of all docIds in the index
      */
-    public Set<DocId> allDocIds() {
-        return this.directIndex.keySet();
+    public HashSet<DocId> allDocIds() {
+        return (HashSet<DocId>) this.directIndex.keySet();
     }
-
     
     /**
      * 

@@ -73,29 +73,11 @@ public class BooleanModel<SentenceId> {
 
     /**
      * 
-     * @param term term to search
-     * @return ids of sentences containing term
-     */
-    public java.util.Set<SentenceId> queryTerm(String term) {
-        return this.queryTermVavr(term).toJavaSet();
-    }
-    
-    /**
-     * 
      * @param term
      * @return a vavr Set of the sentenceIds containing term
      */
-    public HashSet<SentenceId> queryTermVavr(String term) {
+    public HashSet<SentenceId> queryTerm(String term) {
         return (HashSet<SentenceId>) this.index.postingList(term).keySet();
-    }
-    
-    /**
-     * 
-     * @param set collection of terms to search
-     * @return ids of sentences containing all the terms in set
-     */
-    public java.util.Set<SentenceId> querySet(Collection<String> set) {
-        return querySetVavr(set).toJavaSet();
     }
 
     /**
@@ -104,8 +86,8 @@ public class BooleanModel<SentenceId> {
      * @return a vavr Set of the sentenceIds containing all the terms in set
      */
     @SuppressWarnings("deprecation")
-    public HashSet<SentenceId> querySetVavr(Collection<String> set) {
-        var Ds = List.ofAll(set).map(this::queryTermVavr);
+    public HashSet<SentenceId> querySet(Collection<String> set) {
+        var Ds = List.ofAll(set).map(this::queryTerm);
         return Ds.minBy(Set::size) // compare all using the smallest set
             .map(Dmin ->  Dmin.filter(d -> Ds.forAll(Di -> Di.contains(d))))
             .getOrElse(HashSet::empty);
@@ -116,12 +98,8 @@ public class BooleanModel<SentenceId> {
      * @param sequence sequence of terms to search
      * @return ids of sentences containing all the terms of the sequence in order
      */
-    public java.util.Set<SentenceId> querySequence(Iterable<String> sequence) {
-        return this.querySequenceVavr(sequence).toJavaSet();
-    }
-
     @SuppressWarnings("deprecation")
-    public HashSet<SentenceId> querySequenceVavr(Iterable<String> sequence) {
+    public HashSet<SentenceId> querySequence(Iterable<String> sequence) {
         var postingLists = List.ofAll(sequence).map(index::postingList);
         var minListIndex = postingLists.zipWithIndex().minBy(t -> t._1.size());
         return minListIndex.map(
@@ -145,8 +123,8 @@ public class BooleanModel<SentenceId> {
      * 
      * @return set of all the sentences ids
      */
-    public java.util.Set<SentenceId> all() {
-        return this.index.allDocIds().toJavaSet();
+    public HashSet<SentenceId> all() {
+        return this.index.allDocIds();
     }
     
 }

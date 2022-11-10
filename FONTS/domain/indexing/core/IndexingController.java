@@ -4,12 +4,12 @@ import java.util.Map;
 
 import domain.core.ExpressionTreeNode;
 import domain.indexing.booleanmodel.BooleanModel;
-import domain.indexing.booleanmodel.ExpressionTree;
 import domain.indexing.vectorial.VectorialModel;
 import helpers.Maths;
 import helpers.Parsing;
 import helpers.Strings;
 import io.vavr.collection.HashMap;
+import io.vavr.collection.HashSet;
 import io.vavr.collection.Stream;
 import io.vavr.control.Either;
 
@@ -62,10 +62,46 @@ public class IndexingController<DocId, SentenceId> {
     public Either<String, java.util.HashMap<DocId, Double>> querySimilarDocuments(DocId docId) {
         return this.vectorialModel.querySimilars(docId).map(HashMap::toJavaMap).toEither("DocId " + docId + " does not exist");
     }
+
+
+    private HashSet<SentenceId> solveQuery(ExpressionTreeNode root) {
+        var value = root.getValue();
+        switch (value.charAt(0)) {
+            case '&':
+                return solveQuery(root.getLeft()).intersect(solveQuery(root.getRight()));
+            case '|':
+                break;
+        }
+    }
+
+    /* 
+    public HashSet<SentenceId> booleanQuery(ExpressionTreeNode expressionTree) {
+        String value=expressionTree.getValue();
+        if(value.charAt(0)=='&') return intersection(booleanQuery(expressionTree.getLeft()),booleanQuery(expressionTree.getRight()));
+        else if(value.charAt(0)=='|') return union(booleanQuery(expressionTree.getLeft()),booleanQuery(expressionTree.getRight()));
+        else if(value.charAt(0)=='!') return negate(booleanQuery(expressionTree.getRight()));
+        //sino vol dir que és node final
+        //String aux = eraseSpacesValue();
+        if(value.charAt(0)=='{'){//llista de paraules
+            String aux=value.substring(1,value.length()-1);//treiem els {}
+            String[] list=aux.split(" ");
+            //Set<String> SetList = new HashSet<String>();
+            return new HashSet<SentenceId> (booleanModel.querySet(Arrays.asList(list)));
+
+        }
+        else if(value.charAt(0)=='"'){//cadena de paraules
+            String aux=value.substring(1,value.length()-1);//treiem els ""
+            String[] list=aux.split(" ");
+
+            return new HashSet<SentenceId> (booleanModel.querySequence(Arrays.asList(list))); //ha de tornar totes les frases que tenen la frase.................................
+
+        }
+        else return new HashSet<SentenceId> (booleanModel.queryTerm(value));//.........................................................
+    }
+    */
     
     // TODO
-    public Iterable<SentenceId> booleanQuery(ExpressionTreeNode root) {
-        
+    public Either<String, Iterable<SentenceId>> booleanQuery(ExpressionTreeNode root) {
         return Either.left("Not yet implemented");
     }
     
