@@ -110,6 +110,11 @@ public class Document {
         sentences.add(sentence);
     }
 
+
+    public void updateModificationDate() {
+        modificationDate = LocalDateTime.now();
+    }
+
     public void compute() {
         //HashMap<String,Integer> ocurrences = new HashMap<>();
         ArrayList<String> tokens = new ArrayList<>();

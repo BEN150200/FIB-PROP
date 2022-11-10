@@ -100,6 +100,8 @@ public class DomainCtrl {
     }
 
     private void updateDocumentContent(Document doc, List<String> content) {
+        deleteDocumentContent(doc);
+
         for (String sentenceDoc : content) {
             Sentence sentence;
             if(!SentenceCtrl.getInstance().existsSentence(sentenceDoc)) {
@@ -113,6 +115,8 @@ public class DomainCtrl {
             doc.addSentence(sentence);
             sentence.addDoc(doc.getID());
         }
+
+        doc.updateModificationDate();
         doc.compute();
     }
 
@@ -124,19 +128,36 @@ public class DomainCtrl {
         if (!DocumentCtrl.getInstance().existsDocument(titleName, authorName)) {
             Document d = DocumentCtrl.getInstance().getDocument(titleName, authorName);
             DocumentCtrl.getInstance().deleteDocument(titleName, authorName);
+            
             Author a = d.getAuthor();
             a.deleteDocument(d.getID());
             if(a.getNbDocuments() == 0){
                 AuthorCtrl.getInstance().deleteAuthor(a.toString());
             }
+
             Title t = d.getTitle();
             t.deleteDocument(d.getID());
             if(t.getNbDocuments() == 0){
                 TitleCtrl.getInstance().deleteTitle(t.toString());
             }
+            
+            deleteDocumentContent(d);
+            SearchCtrl.getInstance().removeDocument(d.getID());
+
             return true;
         }
         return false;
+    }
+
+    private void deleteDocumentContent(Document doc) {
+        ArrayList<Sentence> content = doc.getSentences();
+            for (Sentence sentence : content) {
+                sentence.deleteDocument(doc.getID());
+                if (sentence.getNbDocuments() == 0) {
+                    SentenceCtrl.getInstance().deleteSentence(sentence.toString());
+                    SearchCtrl.getInstance().removeSentence(sentence.id());
+                }
+            }
     }
 
     public void deleteBooleanExpression(String boolExpName) {

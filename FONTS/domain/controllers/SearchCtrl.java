@@ -45,7 +45,13 @@ public class SearchCtrl {
                 }
                 Collections.sort(list);
 
-                for (int i = list.size()-1; i >= list.size()-k; --i) {
+                int numDocs;
+                if (list.size() < k) {
+                    numDocs = list.size();
+                }
+                else numDocs = k;
+
+                for (int i = list.size()-1; i >= list.size() - numDocs; --i) {
                     Double num = list.get(i);
                     for (Entry<Integer, Double> entry : similar.get().entrySet()) {
                         if(entry.getValue().equals(num)) {
@@ -70,12 +76,21 @@ public class SearchCtrl {
     }
 
 
+    
+    public void addDocument(Integer docId, Iterable<String> content) {
+        indexingCtrl.addDocument(docId, content);
+    }
+
     public void addSentence(Integer sentenceId, Iterable<String> content) {
         indexingCtrl.addSentence(sentenceId, content);
     }
     
-    public void addDocument(Integer docId, Iterable<String> content) {
-        indexingCtrl.addDocument(docId, content);
+    public void removeDocument(Integer docId) {
+        indexingCtrl.removeSentence(docId);
+    }
+
+    public void removeSentence(Integer sentenceId) {
+        indexingCtrl.removeSentence(sentenceId);
     }
     
 }
