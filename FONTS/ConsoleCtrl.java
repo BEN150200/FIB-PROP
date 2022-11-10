@@ -352,17 +352,6 @@ public class ConsoleCtrl extends PresentationCtrl{
             else System.out.println("The expression is not correct");
         }
     }
-
-
-
-
-
-
-
-
-
-
-
     
     private void searchMenu() {
             while (true) {
