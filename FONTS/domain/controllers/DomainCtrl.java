@@ -151,13 +151,14 @@ public class DomainCtrl {
 
     private void deleteDocumentContent(Document doc) {
         ArrayList<Sentence> content = doc.getSentences();
-            for (Sentence sentence : content) {
-                sentence.deleteDocument(doc.getID());
-                if (sentence.getNbDocuments() == 0) {
-                    SentenceCtrl.getInstance().deleteSentence(sentence.toString());
-                    SearchCtrl.getInstance().removeSentence(sentence.id());
-                }
+        for (Sentence sentence : content) {
+            sentence.deleteDocument(doc.getID());
+            if (sentence.getNbDocuments() == 0) {
+                SentenceCtrl.getInstance().deleteSentence(sentence.toString());
+                SearchCtrl.getInstance().removeSentence(sentence.id());
             }
+        }
+        doc.deleteContent();
     }
 
     public void deleteBooleanExpression(String boolExpName) {

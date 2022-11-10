@@ -414,6 +414,9 @@ public class ConsoleCtrl extends PresentationCtrl{
         }
     }
 
+    /**
+     * Document Manage Functions
+    */
     public ArrayList<String> getContentByInput(){
         System.out.println("Enter the content of the document (enter *end* as the last line to finish): ");
         System.out.println("");
@@ -500,6 +503,9 @@ public class ConsoleCtrl extends PresentationCtrl{
         openDocument(currentTitle, currentAuthor);
     }
 
+    /**
+     * Document Manage Functions
+    */
     public void titlesOfAnAuthor(String authorName){
         ArrayList<String> titles = domain.getAllAuthorTitles(authorName);
         while(true){

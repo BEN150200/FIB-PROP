@@ -115,6 +115,10 @@ public class Document {
         modificationDate = LocalDateTime.now();
     }
 
+    public void deleteContent() {
+        sentences.clear();
+    }
+
     public void compute() {
         //HashMap<String,Integer> ocurrences = new HashMap<>();
         ArrayList<String> tokens = new ArrayList<>();
