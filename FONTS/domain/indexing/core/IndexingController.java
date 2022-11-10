@@ -4,7 +4,6 @@ import java.util.Map;
 
 import domain.core.ExpressionTreeNode;
 import domain.indexing.booleanmodel.BooleanModel;
-import domain.indexing.booleanmodel.ExpressionTree;
 import domain.indexing.vectorial.VectorialModel;
 import helpers.Maths;
 import helpers.Parsing;
