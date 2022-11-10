@@ -59,7 +59,7 @@ public class TestVectorialModel {
     );
     }
 
-    static final Map<String, Iterable<String>> corpus = HashMap.of(
+    static final HashMap<String, Iterable<String>> corpus = HashMap.of(
             "d1", "0 0 1 0 1 0",
             "d2", "0 0 0 0 1 2",
             "d3", "3 1 1 0 1 0",

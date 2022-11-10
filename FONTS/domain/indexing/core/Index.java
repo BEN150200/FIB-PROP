@@ -10,6 +10,7 @@ import io.vavr.collection.HashSet;
 import io.vavr.collection.List;
 import io.vavr.collection.Map;
 import io.vavr.collection.Set;
+import io.vavr.collection.Stream;
 import io.vavr.control.Option;
 
 public class Index<DocId> {
@@ -42,12 +43,8 @@ public class Index<DocId> {
      * @param collection
      * @return a new Index representing the given collection
      */
-    public static <DocId> Index<DocId> of(Map<DocId, Iterable<String>> collection) {
-        var directIndex =
-            collection.foldLeft(
-                HashMap.<DocId, HashMap<String, HashSet<Integer>>>empty(),
-                (direct, entry) -> direct.put(entry._1, Index.termsPositions(entry._2))
-            );
+    public static <DocId> Index<DocId> of(HashMap<DocId, Iterable<String>> collection) {
+        var directIndex = collection.mapValues(Index::termsPositions);
 
         var invertedIndex = directIndex.map(
             (docId, termsPositions) -> Tuple.of(docId, termsPositions.foldLeft(
@@ -63,6 +60,17 @@ public class Index<DocId> {
         return new Index<DocId>(invertedIndex, directIndex);
     }
 
+    private static HashMap<String, HashSet<Integer>> termsPositions(Iterable<String> content) {
+        return Stream.ofAll(content)
+            .zipWithIndex()
+            .foldLeft(
+                HashMap.<String, HashSet<Integer>>empty(),
+                (positions, termIndex) -> positions.merge(
+                    HashMap.of(termIndex._1, HashSet.of(termIndex._2)),
+                    HashSet::union
+                )
+            );
+    }
 
     /**
      * @param term term whose posting list we want to retrieve
@@ -72,10 +80,33 @@ public class Index<DocId> {
         return this.invertedIndex.get(term).getOrElse(HashMap::empty);
     }
 
+    /**
+     * 
+     * @param term
+     * @return ids of documents containing term
+     */
     public Set<DocId> documents(String term) {
         return this.postingList(term).keySet();
     }
     
+    /**
+     * 
+     * @param term
+     * @return the number of documents containing term
+     */
+    public int documentFrequency(String term) {
+        return this.documents(term).size();
+    }
+
+    /**
+     * 
+     * @param docId
+     * @return true iff this contains the given docId
+     */
+    public boolean contains(DocId docId) {
+        return this.directIndex.containsKey(docId);
+    }
+
     /**
      * @param docId id of the documents whose term frequencies we wish to retrieve
      * @return if present, a mapping term -> [positions] forall terms of the document identified by docId. Throws if docId doesn't exist! (an empty document is still a document)
@@ -102,24 +133,13 @@ public class Index<DocId> {
 
     /**
      * 
-     * @param term
-     * @return the number of documents containing term
-     */
-    public int documentFrequency(String term) {
-        return this.invertedIndex.get(term)
-            .map(HashMap::size)
-            .getOrElse(0);
-    }
-
-    /**
-     * 
      * @param docId
-     * @return a mapping term -> document_frequency forall terms of the document. Throws if docId doesn't exist! (an empty document is still a document)
+     * @return if present, a mapping term -> document_frequency forall terms of the document
      */
     @SuppressWarnings("deprecation")
     public Option<HashMap<String, Integer>> termsDocumentFrequencies(DocId docId) {
         return this.terms(docId).map(terms -> (HashMap<String, Integer>) terms.toMap(
-            Function.identity(),
+            term -> term,
             this::documentFrequency
         ));
     }
@@ -141,17 +161,6 @@ public class Index<DocId> {
         return this.directIndex.keySet();
     }
 
-    private static HashMap<String, HashSet<Integer>> termsPositions(Iterable<String> content) {
-        return List.ofAll(content)
-            .zipWithIndex()
-            .foldLeft(
-                HashMap.<String, HashSet<Integer>>empty(),
-                (positions, termIndex) -> positions.merge(
-                    HashMap.of(termIndex._1, HashSet.of(termIndex._2)),
-                    HashSet::union
-                )
-            );
-    }
     
     /**
      * 
@@ -160,19 +169,18 @@ public class Index<DocId> {
      * @return a new index with the document inserted. If it previously existed, it is replaced
      */
     public Index<DocId> insert(DocId docId, Iterable<String> content) {
-        // compute positions
+
         var termsPositions = Index.termsPositions(content);
                     
         var newDirectIndex = this.directIndex.put(docId, termsPositions);
         
-        // remove if previously existing
+        // remove all terms of previous docId, if any
         var removedInverted = this.directIndex.get(docId).map(
             doc -> doc.keySet().foldLeft(this.invertedIndex, HashMap::remove)
-            )
-            .getOrElse(this.invertedIndex);
+        )
+        .getOrElse(this.invertedIndex);
                         
                         
-        // add to inverted file
         var newInvertedIndex = termsPositions
             .foldLeft(
                 removedInverted,
@@ -185,6 +193,11 @@ public class Index<DocId> {
             return new Index<DocId>(newInvertedIndex, newDirectIndex);
     }
 
+    /**
+     * 
+     * @param docIdContent tuple of docId and content to insert
+     * @return a new index with the document inserted. If it previously existed, it is replaced
+     */
     public Index<DocId> insert(Tuple2<DocId, Iterable<String>> docIdContent) {
         return this.insert(docIdContent._1, docIdContent._2);
     }
@@ -195,7 +208,7 @@ public class Index<DocId> {
      * @return a new index with docId (and its term occurrences) removed (if it existed)
      */
     public Index<DocId> remove(DocId docId) {
-        return this.allDocIds().contains(docId)
+        return this.contains(docId)
             ? new Index<DocId>(
                 this.invertedIndex.removeAll(this.terms(docId).get()),
                 this.directIndex.remove(docId)
