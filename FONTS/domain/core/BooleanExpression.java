@@ -15,7 +15,7 @@ public class BooleanExpression{
      * @param the string of the expression 
      */
     public BooleanExpression(String expr){
-        expression=expr;
+        expression=expr.trim();
     }
 
     /**
@@ -26,25 +26,18 @@ public class BooleanExpression{
         return expression;
     }
 
+    public ExpressionTreeNode getRoot(){
+        return root;
+    }
     /**
      * @cost 
      * @return true if the expression is valid, else false
      */
     public boolean checkExpression(){
-        root=new ExpressionTreeNode(expression);
+        root=new ExpressionTreeNode();
         return buildTree(root,expression);
     }
-
-     /**
-     * @cost 
-     * @param 
-     * @return returns a HashSet with all the Sentences id that obey the expression
-     */
-    public HashSet<Long> solveExpression(){
-        return root.solveExpression();
-    }
-
-    
+ 
     public void printTree(){//nomes per veure si va be, eliminar desprs
         print(root);
     }
@@ -72,23 +65,19 @@ public class BooleanExpression{
 
             String val=String.valueOf(s.charAt(index));
             rot.setValue(val);
-            System.out.println(index);
-            //System.out.println("Pas 6");
-            String s1= s.substring(0,index);
-            String s2= s.substring(index+1);
+            String s1= s.substring(0,index).trim();
+            String s2= s.substring(index+1).trim();
             if(!val.equals("!")){
-                 ExpressionTreeNode l = new ExpressionTreeNode(s1);
+                 ExpressionTreeNode l = new ExpressionTreeNode();
                  rot.setLeft(l);
-                 ExpressionTreeNode r = new ExpressionTreeNode(s2);
+                 ExpressionTreeNode r = new ExpressionTreeNode();
                  rot.setRight(r);
                  //Exception exc = new Exception("aaasaaa"); 
                  return buildTree(l, s1) & buildTree(r, s2);//return build(s.l).map(l -> build(r).map(r -> new Node(rot, l, r) per tornar excepcions
             }
             else{
-                 System.out.println("Pas 8");
-                 ExpressionTreeNode r = new ExpressionTreeNode(s2);
+                 ExpressionTreeNode r = new ExpressionTreeNode();
                  rot.setRight(r);
-                 System.out.println("Pas 9");
                  if(s1.length()>0) return false;
                  return buildTree(r, s2);
             }

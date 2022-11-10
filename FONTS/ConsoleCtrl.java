@@ -286,23 +286,83 @@ public class ConsoleCtrl extends PresentationCtrl{
             /*
             Obtenir i fer print de totes les expressions booleanes.
             */
+            searchAllBooleanExpresions();
             printToConsole(booleanExpressionsMenuOptions);
             Integer command = getInputAsInt(0, 3, "Enter an option number:");
             switch (command) {
                 case 1:
-                    //addBooleanExpresion();
+                    addBooleanExpresion();
                     break;
                 case 2:
-                    //modifyBooleanExpression();
+                    modifyBooleanExpression();
                     break;
                 case 3:
-                    //deleteBooleanExpression();
+                    deleteBooleanExpression();
                     break;
                 case 0:
                     return;    
             }
         }
     }
+
+    public void searchAllBooleanExpresions() {
+        System.out.println("____Boolean Expresions____");
+        HashMap<String,String> expresions = domain.getAllBooleanExpresions();
+        for (String string : expresions.keySet()) {
+            System.out.println(string + "    " + expresions.get(string)); 
+        }
+    }
+
+    public void deleteBooleanExpression() {
+        terminalIn.nextLine();
+        System.out.println("-Enter the Boolean Expresion Name:");
+        String boolExpName = terminalIn.nextLine();
+        if(!domain.deleteBooleanExpression(boolExpName)){
+            System.out.println("There was no saved expression with this name");
+        }
+        else System.out.println("Expression deleted");
+    }
+
+    public void modifyBooleanExpression(){
+        terminalIn.nextLine();
+        System.out.println("-Enter the Boolean Expresion Name:");
+        String boolExpName = terminalIn.nextLine();
+        if(!domain.existsBooleanExpression(boolExpName)) System.out.println("There is not a expression with this name");
+        else{
+            System.out.println("-Enter a Boolean Expresion:");
+            String boolExp = terminalIn.nextLine();
+            if (domain.addBooleanExpresion(boolExpName, boolExp)) {
+                System.out.println("Title modified successfully");
+            }
+            else System.out.println("The expression is not correct");
+        }
+    }
+
+    public void addBooleanExpresion() {
+        terminalIn.nextLine();
+        System.out.println("-Enter the Boolean Expresion Name:");
+        String boolExpName = terminalIn.nextLine();
+        if(domain.existsBooleanExpression(boolExpName)) System.out.println("There is already a expression with this name");
+        else{
+            System.out.println("-Enter a Boolean Expresion:");
+            String boolExp = terminalIn.nextLine();
+            if (domain.addBooleanExpresion(boolExpName, boolExp)) {
+                System.out.println("Title added successfully");
+            }
+            else System.out.println("The expression is not correct");
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
     
     private void searchMenu() {
             while (true) {
@@ -332,7 +392,6 @@ public class ConsoleCtrl extends PresentationCtrl{
             }
         }
     }
-
 
     private ArrayList<String> sortStringList(ArrayList<String> l){
         printToConsole(sortingArrayMenu);
@@ -387,7 +446,7 @@ public class ConsoleCtrl extends PresentationCtrl{
 
     private void similarDocumentsSearch(String titleName, String authorName){
         int k = getInputAsInt(0, 100,"Enter the number of documents showed:");
-        ArrayList<DocumentInfo> similarDocuments = new ArrayList<DocumentInfo>(domain.searchSimilarDocuments(titleName, authorName, k));
+        ArrayList<DocumentInfo> similarDocuments = new ArrayList<DocumentInfo>(SearchCtrl.getInstance().searchSimilarDocuments(titleName, authorName, k));
         while(true){
             printToConsole(similarDocumentsHeader);
             for(int i = 0; i < similarDocuments.size(); ++i){
@@ -415,9 +474,6 @@ public class ConsoleCtrl extends PresentationCtrl{
         }
     }
 
-    /**
-     * Document Manage Functions
-    */
     public ArrayList<String> getContentByInput(){
         System.out.println("Enter the content of the document (enter *end* as the last line to finish): ");
         System.out.println("");
@@ -504,9 +560,6 @@ public class ConsoleCtrl extends PresentationCtrl{
         openDocument(currentTitle, currentAuthor);
     }
 
-    /**
-     * Document Manage Functions
-    */
     public void titlesOfAnAuthor(String authorName){
         ArrayList<String> titles = domain.getAllAuthorTitles(authorName);
         while(true){

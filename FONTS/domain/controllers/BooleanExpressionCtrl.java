@@ -1,12 +1,13 @@
 package domain.controllers;
 
 import domain.core.BooleanExpression;
+import domain.core.ExpressionTreeNode;
 
 import java.io.*;
 import java.util.*;
 
 public class BooleanExpressionCtrl {
-    private Map<String,BooleanExpression> savedExpressions= new TreeMap<String,BooleanExpression>();//no val la pena ordenarho no?, potser valdria la pena un map
+    private Map<String,BooleanExpression> savedExpressions= new HashMap<String,BooleanExpression>();//no val la pena ordenarho no?, potser valdria la pena un map
     private ArrayList<BooleanExpression> historial=new ArrayList<BooleanExpression>();//aqui si que un vector aixi queden ordenats per entrada, aixo o una queue i quan poso 1 trec el primer si la cua te mida 10 (o la del historial)
     private int midaHistorial=10;
 
@@ -22,15 +23,14 @@ public class BooleanExpressionCtrl {
     public BooleanExpressionCtrl(){}
     /**
      * @cost 0(n) n=number of saved expressions
-     * @return Names of all the saved expressions 
+     * @return Names and expression of all the saved expressions 
      */
-    public ArrayList<String> getSavedExpressionsNames(){//Torna els noms de les expressions guardades
-        ArrayList<String> names= new ArrayList<String>(0);
-        Iterator<String> it = savedExpressions.keySet().iterator();
-        while(it.hasNext()){
-            String clave = it.next();
-            names.add(clave);
-            System.out.println(clave);
+    public HashMap<String,String> getSavedExpressionsNames(){//Torna els noms de les expressions guardades
+        HashMap<String,String> names= new HashMap<String,String>();
+        for(Map.Entry<String, BooleanExpression> i : savedExpressions.entrySet() ){
+            
+            names.put(i.getKey(),i.getValue().getExpression());
+            
         }
         return names;
     }
@@ -74,27 +74,27 @@ public class BooleanExpressionCtrl {
 
     /**
      * @cost 
-     * @param Name of the expression you want to solve 
-     * @return Return null if the expression do not exist, else returns a HashSet with all the Sentences id that obey the expression
+     * @param Name of the expression that you want the tree of
+     * @return Return null if the expression do not exist, else returns the root of the expressions tree
      */
-    public HashSet<Long> solveSavedExpression(String name){
+    public ExpressionTreeNode getSavedExpressionTree(String name){
         BooleanExpression aux=savedExpressions.get(name);
         if(aux==null) return null; //si no existeix return null (canviare a excepcio)
         addHistorial(aux);
-        return aux.solveExpression();
+        return aux.getRoot();
     }
 
     /**
      * @cost 
      * @param The expression to be solved 
-     * @return returns null if the expression is not correct, else returns a HashSet with all the Sentences id that obey the expression
+     * @return returns null if the expression is not correct, else returns the root of the expressions tree
      */
-    public HashSet<Long> solveExpression(String exp){
+    public ExpressionTreeNode createExpressionTree(String exp){
 
         BooleanExpression newexp=new BooleanExpression(exp);
         if(newexp.checkExpression()==false) return null;//haura de retornar excepcio si no es correcte
         addHistorial(newexp);
-        return newexp.solveExpression();
+        return newexp.getRoot();
     }
     
     /**
@@ -107,6 +107,10 @@ public class BooleanExpressionCtrl {
         if(aux==null)  return false;//si no existeix return excepcio
         else savedExpressions.remove(name);
         return true;
+    }
+
+    public boolean existsBooleanExpression(String boolExpName){
+        return (savedExpressions.get(boolExpName)!=null);
     }
 
     /**
