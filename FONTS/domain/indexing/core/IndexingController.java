@@ -9,7 +9,7 @@ import domain.DocumentInfo;
 import domain.controllers.SentenceCtrl;
 import domain.core.ExpressionTreeNode;
 import domain.indexing.booleanmodel.BooleanModel;
-import domain.indexing.booleanmodel.ExpressionTree;
+//import domain.indexing.booleanmodel.ExpressionTree;
 import domain.indexing.vectorial.VectorialModel;
 import helpers.Maths;
 import helpers.Parsing;
@@ -91,18 +91,18 @@ public class IndexingController<DocId, SentenceId> {
         }
     }
     
-    public ArrayList <Integer> booleanQueryDocs(ExpressionTreeNode root){
+    /*public ArrayList <Integer> booleanQueryDocs(ExpressionTreeNode root){
         HashSet<SentenceId> sentences = booleanQuery(root);
-        ArrayList<Integer> docs = new ArrayList<Integer>();
+        ArrayList<DocumentInfo> docs = new ArrayList<DocumentInfo>();
 
         for(SentenceId sent : sentences){
-            Set <Integer> doc = SentenceCtrl.getInstance().sentenceById(3).getAllDocsID();//TODO ...................................................................
+            Set <Integer> doc = SentenceCtrl.getInstance().sentenceById(sent).getAllDocsID();//TODO ...................................................................
              for(int document : doc){
                 docs.add(document);
              }
         } 
         return docs;
-    }
+    }*/
 
     public HashSet<SentenceId> booleanQuery(ExpressionTreeNode root) {
         return this.solveQuery(root);

@@ -49,8 +49,6 @@ public class BooleanExpression{
      * @return true if the expression is correct, else false
      */
     private boolean buildTree(ExpressionTreeNode rot,String s){
-        
-        //if(s.charAt(0)=='|' || s.charAt(0)=='&' || s.charAt(s.length()-1)=='|' || s.charAt(s.length()-1)=='&') return false;
         while(parentesis(s)){
             s=s.substring(1,s.length()-1);
         }
@@ -58,6 +56,8 @@ public class BooleanExpression{
         int index =findLastOperation(s);//també fa control d'errors
         if(index==-1) return false;//vol dir que hi ha error en la expresio
         if(index==-2){
+            
+            if(missingOperator(s)) return false;
             rot.setValue(s);
             return true;
         }
@@ -85,6 +85,32 @@ public class BooleanExpression{
             
             
         }
+    }
+
+    private boolean missingOperator(String s){
+        char[] x = s.trim().toCharArray();
+        if(x[0]=='{'){
+            int count=0;
+            for(char c: x){
+                if(c=='}' |c == '{' ) {
+                    count++;
+                }
+                if (count>2) return true;
+            }
+        }
+        else if(x[0]=='"'){
+            int count = 0;
+            for(char c: x){
+                if(c=='"') count++;
+                if(count>2) return true;
+            }
+        }
+        else{
+            for(char c: x){
+                if(c==' ') return true;
+            }
+        }
+        return false;
     }
 
     /**

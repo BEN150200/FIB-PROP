@@ -1,7 +1,7 @@
 import domain.controllers.DomainCtrl;
 import domain.controllers.SearchCtrl;
 import domain.core.ExpressionTreeNode;
-import domain.indexing.booleanmodel.ExpressionTree;
+//import domain.indexing.booleanmodel.ExpressionTree;
 import domain.DocumentInfo;
 
 import java.util.ArrayList;
