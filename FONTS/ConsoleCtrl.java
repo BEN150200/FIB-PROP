@@ -361,7 +361,7 @@ public class ConsoleCtrl extends PresentationCtrl{
     }
 
     public void modifyBooleanExpression(){
-        terminalIn.nextLine();
+        //terminalIn.nextLine();
         System.out.println("-Enter the Boolean Expresion Name:");
         String boolExpName = terminalIn.nextLine();
         if(!domain.existsBooleanExpression(boolExpName)) System.out.println("There is not a expression with this name");
@@ -376,7 +376,7 @@ public class ConsoleCtrl extends PresentationCtrl{
     }
 
     public void addBooleanExpresion() {
-        terminalIn.nextLine();
+        //terminalIn.nextLine();
         System.out.println("-Enter the Boolean Expresion Name:");
         String boolExpName = terminalIn.nextLine();
         if(domain.existsBooleanExpression(boolExpName)) System.out.println("There is already a expression with this name");
@@ -651,7 +651,7 @@ public class ConsoleCtrl extends PresentationCtrl{
 
         ArrayList<DocumentInfo> docsInfo = new ArrayList<>();
 
-        Integer command = getInputAsInt(0, 1, "Enter an option number:");
+        Integer command = getInputAsInt(1,2, "Enter an option number:");
         if (command == 1) {
             System.out.println("-Enter the Boolean Expresion Name:");
             String boolExpName = terminalIn.nextLine();

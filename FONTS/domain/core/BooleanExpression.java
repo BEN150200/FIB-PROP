@@ -92,17 +92,19 @@ public class BooleanExpression{
         if(x[0]=='{'){
             int count=0;
             for(char c: x){
+                if (count>=2) return true;
                 if(c=='}' |c == '{' ) {
                     count++;
                 }
-                if (count>2) return true;
+                
             }
         }
         else if(x[0]=='"'){
             int count = 0;
             for(char c: x){
+                if(count>=2) return true;
                 if(c=='"') count++;
-                if(count>2) return true;
+               
             }
         }
         else{
