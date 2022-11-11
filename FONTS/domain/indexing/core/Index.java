@@ -173,7 +173,10 @@ public class Index<DocId> {
         
         // remove all terms of previous docId, if any
         var removedInverted = this.directIndex.get(docId).map(
-            doc -> doc.keySet().foldLeft(this.invertedIndex, HashMap::remove)
+            doc -> doc.keySet().foldLeft(
+                this.invertedIndex,
+                (inverted, term) -> Maps.nestedRemove(term, docId, inverted)
+            )
         )
         .getOrElse(this.invertedIndex);
                         
@@ -199,6 +202,10 @@ public class Index<DocId> {
         return this.insert(docIdContent._1, docIdContent._2);
     }
 
+    public Index<DocId> insert(DocId docId, String... content) {
+        return this.insert(docId, Stream.of(content));
+    }
+
     /**
      * 
      * @param docId
@@ -207,10 +214,21 @@ public class Index<DocId> {
     public Index<DocId> remove(DocId docId) {
         return this.contains(docId)
             ? new Index<DocId>(
-                this.invertedIndex.removeAll(this.terms(docId).get()),
+                this.directIndex.get(docId).map(
+                    doc -> doc.keySet().foldLeft(
+                        this.invertedIndex,
+                        (inverted, term) -> Maps
+                            .nestedRemove(term, docId, inverted)
+                    )
+                ).getOrElse(this.invertedIndex),
                 this.directIndex.remove(docId)
             )
             : this;
+    }
+
+    @Override
+    public String toString() {
+        return Index.print(this);
     }
 
     public static <DocId> String print(Index<DocId> index) {
