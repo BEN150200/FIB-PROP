@@ -1,4 +1,4 @@
-package tests;
+package tests.domain.indexing.vectorial.VectorialModel;
 
 import static org.junit.Assert.assertEquals;
 

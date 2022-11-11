@@ -1,4 +1,4 @@
-package tests;
+package tests.domain.indexing.core.IndexingController;
 
 import java.nio.charset.Charset;
 import java.nio.file.Files;

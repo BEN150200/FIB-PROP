@@ -4,17 +4,35 @@ import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import domain.preprocessing.Tokenizer;
 import io.vavr.Tuple;
 import io.vavr.Tuple2;
+import io.vavr.collection.HashMap;
 import io.vavr.collection.Stream;
 import io.vavr.control.Either;
 import io.vavr.control.Try;
 
 public class Parsing {
+
+    /**
+     * 
+     * @param idContents
+     * @return
+     */
+    public static HashMap<String, Iterable<String>> makeCollection(String... idContents) {
+        return Stream.of(idContents).grouped(2).foldLeft(
+            HashMap.<String, String>empty(),
+            (map, idContent) -> map.put(idContent.get(0), idContent.get(1))
+        )
+        .mapValues(Tokenizer::tokenize)
+        .mapValues(Arrays::asList);
+    }
+
+
     static public Tuple2<String, ? extends Iterable<String>> parseDocument(Path filepath) {
         return Try.of(() -> Files.readString(filepath, Charset.forName("ISO-8859-1")))
             .map(Tokenizer::tokenize)

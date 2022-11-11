@@ -7,8 +7,6 @@ import io.vavr.Tuple;
 import io.vavr.Tuple2;
 import io.vavr.collection.HashMap;
 import io.vavr.collection.HashSet;
-import io.vavr.collection.List;
-import io.vavr.collection.Map;
 import io.vavr.collection.Set;
 import io.vavr.collection.Stream;
 import io.vavr.control.Option;
@@ -18,7 +16,7 @@ public class Index<DocId> {
     public HashMap<String, HashMap<DocId, HashSet<Integer>>> invertedIndex; // String -> docId -> [position]
     public HashMap<DocId, HashMap<String, HashSet<Integer>>> directIndex;   // docId -> String -> [position]
     
-    private Index(HashMap<String, HashMap<DocId, HashSet<Integer>>> invertedIndex, HashMap<DocId, HashMap<String, HashSet<Integer>>> directIndex) {
+    public Index(HashMap<String, HashMap<DocId, HashSet<Integer>>> invertedIndex, HashMap<DocId, HashMap<String, HashSet<Integer>>> directIndex) {
         this.invertedIndex = invertedIndex;
         this.directIndex = directIndex;
     }
@@ -55,7 +53,7 @@ public class Index<DocId> {
                 )
             ))
         )
-        .values().reduce(Maps::nestedUnionMerge);
+        .values().reduceOption(Maps::nestedUnionMerge).getOrElse(HashMap::empty);
 
         return new Index<DocId>(invertedIndex, directIndex);
     }
@@ -214,11 +212,11 @@ public class Index<DocId> {
             )
             : this;
     }
-    
+
     public static <DocId> String print(Index<DocId> index) {
         return "InvertedIndex {\n" +
             index.invertedIndex.mkString("\t", "\n\t", "") +
-            "},\nDirectIndex {\n" +
+            "\n},\nDirectIndex {\n" +
             index.directIndex.mkString("\t", "\n\t", "") +
             "\n}";
     }
