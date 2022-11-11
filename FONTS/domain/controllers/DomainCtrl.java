@@ -173,14 +173,7 @@ public class DomainCtrl {
     /**
      * Search Elements
     **/
-    public ArrayList<DocumentInfo> getAllDocumentsInfo() {
-        ArrayList<Document> docs = DocumentCtrl.getInstance().getAllDocuments();
-        ArrayList<DocumentInfo> info = new ArrayList<DocumentInfo>();
-        for (Document d : docs) {
-            info.add(d.getInfo());
-        }
-        return info;
-    }
+    
 
     public ArrayList<String> getAllTitles(String titleName) {
         if (titleName.isEmpty()) return TitleCtrl.getInstance().getAllTitlesNames();
@@ -330,7 +323,16 @@ public class DomainCtrl {
         return BooleanExpressionCtrl.getInstance().createExpressionTree(boolExp);
     }
 
-    /*public ArrayList<Integer> booleanQueryDocs(ExpressionTreeNode root){
+    /*public ArrayList<DocumentInfo> booleanQuery(ExpressionTreeNode root){
         return IndexingController.getInstance().booleanQueryDocs(root);
-    }*/
+    } */
+
+    public ArrayList<DocumentInfo> getAllDocumentsInfo() {
+        ArrayList<Document> docs = DocumentCtrl.getInstance().getAllDocuments();
+        ArrayList<DocumentInfo> info = new ArrayList<DocumentInfo>();
+        for (Document d : docs) {
+            info.add(d.getInfo());
+        }
+        return info;
+    }
 }
