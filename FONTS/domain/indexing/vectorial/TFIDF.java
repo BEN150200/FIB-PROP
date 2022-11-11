@@ -4,7 +4,6 @@ package domain.indexing.vectorial;
 import helpers.Maths;
 import io.vavr.Tuple;
 import io.vavr.collection.HashMap;
-import io.vavr.control.Option;
 import io.vavr.control.Try;
 
 public class TFIDF {

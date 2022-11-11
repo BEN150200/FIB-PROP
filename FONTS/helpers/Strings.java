@@ -1,8 +1,14 @@
 package helpers;
 
+import java.util.function.Function;
+
 import io.vavr.collection.Stream;
 
 public class Strings {
+    public static Function<String, String[]> split(String regex) {
+        return s -> s.split(regex);
+    }
+
     public static boolean isLowerCase(char c) {
         return (c >= 'a' && c <= 'z');
     }

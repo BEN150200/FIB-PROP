@@ -1,4 +1,4 @@
-package tests;
+package tests.domain.core;
 
 import java.util.*;
 
