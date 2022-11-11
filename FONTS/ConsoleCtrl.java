@@ -1,7 +1,7 @@
 import domain.controllers.DomainCtrl;
 import domain.controllers.SearchCtrl;
-import domain.core.ExpressionTreeNode;
-import domain.indexing.booleanmodel.ExpressionTree;
+//import domain.core.ExpressionTreeNode;
+//import domain.indexing.booleanmodel.ExpressionTree;
 import domain.DocumentInfo;
 
 import java.util.ArrayList;
@@ -307,6 +307,39 @@ public class ConsoleCtrl extends PresentationCtrl{
         }
     }
 
+    private void searchMenu() {
+        while (true) {
+
+        printToConsole(searchMenu);
+        Integer command = getInputAsInt(0, 5, "Enter an option number:");
+        switch (command) {
+            case 1:
+                authorsSearch();
+                break;
+            case 2:
+                titlesSearch();
+                break;
+            case 3:
+                allDocumentSearch();
+                break;
+            case 4:
+                //System.out.println("Cerca per expressio booleana");
+                booleanExpressionSearch();
+                break;
+            case 5:
+                System.out.println("Cerca per query");
+                //searchDocumentsByQuery();
+                break;
+            case 0:
+                return;
+        }
+    }
+}
+
+
+    /**
+     * Boolean Expresion Manager
+    **/
     public void searchAllBooleanExpresions() {
         System.out.println("____Boolean Expresions____");
         HashMap<String,String> expresions = domain.getAllBooleanExpresions();
@@ -358,126 +391,7 @@ public class ConsoleCtrl extends PresentationCtrl{
     }
 
 
-
-
-
-
-
-
-
-
-
     
-    private void searchMenu() {
-            while (true) {
-
-            printToConsole(searchMenu);
-            Integer command = getInputAsInt(0, 5, "Enter an option number:");
-            switch (command) {
-                case 1:
-                    authorsSearch();
-                    break;
-                case 2:
-                    titlesSearch();
-                    break;
-                case 3:
-                    allDocumentSearch();
-                    break;
-                case 4:
-                    //System.out.println("Cerca per expressio booleana");
-                    searchDocumentByBooleanExpression();
-                    break;
-                case 5:
-                    System.out.println("Cerca per query");
-                    //searchDocumentsByQuery();
-                    break;
-                case 0:
-                    return;
-            }
-        }
-    }
-
-    private ArrayList<String> sortStringList(ArrayList<String> l){
-        printToConsole(sortingArrayMenu);
-        Integer command = getInputAsInt(0, 2, "Enter an option number:");
-        switch (command) {
-            case 1:
-                l.sort(Comparator.naturalOrder());
-                break;
-            case 2:
-                l.sort(Comparator.reverseOrder());
-                break;
-            case 0:
-                break;
-            }
-        return l;
-    }
-
-    private ArrayList<DocumentInfo> sortDocumentInfoList(ArrayList<DocumentInfo> docInfos){
-        printToConsole(sortingDocumentsMenu);
-        Integer command = getInputAsInt(0, 8, "Enter an option number:");
-        switch (command) {
-            case 1:
-                docInfos.sort((doc1, doc2)->doc1.title().compareTo(doc2.title()));
-                break;
-            case 2:
-                docInfos.sort((doc1, doc2)->doc2.title().compareTo(doc1.title()));
-                break;
-            case 3:
-                docInfos.sort((doc1, doc2)->doc1.author().compareTo(doc2.author()));
-                break;
-            case 4:
-                docInfos.sort((doc1, doc2)->doc2.author().compareTo(doc1.author()));
-                break;
-            case 5:
-                docInfos.sort((doc1, doc2)->doc1.creationDate().compareTo(doc2.creationDate()));
-                break;
-            case 6:
-                docInfos.sort((doc1, doc2)->doc2.creationDate().compareTo(doc1.creationDate()));
-                break;
-            case 7:
-                docInfos.sort((doc1, doc2)->doc1.modificationDate().compareTo(doc2.modificationDate()));
-                break;
-            case 8:
-                docInfos.sort((doc1, doc2)->doc2.modificationDate().compareTo(doc1.modificationDate()));
-                break;
-            case 0:
-                break;
-            }
-        return docInfos;
-    }
-
-
-    private void similarDocumentsSearch(String titleName, String authorName){
-        int k = getInputAsInt(0, 100,"Enter the number of documents showed:");
-        ArrayList<DocumentInfo> similarDocuments = new ArrayList<DocumentInfo>(SearchCtrl.getInstance().searchSimilarDocuments(titleName, authorName, k));
-        while(true){
-            printToConsole(similarDocumentsHeader);
-            for(int i = 0; i < similarDocuments.size(); ++i){
-                System.out.println((i + 1) + " - " + similarDocuments.get(i).toString());
-            }
-            printToConsole(similarDocumentsOptions);
-            Integer command = getInputAsInt(0, 2, "Enter an option number:");
-            switch (command) {
-                case 1:
-                    similarDocuments = sortDocumentInfoList(similarDocuments);
-                    break;
-                case 2:
-                    if(similarDocuments.size() > 0){
-                        int docNumber = getInputAsInt(1, similarDocuments.size(), "Enter the number of the document:");
-                        currentTitle = similarDocuments.get(docNumber - 1).title();
-                        currentAuthor = similarDocuments.get(docNumber - 1).author();
-                        openDocument(currentTitle, currentAuthor);
-                    } else {
-                        System.out.println("There are no documents to open");
-                    }
-                    break;
-                case 0:
-                    return;
-            }
-        }
-    }
-
     public ArrayList<String> getContentByInput(){
         System.out.println("Enter the content of the document (enter *end* as the last line to finish): ");
         System.out.println("");
@@ -695,36 +609,80 @@ public class ConsoleCtrl extends PresentationCtrl{
         }
     }
 
+    /**
+     * Complex Search
+    **/
+    private void similarDocumentsSearch(String titleName, String authorName){
+        int k = getInputAsInt(0, 100,"Enter the number of documents showed:");
+        ArrayList<DocumentInfo> similarDocuments = domain.getInstance().similarDocumentsSearch(titleName, authorName, k);
+        while(true){
+            printToConsole(similarDocumentsHeader);
+            for(int i = 0; i < similarDocuments.size(); ++i){
+                System.out.println((i + 1) + " - " + similarDocuments.get(i).toString());
+            }
+            printToConsole(similarDocumentsOptions);
+            Integer command = getInputAsInt(0, 2, "Enter an option number:");
+            switch (command) {
+                case 1:
+                    similarDocuments = sortDocumentInfoList(similarDocuments);
+                    break;
+                case 2:
+                    if(similarDocuments.size() > 0){
+                        int docNumber = getInputAsInt(1, similarDocuments.size(), "Enter the number of the document:");
+                        currentTitle = similarDocuments.get(docNumber - 1).title();
+                        currentAuthor = similarDocuments.get(docNumber - 1).author();
+                        openDocument(currentTitle, currentAuthor);
+                    } else {
+                        System.out.println("There are no documents to open");
+                    }
+                    break;
+                case 0:
+                    return;
+            }
+        }
+    }
+    
 
     //Copiar a partir d'aqui
-    public void searchDocumentByBooleanExpression(){
-         System.out.println("_______________________Options________________________" );
-         System.out.println("   1 - Use a saved expression");
-         System.out.println("   2 - New expression");
-         Integer command = getInputAsInt(0, 1, "Enter an option number:");
-         ExpressionTreeNode root;
-         if(command==1){
+    public void booleanExpressionSearch(){
+        System.out.println("_______________________Options________________________" );
+        System.out.println("   1 - Use a saved expression");
+        System.out.println("   2 - New expression");
+
+        ArrayList<DocumentInfo> docsInfo = new ArrayList<>();
+
+        Integer command = getInputAsInt(0, 1, "Enter an option number:");
+        if (command == 1) {
             System.out.println("-Enter the Boolean Expresion Name:");
             String boolExpName = terminalIn.nextLine();
-             if(!domain.existsBooleanExpression(boolExpName)){
+            docsInfo = domain.storedBooleanExpressionSearch(boolExpName);
+            
+            if (docsInfo == null) {
                 System.out.println("There is not a expression with this name");
                 return;
-             }
-             else{
-               root = domain.getSavedExpressionTree(boolExpName);
-             }
+            }
+        }
 
-         }
-         else{
+        else {
             System.out.println("-Enter the Boolean Expresion:");
             String boolExp = terminalIn.nextLine();
-            root = domain.createExpressionTree(boolExp);
-            if(root==null) {
+            docsInfo = domain.tempBooleanExpressionSearch(boolExp);
+            if (docsInfo == null) {
                 System.out.println("Invalid expression");
                 return;
             }
-         }
-
+        }
+        
+        if (docsInfo.isEmpty()) {
+            System.out.println("There is not a Sentence in all the Documents that satisfy this expresion");
+            return;
+        }
+        else {
+            printToConsole(allDocumentsHeader);
+                for(int i = 0; i < docsInfo.size(); ++i){
+                    System.out.println((i + 1) + " - " + docsInfo.get(i).toString());
+                }
+        }
          /*ArrayList<DocumentInfo> documentsInfo = domain.booleanQueryDocs(root);
 
         while(true){
@@ -749,5 +707,59 @@ public class ConsoleCtrl extends PresentationCtrl{
                     return;
             }
         }*/
+    }
+
+
+    /**
+     * Sorting functions
+    **/
+    private ArrayList<String> sortStringList(ArrayList<String> l){
+        printToConsole(sortingArrayMenu);
+        Integer command = getInputAsInt(0, 2, "Enter an option number:");
+        switch (command) {
+            case 1:
+                l.sort(Comparator.naturalOrder());
+                break;
+            case 2:
+                l.sort(Comparator.reverseOrder());
+                break;
+            case 0:
+                break;
+            }
+        return l;
+    }
+
+    private ArrayList<DocumentInfo> sortDocumentInfoList(ArrayList<DocumentInfo> docInfos){
+        printToConsole(sortingDocumentsMenu);
+        Integer command = getInputAsInt(0, 8, "Enter an option number:");
+        switch (command) {
+            case 1:
+                docInfos.sort((doc1, doc2)->doc1.title().compareTo(doc2.title()));
+                break;
+            case 2:
+                docInfos.sort((doc1, doc2)->doc2.title().compareTo(doc1.title()));
+                break;
+            case 3:
+                docInfos.sort((doc1, doc2)->doc1.author().compareTo(doc2.author()));
+                break;
+            case 4:
+                docInfos.sort((doc1, doc2)->doc2.author().compareTo(doc1.author()));
+                break;
+            case 5:
+                docInfos.sort((doc1, doc2)->doc1.creationDate().compareTo(doc2.creationDate()));
+                break;
+            case 6:
+                docInfos.sort((doc1, doc2)->doc2.creationDate().compareTo(doc1.creationDate()));
+                break;
+            case 7:
+                docInfos.sort((doc1, doc2)->doc1.modificationDate().compareTo(doc2.modificationDate()));
+                break;
+            case 8:
+                docInfos.sort((doc1, doc2)->doc2.modificationDate().compareTo(doc1.modificationDate()));
+                break;
+            case 0:
+                break;
+            }
+        return docInfos;
     }
 }

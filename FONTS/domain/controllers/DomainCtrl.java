@@ -307,6 +307,20 @@ public class DomainCtrl {
         }
     }
     
+    public ArrayList<DocumentInfo> similarDocumentsSearch(String titleName, String authorName, int k) {
+        return SearchCtrl.getInstance().similarDocumentsSearch(titleName, authorName, k);
+    }
+
+    public ArrayList<DocumentInfo> storedBooleanExpressionSearch (String boolExpName) {
+        return SearchCtrl.getInstance().storedBooleanExpressionSearch(boolExpName);
+    }
+
+    public ArrayList<DocumentInfo> tempBooleanExpressionSearch (String boolExp) {
+        return SearchCtrl.getInstance().tempBooleanExpressionSearch(boolExp);
+    }
+
+
+
     // Copiar a partir d'aqui 
     public ExpressionTreeNode getSavedExpressionTree(String boolExpName){
         return BooleanExpressionCtrl.getInstance().getSavedExpressionTree(boolExpName);

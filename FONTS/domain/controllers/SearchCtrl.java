@@ -1,5 +1,11 @@
 package domain.controllers;
 
+import domain.DocumentInfo;
+import domain.core.BooleanExpression;
+import domain.core.Document;
+import domain.core.ExpressionTreeNode;
+import domain.indexing.core.IndexingController;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -8,8 +14,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.Map.Entry;
 
-import domain.DocumentInfo;
-import domain.indexing.core.IndexingController;
+import io.vavr.collection.HashSet;
 import io.vavr.control.Either;
 
 public class SearchCtrl {
@@ -30,7 +35,7 @@ public class SearchCtrl {
         return instance;
     }
 
-    public List<DocumentInfo> searchSimilarDocuments(String titleName, String authorName, Integer k) {
+    public ArrayList<DocumentInfo> similarDocumentsSearch(String titleName, String authorName, Integer k) {
         Integer docId = DocumentCtrl.getInstance().getDocumentID(titleName, authorName);
         if(docId != null) {
             Either<String, HashMap<Integer, Double>> similar = indexingCtrl.querySimilarDocuments(docId);
@@ -59,7 +64,7 @@ public class SearchCtrl {
                         }
                     }
                 }
-                List<DocumentInfo> docInfo = new ArrayList<>(); 
+                ArrayList<DocumentInfo> docInfo = new ArrayList<>(); 
                 sortedMap.forEach((id, value) -> {
                     docInfo.add(DocumentCtrl.getInstance().getDocument(id).getInfo());
                 });
@@ -71,8 +76,35 @@ public class SearchCtrl {
         return null;
     }
 
-    public Set<Integer> booleanQuery(String boolExpName) {
-        return null;
+    public ArrayList<DocumentInfo> storedBooleanExpressionSearch (String boolExpName) {
+        if(BooleanExpressionCtrl.getInstance().existsBooleanExpression(boolExpName)) {
+            ExpressionTreeNode root = BooleanExpressionCtrl.getInstance().getSavedExpressionTree(boolExpName);
+            return booleanExpressionSearch(root);
+        }
+        else return null;
+    }
+
+    public ArrayList<DocumentInfo> tempBooleanExpressionSearch (String boolExp) {
+        ExpressionTreeNode root = BooleanExpressionCtrl.getInstance().createExpressionTree(boolExp);
+        if (root != null) {
+            return booleanExpressionSearch(root);
+        }
+        else return null;
+    }
+
+    private ArrayList<DocumentInfo> booleanExpressionSearch(ExpressionTreeNode root) {
+        HashSet<Integer> sentencesID = indexingCtrl.booleanQuery(root);
+        java.util.HashSet<Document> docs = new java.util.HashSet<Document>();
+
+        sentencesID.forEach(sentenceID -> {
+            docs.addAll(DocumentCtrl.getInstance().getDocuments(
+                SentenceCtrl.getInstance().sentenceById(sentenceID).getAllDocsID()));
+        });
+        ArrayList<DocumentInfo> docsInfo = new ArrayList<>();
+        docs.forEach(doc -> {
+            docsInfo.add(doc.getInfo());
+        });
+        return docsInfo;
     }
 
 

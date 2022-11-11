@@ -9,7 +9,7 @@ import domain.DocumentInfo;
 import domain.controllers.SentenceCtrl;
 import domain.core.ExpressionTreeNode;
 import domain.indexing.booleanmodel.BooleanModel;
-import domain.indexing.booleanmodel.ExpressionTree;
+//import domain.indexing.booleanmodel.ExpressionTree;
 import domain.indexing.vectorial.VectorialModel;
 import helpers.Maths;
 import helpers.Parsing;
@@ -71,6 +71,12 @@ public class IndexingController<DocId, SentenceId> {
     }
 
 
+
+    public HashSet<SentenceId> booleanQuery(ExpressionTreeNode root) {
+        return this.solveQuery(root);
+    }
+
+    //TODO: posiblement s'hagi de moure al BooleanModel, ja que el Controller no hauria de resoldre
     private HashSet<SentenceId> solveQuery(ExpressionTreeNode root) {
         var value = root.getValue();
         switch (value.charAt(0)) {
@@ -89,23 +95,6 @@ public class IndexingController<DocId, SentenceId> {
             default:
                 return this.booleanModel.queryTerm(value);
         }
-    }
-    
-    public ArrayList <Integer> booleanQueryDocs(ExpressionTreeNode root){
-        HashSet<SentenceId> sentences = booleanQuery(root);
-        ArrayList<Integer> docs = new ArrayList<Integer>();
-
-        for(SentenceId sent : sentences){
-            Set <Integer> doc = SentenceCtrl.getInstance().sentenceById(3).getAllDocsID();//TODO ...................................................................
-             for(int document : doc){
-                docs.add(document);
-             }
-        } 
-        return docs;
-    }
-
-    public HashSet<SentenceId> booleanQuery(ExpressionTreeNode root) {
-        return this.solveQuery(root);
     }
     
     public Either<String, HashMap<DocId, Double>> weightedQuery(String query) {
