@@ -597,7 +597,7 @@ public class ConsoleCtrl extends PresentationCtrl{
                         break;
                     case 2:
                         int selectedDocument = getInputAsInt(1, documentsInfo.size(), "Enter a document number:");
-                        DocumentInfo doc = documentsInfo.get(selectedDocument);
+                        DocumentInfo doc = documentsInfo.get(selectedDocument - 1);
                         currentAuthor = doc.author();
                         currentTitle = doc.title();
                         openDocument(currentTitle, currentAuthor);
