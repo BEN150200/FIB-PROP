@@ -2,7 +2,9 @@ package domain.controllers;
 
 import domain.core.Author;
 import domain.core.Document;
+import domain.core.ExpressionTreeNode;
 import domain.core.Title;
+import domain.indexing.core.IndexingController;
 import domain.core.Sentence;
 
 import domain.DocumentInfo;
@@ -191,7 +193,7 @@ public class DomainCtrl {
     }
 
     public HashMap<String,String> getAllBooleanExpresions() {
-        return null;
+        return BooleanExpressionCtrl.getInstance().getSavedExpressionsNames();
     }
 
     public ArrayList<String> getAllAuthorTitles(String authorName) {
@@ -305,5 +307,16 @@ public class DomainCtrl {
         }
     }
     
-    
+    // Copiar a partir d'aqui 
+    public ExpressionTreeNode getSavedExpressionTree(String boolExpName){
+        return BooleanExpressionCtrl.getInstance().getSavedExpressionTree(boolExpName);
+    }
+
+    public ExpressionTreeNode createExpressionTree(String boolExp){
+        return BooleanExpressionCtrl.getInstance().createExpressionTree(boolExp);
+    }
+
+    /*public ArrayList<Integer> booleanQueryDocs(ExpressionTreeNode root){
+        return IndexingController.getInstance().booleanQueryDocs(root);
+    }*/
 }

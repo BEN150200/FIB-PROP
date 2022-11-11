@@ -1,5 +1,7 @@
 import domain.controllers.DomainCtrl;
 import domain.controllers.SearchCtrl;
+import domain.core.ExpressionTreeNode;
+import domain.indexing.booleanmodel.ExpressionTree;
 import domain.DocumentInfo;
 
 import java.util.ArrayList;
@@ -308,8 +310,10 @@ public class ConsoleCtrl extends PresentationCtrl{
     public void searchAllBooleanExpresions() {
         System.out.println("____Boolean Expresions____");
         HashMap<String,String> expresions = domain.getAllBooleanExpresions();
-        for (String string : expresions.keySet()) {
-            System.out.println(string + "    " + expresions.get(string)); 
+        if(expresions!=null){
+            for (String string : expresions.keySet()) {
+                System.out.println(string + "    " + expresions.get(string)); 
+            }
         }
     }
 
@@ -380,7 +384,7 @@ public class ConsoleCtrl extends PresentationCtrl{
                     allDocumentSearch();
                     break;
                 case 4:
-                    System.out.println("Cerca per expressio booleana");
+                    //System.out.println("Cerca per expressio booleana");
                     searchDocumentByBooleanExpression();
                     break;
                 case 5:
@@ -691,34 +695,59 @@ public class ConsoleCtrl extends PresentationCtrl{
         }
     }
 
+
+    //Copiar a partir d'aqui
     public void searchDocumentByBooleanExpression(){
-         //System.out.println("");
+         System.out.println("_______________________Options________________________" );
+         System.out.println("   1 - Use a saved expression");
+         System.out.println("   2 - New expression");
          Integer command = getInputAsInt(0, 1, "Enter an option number:");
+         ExpressionTreeNode root;
          if(command==1){
             System.out.println("-Enter the Boolean Expresion Name:");
             String boolExpName = terminalIn.nextLine();
              if(!domain.existsBooleanExpression(boolExpName)){
-                printCmd("There is not a expression with this name");
+                System.out.println("There is not a expression with this name");
                 return;
              }
              else{
-                ExpressionTreeNode root = domain.getSavedExpressionTree(boolExpName);
+               root = domain.getSavedExpressionTree(boolExpName);
              }
 
          }
          else{
             System.out.println("-Enter the Boolean Expresion:");
             String boolExp = terminalIn.nextLine();
-            ExpressionTreeNode root = domain.createExpressionTree(boolExp);
+            root = domain.createExpressionTree(boolExp);
             if(root==null) {
-                printCmd("Invalid expression");
+                System.out.println("Invalid expression");
                 return;
             }
          }
 
-        HashSet<DocumentsId> docs = IndexingController.getInstance().booleanQueryDocs(root);
-        for(SentenceId doc : docs){
-           
-        }
+         /*ArrayList<DocumentInfo> documentsInfo = domain.booleanQueryDocs(root);
+
+        while(true){
+            printToConsole(allDocumentsHeader);
+            for(int i = 0; i < documentsInfo.size(); ++i){
+                System.out.println((i + 1) + " - " + documentsInfo.get(i).toString());
+            }
+            printToConsole(optionStrings);
+            command = getInputAsInt(0, 2, "Enter an option number:");
+            switch(command){
+                case 1:
+                    documentsInfo = sortDocumentInfoList(documentsInfo);
+                    break;
+                case 2:
+                    int selectedDocument = getInputAsInt(1, documentsInfo.size(), "Enter a document number:");
+                    DocumentInfo doc = documentsInfo.get(selectedDocument);
+                    currentAuthor = doc.author();
+                    currentTitle = doc.title();
+                    openDocument(currentTitle, currentAuthor);
+                    break;
+                case 0:
+                    return;
+            }
+        }*/
     }
 }

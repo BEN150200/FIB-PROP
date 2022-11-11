@@ -1,8 +1,12 @@
 package domain.indexing.core;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Map;
+import java.util.Set;
 
+import domain.DocumentInfo;
+import domain.controllers.SentenceCtrl;
 import domain.core.ExpressionTreeNode;
 import domain.indexing.booleanmodel.BooleanModel;
 import domain.indexing.booleanmodel.ExpressionTree;
@@ -87,13 +91,19 @@ public class IndexingController<DocId, SentenceId> {
         }
     }
     
-    public HashSet<DocId> booleanQueryDocs(ExpressionTreeNode root){
+    public ArrayList <Integer> booleanQueryDocs(ExpressionTreeNode root){
         HashSet<SentenceId> sentences = booleanQuery(root);
+        ArrayList<Integer> docs = new ArrayList<Integer>();
+
         for(SentenceId sent : sentences){
-            
+            Set <Integer> doc = SentenceCtrl.getInstance().sentenceById(3).getAllDocsID();//TODO ...................................................................
+             for(int document : doc){
+                docs.add(document);
+             }
         } 
-        return null;
+        return docs;
     }
+
     public HashSet<SentenceId> booleanQuery(ExpressionTreeNode root) {
         return this.solveQuery(root);
     }
