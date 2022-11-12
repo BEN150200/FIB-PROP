@@ -113,7 +113,6 @@ public class IndexingController<DocId, SentenceId> {
                     )
                 )
             )
-            .map(Maths::normalized)
             .map(vectorialModel::querySimilars)
             .mapLeft(Strings::joinEndLine);
     }

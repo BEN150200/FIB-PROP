@@ -235,7 +235,5 @@ public class TestIndex {
         var time = Duration.between(start, end);
 
         System.out.println("Constructed in " + time.toMillis() + "ms");
-
-        System.out.println(index);
     }
 }

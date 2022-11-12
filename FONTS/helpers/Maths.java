@@ -32,8 +32,16 @@ public class Maths {
         );
     }
 
+    /**
+     * 
+     * @param <T>
+     * @param vector
+     * @return normalized vector (or 0 vector if vector norm is 0)
+     */
     public static <T> HashMap<T, Double> normalized(HashMap<T, Double> vector) {
         var norm = Maths.norm(vector);
-        return vector.mapValues(Maths.divideBy(norm));
+        return norm > 0
+            ? vector.mapValues(Maths.divideBy(norm))
+            : vector;
     }
 }

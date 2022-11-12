@@ -93,7 +93,7 @@ public class VectorialModel<DocId> {
 
         var dirtyDocs =
             Sets.unionFold(removedTerms, _index::documents).union(
-            Sets.unionFold(addedTerms, newIndex::documents)
+            Sets.unionFold(addedTerms, newIndex::documents).add(docId)
         );
 
         var newTfidfVectors = dirtyDocs.foldLeft(
@@ -151,21 +151,22 @@ public class VectorialModel<DocId> {
 
     /**
      * 
-     * @param termsWeights
+     * @param termsWeights a (not necessarily normalized) terms+weights vector
      * @return mapping doc_id -> cosine_similarity for all documents with similarity > 0 with the given (term, tfidf weight) vector
      */
-    public HashMap<DocId, Double> querySimilars(Map<String, Double> termsWeights) {
-        return termsWeights.map(
-            (term, weight) -> Tuple.of(term, Maps.fromTraversable(
-                _index.documents(term),
-                docId -> Maps.nestedGet(_tfidfVectors, docId, term)*weight
-            ))
-        )
-        .values()
-        .foldLeft(
-            HashMap.<DocId, Double>empty(),
-            Maps::addingMerge
-        );
+    public HashMap<DocId, Double> querySimilars(HashMap<String, Double> termsWeights) {
+        return Maths.normalized(termsWeights)
+            .map(
+                (term, weight) -> Tuple.of(term, Maps.fromTraversable(
+                    _index.documents(term),
+                    docId -> Maps.nestedGet(_tfidfVectors, docId, term)*weight
+                ))
+            )
+            .values()
+            .foldLeft(
+                HashMap.<DocId, Double>empty(),
+                Maps::addingMerge
+            );
     }
 
     @Override
