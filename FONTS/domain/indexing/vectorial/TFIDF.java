@@ -21,6 +21,7 @@ public class TFIDF {
             term, 
             (frequency / (double) maxFrequency) * Maths.log2(documentsCount / (double) documentFrequencies.get(term).get())
         )))
+        .map(Maths::normalized)
         .getOrElse(HashMap::empty);
     }
 }

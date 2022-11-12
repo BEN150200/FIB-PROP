@@ -153,7 +153,7 @@ public class TestIndex {
             )
         );
 
-        System.out.println(Index.print(replaced));
+        assertEquals(replacedExpected, replaced);
     }
 
     @Test
