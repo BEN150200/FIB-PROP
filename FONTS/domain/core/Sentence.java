@@ -1,6 +1,7 @@
 package domain.core;
 
 import domain.controllers.SearchCtrl;
+import domain.controllers.SentenceCtrl;
 import domain.preprocessing.TokenFilter;
 import domain.preprocessing.Tokenizer;
 
@@ -10,7 +11,7 @@ import java.util.Optional;
 import java.util.Set;
 
 public class Sentence {
-    private String sentence;
+    protected String sentence;
     //private ArrayList<String> words = new ArrayList<String>();
     private Set<Integer> documents = new HashSet<Integer>();
     private ArrayList<String> tokens = new ArrayList<>();
@@ -20,6 +21,16 @@ public class Sentence {
     
     public Sentence(String p) {
         sentence = p;
+        SentenceCtrl.getInstance().addSentence(this);
+        compute();
+    }
+
+    public Sentence() {
+    }
+
+    public void delete() {
+        SentenceCtrl.getInstance().deleteSentence(sentence);
+        SearchCtrl.getInstance().removeSentence(id);
     }
 
     /**
@@ -63,6 +74,10 @@ public class Sentence {
             return true;
         }
         return false;
+    }
+
+    protected void setSentence(String s) {
+        sentence = s;
     }
 
     public void setID(Integer sentID) {

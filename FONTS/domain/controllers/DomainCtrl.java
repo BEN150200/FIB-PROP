@@ -42,29 +42,31 @@ public class DomainCtrl {
 
     /**
      * Public Functions
-    **/
+     */
 
     /**
      * Add Elements
-    **/
+     */
+
+    /**
+     * @param titleName The String of the Name of the Title that identifies the new Document
+     * @param authorName The String of the Name of the Author that identifies the new Document
+     * @param content List of the strings of the Document in order of appearance.
+     * @return True if the document is created sucsesfuly, else False.
+     */
     public boolean addDocument(String titleName, String authorName, List<String> content) {
         if (!DocumentCtrl.getInstance().existsDocument(titleName, authorName)) {
+
             Title title = TitleCtrl.getInstance().getTitle(titleName);
             Author author = AuthorCtrl.getInstance().getAuthor(authorName);
             if (title == null) {
                 title = new Title(titleName);
-                TitleCtrl.getInstance().addTitle(title);
             }
             if (author == null) {
                 author = new Author(authorName);
-                AuthorCtrl.getInstance().addAuthor(author);
             }
-            Document doc = new Document(title, author);
-            DocumentCtrl.getInstance().addDocument(doc);
-            Integer ID = doc.getID();
-            title.addDoc(ID);
-            author.addDoc(ID);
 
+            Document doc = new Document(title, author);
             updateDocumentContent(doc, content);
 
             return true;
@@ -72,23 +74,13 @@ public class DomainCtrl {
         return false;
     }
 
-    /*
-    public boolean addTitle(String titleName) {
-        Title t = new Title(titleName);
-        return TitleCtrl.getInstance().addTitle(t);
-    }
-
-    public boolean addAuthor(String authorName) {
-        Author a = new Author(authorName);
-        return AuthorCtrl.getInstance().addAuthor(a);
-    }
-    */
 
     public boolean addBooleanExpresion(String boolExpName, String boolExp) {
         return BooleanExpressionCtrl.getInstance().saveExpression(boolExp, boolExpName);
     }
 
-     public boolean existsBooleanExpression(String boolExpName){
+
+    public boolean existsBooleanExpression(String boolExpName){
         return BooleanExpressionCtrl.getInstance().existsBooleanExpression(boolExpName);
     }
 
@@ -112,14 +104,12 @@ public class DomainCtrl {
             Sentence sentence;
             if(!SentenceCtrl.getInstance().existsSentence(sentenceDoc)) {
                 sentence = new Sentence(sentenceDoc);
-                SentenceCtrl.getInstance().addSentence(sentence);
-                sentence.compute();
             }
             else {
                 sentence = SentenceCtrl.getInstance().getSentence(sentenceDoc);
             }
+            
             doc.addSentence(sentence);
-            sentence.addDoc(doc.getID());
         }
 
         doc.updateModificationDate();
@@ -138,16 +128,18 @@ public class DomainCtrl {
             Author a = d.getAuthor();
             a.deleteDocument(d.getID());
             if(a.getNbDocuments() == 0){
-                AuthorCtrl.getInstance().deleteAuthor(a.toString());
+                a.delete();
             }
 
             Title t = d.getTitle();
             t.deleteDocument(d.getID());
             if(t.getNbDocuments() == 0){
-                TitleCtrl.getInstance().deleteTitle(t.toString());
+                t.delete();
             }
             
             deleteDocumentContent(d);
+            
+            
             SearchCtrl.getInstance().removeDocument(d.getID());
 
             return true;
@@ -160,8 +152,7 @@ public class DomainCtrl {
             for (Sentence sentence : content) {
                 sentence.deleteDocument(doc.getID());
                 if (sentence.getNbDocuments() == 0) {
-                    SentenceCtrl.getInstance().deleteSentence(sentence.toString());
-                    SearchCtrl.getInstance().removeSentence(sentence.id());
+                    sentence.delete();
                 }
             }
     }
@@ -173,7 +164,6 @@ public class DomainCtrl {
     /**
      * Search Elements
     **/
-    
 
     public ArrayList<String> getAllTitles(String titleName) {
         if (titleName.isEmpty()) return TitleCtrl.getInstance().getAllTitlesNames();
@@ -300,6 +290,17 @@ public class DomainCtrl {
         }
     }
     
+    /**
+     * Complex Search
+     */
+
+    /**
+     * 
+     * @param titleName title that identifies the document
+     * @param authorName author that identifies the document
+     * @param k number of document to be showed
+     * @return Return the k documents more similars to the document identified by titleName and authorName
+     */
     public ArrayList<DocumentInfo> similarDocumentsSearch(String titleName, String authorName, int k) {
         return SearchCtrl.getInstance().similarDocumentsSearch(titleName, authorName, k);
     }
@@ -311,21 +312,6 @@ public class DomainCtrl {
     public ArrayList<DocumentInfo> tempBooleanExpressionSearch (String boolExp) {
         return SearchCtrl.getInstance().tempBooleanExpressionSearch(boolExp);
     }
-
-
-
-    // Copiar a partir d'aqui 
-    public ExpressionTreeNode getSavedExpressionTree(String boolExpName){
-        return BooleanExpressionCtrl.getInstance().getSavedExpressionTree(boolExpName);
-    }
-
-    public ExpressionTreeNode createExpressionTree(String boolExp){
-        return BooleanExpressionCtrl.getInstance().createExpressionTree(boolExp);
-    }
-
-    /*public ArrayList<DocumentInfo> booleanQuery(ExpressionTreeNode root){
-        return IndexingController.getInstance().booleanQueryDocs(root);
-    } */
 
     public ArrayList<DocumentInfo> getAllDocumentsInfo() {
         ArrayList<Document> docs = DocumentCtrl.getInstance().getAllDocuments();

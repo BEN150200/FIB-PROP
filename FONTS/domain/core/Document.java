@@ -1,6 +1,7 @@
 package domain.core;
 
 import domain.DocumentInfo;
+import domain.controllers.DocumentCtrl;
 import domain.controllers.SearchCtrl;
 
 import java.time.*;
@@ -23,29 +24,18 @@ public class Document {
     //private enum Format {TXT, XML, PROP}
     //private Format format;
 
-    /*
-    public Document(int id) {
-        docID = id;
-    }
-
-    public Document(int id, String t, String a, String p) {
-        docID = id;
-        author = new Author(a);
-        title = new Title(t);
-        filePath = p;
-    }
-
-    public Document(String titleName, String authorName, String path) {
-        author = new Author(authorName);
-        title = new Title(titleName);
-    }
-    */
-
     public Document(Title t, Author a) {
         creationDate = LocalDateTime.now();
         modificationDate = creationDate;
         title = t;
         author = a;
+        setDocumentID(DocumentCtrl.getInstance().addDocument(this));
+        title.addDoc(docID);
+        author.addDoc(docID);
+    }
+
+    public void delete() {
+        DocumentCtrl.getInstance().deleteDocument(title.toString(), author.toString());
     }
 
     /**
@@ -108,6 +98,7 @@ public class Document {
 
     public void addSentence(Sentence sentence) {
         sentences.add(sentence);
+        sentence.addDoc(docID);
     }
 
 

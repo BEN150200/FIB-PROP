@@ -1,10 +1,17 @@
 package domain.core;
 
+import domain.controllers.AuthorCtrl;
+
 public class Author extends Sentence{
     //Set<Integer> documents = new HashSet<Integer>();
     
-    public Author(String p) {
-        super(p);
+    public Author(String a) {
+        this.sentence = a;
+        AuthorCtrl.getInstance().addAuthor(this);
+    }
+
+    public void delete() {
+        AuthorCtrl.getInstance().deleteAuthor(this.toString());
     }
 
 }

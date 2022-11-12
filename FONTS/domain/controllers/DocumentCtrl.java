@@ -79,15 +79,13 @@ public class DocumentCtrl {
     /**
      * Setters
     **/
-
-    public boolean addDocument(Document doc) {
+    public Integer addDocument(Document doc) {
         Title t = doc.getTitle();
         Author a = doc.getAuthor();
         ++usedID;
-        doc.setDocumentID(usedID);
         documentsID.put(new Pair<String,String>(t.toString(), a.toString()), usedID);
         documents.put(usedID, doc);
-        return true;
+        return usedID;
     }
 
     public boolean deleteDocument(String titleName, String authorName){
