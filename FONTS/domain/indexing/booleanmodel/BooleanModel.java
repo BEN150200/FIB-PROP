@@ -40,20 +40,6 @@ public class BooleanModel<SentenceId> {
 
     /**
      * 
-     * @param <SentenceId>
-     * @param collection
-     * @return a new BooleanModel describing the given collection of sentences
-     */
-    public static <SentenceId> BooleanModel<SentenceId> of(java.util.Map<SentenceId, java.util.Collection<String>> collection) {
-        return new BooleanModel<SentenceId>(
-            Index.of(
-                HashMap.ofAll(collection)
-            )
-        );
-    }
-
-    /**
-     * 
      * @param sentenceId
      * @param content
      * @return a new BooleanModel with the document inserted. If it previously existed, it is replaced
