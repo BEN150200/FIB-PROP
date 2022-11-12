@@ -642,8 +642,6 @@ public class ConsoleCtrl extends PresentationCtrl{
         }
     }
     
-
-    //Copiar a partir d'aqui
     public void booleanExpressionSearch(){
         System.out.println("_______________________Options________________________" );
         System.out.println("   1 - Use a saved expression");
@@ -679,34 +677,10 @@ public class ConsoleCtrl extends PresentationCtrl{
         }
         else {
             printToConsole(allDocumentsHeader);
-                for(int i = 0; i < docsInfo.size(); ++i){
-                    System.out.println((i + 1) + " - " + docsInfo.get(i).toString());
-                }
+            for(int i = 0; i < docsInfo.size(); ++i){
+                System.out.println((i + 1) + " - " + docsInfo.get(i).toString());
+            }
         }
-         /*ArrayList<DocumentInfo> documentsInfo = domain.booleanQueryDocs(root);
-
-        while(true){
-            printToConsole(allDocumentsHeader);
-            for(int i = 0; i < documentsInfo.size(); ++i){
-                System.out.println((i + 1) + " - " + documentsInfo.get(i).toString());
-            }
-            printToConsole(optionStrings);
-            command = getInputAsInt(0, 2, "Enter an option number:");
-            switch(command){
-                case 1:
-                    documentsInfo = sortDocumentInfoList(documentsInfo);
-                    break;
-                case 2:
-                    int selectedDocument = getInputAsInt(1, documentsInfo.size(), "Enter a document number:");
-                    DocumentInfo doc = documentsInfo.get(selectedDocument);
-                    currentAuthor = doc.author();
-                    currentTitle = doc.title();
-                    openDocument(currentTitle, currentAuthor);
-                    break;
-                case 0:
-                    return;
-            }
-        }*/
     }
 
 
