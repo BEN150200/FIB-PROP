@@ -208,7 +208,7 @@ public class TestVectorialModel {
     
     @Test
     @SuppressWarnings("deprecation")
-    public void testNews() {
+    public void massive() {
         var folderPath = "..\\pracs-caim\\s1\\data\\raw\\20_newsgroups";
         
         var files = Parsing.parseFolder(folderPath);
@@ -233,19 +233,19 @@ public class TestVectorialModel {
             "god", 1.0d
         );
 
-        var results = model.querySimilars(query).toStream()
-        .sortBy(Tuple2::_2)
-        .reverse()
-        .take(5);
+        // var results = model.querySimilars(query).toStream()
+        // .sortBy(Tuple2::_2)
+        // .reverse()
+        // .take(5);
 
-        results.forEach(entry ->
-            System.out.println(
-                "Doc " + entry._1 + " (score=" + entry._2 + ")\n" +
-                "-----------------------------------\n" +
-                Try.of(() -> Files.readString(Paths.get(entry._1), Charset.forName("ISO-8859-1"))).get() +
-                "\n-----------------------------------\n"
-            )
-        );
+        // results.forEach(entry ->
+        //     System.out.println(
+        //         "Doc " + entry._1 + " (score=" + entry._2 + ")\n" +
+        //         "-----------------------------------\n" +
+        //         Try.of(() -> Files.readString(Paths.get(entry._1), Charset.forName("ISO-8859-1"))).get() +
+        //         "\n-----------------------------------\n"
+        //     )
+        // );
     }
     
     //     5 4 1 6 3 2

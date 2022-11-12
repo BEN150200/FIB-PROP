@@ -67,10 +67,6 @@ public class VectorialModel<DocId> {
                 );
     }
 
-    private static <DocId> HashMap<String, Double> computeTfidf(Index<DocId> index, DocId docId) {
-        return computeTfidf(index, docId, (long) index.maxFrequency(docId));
-    }
-
     /**
      * 
      * @param docId id of the document to be inserted
@@ -119,13 +115,14 @@ public class VectorialModel<DocId> {
         var removedTerms = _index.terms(docId).getOrElse(HashSet::empty);
         var dirtyDocuments = removedTerms
             .map(_index::documents)
-            .fold(HashSet.empty(), Set::union);
+            .fold(HashSet.empty(), Set::union)
+            .remove(docId);
 
         var newTfidfVectors = dirtyDocuments.foldLeft(
             _tfidfVectors.remove(docId),
             (tfidfs, dirtyDocId) -> tfidfs.put(
                 dirtyDocId,
-                VectorialModel.computeTfidf(_index, dirtyDocId)
+                VectorialModel.computeTfidf(newIndex, dirtyDocId, newMaxFrequencies.get(dirtyDocId).get())
             )
         );
 
@@ -167,6 +164,20 @@ public class VectorialModel<DocId> {
                 HashMap.<DocId, Double>empty(),
                 Maps::addingMerge
             );
+    }
+
+    @Override
+    public String toString() {
+        return String.format(
+            "Index:\n%s\nMaxFrequencies\n%s\nTFIDF vectors\n%s",
+            _index.toString(),
+            _maxFrequencies.mkString("\t", "\n\t", ""),
+            _tfidfVectors.mkString("\t", "\n\t", "")
+        );
+    }
+
+    public String printVectors() {
+        return _tfidfVectors.mkString("\t", "\n\t", "");
     }
 
     @Override
