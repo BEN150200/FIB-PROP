@@ -9,16 +9,17 @@ import io.vavr.collection.HashMap;
 import io.vavr.collection.HashSet;
 import io.vavr.collection.Set;
 import io.vavr.collection.Stream;
+import io.vavr.collection.Traversable;
 import io.vavr.control.Option;
 
 public class Index<DocId> {
 
-    public HashMap<String, HashMap<DocId, HashSet<Integer>>> invertedIndex; // String -> docId -> [position]
-    public HashMap<DocId, HashMap<String, HashSet<Integer>>> directIndex;   // docId -> String -> [position]
+    public HashMap<String, HashMap<DocId, HashSet<Integer>>> _invertedIndex; // String -> docId -> [position]
+    public HashMap<DocId, HashMap<String, HashSet<Integer>>> _directIndex;   // docId -> String -> [position]
     
     public Index(HashMap<String, HashMap<DocId, HashSet<Integer>>> invertedIndex, HashMap<DocId, HashMap<String, HashSet<Integer>>> directIndex) {
-        this.invertedIndex = invertedIndex;
-        this.directIndex = directIndex;
+        _invertedIndex = invertedIndex;
+        _directIndex = directIndex;
     }
 
     /**
@@ -42,7 +43,7 @@ public class Index<DocId> {
      * @return a new Index representing the given collection
      */
     public static <DocId> Index<DocId> of(HashMap<DocId, Iterable<String>> collection) {
-        var directIndex = collection.mapValues(Index::termsPositions);
+        var directIndex = collection.mapValues(Index::computePositions);
 
         var invertedIndex = directIndex.map(
             (docId, termsPositions) -> Tuple.of(docId, termsPositions.foldLeft(
@@ -58,7 +59,7 @@ public class Index<DocId> {
         return new Index<DocId>(invertedIndex, directIndex);
     }
 
-    private static HashMap<String, HashSet<Integer>> termsPositions(Iterable<String> content) {
+    private static HashMap<String, HashSet<Integer>> computePositions(Iterable<String> content) {
         return Stream.ofAll(content)
             .zipWithIndex()
             .foldLeft(
@@ -75,7 +76,7 @@ public class Index<DocId> {
      * @return a mapping docId -> [positions] forall documents containing the String parameter (or empty, if there are none)
      */
     public HashMap<DocId, HashSet<Integer>> postingList(String term) {
-        return this.invertedIndex.get(term).getOrElse(HashMap::empty);
+        return _invertedIndex.get(term).getOrElse(HashMap::empty);
     }
 
     /**
@@ -86,7 +87,7 @@ public class Index<DocId> {
     public Set<DocId> documents(String term) {
         return this.postingList(term).keySet();
     }
-    
+
     /**
      * 
      * @param term
@@ -102,15 +103,15 @@ public class Index<DocId> {
      * @return true iff this contains the given docId
      */
     public boolean contains(DocId docId) {
-        return this.directIndex.containsKey(docId);
+        return _directIndex.containsKey(docId);
     }
 
     /**
      * @param docId id of the documents whose term frequencies we wish to retrieve
      * @return if present, a mapping term -> [positions] forall terms of the document identified by docId. Throws if docId doesn't exist! (an empty document is still a document)
      */
-    public Option<HashMap<String, HashSet<Integer>>> termsPositions(DocId docId) {
-        return this.directIndex.get(docId);
+    public Option<HashMap<String, HashSet<Integer>>> positions(DocId docId) {
+        return _directIndex.get(docId);
     }
 
     /**
@@ -118,15 +119,27 @@ public class Index<DocId> {
      * @return if present, a mapping term -> [positions] forall terms of the document identified by docId. Throws if docId doesn't exist! (an empty document is still a document)
      */
     public Option<Set<String>> terms(DocId docId) {
-        return this.termsPositions(docId).map(HashMap::keySet);
+        return this.positions(docId).map(HashMap::keySet);
     }
 
     /**
      * @param docId id of the documents whose term frequencies we wish to retrieve
      * @return if present, a mapping term -> [positions] forall terms of the document identified by docId. Throws if docId doesn't exist! (an empty document is still a document)
      */
-    public Option<HashMap<String, Integer>> termsFrequencies(DocId docId) {
-        return this.termsPositions(docId).map(tv -> tv.mapValues(HashSet::size));
+    public Option<HashMap<String, Integer>> frequencies(DocId docId) {
+        return this.positions(docId).map(tv -> tv.mapValues(HashSet::size));
+    }
+
+    /**
+     * 
+     * @param docId
+     * @return if present, the max frequency of all terms in docId
+     */
+    public Integer maxFrequency(DocId docId) {
+        return this.documentFrequencies(docId)
+            .map(HashMap::values)
+            .flatMap(Traversable::max)
+            .getOrElse(0);
     }
 
     /**
@@ -135,7 +148,7 @@ public class Index<DocId> {
      * @return if present, a mapping term -> document_frequency forall terms of the document
      */
     @SuppressWarnings("deprecation")
-    public Option<HashMap<String, Integer>> termsDocumentFrequencies(DocId docId) {
+    public Option<HashMap<String, Integer>> documentFrequencies(DocId docId) {
         return this.terms(docId).map(terms -> (HashMap<String, Integer>) terms.toMap(
             term -> term,
             this::documentFrequency
@@ -148,7 +161,7 @@ public class Index<DocId> {
      * @return number of documents in the index
      */
     public int documentsCount() {
-        return this.directIndex.size();
+        return _directIndex.size();
     }
     
     /**
@@ -156,7 +169,7 @@ public class Index<DocId> {
      * @return Set of all docIds in the index
      */
     public HashSet<DocId> allDocIds() {
-        return (HashSet<DocId>) this.directIndex.keySet();
+        return (HashSet<DocId>) _directIndex.keySet();
     }
     
     /**
@@ -167,18 +180,18 @@ public class Index<DocId> {
      */
     public Index<DocId> insert(DocId docId, Iterable<String> content) {
 
-        var termsPositions = Index.termsPositions(content);
+        var termsPositions = Index.computePositions(content);
                     
-        var newDirectIndex = this.directIndex.put(docId, termsPositions);
+        var newDirectIndex = _directIndex.put(docId, termsPositions);
         
         // remove all terms of previous docId, if any
-        var removedInverted = this.directIndex.get(docId).map(
+        var removedInverted = _directIndex.get(docId).map(
             doc -> doc.keySet().foldLeft(
-                this.invertedIndex,
+                _invertedIndex,
                 (inverted, term) -> Maps.nestedRemove(term, docId, inverted)
             )
         )
-        .getOrElse(this.invertedIndex);
+        .getOrElse(_invertedIndex);
                         
                         
         var newInvertedIndex = termsPositions
@@ -214,14 +227,14 @@ public class Index<DocId> {
     public Index<DocId> remove(DocId docId) {
         return this.contains(docId)
             ? new Index<DocId>(
-                this.directIndex.get(docId).map(
+                _directIndex.get(docId).map(
                     doc -> doc.keySet().foldLeft(
-                        this.invertedIndex,
+                        _invertedIndex,
                         (inverted, term) -> Maps
                             .nestedRemove(term, docId, inverted)
                     )
-                ).getOrElse(this.invertedIndex),
-                this.directIndex.remove(docId)
+                ).getOrElse(_invertedIndex),
+                _directIndex.remove(docId)
             )
             : this;
     }
@@ -233,9 +246,9 @@ public class Index<DocId> {
 
     public static <DocId> String print(Index<DocId> index) {
         return "InvertedIndex {\n" +
-            index.invertedIndex.mkString("\t", "\n\t", "") +
+            index._invertedIndex.mkString("\t", "\n\t", "") +
             "\n},\nDirectIndex {\n" +
-            index.directIndex.mkString("\t", "\n\t", "") +
+            index._directIndex.mkString("\t", "\n\t", "") +
             "\n}";
     }
 
@@ -246,6 +259,6 @@ public class Index<DocId> {
 
         var other = (Index<DocId>) obj;
 
-        return this.directIndex.eq(other.directIndex) && this.invertedIndex.eq(other.invertedIndex);
+        return _directIndex.eq(other._directIndex) && _invertedIndex.eq(other._invertedIndex);
     }
 }
