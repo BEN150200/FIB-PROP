@@ -48,38 +48,12 @@ public class VectorialModel<DocId> {
             }
         );
 
-        var maxFrequencies = freqsTfidfs.<Long>mapValues(Tuple2::_1);
-        var tfidfs = freqsTfidfs.<HashMap<String, Double>>mapValues(Tuple2::_2);
+        var maxFrequencies = freqsTfidfs.mapValues(Tuple2::_1);
+        var tfidfs = freqsTfidfs.mapValues(Tuple2::_2);
 
         return new VectorialModel<DocId>(index, maxFrequencies, tfidfs);
     }
 
-    /**
-     * @param <String> Type used to represent Strings
-     * @param <DocId> Type used to represent document IDs
-     * @param collection Mapping docId -> Document forall documents of the collection
-     * @return a vectorial model representation of the collection
-     */
-    public static <DocId> VectorialModel<DocId> of(java.util.Map<DocId, Iterable<String>> collection) {
-        
-        // map documents to their max frequencies
-        var hashedCollection = HashMap.ofAll(collection);
-
-        // construct index
-        Index<DocId> index = Index.of(hashedCollection);
-
-        HashMap<DocId, Long> maxFrequencies = hashedCollection.mapValues(Lists::maxFrequency);
-
-        // map documents to their tfidf vectors
-        HashMap<DocId, HashMap<String, Double>> tfidfs = hashedCollection.map(
-            (docId, __) -> Tuple.of(
-                docId,
-                VectorialModel.computeTfidf(index, docId, maxFrequencies.get(docId).get())
-            )
-        );
-
-        return new VectorialModel<DocId>(index, maxFrequencies, tfidfs);
-    }
 
     private static <DocId> HashMap<String, Double> computeTfidf(Index<DocId> index, DocId docId, Long maxFrequency) {
         return TFIDF.computeTFIDF(
