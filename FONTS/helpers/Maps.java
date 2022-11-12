@@ -1,12 +1,14 @@
 package helpers;
 
-import java.util.Map;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 
 import io.vavr.collection.HashMap;
 import io.vavr.collection.HashSet;
+import io.vavr.collection.Map;
 import io.vavr.collection.Set;
+import io.vavr.collection.Stream;
+import io.vavr.collection.Traversable;
 
 public class Maps {
     public static <K, T> HashMap<K, HashSet<T>> unionMerge(HashMap<K, HashSet<T>> a, HashMap<K, HashSet<T>> b) {
@@ -42,5 +44,21 @@ public class Maps {
             .isDefined()
                 ? removedMap.remove(key1)
                 : removedMap;
+    }
+
+    @SuppressWarnings("deprecation")
+    public static <K, V, T> Stream<T> mapToValues(HashMap<K, V> map, BiFunction<K, V, T> f) {
+        return map.toStream().<T>map(t -> f.apply(t._1, t._2));
+    }
+    
+    @SuppressWarnings("deprecation")
+    public static <K, V> HashMap<K, V> fromTraversable(Traversable<K> xs, Function<K, V> valueMapper) {
+        return (HashMap<K, V>) xs.toMap(key -> key, valueMapper);
+    }
+
+    public static <K1, K2, V> V nestedGet(HashMap<K1, HashMap<K2, V>> map, K1 key1, K2 key2) {
+        return map.get(key1)
+            .flatMap(nestedMap -> nestedMap.get(key2))
+            .get();
     }
 }
