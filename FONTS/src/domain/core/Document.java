@@ -1,20 +1,18 @@
 package src.domain.core;
 
-import java.time.*;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-
 import src.domain.DocumentInfo;
 import src.domain.controllers.DocumentCtrl;
 import src.domain.controllers.SearchCtrl;
+
+import java.time.*;
+import java.util.ArrayList;
 
 public class Document {
 
     private Integer docID;
     private Author  author;
     private Title  title;
-    private String filePath;
+    //private String filePath;
     //private String fileName;
     private LocalDateTime creationDate;
     private LocalDateTime modificationDate;

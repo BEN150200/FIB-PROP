@@ -1,18 +1,16 @@
 package src.domain.controllers;
 
+import src.domain.DocumentInfo;
+import src.domain.core.Author;
+import src.domain.core.Document;
+import src.domain.core.Sentence;
+import src.domain.core.Title;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
-import src.domain.DocumentInfo;
-import src.domain.core.Author;
-import src.domain.core.Document;
-import src.domain.core.ExpressionTreeNode;
-import src.domain.core.Sentence;
-import src.domain.core.Title;
-import src.domain.indexing.core.IndexingController;
 
 public class DomainCtrl {
 

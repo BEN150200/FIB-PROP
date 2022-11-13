@@ -1,9 +1,9 @@
 package src.domain.core;
 
-import java.io.*;
-import java.util.*;
+//import src.domain.indexing.booleanmodel.BooleanModel;
 
-import src.domain.indexing.booleanmodel.BooleanModel;
+//import java.io.*;
+//import java.util.*;
 
 public class ExpressionTreeNode{
     private ExpressionTreeNode right, left;
