@@ -48,11 +48,15 @@ public class BooleanExpressionCtrlTest {
     public void getSavedExpressionTree() {
         test.saveExpression("a|b","Expression1");//sabem que l'arbre tindrà com a arrel "|" per com es comnstrueix
         assertEquals("|", test.getSavedExpressionTree("Expression1").getValue());
+        assertEquals("a", test.getSavedExpressionTree("Expression1").getLeft().getValue());
+        assertEquals("b", test.getSavedExpressionTree("Expression1").getRight().getValue());
     }
 
     @Test
     public void createExpressionTree() {
-        assertEquals("&", test.createExpressionTree("c&d").getValue());
+        assertEquals("&", test.createExpressionTree("c&d").getValue());//la arrel serà el &
+        assertEquals("d", test.createExpressionTree("c&d").getRight().getValue());
+        assertEquals("c", test.createExpressionTree("c&d").getLeft().getValue());
     }
 
     @Test
