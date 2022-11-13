@@ -35,8 +35,4 @@ public class Strings {
         return Stream.ofAll(string.toCharArray())
             .forAll(Strings::isAlphaNumeric);
     }
-
-    public static String joinEndLine(Iterable<String> strings) {
-        return String.join("\n", strings);
-    }
 }

@@ -1,20 +1,15 @@
 package src.domain.indexing.core;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Map;
-import java.util.Set;
 
 import src.helpers.Maths;
 import src.helpers.Parsing;
 import src.helpers.Strings;
 import io.vavr.collection.HashMap;
 import io.vavr.collection.HashSet;
-import io.vavr.collection.List;
 import io.vavr.collection.Stream;
 import io.vavr.control.Either;
-import src.domain.DocumentInfo;
-import src.domain.controllers.SentenceCtrl;
 import src.domain.core.ExpressionTreeNode;
 import src.domain.indexing.booleanmodel.BooleanModel;
 import src.domain.indexing.vectorial.VectorialModel;
@@ -23,7 +18,6 @@ public class IndexingController<DocId, SentenceId> {
     private VectorialModel<DocId> vectorialModel;
     private BooleanModel<SentenceId> booleanModel;
     
-    // TODO: return boolean of wheter inserted new or updated,
     // or exception plus add `updateDocument` method?
     public IndexingController() {
         this.vectorialModel = VectorialModel.empty();
@@ -44,18 +38,14 @@ public class IndexingController<DocId, SentenceId> {
         this.vectorialModel = this.vectorialModel.insert(docId, content);
     }
     
-    // TODO: return boolean of wheter inserted new or updated,
-    // or exception plus add `updateDocument` method?
     public void addSentence(SentenceId sentenceId, Iterable<String> content) {
         this.booleanModel = this.booleanModel.insert(sentenceId, content);
     }
     
-    // TODO: return boolean of whether it was removed, or exception?
     public void removeDocument(DocId docId) {
         this.vectorialModel = this.vectorialModel.remove(docId);
     }
 
-    // TODO: return boolean of whether it was removed, or exception?
     public void removeSentence(SentenceId sentenceId) {
         this.booleanModel = this.booleanModel.remove(sentenceId);
     }
@@ -69,50 +59,27 @@ public class IndexingController<DocId, SentenceId> {
         return this.vectorialModel.querySimilars(docId).map(HashMap::toJavaMap).toEither("DocId " + docId + " does not exist");
     }
 
-
-
     public HashSet<SentenceId> booleanQuery(ExpressionTreeNode root) {
-        return this.solveQuery(root);
+        return booleanModel.query(root);
     }
 
-    //TODO: posiblement s'hagi de moure al BooleanModel, ja que el Controller no hauria de resoldre
-    private HashSet<SentenceId> solveQuery(ExpressionTreeNode root) {
-        var value = root.getValue();
-        switch (value.charAt(0)) {
-            case '&':
-                return solveQuery(root.getLeft()).intersect(solveQuery(root.getRight()));
-            case '|':
-                return solveQuery(root.getLeft()).union(solveQuery(root.getRight()));
-            case '!':
-                return this.booleanModel.all().diff(solveQuery(root.getRight()));
-            case '{':
-                var set = Arrays.asList(value.substring(1, value.length()-2).split(" "));
-                return this.booleanModel.querySet(set);
-            case '"':
-                var seq = Arrays.asList(value.substring(1, value.length()-2).split(" "));
-                return this.booleanModel.querySequence(seq);
-            default:
-                return this.booleanModel.queryTerm(value);
-        }
-    }
-    
-    public Either<String, HashMap<DocId, Double>> weightedQuery(String query) {
-        var queryTerms = query.strip().split(" ");
-
+    public Either<String, java.util.HashMap<DocId, Double>> weightedQuery(String query) {
         if(query.isEmpty())
             return Either.left("Unexpected empty query");
+        
+            var terms = Stream.of(
+            query.strip().split(" ")
+        );
 
-        return Either.sequence(Stream.of(queryTerms).map(Parsing::parseWeightedTerm))
-            .map(termsWeights ->
-                termsWeights.foldLeft(
-                    io.vavr.collection.HashMap.<String, Double>empty(),
-                    (queryMap, termWeight) -> queryMap.merge(
-                        io.vavr.collection.HashMap.of(termWeight._1, termWeight._2),
-                        (a, b) -> a + b
-                    )
-                )
+        return
+            Either.sequence(
+                terms.map(Parsing::parseWeightedTerm)
             )
+            .map(HashMap::ofEntries)
             .map(vectorialModel::querySimilars)
-            .mapLeft(Strings::joinEndLine);
+            .map(HashMap::toJavaMap)
+            .mapLeft(
+                errors -> String.join("\n", errors)
+            );
     }
 }
