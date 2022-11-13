@@ -19,7 +19,7 @@ public class Sentence {
     
     public Sentence(String p) {
         sentence = p;
-        SentenceCtrl.getInstance().addSentence(this);
+        setID(SentenceCtrl.getInstance().addSentence(this));
         compute();
     }
 
@@ -83,8 +83,12 @@ public class Sentence {
         sentence = s;
     }
 
-    public void setID(Integer sentID) {
-        id = sentID;
+    private boolean setID(Integer sentID) {
+        if (id == null) {
+            id = sentID;
+            return true;
+        }
+        else return false;
     }
 
     

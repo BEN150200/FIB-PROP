@@ -11,7 +11,7 @@ public class TestSentence {
 
     //test of the creator
     @Test
-    public void testCreat() throws NoSuchFieldException, IllegalAccessException {
+    public void testCreate() throws NoSuchFieldException, IllegalAccessException {
         //given
         Sentence sentence;
 
@@ -43,25 +43,11 @@ public class TestSentence {
     /**
      * Setters Tests
      */
-    @Test
-    public void testSetID() throws NoSuchFieldException, IllegalAccessException {
-        //given
-        Sentence sentence = new Sentence("prova de frase");
-        
-        //when
-        sentence.setID(1);
-        
-        //then
-        Field field = sentence.getClass().getDeclaredField("id");
-        field.setAccessible(true);
-        assertEquals("Sentence ID not setted correctly", 1, field.get(sentence));
-    }
 
     @Test
     public void testAddDoc() throws NoSuchFieldException, IllegalAccessException {
         //given
         Sentence sentence = new Sentence("prova de frase");
-        sentence.setID(1);
         
         //when
         boolean resultAdd1 = sentence.addDoc(1);
@@ -84,7 +70,6 @@ public class TestSentence {
     public void testDeleteDoc() throws NoSuchFieldException, IllegalAccessException {
         //given
         Sentence sentence = new Sentence("prova de frase");
-        sentence.setID(1);
         sentence.addDoc(1);
         sentence.addDoc(2);
         sentence.addDoc(3);
@@ -125,7 +110,6 @@ public class TestSentence {
     public void testGetID() throws NoSuchFieldException, IllegalAccessException {
         //given
         Sentence sentence = new Sentence("prova de frase");
-        sentence.setID(1);
         
         //when
         int result = sentence.id();
@@ -138,7 +122,6 @@ public class TestSentence {
     public void testGetAllDocs() throws NoSuchFieldException, IllegalAccessException {
         //given
         Sentence sentence = new Sentence("prova de frase");
-        sentence.setID(1);
         sentence.addDoc(1);
         sentence.addDoc(2);
         sentence.addDoc(3);
@@ -158,7 +141,6 @@ public class TestSentence {
     public void testBelongsToDoc() throws NoSuchFieldException, IllegalAccessException {
         //given
         Sentence sentence = new Sentence("prova de frase");
-        sentence.setID(1);
         sentence.addDoc(1);
         sentence.addDoc(2);
         sentence.addDoc(3);
@@ -178,7 +160,6 @@ public class TestSentence {
     public void testGetNbDocuments() throws NoSuchFieldException, IllegalAccessException {
         //given
         Sentence sentence = new Sentence("prova de frase");
-        sentence.setID(1);
         sentence.addDoc(1);
         sentence.addDoc(2);
         sentence.addDoc(3);
@@ -194,7 +175,6 @@ public class TestSentence {
     public void testGetTokens() throws NoSuchFieldException, IllegalAccessException {
         //given
         Sentence sentence = new Sentence("prova frase");
-        sentence.setID(1);
         
         //when
         ArrayList<String> result = sentence.getTokens();

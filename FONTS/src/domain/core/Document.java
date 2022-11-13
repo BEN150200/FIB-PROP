@@ -53,9 +53,11 @@ public class Document {
         return title;
     }
 
+    /*
     public String getPath() {
         return filePath;
     }
+    */
 
     public Integer getID() {
         return docID;
@@ -80,6 +82,7 @@ public class Document {
     /**
      * Setters
      */
+    /* 
     public boolean setPath(String path) {
         if (filePath == null) {
             filePath = path;
@@ -87,8 +90,9 @@ public class Document {
         }
         return false;
     }
+    */
 
-    public boolean setDocumentID(Integer id) {
+    private boolean setDocumentID(Integer id) {
         if (docID == null) {
             docID = id;
             return true;
@@ -115,14 +119,6 @@ public class Document {
         ArrayList<String> tokens = new ArrayList<>();
         for (Sentence sentence : sentences) {
             tokens.addAll(sentence.getTokens());
-            /*
-            for (String string : tokens) {
-                if (ocurrences.containsKey(string)) {
-                    ocurrences.put(string, ocurrences.get(string) + 1);
-                }
-                else ocurrences.put(string, 1);
-            } 
-            */
         }
         if (!tokens.isEmpty()) SearchCtrl.getInstance().addDocument(this.docID, tokens);
     }

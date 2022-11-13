@@ -55,15 +55,11 @@ public class SentenceCtrl {
      * Setters
     **/
 
-    public boolean addSentence(Sentence s) {
-        if (!existsSentence(s.toString())){
-            ++usedID;
-            s.setID(usedID);
-            sentencesByKey.put(s.toString(), s);
-            sentencesById.put(usedID, s);
-            return true;
-        }
-        return false;
+    public Integer addSentence(Sentence s) {
+        ++usedID;
+        sentencesByKey.put(s.toString(), s);
+        sentencesById.put(usedID, s);
+        return usedID;
     }
 
     public Boolean deleteSentence(String sentence){
