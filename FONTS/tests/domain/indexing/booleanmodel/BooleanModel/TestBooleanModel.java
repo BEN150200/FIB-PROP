@@ -4,17 +4,13 @@ import static org.junit.Assert.assertEquals;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 import org.junit.Test;
 
-import helpers.Parsing;
 import io.vavr.collection.HashMap;
 import io.vavr.collection.HashSet;
 import src.domain.indexing.booleanmodel.BooleanModel;
 import src.domain.indexing.core.Index;
-import src.domain.preprocessing.Tokenizer;
 
 public class TestBooleanModel {
 
@@ -23,7 +19,6 @@ public class TestBooleanModel {
         "d2", "and darkness was upon the face of the deep",
         "d3", "and the spirit of god moved upon the face of the waters"
     );*/
-
     // should be equivalent to Index.of(corpus), but it's a stub!
     private BooleanModel<String> model = BooleanModel.of(
         new Index<String>(

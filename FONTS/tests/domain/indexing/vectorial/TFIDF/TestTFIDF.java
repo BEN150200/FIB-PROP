@@ -4,9 +4,9 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import helpers.Maths;
 import io.vavr.collection.HashMap;
 import src.domain.indexing.vectorial.TFIDF;
+import src.helpers.Maths;
 
 public class TestTFIDF {
     @Test

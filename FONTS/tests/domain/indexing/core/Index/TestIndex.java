@@ -1,4 +1,4 @@
-package tests.domain.indexing.core.Index;
+package tests.domain.indexing.core.index;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -11,11 +11,11 @@ import java.util.stream.IntStream;
 
 import org.junit.Test;
 
-import helpers.Parsing;
-import helpers.Strings;
 import io.vavr.collection.HashMap;
 import io.vavr.collection.HashSet;
 import src.domain.indexing.core.Index;
+import src.helpers.Parsing;
+import src.helpers.Strings;
 
 public class TestIndex {
     @Test

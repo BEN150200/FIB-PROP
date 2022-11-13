@@ -6,25 +6,20 @@ import static org.junit.Assert.assertTrue;
 
 import java.nio.charset.Charset;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.Arrays;
-import java.util.stream.Collectors;
 
 import org.junit.Test;
 
-import helpers.Parsing;
-import helpers.Strings;
 import io.vavr.Tuple2;
 import io.vavr.collection.HashMap;
 import io.vavr.collection.HashSet;
-import io.vavr.collection.List;
-import io.vavr.collection.Stream;
 import io.vavr.control.Try;
 import src.domain.indexing.core.Index;
 import src.domain.indexing.vectorial.VectorialModel;
+import src.helpers.Parsing;
 
 public class TestVectorialModel {
 
@@ -209,7 +204,7 @@ public class TestVectorialModel {
     @Test
     @SuppressWarnings("deprecation")
     public void massive() {
-        var folderPath = "..\\pracs-caim\\s1\\data\\raw\\20_newsgroups";
+        var folderPath = "..\\pracs-caim\\s1\\data\\raw\\novels";
         
         var files = Parsing.parseFolder(folderPath);
 
@@ -233,19 +228,19 @@ public class TestVectorialModel {
             "god", 1.0d
         );
 
-        // var results = model.querySimilars(query).toStream()
-        // .sortBy(Tuple2::_2)
-        // .reverse()
-        // .take(5);
+        var results = model.querySimilars(query).toStream()
+        .sortBy(Tuple2::_2)
+        .reverse()
+        .take(5);
 
-        // results.forEach(entry ->
-        //     System.out.println(
-        //         "Doc " + entry._1 + " (score=" + entry._2 + ")\n" +
-        //         "-----------------------------------\n" +
-        //         Try.of(() -> Files.readString(Paths.get(entry._1), Charset.forName("ISO-8859-1"))).get() +
-        //         "\n-----------------------------------\n"
-        //     )
-        // );
+        results.forEach(entry ->
+            System.out.println(
+                "Doc " + entry._1 + " (score=" + entry._2 + ")\n" +
+                "-----------------------------------\n" +
+                Try.of(() -> Files.readString(Paths.get(entry._1), Charset.forName("ISO-8859-1"))).get() +
+                "\n-----------------------------------\n"
+            )
+        );
     }
     
     //     5 4 1 6 3 2

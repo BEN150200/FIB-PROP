@@ -10,10 +10,10 @@ import io.vavr.collection.Map;
 import io.vavr.collection.Set;
 import io.vavr.control.Option;
 import src.domain.indexing.core.Index;
-import helpers.Lists;
-import helpers.Maps;
-import helpers.Maths;
-import helpers.Sets;
+import src.helpers.Lists;
+import src.helpers.Maps;
+import src.helpers.Maths;
+import src.helpers.Sets;
 
 public class VectorialModel<DocId> {
 

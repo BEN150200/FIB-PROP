@@ -1,12 +1,10 @@
-package helpers;
+package src.helpers;
 
 import java.util.function.BiFunction;
 import java.util.function.Function;
 
 import io.vavr.collection.HashMap;
 import io.vavr.collection.HashSet;
-import io.vavr.collection.Map;
-import io.vavr.collection.Set;
 import io.vavr.collection.Stream;
 import io.vavr.collection.Traversable;
 

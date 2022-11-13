@@ -1,4 +1,4 @@
-package tests.domain.indexing.core.IndexingController;
+package tests.domain.indexing.core.indexingcontroller;
 
 import java.nio.charset.Charset;
 import java.nio.file.Files;
@@ -8,7 +8,6 @@ import java.util.Collection;
 
 import org.junit.Test;
 
-import helpers.Parsing;
 import io.vavr.Tuple;
 import io.vavr.Tuple2;
 import io.vavr.collection.HashMap;
@@ -18,6 +17,7 @@ import io.vavr.control.Try;
 import src.domain.indexing.booleanmodel.BooleanModel;
 import src.domain.indexing.core.IndexingController;
 import src.domain.indexing.vectorial.VectorialModel;
+import src.helpers.Parsing;
 
 public class TestIndexingController {
    /* @Test
