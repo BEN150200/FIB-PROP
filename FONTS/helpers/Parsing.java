@@ -8,13 +8,13 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import domain.preprocessing.Tokenizer;
 import io.vavr.Tuple;
 import io.vavr.Tuple2;
 import io.vavr.collection.HashMap;
 import io.vavr.collection.Stream;
 import io.vavr.control.Either;
 import io.vavr.control.Try;
+import src.domain.preprocessing.Tokenizer;
 
 public class Parsing {
 
