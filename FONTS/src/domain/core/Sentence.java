@@ -1,14 +1,12 @@
 package src.domain.core;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Optional;
-import java.util.Set;
-
 import src.domain.controllers.SearchCtrl;
 import src.domain.controllers.SentenceCtrl;
-import src.domain.preprocessing.TokenFilter;
 import src.domain.preprocessing.Tokenizer;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 public class Sentence {
     protected String sentence;
@@ -90,31 +88,19 @@ public class Sentence {
     }
 
     
-
     /**
      * Compute
     **/
-    public void compute() {
-        filter();
+    private void compute() {
+        tokenize();
         addToBooleanModel();
     }
 
-    private void filter() {
+    private void tokenize() {
         String[] splitedSentence = Tokenizer.tokenize(sentence);
-        ArrayList<String> tok = new ArrayList<>();
         for (String string : splitedSentence) {
-            tok.add(string);
+            tokens.add(string);
         }
-        /*
-        for (String s : tok) {
-            Optional<String> token = TokenFilter.filter(s);
-            if (token.isPresent()) {
-                tokens.add(token.get());
-            }
-        }
-        */
-        tokens = tok;
-
     }
 
     private void addToBooleanModel() {

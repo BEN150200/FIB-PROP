@@ -1,19 +1,11 @@
 package tests.domain.core;
 
-import org.junit.Test;
+import src.domain.core.Sentence;
 
+import org.junit.Test;
 import java.lang.reflect.Field;
 import java.util.*;
-
 import static org.junit.Assert.*;
-import org.junit.BeforeClass;
-import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
-import org.junit.runners.Parameterized.Parameters;
-import org.junit.runners.Suite;
-import org.junit.runners.Suite.SuiteClasses;
-
-import src.domain.core.Sentence;
 
 public class TestSentence {
 
@@ -203,7 +195,6 @@ public class TestSentence {
         //given
         Sentence sentence = new Sentence("prova frase");
         sentence.setID(1);
-        sentence.compute();
         
         //when
         ArrayList<String> result = sentence.getTokens();
@@ -212,13 +203,7 @@ public class TestSentence {
         ArrayList<String> expectedList = new ArrayList<>();
         expectedList.add("prova");
         expectedList.add("frase");
-        assertEquals("Filtred Tokens getted correctly", expectedList, result);
+        assertEquals("Tokens getted correctly", expectedList, result);
     }
-
-    
-
-
-
-
 
 }
