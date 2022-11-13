@@ -1,7 +1,9 @@
 package tests.domain.core;
 
+import src.domain.DocumentInfo;
 import src.domain.core.Author;
 import src.domain.core.Document;
+import src.domain.core.Sentence;
 import src.domain.core.Title;
 
 import org.junit.Test;
@@ -39,10 +41,47 @@ public class TestDocument {
      */
 
     @Test
-    public void testAddSentence() throws NoSuchFieldException, IllegalAccessException {}
+    public void testAddSentence() throws NoSuchFieldException, IllegalAccessException {
+        //given
+        Title t = new Title("t1");
+        Author a = new Author("a1");
+        Document doc = new Document(t,a);
+        Sentence s1 = new Sentence("bon dia");
+        Sentence s2 = new Sentence("aixo es una prova");
+        Sentence s3 = new Sentence("bona nit");
+        
+        //when
+        doc.addSentence(s1);
+        doc.addSentence(s2);
+        doc.addSentence(s3);
+        
+        //then
+        Field field = doc.getClass().getDeclaredField("sentences");
+        field.setAccessible(true);
+        ArrayList<Sentence> expected = new ArrayList<>();
+        expected.add(s1);
+        expected.add(s2);
+        expected.add(s3);
+        assertEquals("Content not deleted", expected, field.get(doc));
+    }
 
     @Test
-    public void testdeleteContnet() throws NoSuchFieldException, IllegalAccessException {}
+    public void testDeleteContnet() throws NoSuchFieldException, IllegalAccessException {
+        //given
+        Title t = new Title("t1");
+        Author a = new Author("a1");
+        Document doc = new Document(t,a);
+        Sentence s = new Sentence("bon dia");
+        doc.addSentence(s);
+
+        //when
+        doc.deleteContent();
+
+        //then
+        Field field = doc.getClass().getDeclaredField("sentences");
+        field.setAccessible(true);
+        assertEquals("Content not deleted", new ArrayList<String>(), field.get(doc));
+    }
 
     @Test
     public void testUpdateModificationDate() throws NoSuchFieldException, IllegalAccessException, InterruptedException {
@@ -84,7 +123,6 @@ public class TestDocument {
         field.setAccessible(true);
         assertEquals("Document ID not getted correctly", field.get(doc), result);
     }
-
 
     @Test
     public void testGetAuthor() throws NoSuchFieldException, IllegalAccessException {
@@ -150,7 +188,45 @@ public class TestDocument {
         assertEquals("Modification Date not getted correctly", field.get(doc), result);
     }
 
+    @Test
+    public void testGetInfo() throws NoSuchFieldException, IllegalAccessException {
+        //given
+        Title t = new Title("t1");
+        Author a = new Author("a1");
+        Document doc = new Document(t,a);
+        
+        //when
+        DocumentInfo docInfo = doc.getInfo();
+        
+        //then
+        assertEquals("Document Info ID not correct", doc.getID() , docInfo.id());
+        assertEquals("Document Info Title not correct", doc.getTitle().toString() , docInfo.title());
+        assertEquals("Document Info Author not correct", doc.getAuthor().toString() , docInfo.author());
+        assertEquals("Document Info Cration Date not correct", doc.getCreationDate() , docInfo.creationDate());
+        assertEquals("Document Info Modification Date not correct", doc.getModificationDate() , docInfo.modificationDate());
+    }
 
+    @Test
+    public void testGetSentences() throws NoSuchFieldException, IllegalAccessException {
+        //given
+        Title t = new Title("t1");
+        Author a = new Author("a1");
+        Document doc = new Document(t,a);
+        Sentence s1 = new Sentence("bon dia");
+        Sentence s2 = new Sentence("aixo es una prova");
+        Sentence s3 = new Sentence("bona nit");
+        doc.addSentence(s1);
+        doc.addSentence(s2);
+        doc.addSentence(s3);
+        
+        //when
+        ArrayList<Sentence> result = doc.getSentences();
+
+        //then
+        Field field = doc.getClass().getDeclaredField("sentences");
+        field.setAccessible(true);
+        assertEquals("Content not deleted", field.get(doc), result);
+    }
 
 
 
