@@ -78,7 +78,7 @@ public class BooleanExpressionTest {
     }
 
     @Test
-    public void checkExpression() {
+    public void checkExpression() { //la funcio comprova si la expressio és correcte i crea l'arbre corresponent
         //primer comprovem que comprova be les expressions
         for(Map.Entry<String, Boolean> i : list.entrySet() ){
             BooleanExpression test = new BooleanExpression(i.getKey());
