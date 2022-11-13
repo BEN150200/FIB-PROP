@@ -12,7 +12,7 @@ public class BooleanExpression{
 
     /**
      * @cost 0(1) 
-     * @param the string of the expression 
+     * @param //the string of the expression
      */
     public BooleanExpression(String expr){
         expression=expr.trim();
@@ -39,14 +39,14 @@ public class BooleanExpression{
         return buildTree(root,expression);
     }
  
-    public void printTree(){//nomes per veure si va be, eliminar desprs
-        print(root);
+    public String printTree(){//nomes per veure si va be, eliminar desprs
+        return print(root);
     }
 
     //funcions privades
     /**
      * @cost 
-     * @param the root of the tree and the expression to be converted to a tree
+     * @param  //the root of the tree and the expression to be converted to a tree
      * @return true if the expression is correct, else false
      */
     private boolean buildTree(ExpressionTreeNode rot,String s){
@@ -118,7 +118,7 @@ public class BooleanExpression{
 
     /**
      * @cost 
-     * @param a expression 
+     * @param //a expression
      * @return the index of the last operation that should be computed, -1 if its not correct, -2 if there arent any operations
      */
     private int findLastOperation(String s){
@@ -181,7 +181,7 @@ public class BooleanExpression{
 
     /**
      * @cost 0(1)
-     * @param two operators (|,&,!)
+     * @param //two operators (|,&,!)
      * @return true if iact has lower preference, else return false
      */
     private Boolean hasLowerPreference(char iact, char imin) {
@@ -192,26 +192,19 @@ public class BooleanExpression{
         else return false;
     }
 
-    private void print(ExpressionTreeNode r){
-        if(r.right!=null & r.left!=null){
-            System.out.print('[');
-            print(r.left);
-            System.out.print(']'+ r.value + '[');
-            print(r.right);
-            System.out.print(']');
+    private String print(ExpressionTreeNode r){
+        if(r.getRight()!=null & r.getLeft()!=null){
+            return "["+ print(r.getLeft())+"]"+r.getValue()+"["+print(r.getRight())+"]";
         }
-        else if(r.value.equals("!")){
-            System.out.print(r.value + '[');
-            print(r.right);
-            System.out.print(']');
+        else if(r.getValue().equals("!")){
+            return r.getValue()+"["+print(r.getRight())+"]";
         }
-        else System.out.print(r.value);
-
+        else return r.getValue();
     }
 
     /**
      * @cost 0(n) ,n=mida s
-     * @param a string s
+     * @param //a string s
      * @return returns true if it has a parentesis that contains everything else
      */
     private boolean parentesis(String s){//comprova si hi ha un parentesis que conté la expressió sencera

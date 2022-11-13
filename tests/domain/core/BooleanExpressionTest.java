@@ -84,5 +84,21 @@ public class BooleanExpressionTest {
             BooleanExpression test = new BooleanExpression(i.getKey());
             assertEquals(i.getValue(),test.checkExpression());
         }
+
+        //comprovem que els arbres creats son els esperats
+        String expr = "{hola adeu} | !(dia) & !\"com estas\"";
+        BooleanExpression test1 = new BooleanExpression(expr);
+        test1.checkExpression();
+        assertEquals("[{hola adeu}]|[[![dia]]&[![\"com estas\"]]]",test1.printTree());
+
+        expr = "(hola|!(adeu & estas)) & {bon dia}";
+        BooleanExpression test2 = new BooleanExpression(expr);
+        test2.checkExpression();
+        assertEquals("[[hola]|[![[adeu]&[estas]]]]&[{bon dia}]",test2.printTree());
+
+        expr = "   adeu&hola|        ({que passa   }      & !      dia )";
+        BooleanExpression test3 = new BooleanExpression(expr);
+        test3.checkExpression();
+        assertEquals("[[adeu]&[hola]]|[[{que passa   }]&[![dia]]]",test3.printTree());
     }
 }

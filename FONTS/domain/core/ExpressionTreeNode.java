@@ -5,8 +5,8 @@ import java.util.*;
 import domain.indexing.booleanmodel.BooleanModel;
 
 public class ExpressionTreeNode{
-    ExpressionTreeNode right, left;
-    String value;
+    private ExpressionTreeNode right, left;
+    private String value;
 
     /**
      * @cost 0(1)
