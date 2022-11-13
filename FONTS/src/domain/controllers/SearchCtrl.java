@@ -1,20 +1,18 @@
 package src.domain.controllers;
 
+import src.domain.DocumentInfo;
+import src.domain.core.Document;
+import src.domain.core.ExpressionTreeNode;
+import src.domain.indexing.core.IndexingController;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Set;
 import java.util.Map.Entry;
 
 import io.vavr.collection.HashSet;
 import io.vavr.control.Either;
-import src.domain.DocumentInfo;
-import src.domain.core.BooleanExpression;
-import src.domain.core.Document;
-import src.domain.core.ExpressionTreeNode;
-import src.domain.indexing.core.IndexingController;
 
 public class SearchCtrl {
 
