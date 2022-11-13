@@ -16,6 +16,7 @@ public class BooleanExpression{
      */
     public BooleanExpression(String expr){
         expression=expr.trim();
+
     }
 
     /**

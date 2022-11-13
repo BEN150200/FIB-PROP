@@ -20,7 +20,7 @@ import io.vavr.collection.Stream;
 import io.vavr.control.Try;
 
 public class TestIndexingController {
-    @Test
+   /* @Test
     @SuppressWarnings("deprecation")
     public void testWeightedQuery() {
 
@@ -59,5 +59,5 @@ public class TestIndexingController {
             System.out.println(err);
             return false;
         });
-    }
+    }*/
 }
