@@ -45,6 +45,11 @@ public class Sentence {
         return sentence;
     }
 
+    public int id() {
+        return this.id;
+    }
+
+
     public Set<Integer> getAllDocsID() {
         return documents;
     }
@@ -84,10 +89,7 @@ public class Sentence {
         id = sentID;
     }
 
-    public int id() {
-        return this.id;
-    }
-
+    
 
     /**
      * Compute
@@ -98,13 +100,21 @@ public class Sentence {
     }
 
     private void filter() {
-        String[] tok = Tokenizer.tokenize(sentence);
+        String[] splitedSentence = Tokenizer.tokenize(sentence);
+        ArrayList<String> tok = new ArrayList<>();
+        for (String string : splitedSentence) {
+            tok.add(string);
+        }
+        /*
         for (String s : tok) {
             Optional<String> token = TokenFilter.filter(s);
             if (token.isPresent()) {
                 tokens.add(token.get());
             }
         }
+        */
+        tokens = tok;
+
     }
 
     private void addToBooleanModel() {
