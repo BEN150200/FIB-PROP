@@ -11,6 +11,7 @@ import src.domain.DocumentInfo;
 import src.domain.controllers.DomainCtrl;
 import src.domain.controllers.SearchCtrl;
 
+
 import java.util.HashMap;
 
 public class ConsoleCtrl extends PresentationCtrl{
@@ -197,6 +198,12 @@ public class ConsoleCtrl extends PresentationCtrl{
                         ""
     };
 
+    String[] queryDocumentsHeader = {
+                        "",
+                        "___________________Query documents___________________",
+                        ""
+    };
+
     
     Scanner terminalIn = new Scanner(System.in);
     
@@ -323,12 +330,11 @@ public class ConsoleCtrl extends PresentationCtrl{
                 allDocumentSearch();
                 break;
             case 4:
-                //System.out.println("Cerca per expressio booleana");
                 booleanExpressionSearch();
                 break;
             case 5:
                 System.out.println("Cerca per query");
-                //searchDocumentsByQuery();
+                searchDocumentsByQuery();
                 break;
             case 0:
                 return;
@@ -601,7 +607,7 @@ public class ConsoleCtrl extends PresentationCtrl{
                         currentAuthor = doc.author();
                         currentTitle = doc.title();
                         openDocument(currentTitle, currentAuthor);
-                        break;
+                        return;
                     case 0:
                         return;
                 }
@@ -635,7 +641,7 @@ public class ConsoleCtrl extends PresentationCtrl{
                     } else {
                         System.out.println("There are no documents to open");
                     }
-                    break;
+                    return;
                 case 0:
                     return;
             }
@@ -679,6 +685,41 @@ public class ConsoleCtrl extends PresentationCtrl{
             printToConsole(allDocumentsHeader);
             for(int i = 0; i < docsInfo.size(); ++i){
                 System.out.println((i + 1) + " - " + docsInfo.get(i).toString());
+            }
+        }
+    }
+
+    public void searchDocumentsByQuery(){
+        System.out.println("Enter a query:");
+        String query = terminalIn.nextLine();
+        if (query.isEmpty()){
+            System.out.println("The query entered is empty");
+            return;
+        }
+        ArrayList<DocumentInfo> queryDocs = domain.documentsByQuery(query);
+        if(queryDocs.isEmpty()){ 
+            System.out.println("There are no documents that satisfy the query");
+            return;
+        }
+        while(true){
+            printToConsole(queryDocumentsHeader);
+            for(int i = 0; i < queryDocs.size(); ++i){
+                System.out.println((i + 1) + " - " + queryDocs.get(i).toString());
+            }
+            printToConsole(similarDocumentsOptions);
+            Integer command = getInputAsInt(0, 2, "Enter an option number:");
+            switch (command) {
+                case 1:
+                    queryDocs = sortDocumentInfoList(queryDocs);
+                    break;
+                case 2:
+                    int docNumber = getInputAsInt(1, queryDocs.size(), "Enter the number of the document:");
+                    currentTitle = queryDocs.get(docNumber - 1).title();
+                    currentAuthor = queryDocs.get(docNumber - 1).author();
+                    openDocument(currentTitle, currentAuthor);
+                    return;
+                case 0:
+                    return;
             }
         }
     }

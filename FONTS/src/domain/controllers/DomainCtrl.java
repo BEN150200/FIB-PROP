@@ -12,6 +12,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import src.domain.indexing.core.IndexingController;
+import io.vavr.control.Either;
+
 public class DomainCtrl {
 
     /**
@@ -317,5 +320,16 @@ public class DomainCtrl {
             info.add(d.getInfo());
         }
         return info;
+    }
+
+    public ArrayList<DocumentInfo> documentsByQuery(String query){
+        IndexingController indexCtrl = new IndexingController();
+        Either<String, java.util.HashMap<Integer, Double>> resultsId = indexCtrl.weightedQuery(query);
+        ArrayList<Document> docs = DocumentCtrl.getInstance().getDocuments(resultsId.get().keySet());
+        ArrayList<DocumentInfo> docsInfo = new ArrayList<DocumentInfo>();
+        for(Document d: docs){
+            docsInfo.add(d.getInfo());
+        }
+        return docsInfo;
     }
 }
