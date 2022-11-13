@@ -2,19 +2,13 @@ package tests.domain.indexing.booleanmodel.BooleanModel;
 
 import static org.junit.Assert.assertEquals;
 
-import java.util.Arrays;
-import java.util.List;
-
-import org.junit.Test;
-
 import io.vavr.collection.HashMap;
 import io.vavr.collection.HashSet;
 import src.domain.core.ExpressionTreeNode;
 import src.domain.indexing.booleanmodel.BooleanModel;
 import src.domain.indexing.core.Index;
 
-public class TestBooleanModel {
-
+public class BooleanQueries {
     /*private HashMap<String, Iterable<String>> corpus = Parsing.makeCollection(
         "d1", "and the earth was without form and void",
         "d2", "and darkness was upon the face of the deep",
@@ -50,92 +44,17 @@ public class TestBooleanModel {
         )
     );
 
-    // BooleanModel::queryTerm
-    @Test
-    public void nonExistingTerm() {
+    public void nullTree() {
         assertEquals(
             HashSet.empty(),
-            model.queryTerm("divine")
+            model.query(new ExpressionTreeNode())
         );
     }
 
-    @Test
-    public void inAllTerm() {
-        assertEquals(
-            HashSet.of("d1", "d2", "d3"),
-            model.queryTerm("the")
-        );
-    }
-
-    @Test
-    public void termEmpty() {
+    public void emptyQuery() {
         assertEquals(
             HashSet.empty(),
-            BooleanModel.empty().queryTerm("")
-        );
-    }
-
-    // BooleanModel::querySet
-    @Test
-    public void nonExistingSet() {
-        assertEquals(
-            HashSet.empty(),
-            model.querySet(Arrays.asList("is this the region, this is the soil, the clime".split(" ")))
-        );
-    }
-
-    @Test
-    public void almostButNoSet() {
-        assertEquals(
-            HashSet.empty(),
-            model.querySet(Arrays.asList("and the earth moved".split(" ")))
-        );
-    }
-
-    @Test
-    public void allSet() {
-        assertEquals(
-            HashSet.of("d1", "d2", "d3"),
-            model.querySet(List.of("and", "the"))
-        );
-    }
-
-    // BooleanModel::querySequence
-    @Test
-    public void nonExistingSequence() {
-        assertEquals(
-            HashSet.empty(),
-            model.querySequence(Arrays.asList("Said then the lost Arch-Angel, this the seat".split(" ")))
-        );
-    }
-
-    @Test
-    public void orderMatters() {
-        assertEquals(
-            HashSet.empty(),
-            model.querySequence(Arrays.asList("and the earth was without void and form".split(" ")))
-        );
-
-        assertEquals(
-            HashSet.of("d1"),
-            model.querySequence(Arrays.asList("and the earth was without form and void".split(" ")))
-        );
-    }
-
-    @Test
-    public void matchSequence() {
-        assertEquals(
-            HashSet.of("d2", "d3"),
-            model.querySequence(List.of("the", "face"))
-        );
-    }
-
-    // BooleanModel::all
-    @Test
-    public void allDocIds() {
-        assertEquals(
-            HashSet.of("d1", "d2", "d3"),
-            model.all()
+            model.query(new ExpressionTreeNode("", null, null))
         );
     }
 }
