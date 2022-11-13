@@ -1,10 +1,10 @@
 package src.domain.controllers;
 
-import java.io.*;
-import java.util.*;
-
 import src.domain.core.BooleanExpression;
 import src.domain.core.ExpressionTreeNode;
+
+//import java.io.*;
+import java.util.*;
 
 public class BooleanExpressionCtrl {
     private Map<String,BooleanExpression> savedExpressions= new HashMap<String,BooleanExpression>();//no val la pena ordenarho no?, potser valdria la pena un map
@@ -80,7 +80,7 @@ public class BooleanExpressionCtrl {
     public ExpressionTreeNode getSavedExpressionTree(String name){
         BooleanExpression aux=savedExpressions.get(name);
         if(aux==null) return null; //si no existeix return null (canviare a excepcio)
-        addHistorial(aux);
+        //addHistorial(aux);
         return aux.getRoot();
     }
 
@@ -93,7 +93,7 @@ public class BooleanExpressionCtrl {
 
         BooleanExpression newexp=new BooleanExpression(exp);
         if(newexp.checkExpression()==false) return null;//haura de retornar excepcio si no es correcte
-        addHistorial(newexp);
+        //addHistorial(newexp);
         return newexp.getRoot();
     }
     

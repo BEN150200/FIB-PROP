@@ -1,6 +1,6 @@
 package src.domain.core;
-import java.io.*;
-import java.util.*;
+//import java.io.*;
+//import java.util.*;
 
 public class BooleanExpression{
     //Estructures de la classe
