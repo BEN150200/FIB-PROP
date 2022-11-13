@@ -80,7 +80,7 @@ public class BooleanExpressionCtrl {
     public ExpressionTreeNode getSavedExpressionTree(String name){
         BooleanExpression aux=savedExpressions.get(name);
         if(aux==null) return null; //si no existeix return null (canviare a excepcio)
-        addHistorial(aux);
+        //addHistorial(aux);
         return aux.getRoot();
     }
 
