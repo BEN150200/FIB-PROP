@@ -93,7 +93,7 @@ public class BooleanExpressionCtrl {
 
         BooleanExpression newexp=new BooleanExpression(exp);
         if(newexp.checkExpression()==false) return null;//haura de retornar excepcio si no es correcte
-        addHistorial(newexp);
+        //addHistorial(newexp);
         return newexp.getRoot();
     }
     
