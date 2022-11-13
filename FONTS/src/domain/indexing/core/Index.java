@@ -1,8 +1,6 @@
 package src.domain.indexing.core;
 
-import java.util.function.Function;
-
-import helpers.Maps;
+import src.helpers.Maps;
 import io.vavr.Tuple;
 import io.vavr.Tuple2;
 import io.vavr.collection.HashMap;

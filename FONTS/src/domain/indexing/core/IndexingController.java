@@ -5,9 +5,9 @@ import java.util.Arrays;
 import java.util.Map;
 import java.util.Set;
 
-import helpers.Maths;
-import helpers.Parsing;
-import helpers.Strings;
+import src.helpers.Maths;
+import src.helpers.Parsing;
+import src.helpers.Strings;
 import io.vavr.collection.HashMap;
 import io.vavr.collection.HashSet;
 import io.vavr.collection.List;
