@@ -18,8 +18,8 @@ import io.vavr.control.Either;
 import src.domain.indexing.booleanmodel.BooleanModel;
 import src.domain.indexing.core.Index;
 import src.domain.indexing.core.IndexingController;
+import src.domain.indexing.core.Parsing;
 import src.domain.indexing.vectorial.VectorialModel;
-import src.helpers.Parsing;
 
 public class TestIndexingController {
 

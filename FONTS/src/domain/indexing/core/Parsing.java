@@ -1,4 +1,4 @@
-package src.helpers;
+package src.domain.indexing.core;
 
 import java.nio.charset.Charset;
 import java.nio.file.Files;
@@ -15,6 +15,7 @@ import io.vavr.collection.Stream;
 import io.vavr.control.Either;
 import io.vavr.control.Try;
 import src.domain.preprocessing.Tokenizer;
+import src.helpers.Strings;
 
 public class Parsing {
 
@@ -51,8 +52,8 @@ public class Parsing {
     }
 
     @SuppressWarnings("deprecation")
-    public static Either<String, Tuple2<String, Double>> parseWeightedTerm(String string) {
-        var splited = string.split("\\^");
+    public static Either<String, Tuple2<String, Double>> parseWeightedTerm(String term) {
+        var splited = term.split("\\^");
         if(splited.length == 0)
             return Either.left("Unexpected standalone '^' found");
         else if(!Strings.isAlphaNumeric(splited[0])) {
@@ -66,5 +67,23 @@ public class Parsing {
             return Try.of(() -> Double.parseDouble(splited[1]))
                 .map(weight -> Tuple.of(splited[0], weight))
                 .toEither("Invalid weight '" + splited[1] + "'");
+    }
+
+    public static Either<String, HashMap<String, Double>> weightedQuery(String query) {
+        if(query.isEmpty())
+            return Either.left("Unexpected empty query");
+        
+        var terms = Stream.of(
+            query.strip().split(" ")
+        );
+
+        return
+            Either.sequence(
+                terms.map(Parsing::parseWeightedTerm)
+            )
+            .map(HashMap::ofEntries)
+            .mapLeft(
+                errors -> String.join("\n", errors)
+            );
     }
 }

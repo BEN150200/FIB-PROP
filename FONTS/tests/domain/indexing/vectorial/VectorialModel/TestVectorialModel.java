@@ -18,8 +18,8 @@ import io.vavr.collection.HashMap;
 import io.vavr.collection.HashSet;
 import io.vavr.control.Try;
 import src.domain.indexing.core.Index;
+import src.domain.indexing.core.Parsing;
 import src.domain.indexing.vectorial.VectorialModel;
-import src.helpers.Parsing;
 
 public class TestVectorialModel {
 
@@ -198,49 +198,6 @@ public class TestVectorialModel {
         var sim = model.querySimilars("d1").get().get("d2").get();
 
         assertEquals(1.0d, sim, 0.00000001d);
-    }
-
-    
-    @Test
-    @SuppressWarnings("deprecation")
-    public void massive() {
-        var folderPath = "..\\pracs-caim\\s1\\data\\raw\\novels";
-        
-        var files = Parsing.parseFolder(folderPath);
-
-        HashMap<String, Iterable<String>> corpus = HashMap.ofEntries(files);
-
-
-        var start = Instant.now();
-        var index = Index.of(corpus);
-        var end = Instant.now();
-
-
-        System.out.println("Constructed index in " + Duration.between(start, end).toMillis() + "ms");
-
-        start = Instant.now();
-        var model = VectorialModel.of(index);
-        end = Instant.now();
-
-        System.out.println("Computed vectorial model in " + Duration.between(start, end).toMillis() + "ms");
-
-        var query = HashMap.of(
-            "god", 1.0d
-        );
-
-        var results = model.querySimilars(query).toStream()
-        .sortBy(Tuple2::_2)
-        .reverse()
-        .take(5);
-
-        results.forEach(entry ->
-            System.out.println(
-                "Doc " + entry._1 + " (score=" + entry._2 + ")\n" +
-                "-----------------------------------\n" +
-                Try.of(() -> Files.readString(Paths.get(entry._1), Charset.forName("ISO-8859-1"))).get() +
-                "\n-----------------------------------\n"
-            )
-        );
     }
     
     //     5 4 1 6 3 2

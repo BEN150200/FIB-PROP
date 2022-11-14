@@ -14,7 +14,7 @@ import org.junit.Test;
 import io.vavr.collection.HashMap;
 import io.vavr.collection.HashSet;
 import src.domain.indexing.core.Index;
-import src.helpers.Parsing;
+import src.domain.indexing.core.Parsing;
 import src.helpers.Strings;
 
 public class TestIndex {
@@ -218,22 +218,5 @@ public class TestIndex {
         var index = Index.of(collection);
 
         assertEquals(index, index.remove("d4"));
-    }
-
-
-    @Test
-    public void massive() {
-        var folderPath = "..\\pracs-caim\\s1\\data\\raw\\20_newsgroups";
-        var files = Parsing.parseFolder(folderPath);
-        var corpus = HashMap.ofEntries(files);
-
-
-        var start = Instant.now();
-        var index = Index.of(corpus);
-        var end = Instant.now();
-
-        var time = Duration.between(start, end);
-
-        System.out.println("Constructed in " + time.toMillis() + "ms");
     }
 }

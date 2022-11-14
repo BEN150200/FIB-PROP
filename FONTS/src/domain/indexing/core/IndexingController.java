@@ -5,7 +5,6 @@ import src.domain.indexing.booleanmodel.BooleanModel;
 import src.domain.indexing.vectorial.VectorialModel;
 
 import src.helpers.Maths;
-import src.helpers.Parsing;
 import src.helpers.Strings;
 
 import java.util.Arrays;
@@ -66,22 +65,9 @@ public class IndexingController<DocId, SentenceId> {
     }
 
     public Either<String, java.util.HashMap<DocId, Double>> weightedQuery(String query) {
-        if(query.isEmpty())
-            return Either.left("Unexpected empty query");
-        
-            var terms = Stream.of(
-            query.strip().split(" ")
-        );
-
-        return
-            Either.sequence(
-                terms.map(Parsing::parseWeightedTerm)
-            )
-            .map(HashMap::ofEntries)
+        return  Parsing
+            .weightedQuery(query)
             .map(vectorialModel::querySimilars)
-            .map(HashMap::toJavaMap)
-            .mapLeft(
-                errors -> String.join("\n", errors)
-            );
+            .map(HashMap::toJavaMap);
     }
 }
