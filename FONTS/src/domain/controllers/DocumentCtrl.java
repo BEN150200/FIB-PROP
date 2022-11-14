@@ -3,6 +3,8 @@ package src.domain.controllers;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Set;
+
+import io.vavr.Tuple2;
 import javafx.util.Pair;
 import src.domain.core.Author;
 import src.domain.core.Document;
@@ -12,7 +14,8 @@ public class DocumentCtrl {
     private static DocumentCtrl instance = null;
     private int usedID;
     
-    private HashMap<Pair<String,String>, Integer> documentsID = new HashMap<Pair<String,String>, Integer>();
+    //private HashMap<Pair<String,String>, Integer> documentsID = new HashMap<Pair<String,String>, Integer>();
+    private HashMap<Tuple2<String,String>, Integer> documentsID = new HashMap<Tuple2<String,String>, Integer>();
     private HashMap<Integer, Document> documents = new HashMap<Integer, Document>();
 
     public static DocumentCtrl getInstance() {
@@ -38,15 +41,15 @@ public class DocumentCtrl {
     }
 
     public boolean existsDocument(String titleName, String authorName) {
-        return documentsID.containsKey(new Pair<String,String>(titleName, authorName));
+        return documentsID.containsKey(new Tuple2<String,String>(titleName, authorName));
     }
     
     public Integer getDocumentID(String titleName, String authorName) {
-        return documentsID.get(new Pair<String,String>(titleName, authorName));
+        return documentsID.get(new Tuple2<String,String>(titleName, authorName));
     }
 
     public Document getDocument(String titleName, String authorName) {
-        return documents.get(documentsID.get(new Pair<String,String>(titleName, authorName)));
+        return documents.get(documentsID.get(new Tuple2<String,String>(titleName, authorName)));
     }
 
     public Document getDocument(int docID) {
@@ -58,9 +61,11 @@ public class DocumentCtrl {
         return new ArrayList<Integer>(documents.keySet());
     }
 
-    public ArrayList<Pair<String,String>> getAllDocsTitlesAuthors() {
-        return new ArrayList<Pair<String, String>>(documentsID.keySet());
+    /*
+    public ArrayList<Tuple2<String,String>> getAllDocsTitlesAuthors() {
+        return new ArrayList<Tuple2<String,String>>(documentsID.keySet());
     }
+    */
 
     public ArrayList<Document> getAllDocuments() {
         return new ArrayList<Document>(documents.values());
@@ -82,14 +87,14 @@ public class DocumentCtrl {
         Title t = doc.getTitle();
         Author a = doc.getAuthor();
         ++usedID;
-        documentsID.put(new Pair<String,String>(t.toString(), a.toString()), usedID);
+        documentsID.put(new Tuple2<String,String>(t.toString(), a.toString()), usedID);
         documents.put(usedID, doc);
         return usedID;
     }
 
     public boolean deleteDocument(String titleName, String authorName){
         if(existsDocument(titleName, authorName)){
-            Pair<String, String> p = new Pair<String, String>(titleName, authorName);
+            Tuple2<String,String> p = new Tuple2<String,String>(titleName, authorName);
             documents.remove(getDocumentID(titleName, authorName));
             documentsID.remove(p);
             return true;

@@ -23,16 +23,17 @@ public class ConsoleCtrl extends PresentationCtrl{
 
     Set<Integer> documents = new HashSet<Integer>();
 
-    String[] logo = {   GREEN_BOLD_BRIGHT,
-        "\n",
+    String[] logo = {
+        PURPLE_BOLD_BRIGHT + "\n",
         "___  ___                                __ _     _    _               _ ",
 		"|  \\/  |                               / _| |   | |  | |             | |",
 		"| .  . | __ _  ___ _ __ ___  ___  ___ | |_| |_  | |  | | ___  _ __ __| |",
 		"| |\\/| |/ _` |/ __| '__/ _ \\/ __|/ _ \\|  _| __| | |/\\| |/ _ \\| '__/ _` |",
 		"| |  | | (_| | (__| | | (_) \\__ \\ (_) | | | |_  \\  /\\  / (_) | | | (_| |",
 		"\\_|  |_/\\__,_|\\___|_|  \\___/|___/\\___/|_|  \\__|  \\/  \\/ \\___/|_|  \\__,_|",
-		"\n",
-        ANSI_RESET
+		"\n" + RESET,
+
+        WHITE_BACKGROUND_BRIGHT + GREEN_BOLD_BRIGHT + "By Marcel Claramunt, Biel Escorsell, Xavier García, Jan Samaranch" + RESET
     };
 
     String[] mainMenu = {  
@@ -246,11 +247,11 @@ public class ConsoleCtrl extends PresentationCtrl{
     }
 
     private void printEnter(String message) {
-        System.out.println(BLACK_BOLD_BRIGHT + WHITE_BACKGROUND_BRIGHT+ message + RESET);
+        System.out.println(WHITE_BACKGROUND_BRIGHT+ BLACK_BOLD + message + RESET);
     }
 
     private int getInputAsInt(int min, int max, String message) {
-        System.out.println(BLACK_BOLD_BRIGHT + WHITE_BACKGROUND_BRIGHT + message + RESET);
+        System.out.println(WHITE_BACKGROUND_BRIGHT + BLACK_BOLD_BRIGHT + message + RESET);
         Integer command;
         while(true){
             try{
@@ -799,24 +800,6 @@ public class ConsoleCtrl extends PresentationCtrl{
         return docInfos;
     }
 
-    public static final String ANSI_RESET = "\u001B[0m";
-    public static final String ANSI_BLACK = "\u001B[30m";
-    public static final String ANSI_RED = "\u001B[31m";
-    public static final String ANSI_GREEN = "\u001B[32m";
-    public static final String ANSI_YELLOW = "\u001B[33m";
-    public static final String ANSI_BLUE = "\u001B[34m";
-    public static final String ANSI_PURPLE = "\u001B[35m";
-    public static final String ANSI_CYAN = "\u001B[36m";
-    public static final String ANSI_WHITE = "\u001B[37m";
-
-    public static final String ANSI_BLACK_BACKGROUND = "\u001B[40m";
-    public static final String ANSI_RED_BACKGROUND = "\u001B[41m";
-    public static final String ANSI_GREEN_BACKGROUND = "\u001B[42m";
-    public static final String ANSI_YELLOW_BACKGROUND = "\u001B[43m";
-    public static final String ANSI_BLUE_BACKGROUND = "\u001B[44m";
-    public static final String ANSI_PURPLE_BACKGROUND = "\u001B[45m";
-    public static final String ANSI_CYAN_BACKGROUND = "\u001B[46m";
-    public static final String ANSI_WHITE_BACKGROUND = "\u001B[47m";
     public static final String RESET = "\033[0m";  // Text Reset
 
     
