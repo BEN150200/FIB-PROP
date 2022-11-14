@@ -1,14 +1,7 @@
 Directoris:
 
-- EXE: 	Executables de les classes i el driver. Driver.class serveix per provar les funcionalitats implementades.
-	Les classes compilades es reparteixen en els directoris src i tests, a src hi ha les classes compilades, i
-	a tests hi ha els tests unitaris. per cada classe a provar hi ha un directori amb un executable i una 
-	descripció del joc de prova.
+- EXE: 	Executables de les classes i el driver.
 
 - DOCS:	Conté un document amb tota la informacio del lliurament.
 
 - FONTS:Aquest directori conté la implementació fins al moment de totes les classes.
-	Conte un makefile i un fitxer .bat per recompilar el driver.
-	Al directori lib hi ha els .jar de les llibreries externes utilitzades.
-	Al directori src hi ha les implementacions de les classes.
-	Al directori tests hi ha les implementacions dels tests unitaris.
