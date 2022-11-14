@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
+import io.vavr.collection.HashMap;
 import io.vavr.collection.List;
 import io.vavr.collection.Stream;
 import io.vavr.control.Either;
@@ -61,6 +62,14 @@ public class TestParsing {
         assertEquals(
             Either.left("Only one '^' expected in hello^^4"),
             Parsing.weightedQuery("bye^1 hello^^4")
+        );
+    }
+
+    @Test
+    public void correctQuery() {
+        assertEquals(
+            Either.right(HashMap.of("hello", 2.0, "hey", 2.5, "there", 1.0)),
+            Parsing.weightedQuery("hello^2 hey^2.5 there")
         );
     }
 }
