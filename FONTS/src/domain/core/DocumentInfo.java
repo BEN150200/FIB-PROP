@@ -1,4 +1,4 @@
-package src.domain;
+package src.domain.core;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
