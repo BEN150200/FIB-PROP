@@ -27,190 +27,160 @@ public class Driver{
     Set<Integer> documents = new HashSet<Integer>();
 
     String[] logo = {
-        PURPLE_BOLD_BRIGHT + "\n",
+        "",
         "___  ___                                __ _     _    _               _ ",
 		"|  \\/  |                               / _| |   | |  | |             | |",
 		"| .  . | __ _  ___ _ __ ___  ___  ___ | |_| |_  | |  | | ___  _ __ __| |",
 		"| |\\/| |/ _` |/ __| '__/ _ \\/ __|/ _ \\|  _| __| | |/\\| |/ _ \\| '__/ _` |",
 		"| |  | | (_| | (__| | | (_) \\__ \\ (_) | | | |_  \\  /\\  / (_) | | | (_| |",
 		"\\_|  |_/\\__,_|\\___|_|  \\___/|___/\\___/|_|  \\__|  \\/  \\/ \\___/|_|  \\__,_|",
-		"\n" + RESET,
-
-        GREEN_BOLD_BRIGHT + "By Marcel Claramunt, Biel Escorsell, Xavier García, Jan Samaranch" + RESET
+		""
     };
 
     String[] mainMenu = {  
                         "",
-                        WHITE_UNDERLINED +
-                        "                     Main Menu                       " +
-                        RESET,
-                        WHITE_BOLD + "Choose the type of operation:",
+                        "_____________________Main Menu_______________________",
+                        "Choose the type of operation:",
                         "   1 - Add document",
                         "   2 - Open document",
                         "   3 - Manage boolean expressions",
                         "   4 - Search in the system",
                         "   0 - Exit",
-                        //WHITE_UNDERLINED +"                                                     " + RESET,
+                        "_____________________________________________________",
                         "",
     };
 
     String[] booleanExpressionsMenuHeader = {
                         "",
-                        WHITE_UNDERLINED +
-                        "                Boolean Expressions                  " +
-                        RESET,
+                        "________________Boolean Expressions__________________",
                         ""
     };
 
     String[] booleanExpressionsMenuOptions = {
                         "",
-                        WHITE_UNDERLINED +
-                        "           Boolean Expressions options               "
-                        + RESET,
-                        WHITE_BOLD + "Choose the type of operation:",
+                        "___________Boolean Expressions options_______________",
+                        "Choose the type of operation:",
                         "   1 - Add a new boolean expression",
                         "   2 - Modify an existing boolean expression",
                         "   3 - Delete an existing boolean expression",
                         "   0 - Return to Main Menu",
-                        //WHITE_UNDERLINED +"                                                     " + RESET,
+                        "_____________________________________________________",
                         ""
     };
 
     String[] booleanSearchOptions = {
                         "",
-                        WHITE_UNDERLINED +
-                        "              Boolean Expressions Search             "
-                        + RESET,
-                        WHITE_BOLD + "Choose the type of operation:",
+                        "______________Boolean Expressions Search_____________",
+                        "Choose the type of operation:",
                         "   1 - Use a saved expression",
                         "   2 - New expression",
-                        //WHITE_UNDERLINED +"                                                     " + RESET,
+                        "_____________________________________________________",
                         ""
     };
                     
     String[] searchMenu = {
                         "",
-                        WHITE_UNDERLINED +
-                        "                    Search Menu                      "
-                        + RESET,
-                        WHITE_BOLD + "Choose the type of operation:",
+                        "____________________Search Menu______________________",
+                        "Choose the type of operation:",
                         "   1 - Search authors",
                         "   2 - Search titles",
                         "   3 - List all documents",
                         "   4 - Documents by boolean expression",
                         "   5 - Documents by query",
                         "   0 - Return to Main Menu",
-                        //WHITE_UNDERLINED +"                                                     " + RESET,
+                        "_____________________________________________________",
                         ""
     };
 
     String[] documentHeader = {
                         "",
-                        WHITE_UNDERLINED +
-                        "                      Document                       "
-                        + RESET,
+                        "______________________Document_______________________",
                         ""
     };
 
     String[] documentOptions = {
                         "",
-                        WHITE_UNDERLINED +
-                        "                 Document options                    "
-                        + RESET,
-                        WHITE_BOLD + "   1 - Modify content",
+                        "_________________Document options____________________",
+                        "   1 - Modify content",
                         "   2 - Delete",
                         "   3 - Search similar documents",
-                        "   0 - Exit" + RESET,
-                        //WHITE_UNDERLINED +"                                                     " + RESET,
+                        "   0 - Exit",
+                        "_____________________________________________________",
                         ""
 
     };
 
     String[] similarDocumentsHeader = {
                         "",
-                        WHITE_UNDERLINED +
-                        "                 Similar Documents                   "
-                        + RESET,
+                        "_________________Similar Documents___________________",
                         ""
     };
 
     String[] similarDocumentsOptions = {
                         "",
-                        WHITE_UNDERLINED +
-                        "              Similar Documents options              "
-                        + RESET,
+                        "______________Similar Documents options______________",
                         "   1 - Sort results",
                         "   2 - Open one of the documents",
                         "   0 - Exit",
-                        //WHITE_UNDERLINED +"                                                     " + RESET,
+                        "_____________________________________________________",
                         ""
     };
 
     String[] authorsHeader = {
-                        WHITE_UNDERLINED + "",
-                        "                       Authors                       ",
-                        "" + RESET
+                        "",
+                        "_______________________Authors_______________________",
+                        ""
     };
 
     String[] authorsOptions = {
                         "",
-                        WHITE_UNDERLINED +
-                        "                  Authors options                    "
-                        + RESET,
+                        "__________________Authors options____________________",
                         "   1 - Sort results",
                         "   2 - Get the titles of one of the authors",
                         "   0 - Exit",
-                        //WHITE_UNDERLINED +"                                                     " + RESET,
+                        "_____________________________________________________",
                         ""
     };
 
     String[] titlesHeader = {
-                        WHITE_UNDERLINED + "",
-                        "                       Titles                        ",
-                        "" + RESET
+                        "",
+                        "_______________________Titles________________________",
+                        ""
     };
 
     String[] titlesOptions = {
                         "",
-                        WHITE_UNDERLINED +
-                        "                   Titles options                    "
-                        + RESET,
+                        "___________________Titles options____________________",
                         "   1 - Sort results",
                         "   2 - Get the authors of one of the titles",
                         "   0 - Exit",
-                        //WHITE_UNDERLINED +"                                                     " + RESET,
+                        "_____________________________________________________",
                         ""
     };
 
     String[] optionStrings = {
                         "",
-                        WHITE_UNDERLINED +
-                        "                      Options                        "
-                        + RESET,
+                        "______________________Options________________________",
                         "   1 - Sort results",
                         "   2 - Open document",
                         "   0 - Exit",
-                        //WHITE_UNDERLINED +"                                                     " + RESET,
+                        "_____________________________________________________",
                         ""
     };
 
     String[] sortingArrayMenu = {
                         "",
-                        WHITE_UNDERLINED +
-                        "                  Sorting options                    "
-                        + RESET,
+                        "__________________Sorting options____________________",
                         "   1 - Ascending order  (A -> Z)",
                         "   2 - Descending order (Z -> A)",
                         "   0 - Cancel sorting",
-                        //WHITE_UNDERLINED +"                                                     " + RESET,
+                        "_____________________________________________________",
                         ""
     };
 
     String[] sortingDocumentsMenu = {
                         "",
-                        WHITE_UNDERLINED +
-                        "                  Sorting options                    "
-                        + RESET,
+                        "__________________Sorting options____________________",
                         "   1 - Sort by title ascending                 (A -> Z)",
                         "   2 - Sort by title descending                (Z -> A)",
                         "   3 - Sort by author ascending                (A -> Z)",
@@ -220,23 +190,19 @@ public class Driver{
                         "   7 - Sort by last modified date ascending    (A -> Z)",
                         "   8 - Sort by last modified date descending   (Z -> A)",
                         "   0 - Cancel sorting",
-                        //WHITE_UNDERLINED +"                                                     " + RESET,
+                        "_____________________________________________________",
                         ""
     };
 
     String[] allDocumentsHeader = {
                         "",
-                        WHITE_UNDERLINED +
-                        "                  System documents                   "
-                        + RESET,
+                        "__________________System documents___________________",
                         ""
     };
 
     String[] queryDocumentsHeader = {
                         "",
-                        WHITE_UNDERLINED +
-                        "                   Query documents                   "
-                        + RESET,
+                        "___________________Query documents___________________",
                         ""
     };
 
@@ -260,35 +226,35 @@ public class Driver{
     **/
     private void exit() {
         System.out.println("\n");
-        System.out.println(BLUE_BOLD_BRIGHT + "Closing the program" + RESET);
+        System.out.println("Closing the program");
         System.out.println("\n");
         System.exit(0);
     }
 
     private void printError(String error) {
-        System.out.println(RED_BOLD_BRIGHT + error + RESET);
+        System.out.println(error);
     }
 
     private void printCorrect(String message) {
-        System.out.println(GREEN_BOLD_BRIGHT + message + RESET);
+        System.out.println(message);
     }
 
     private void printEnter(String message) {
-        System.out.println(WHITE_BACKGROUND_BRIGHT+ BLACK_BOLD + message + RESET);
+        System.out.println(message);
     }
 
     private int getInputAsInt(int min, int max, String message) {
-        System.out.println(WHITE_BACKGROUND_BRIGHT + BLACK_BOLD_BRIGHT + message + RESET);
+        System.out.println(message);
         Integer command;
         while(true){
             try{
                 command = terminalIn.nextInt();
                 if(min > command || max < command){
-                    System.out.println(YELLOW_BOLD_BRIGHT + "Please enter a number from " + min + " to " + max + RESET);
+                    System.out.println("Please enter a number from " + min + " to " + max);
                 } else break;
             } catch(Exception e){
                 terminalIn.nextLine();
-                System.out.println(YELLOW_BOLD_BRIGHT + "Please enter a valid option (number)" + RESET);
+                System.out.println("Please enter a valid option (number)");
             }
         }
         // this makes sure all line is consumed because nextInt() consumes only the number, not the "end of line"
@@ -418,7 +384,7 @@ public class Driver{
         //terminalIn.nextLine();
         printEnter("-Enter the Boolean Expression Name:");
         String boolExpName = terminalIn.nextLine();
-        if(!domain.existsBooleanExpression(boolExpName)) System.out.println(RED_BACKGROUND + "There is not a expression with this name" + RESET);
+        if(!domain.existsBooleanExpression(boolExpName)) System.out.println("There is not a expression with this name");
         else{
             printEnter("-Enter a Boolean Expression:");
             String boolExp = terminalIn.nextLine();
@@ -455,7 +421,7 @@ public class Driver{
                 String s = terminalIn.nextLine();
                 if(s.equals("*end*")) {
                     System.out.println("");
-                    System.out.println(BLUE_BOLD_BRIGHT + "End of the document" + RESET);
+                    System.out.println("End of the document");
                     break;
                 }
                 content.add(s);
@@ -484,8 +450,8 @@ public class Driver{
             ArrayList<String> content = domain.getDocumentContent(titleName, authorName);
             if (content != null){
                 printToConsole(documentHeader);
-                System.out.println(WHITE_BOLD_BRIGHT + "Author: " + WHITE_BRIGHT+ authorName + RESET);
-                System.out.println(WHITE_BOLD_BRIGHT +"Title:  "+ WHITE_BRIGHT + titleName + RESET);
+                System.out.println("Author: " + authorName);
+                System.out.println("Title:  " + titleName);
                 System.out.println("");
                 for(String sentence: content){
                     System.out.println(sentence);
@@ -537,7 +503,7 @@ public class Driver{
         while(true){
             printToConsole(titlesHeader);
             for(int i = 0; i < titles.size(); ++i){
-                System.out.println(WHITE_BOLD_BRIGHT + (i + 1) + " - " + WHITE_BRIGHT + titles.get(i) + RESET);
+                System.out.println((i + 1) + " - " + titles.get(i));
             }
             printToConsole(optionStrings);
             Integer command = getInputAsInt(0, 2, "Enter an option number:");
@@ -564,7 +530,7 @@ public class Driver{
             while(true){
                 printToConsole(authorsHeader);
                 for(int i = 0; i < authors.size(); ++i){
-                    System.out.println(WHITE_BOLD_BRIGHT + (i + 1) + " - " + WHITE_BRIGHT + authors.get(i) + RESET);
+                    System.out.println((i + 1) + " - " + authors.get(i));
                 }
                 printToConsole(authorsOptions);
                 Integer command = getInputAsInt(0, 2, "Enter an option number:");
@@ -588,7 +554,7 @@ public class Driver{
         while(true){
             printToConsole(authorsHeader);
             for(int i = 0; i < authors.size(); ++i){
-                System.out.println(WHITE_BOLD_BRIGHT + (i + 1) + " - " + WHITE_BRIGHT + authors.get(i) + RESET);
+                System.out.println((i + 1) + " - " + authors.get(i));
             }
             printToConsole(optionStrings);
             Integer command = getInputAsInt(0, 2, "Enter an option number:");
@@ -615,7 +581,7 @@ public class Driver{
             while(true){
                 printToConsole(titlesHeader);
                 for(int i = 0; i < titles.size(); ++i){
-                     System.out.println(WHITE_BOLD_BRIGHT + (i + 1) + " - " + WHITE_BRIGHT + titles.get(i) + RESET);
+                     System.out.println((i + 1) + " - " + titles.get(i));
                 }
                 printToConsole(titlesOptions);
                 Integer command = getInputAsInt(0, 2, "Enter an option number:");
@@ -641,7 +607,7 @@ public class Driver{
             while(true){
                 printToConsole(allDocumentsHeader);
                 for(int i = 0; i < documentsInfo.size(); ++i){
-                    System.out.println(WHITE_BOLD_BRIGHT + (i + 1) + " - " + WHITE_BRIGHT + documentsInfo.get(i).toString() + RESET);
+                    System.out.println((i + 1) + " - " + documentsInfo.get(i).toString());
                 }
                 printToConsole(optionStrings);
                 Integer command = getInputAsInt(0, 2, "Enter an option number:");
@@ -673,7 +639,7 @@ public class Driver{
         while(similarDocuments != null){
             for(int i = 0; i < similarDocuments.size(); ++i){
                 DecimalFormat df = new DecimalFormat("0,00");
-                System.out.println(WHITE_BOLD_BRIGHT + (i + 1) + " - " + WHITE_BRIGHT + similarDocuments.get(i).toString() + "  " + df.format(GREEN_BOLD_BRIGHT+ similarDocuments.get(i).semblance()*100) + "%" + RESET);
+                System.out.println((i + 1) + " - " + similarDocuments.get(i).toString() + "  " + df.format(similarDocuments.get(i).semblance()*100) + "%");
             }
             printToConsole(similarDocumentsOptions);
             Integer command = getInputAsInt(0, 2, "Enter an option number:");
@@ -731,7 +697,7 @@ public class Driver{
         else {
             printToConsole(allDocumentsHeader);
             for(int i = 0; i < docsInfo.size(); ++i){
-                System.out.println(WHITE_BOLD_BRIGHT + (i + 1) + " - " + WHITE_BRIGHT + docsInfo.get(i).toString() + RESET);
+                System.out.println((i + 1) + " - " + docsInfo.get(i).toString());
             }
         }
     }
@@ -751,7 +717,7 @@ public class Driver{
         while(true){
             printToConsole(queryDocumentsHeader);
             for(int i = 0; i < queryDocs.size(); ++i){
-                System.out.println(WHITE_BOLD_BRIGHT + (i + 1) + " - " + WHITE_BRIGHT + queryDocs.get(i).toString() + RESET);
+                System.out.println((i + 1) + " - " + queryDocs.get(i).toString());
             }
             printToConsole(similarDocumentsOptions);
             Integer command = getInputAsInt(0, 2, "Enter an option number:");
@@ -824,79 +790,6 @@ public class Driver{
             }
         return docInfos;
     }
-
-    public static final String RESET = "\033[0m";  // Text Reset
-
-    
-    // Regular Colors
-    public static final String BLACK = "\033[0;30m";   // BLACK
-    public static final String RED = "\033[0;31m";     // RED
-    public static final String GREEN = "\033[0;32m";   // GREEN
-    public static final String YELLOW = "\033[0;33m";  // YELLOW
-    public static final String BLUE = "\033[0;34m";    // BLUE
-    public static final String PURPLE = "\033[0;35m";  // PURPLE
-    public static final String CYAN = "\033[0;36m";    // CYAN
-    public static final String WHITE = "\033[0;37m";   // WHITE
-
-    // Bold
-    public static final String BLACK_BOLD = "\033[1;30m";  // BLACK
-    public static final String RED_BOLD = "\033[1;31m";    // RED
-    public static final String GREEN_BOLD = "\033[1;32m";  // GREEN
-    public static final String YELLOW_BOLD = "\033[1;33m"; // YELLOW
-    public static final String BLUE_BOLD = "\033[1;34m";   // BLUE
-    public static final String PURPLE_BOLD = "\033[1;35m"; // PURPLE
-    public static final String CYAN_BOLD = "\033[1;36m";   // CYAN
-    public static final String WHITE_BOLD = "\033[1;37m";  // WHITE
-
-    // Underline
-    public static final String BLACK_UNDERLINED = "\033[4;30m";  // BLACK
-    public static final String RED_UNDERLINED = "\033[4;31m";    // RED
-    public static final String GREEN_UNDERLINED = "\033[4;32m";  // GREEN
-    public static final String YELLOW_UNDERLINED = "\033[4;33m"; // YELLOW
-    public static final String BLUE_UNDERLINED = "\033[4;34m";   // BLUE
-    public static final String PURPLE_UNDERLINED = "\033[4;35m"; // PURPLE
-    public static final String CYAN_UNDERLINED = "\033[4;36m";   // CYAN
-    public static final String WHITE_UNDERLINED = "\033[4;37m";  // WHITE
-
-    // Background
-    public static final String BLACK_BACKGROUND = "\033[40m";  // BLACK
-    public static final String RED_BACKGROUND = "\033[41m";    // RED
-    public static final String GREEN_BACKGROUND = "\033[42m";  // GREEN
-    public static final String YELLOW_BACKGROUND = "\033[43m"; // YELLOW
-    public static final String BLUE_BACKGROUND = "\033[44m";   // BLUE
-    public static final String PURPLE_BACKGROUND = "\033[45m"; // PURPLE
-    public static final String CYAN_BACKGROUND = "\033[46m";   // CYAN
-    public static final String WHITE_BACKGROUND = "\033[47m";  // WHITE
-
-    // High Intensity
-    public static final String BLACK_BRIGHT = "\033[0;90m";  // BLACK
-    public static final String RED_BRIGHT = "\033[0;91m";    // RED
-    public static final String GREEN_BRIGHT = "\033[0;92m";  // GREEN
-    public static final String YELLOW_BRIGHT = "\033[0;93m"; // YELLOW
-    public static final String BLUE_BRIGHT = "\033[0;94m";   // BLUE
-    public static final String PURPLE_BRIGHT = "\033[0;95m"; // PURPLE
-    public static final String CYAN_BRIGHT = "\033[0;96m";   // CYAN
-    public static final String WHITE_BRIGHT = "\033[0;97m";  // WHITE
-
-    // Bold High Intensity
-    public static final String BLACK_BOLD_BRIGHT = "\033[1;90m"; // BLACK
-    public static final String RED_BOLD_BRIGHT = "\033[1;91m";   // RED
-    public static final String GREEN_BOLD_BRIGHT = "\033[1;92m"; // GREEN
-    public static final String YELLOW_BOLD_BRIGHT = "\033[1;93m";// YELLOW
-    public static final String BLUE_BOLD_BRIGHT = "\033[1;94m";  // BLUE
-    public static final String PURPLE_BOLD_BRIGHT = "\033[1;95m";// PURPLE
-    public static final String CYAN_BOLD_BRIGHT = "\033[1;96m";  // CYAN
-    public static final String WHITE_BOLD_BRIGHT = "\033[1;97m"; // WHITE
-
-    // High Intensity backgrounds
-    public static final String BLACK_BACKGROUND_BRIGHT = "\033[0;100m";// BLACK
-    public static final String RED_BACKGROUND_BRIGHT = "\033[0;101m";// RED
-    public static final String GREEN_BACKGROUND_BRIGHT = "\033[0;102m";// GREEN
-    public static final String YELLOW_BACKGROUND_BRIGHT = "\033[0;103m";// YELLOW
-    public static final String BLUE_BACKGROUND_BRIGHT = "\033[0;104m";// BLUE
-    public static final String PURPLE_BACKGROUND_BRIGHT = "\033[0;105m"; // PURPLE
-    public static final String CYAN_BACKGROUND_BRIGHT = "\033[0;106m";  // CYAN
-    public static final String WHITE_BACKGROUND_BRIGHT = "\033[0;107m";   // WHITE
 
 
 }
