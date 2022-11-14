@@ -54,13 +54,13 @@ public class Parsing {
     @SuppressWarnings("deprecation")
     public static Either<String, Tuple2<String, Double>> parseWeightedTerm(String term) {
         var splited = term.split("\\^");
-        if(splited.length == 0)
-            return Either.left("Unexpected standalone '^' found");
+        if(splited.length > 0 && splited[0].isEmpty() || splited.length < 2 && term.contains("^"))
+            return Either.left("Unexpected incomplete '^' found in " + term);
         else if(!Strings.isAlphaNumeric(splited[0])) {
             return Either.left("Unexpected non-alphanumeric token '" + splited[0] + "'");
         }
         else if(splited.length > 2)
-            return Either.left("Only one '^' expected");
+            return Either.left("Only one '^' expected in " + term);
         else if(splited.length == 1)
             return Either.right(Tuple.of(splited[0], 1.0));
         else

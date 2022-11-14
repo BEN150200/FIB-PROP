@@ -4,15 +4,10 @@ import src.domain.expressions.ExpressionTreeNode;
 import src.domain.indexing.booleanmodel.BooleanModel;
 import src.domain.indexing.vectorial.VectorialModel;
 
-import src.helpers.Maths;
-import src.helpers.Strings;
-
-import java.util.Arrays;
 import java.util.Map;
 
 import io.vavr.collection.HashMap;
 import io.vavr.collection.HashSet;
-import io.vavr.collection.Stream;
 import io.vavr.control.Either;
 
 public class IndexingController<DocId, SentenceId> {
