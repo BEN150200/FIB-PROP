@@ -1,4 +1,4 @@
-package domain.core;
+package domain.core.BooleanExpressionCtrlTest;
 
 import org.junit.Before;
 import org.junit.Test;
