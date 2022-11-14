@@ -92,21 +92,30 @@ public class BooleanExpression{
         char[] x = s.trim().toCharArray();
         if(x[0]=='{'){
             int count=0;
+            boolean estaBuit=true;
             for(char c: x){
                 if (count>=2) return true;
                 if(c=='}' |c == '{' ) {
                     count++;
                 }
+                else if( c!=' '){
+                    estaBuit=false;
+                }
                 
             }
+            if(estaBuit) return true;
         }
         else if(x[0]=='"'){
             int count = 0;
+            boolean estaBuit=true;
             for(char c: x){
                 if(count>=2) return true;
                 if(c=='"') count++;
-               
+                else if( c!=' '){
+                    estaBuit=false;
+                }
             }
+            if(estaBuit) return true;
         }
         else{
             for(char c: x){

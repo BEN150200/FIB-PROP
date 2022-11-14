@@ -25,6 +25,7 @@ public class BooleanExpressionTest {
         list.put("{hola adeu}",true);
         list.put("\"hola adeu!\"",true);
         list.put("hola",true);
+
         list.put("{hola adeu} | !(dia) & !\"com estas\"",true);//casos mes raros
         list.put("(hola|!(adeu & estas)) & {bon dia}",true);
         list.put("   adeu&hola|        ({que passa   }      & !      dia )",true);
@@ -55,9 +56,12 @@ public class BooleanExpressionTest {
         list.put("adeu |!(bon dia)",false);
         list.put("\"bon dia\" adeu|hola&bones",false);
 
-        list.put("",false);
+        list.put("",false);//el cas buit és incorrecte
 
-        list.put("hola|(adeu&!(bon & dia | \"que tal\") | !!!!!{ } & !3) | !nit", true);//casos extrems
+        list.put("hola | {     }",false);//corxetes o cometes buides
+        list.put("hola | \"  \"",false);
+
+        list.put("hola|(adeu&!(bon & dia | \"que tal\") | !!!!!{hola } & !3) | !nit", true);//casos extrems
         list.put("a & b & c & d & e & f & g | !( h| i| j |k |l) & \" m n o\"" ,true);
 
 
