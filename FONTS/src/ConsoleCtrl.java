@@ -12,8 +12,14 @@ import java.util.Scanner;
 import java.util.Set;
 import java.util.HashMap;
 
-public class ConsoleCtrl extends PresentationCtrl{
+public class ConsoleCtrl{
     
+    public static void main(String[] args) {
+        ConsoleCtrl c = new ConsoleCtrl();
+        c.launchPresentation();
+	}
+
+
     /**
      * Attributes
      */
