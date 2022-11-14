@@ -2,18 +2,14 @@ package src.domain.indexing.vectorial;
 
 import src.domain.indexing.core.Index;
 
-import src.helpers.Lists;
 import src.helpers.Maps;
 import src.helpers.Maths;
 import src.helpers.Sets;
-
-import java.util.function.Function;
 
 import io.vavr.Tuple;
 import io.vavr.Tuple2;
 import io.vavr.collection.HashMap;
 import io.vavr.collection.HashSet;
-import io.vavr.collection.Map;
 import io.vavr.collection.Set;
 import io.vavr.control.Option;
 

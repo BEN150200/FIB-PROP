@@ -1,7 +1,6 @@
 package src.domain.preprocessing;
 
 import java.util.Optional;
-import java.util.stream.Stream;
 
 public class TokenFilter {
 
@@ -18,16 +17,5 @@ public class TokenFilter {
             .map(String::toLowerCase)
             .filter(Stopwords::filter)
             .map(Stemmer::stem);
-    }
-
-    /**
-     * 
-     * @param tokens
-     * @return all tokens filtered, may return less tokens that were inputted
-     */
-    public static Stream<String> filter(Stream<String> tokens) {
-        return tokens.map(TokenFilter::filter)
-            .filter(Optional::isPresent)
-            .map(Optional::get);
     }
 }

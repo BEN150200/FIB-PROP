@@ -79,7 +79,6 @@ public class TestIndex {
             )
         );
 
-        System.out.println(Index.print(actual));
         assertEquals(expected, actual);
     }
 
