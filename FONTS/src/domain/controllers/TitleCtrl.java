@@ -23,14 +23,28 @@ public class TitleCtrl {
     /**
      * Getters
     **/
+    /**
+     * Fucntion to check if there is a Title identified by titleName
+     * @param titleName Name of the title that whant to know if exists
+     * @return Return ture if the title identified by titleName, else return false
+     */
     public boolean existsTitle(String titleName) {
         return titles.containsKey(titleName);
     }
 
+    /**
+     * Fucntion to get the title identified by titleName
+     * @param titleName
+     * @return Returns the instance of the Title identified by titleName, if it don't exists, return NULL
+     */
     public Title getTitle(String titleName) {
         return titles.get(titleName);
     }
 
+    /**
+     * Function to get all the titles in the System
+     * @return Return an ArrayList of Titles that contains all the Titles in the System
+     */
     public ArrayList<Title> getAllTitles() {
         return new ArrayList<Title>(titles.values());
     }
