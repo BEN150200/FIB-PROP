@@ -1,4 +1,4 @@
-Directoris:
+- DescripcioEquip: Descripció de l'equip (noms i correus electronics).
 
 - EXE: 	Executables de les classes i el driver.
 
