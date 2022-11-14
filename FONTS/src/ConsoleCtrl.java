@@ -621,8 +621,8 @@ public class ConsoleCtrl extends PresentationCtrl{
     private void similarDocumentsSearch(String titleName, String authorName){
         int k = getInputAsInt(0, 100,"Enter the number of documents showed:");
         ArrayList<DocumentInfo> similarDocuments = domain.getInstance().similarDocumentsSearch(titleName, authorName, k);
-        while(true){
-            printToConsole(similarDocumentsHeader);
+        if (similarDocuments == null) System.out.println("No Similar Documents Found!!!");
+        while(similarDocuments != null){
             for(int i = 0; i < similarDocuments.size(); ++i){
                 System.out.println((i + 1) + " - " + similarDocuments.get(i).toString());
             }
