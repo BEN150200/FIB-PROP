@@ -1,22 +1,15 @@
-package tests.domain.indexing.vectorial.VectorialModel;
+package domain.indexing.vectorial.VectorialModel;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
 
-import java.nio.charset.Charset;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.time.Duration;
-import java.time.Instant;
 import java.util.Arrays;
 
 import org.junit.Test;
 
-import io.vavr.Tuple2;
 import io.vavr.collection.HashMap;
 import io.vavr.collection.HashSet;
-import io.vavr.control.Try;
 import src.domain.indexing.core.Index;
 import src.domain.indexing.core.Parsing;
 import src.domain.indexing.vectorial.VectorialModel;

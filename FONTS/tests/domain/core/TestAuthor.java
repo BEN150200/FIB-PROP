@@ -1,4 +1,6 @@
-package tests.domain.core;
+package domain.core;
+
+
 
 public class TestAuthor {
     

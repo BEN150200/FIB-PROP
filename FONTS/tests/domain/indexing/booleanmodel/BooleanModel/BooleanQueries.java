@@ -1,4 +1,4 @@
-package tests.domain.indexing.booleanmodel.BooleanModel;
+package domain.indexing.booleanmodel.BooleanModel;
 
 import static org.junit.Assert.assertEquals;
 

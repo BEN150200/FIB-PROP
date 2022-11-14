@@ -1,4 +1,4 @@
-package tests.domain.preprocessing;
+package domain.preprocessing;
 
 import static org.junit.Assert.assertArrayEquals;
 

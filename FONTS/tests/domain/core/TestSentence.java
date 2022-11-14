@@ -1,4 +1,6 @@
-package tests.domain.core;
+package domain.core;
+
+
 
 import src.domain.core.Sentence;
 

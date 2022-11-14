@@ -1,9 +1,8 @@
-package tests.domain.core;
+package domain.core;
 
 import org.junit.Before;
 import org.junit.Test;
 import src.domain.controllers.BooleanExpressionCtrl;
-import src.domain.expressions.BooleanExpression;
 
 import java.util.HashMap;
 

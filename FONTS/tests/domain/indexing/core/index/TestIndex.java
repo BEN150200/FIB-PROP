@@ -1,4 +1,4 @@
-package tests.domain.indexing.core.index;
+package domain.indexing.core.index;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;

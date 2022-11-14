@@ -1,4 +1,4 @@
-package tests.domain.core;
+package domain.core;
 
 import src.domain.core.Author;
 import src.domain.core.Document;

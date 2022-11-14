@@ -1,4 +1,4 @@
-package tests.domain.core;
+package domain.core;
 
 import org.junit.After;
 import org.junit.Before;

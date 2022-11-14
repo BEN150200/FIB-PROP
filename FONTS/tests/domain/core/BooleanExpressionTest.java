@@ -1,4 +1,5 @@
-package tests.domain.core;
+package domain.core;
+
 
 import io.vavr.Tuple2;
 import src.domain.expressions.BooleanExpression;

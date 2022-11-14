@@ -1,4 +1,4 @@
-package tests.domain.indexing.core.parsing;
+package domain.indexing.core.parsing;
 
 import static org.junit.Assert.assertEquals;
 

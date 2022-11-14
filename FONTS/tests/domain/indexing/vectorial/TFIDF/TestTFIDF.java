@@ -1,4 +1,4 @@
-package tests.domain.indexing.vectorial.TFIDF;
+package domain.indexing.vectorial.TFIDF;
 
 import static org.junit.Assert.assertEquals;
 
