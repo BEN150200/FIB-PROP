@@ -25,7 +25,7 @@ public class BooleanExpressionCtrl {
      * @cost 0(n) n=number of saved expressions
      * @return Names and expression of all the saved expressions 
      */
-    public HashMap<String,String> getSavedExpressionsNames(){//Torna els noms de les expressions guardades
+    public HashMap<String,String> getSavedExpressionsNames(){//Torna els noms i expressio de les expressions guardades
         HashMap<String,String> names= new HashMap<String,String>();
         for(Map.Entry<String, BooleanExpression> i : savedExpressions.entrySet() ){
             

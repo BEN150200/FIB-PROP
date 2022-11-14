@@ -40,10 +40,10 @@ public class BooleanExpression{
      * @cost 
      * @return true if the expression is valid, else false
      */
-    private boolean checkExpression(){
+    /*private boolean checkExpression(){
         root=new ExpressionTreeNode();
         return buildTree(root,expression);
-    }
+    }*/
  
     public String printTree(){//nomes per veure si va be, eliminar desprs
         return print(root);
