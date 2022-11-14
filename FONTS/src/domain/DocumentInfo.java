@@ -9,6 +9,7 @@ public class DocumentInfo {
     private String authorName;
     private LocalDateTime creationDate;
     private LocalDateTime modificationDate;
+    private Double semblance;
 
     /*private void print(String s) {
         System.out.println(s);
@@ -59,6 +60,14 @@ public class DocumentInfo {
 
     public LocalDateTime modificationDate() {
         return modificationDate;
+    }
+
+    public Double semblance() {
+        return semblance;
+    }
+
+    public void setSemblance(Double s) {
+        semblance = s;
     }
 
 }

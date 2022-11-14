@@ -40,10 +40,11 @@ public class SearchCtrl {
                 return null;
             }
             else {
+                if (k == 0) k = 5; //default
                 LinkedHashMap<Integer, Double> sortedMap = new LinkedHashMap<>();
                 ArrayList<Double> list = new ArrayList<Double>();
                 for (Entry<Integer, Double> entry : similar.get().entrySet()) {
-                    list.add(entry.getValue());
+                    if (entry.getKey() != docId) list.add(entry.getValue());
                 }
                 Collections.sort(list);
 
@@ -61,12 +62,14 @@ public class SearchCtrl {
                         }
                     }
                 }
-                ArrayList<DocumentInfo> docInfo = new ArrayList<>(); 
+                ArrayList<DocumentInfo> docsInfo = new ArrayList<>(); 
                 sortedMap.forEach((id, value) -> {
-                    docInfo.add(DocumentCtrl.getInstance().getDocument(id).getInfo());
+                    DocumentInfo docInf = DocumentCtrl.getInstance().getDocument(id).getInfo();
+                    docInf.setSemblance(value);
+                    docsInfo.add(docInf);
                 });
 
-                return docInfo;
+                return docsInfo;
             } 
         }
 

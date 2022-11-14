@@ -3,6 +3,7 @@ package src;
 import src.domain.DocumentInfo;
 import src.domain.controllers.DomainCtrl;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashSet;
@@ -660,12 +661,13 @@ public class ConsoleCtrl extends PresentationCtrl{
      * Complex Search
     **/
     private void similarDocumentsSearch(String titleName, String authorName){
-        int k = getInputAsInt(0, 100,"Enter the number of documents showed:");
+        int k = getInputAsInt(0, 100,"Enter the number of documents showed or 0 if you want the default number of Documents(5):");
         ArrayList<DocumentInfo> similarDocuments = domain.similarDocumentsSearch(titleName, authorName, k);
         if (similarDocuments == null) printError("No Similar Documents Found!!!");
         while(similarDocuments != null){
             for(int i = 0; i < similarDocuments.size(); ++i){
-                System.out.println(WHITE_BOLD_BRIGHT + (i + 1) + " - " + WHITE_BRIGHT + similarDocuments.get(i).toString() + RESET);
+                DecimalFormat df = new DecimalFormat("0,00");
+                System.out.println(WHITE_BOLD_BRIGHT + (i + 1) + " - " + WHITE_BRIGHT + similarDocuments.get(i).toString() + "  " + df.format(GREEN_BOLD_BRIGHT+ similarDocuments.get(i).semblance()*100) + "%" + RESET);
             }
             printToConsole(similarDocumentsOptions);
             Integer command = getInputAsInt(0, 2, "Enter an option number:");

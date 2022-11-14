@@ -118,6 +118,7 @@ public class Document {
             }
         }
         sentences = newContent;
+        compute();
     }
 
     public void addSentence(Sentence sentence) {
