@@ -300,13 +300,7 @@ public class DomainCtrl {
     }
 
     public ArrayList<DocumentInfo> documentsByQuery(String query){
-        IndexingController indexCtrl = new IndexingController();
-        Either<String, java.util.HashMap<Integer, Double>> resultsId = indexCtrl.weightedQuery(query);
-        ArrayList<Document> docs = DocumentCtrl.getInstance().getDocuments(resultsId.get().keySet());
-        ArrayList<DocumentInfo> docsInfo = new ArrayList<DocumentInfo>();
-        for(Document d: docs){
-            docsInfo.add(d.getInfo());
-        }
-        return docsInfo;
+        return SearchCtrl.getInstance().documentsByQuery(query);
+    
     }
 }
