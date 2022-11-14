@@ -37,7 +37,7 @@ public class BooleanExpressionCtrl {
 
     /**
      * @cost 0(1)
-     * @param The name of the desired expression
+     * @param //The name of the desired expression
      * @return If it exists returns the expression, else exception
      */
     public String getExpression(String name){//retorna una string buida si no existeix
@@ -62,19 +62,19 @@ public class BooleanExpressionCtrl {
 
     /**
      * @cost 
-     * @param The expression and its name 
+     * @param //The expression and its name
      * @return Return true if the expression is valid, false if invalid
      */
     public boolean saveExpression(String exp, String name){
-        BooleanExpression newexp=new BooleanExpression(exp);
-        if(newexp.checkExpression()==false) return false;
+        BooleanExpression newexp = BooleanExpression.createBooleanExpression(exp);
+        if(newexp==null) return false;
         savedExpressions.put(name,newexp);
         return true;
     }
 
     /**
      * @cost 
-     * @param Name of the expression that you want the tree of
+     * @param //Name of the expression that you want the tree of
      * @return Return null if the expression do not exist, else returns the root of the expressions tree
      */
     public ExpressionTreeNode getSavedExpressionTree(String name){
@@ -86,20 +86,20 @@ public class BooleanExpressionCtrl {
 
     /**
      * @cost 
-     * @param The expression to be solved 
+     * @param //The expression to be solved
      * @return returns null if the expression is not correct, else returns the root of the expressions tree
      */
     public ExpressionTreeNode createExpressionTree(String exp){
 
-        BooleanExpression newexp=new BooleanExpression(exp);
-        if(newexp.checkExpression()==false) return null;//haura de retornar excepcio si no es correcte
+        BooleanExpression newexp = BooleanExpression.createBooleanExpression(exp);
+        if(newexp==null) return null;//haura de retornar excepcio si no es correcte
         //addHistorial(newexp);
         return newexp.getRoot();
     }
     
     /**
      * @cost 0(1)
-     * @param The name of the expression to be deleted
+     * @param //The name of the expression to be deleted
      * @return false if the expression did not exist, else true
      */
     public boolean deleteExpression (String name){
@@ -115,7 +115,7 @@ public class BooleanExpressionCtrl {
 
     /**
      * @cost 0(1)
-     * @param a boolean expression
+     * @param //a boolean expression
      */
     private void addHistorial(BooleanExpression expr) {
         historial.add(expr);

@@ -14,9 +14,15 @@ public class BooleanExpression{
      * @cost 0(1) 
      * @param //the string of the expression
      */
-    public BooleanExpression(String expr){
+    private BooleanExpression(String expr,ExpressionTreeNode rot){
         expression=expr.trim();
+        root=rot;
+    }
 
+    static public BooleanExpression createBooleanExpression(String expr){
+        ExpressionTreeNode rot=new ExpressionTreeNode();
+        if(buildTree(rot,expr)) return new BooleanExpression(expr,rot);
+        else return null;
     }
 
     /**
@@ -34,7 +40,7 @@ public class BooleanExpression{
      * @cost 
      * @return true if the expression is valid, else false
      */
-    public boolean checkExpression(){
+    private boolean checkExpression(){
         root=new ExpressionTreeNode();
         return buildTree(root,expression);
     }
@@ -49,7 +55,7 @@ public class BooleanExpression{
      * @param  //the root of the tree and the expression to be converted to a tree
      * @return true if the expression is correct, else false
      */
-    private boolean buildTree(ExpressionTreeNode rot,String s){
+    static private boolean buildTree(ExpressionTreeNode rot,String s){
         while(parentesis(s)){
             s=s.substring(1,s.length()-1);
         }
@@ -88,7 +94,7 @@ public class BooleanExpression{
         }
     }
 
-    private boolean missingOperator(String s){
+    static private boolean missingOperator(String s){
         char[] x = s.trim().toCharArray();
         if(x[0]=='{'){
             int count=0;
@@ -130,7 +136,7 @@ public class BooleanExpression{
      * @param //a expression
      * @return the index of the last operation that should be computed, -1 if its not correct, -2 if there arent any operations
      */
-    private int findLastOperation(String s){
+    static private int findLastOperation(String s){
         char[] x = s.toCharArray();
         int[] ranking = new int[s.length()];
         int rank = 0;
@@ -193,7 +199,7 @@ public class BooleanExpression{
      * @param //two operators (|,&,!)
      * @return true if iact has lower preference, else return false
      */
-    private Boolean hasLowerPreference(char iact, char imin) {
+    static private Boolean hasLowerPreference(char iact, char imin) {
         if (imin == '|') return false;
         if (iact == '|') return true;
         if (imin == '&') return false;
@@ -216,7 +222,7 @@ public class BooleanExpression{
      * @param //a string s
      * @return returns true if it has a parentesis that contains everything else
      */
-    private boolean parentesis(String s){//comprova si hi ha un parentesis que conté la expressió sencera
+    static private boolean parentesis(String s){//comprova si hi ha un parentesis que conté la expressió sencera
         int count=0;
         if(s.length()>1 && s.charAt(0)=='(' && s.charAt(s.length()-1)==')'){
             for(int i=0;i<s.length();i++){

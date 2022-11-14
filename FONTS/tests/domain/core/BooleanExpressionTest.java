@@ -70,14 +70,13 @@ public class BooleanExpressionTest {
 
     @Test
     public void getExpression() {
-        BooleanExpression test =new BooleanExpression("hola|adeu&!\"bon dia\"");
+        BooleanExpression test = BooleanExpression.createBooleanExpression("hola|adeu&!\"bon dia\"");
         assertEquals("hola|adeu&!\"bon dia\"", test.getExpression());
     }
 
     @Test
     public void getRoot() {
-        BooleanExpression test =new BooleanExpression("hola|adeu&!\"bon dia\"");
-        test.checkExpression();// aquesta funció comprova que la expressió sigui correcte i crea l'arbre
+        BooleanExpression test = BooleanExpression.createBooleanExpression("hola|adeu&!\"bon dia\"");
         assertEquals("|", test.getRoot().getValue());
     }
 
@@ -85,24 +84,23 @@ public class BooleanExpressionTest {
     public void checkExpression() { //la funcio comprova si la expressio és correcte i crea l'arbre corresponent
         //primer comprovem que comprova be les expressions
         for(Map.Entry<String, Boolean> i : list.entrySet() ){
-            BooleanExpression test = new BooleanExpression(i.getKey());
-            assertEquals(i.getValue(),test.checkExpression());
+            BooleanExpression test = BooleanExpression.createBooleanExpression(i.getKey());
+            boolean correcte=true;
+            if(test==null) correcte=false;
+            assertEquals(i.getValue(),correcte);
         }
 
         //comprovem que els arbres creats son els esperats
         String expr = "{hola adeu} | !(dia) & !\"com estas\"";
-        BooleanExpression test1 = new BooleanExpression(expr);
-        test1.checkExpression();
+        BooleanExpression test1 = BooleanExpression.createBooleanExpression(expr);
         assertEquals("[{hola adeu}]|[[![dia]]&[![\"com estas\"]]]",test1.printTree());
 
         expr = "(hola|!(adeu & estas)) & {bon dia}";
-        BooleanExpression test2 = new BooleanExpression(expr);
-        test2.checkExpression();
+        BooleanExpression test2 = BooleanExpression.createBooleanExpression(expr);
         assertEquals("[[hola]|[![[adeu]&[estas]]]]&[{bon dia}]",test2.printTree());
 
         expr = "   adeu&hola|        ({que passa   }      & !      dia )";
-        BooleanExpression test3 = new BooleanExpression(expr);
-        test3.checkExpression();
+        BooleanExpression test3 = BooleanExpression.createBooleanExpression(expr);
         assertEquals("[[adeu]&[hola]]|[[{que passa   }]&[![dia]]]",test3.printTree());
     }
 }
