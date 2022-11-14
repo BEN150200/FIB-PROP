@@ -98,8 +98,9 @@ public class DomainCtrl {
     }
 
     private void updateDocumentContent(Document doc, List<String> content) {
-        deleteDocumentContent(doc);
-
+        //doc.deleteContent();
+        
+        ArrayList<Sentence> newContent = new ArrayList<>();
         for (String sentenceDoc : content) {
             Sentence sentence;
             if(!SentenceCtrl.getInstance().existsSentence(sentenceDoc)) {
@@ -108,12 +109,13 @@ public class DomainCtrl {
             else {
                 sentence = SentenceCtrl.getInstance().getSentence(sentenceDoc);
             }
-            
-            doc.addSentence(sentence);
+            newContent.add(sentence);
+            //doc.addSentence(sentence);
         }
+        doc.updateDocumentContent(newContent);
 
-        doc.updateModificationDate();
-        doc.compute();
+        //doc.updateModificationDate();
+        //doc.compute();
     }
 
     /**
@@ -123,39 +125,14 @@ public class DomainCtrl {
     public boolean deleteDocument(String titleName, String authorName){
         if (DocumentCtrl.getInstance().existsDocument(titleName, authorName)) {
             Document d = DocumentCtrl.getInstance().getDocument(titleName, authorName);
-            DocumentCtrl.getInstance().deleteDocument(titleName, authorName);
             
-            Author a = d.getAuthor();
-            a.deleteDocument(d.getID());
-            if(a.getNbDocuments() == 0){
-                a.delete();
-            }
-
-            Title t = d.getTitle();
-            t.deleteDocument(d.getID());
-            if(t.getNbDocuments() == 0){
-                t.delete();
-            }
-            
-            deleteDocumentContent(d);
-            
-            
-            SearchCtrl.getInstance().removeDocument(d.getID());
+            d.delete();
 
             return true;
         }
         return false;
     }
 
-    private void deleteDocumentContent(Document doc) {
-        ArrayList<Sentence> content = doc.getSentences();
-            for (Sentence sentence : content) {
-                sentence.deleteDocument(doc.getID());
-                if (sentence.getNbDocuments() == 0) {
-                    sentence.delete();
-                }
-            }
-    }
 
     public boolean deleteBooleanExpression(String boolExpName) {
         return BooleanExpressionCtrl.getInstance().deleteExpression(boolExpName);

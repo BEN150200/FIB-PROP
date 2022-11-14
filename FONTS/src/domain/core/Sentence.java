@@ -27,8 +27,10 @@ public class Sentence {
     }
 
     public void delete() {
-        SentenceCtrl.getInstance().deleteSentence(sentence);
-        SearchCtrl.getInstance().removeSentence(id);
+        if (getNbDocuments() == 0) {
+            SentenceCtrl.getInstance().deleteSentence(sentence);
+            SearchCtrl.getInstance().removeSentence(id);
+        }
     }
 
     /**
@@ -74,6 +76,9 @@ public class Sentence {
     public boolean deleteDocument(Integer docID){
         if(belongsToDoc(docID)){
             documents.remove(docID);
+            if (getNbDocuments() == 0) {
+                delete();
+            }
             return true;
         }
         return false;

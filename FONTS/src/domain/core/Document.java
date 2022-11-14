@@ -33,7 +33,14 @@ public class Document {
     }
 
     public void delete() {
+        for (Sentence sentence : sentences) {
+            sentence.deleteDocument(docID);
+        }
+        sentences.clear();
+        title.deleteDocument(docID);
+        author.deleteDocument(docID);
         DocumentCtrl.getInstance().deleteDocument(title.toString(), author.toString());
+        SearchCtrl.getInstance().removeDocument(docID);
     }
 
     /**
@@ -98,6 +105,21 @@ public class Document {
         return false;
     }
 
+    public void updateDocumentContent(ArrayList<Sentence> newContent) {
+        
+        for (Sentence sentence : sentences) {
+            if (!newContent.contains(sentence)) {
+                sentence.deleteDocument(docID);
+            }
+        }
+        for (Sentence sentence : newContent) {
+            if (!sentences.contains(sentence)) {
+                sentence.addDoc(docID);
+            }
+        }
+        sentences = newContent;
+    }
+
     public void addSentence(Sentence sentence) {
         sentences.add(sentence);
         sentence.addDoc(docID);
@@ -109,6 +131,9 @@ public class Document {
     }
 
     public void deleteContent() {
+        for (Sentence sentence : sentences) {
+            sentence.deleteDocument(docID);
+        }
         sentences.clear();
     }
 

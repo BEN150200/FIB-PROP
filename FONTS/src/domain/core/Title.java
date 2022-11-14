@@ -9,7 +9,14 @@ public class Title extends Sentence {
         TitleCtrl.getInstance().addTitle(this);
     }
 
+    @Override
     public void delete() {
-        TitleCtrl.getInstance().deleteTitle(this.toString());
+        if (getNbDocuments() == 0) TitleCtrl.getInstance().deleteTitle(this.toString());
+    }
+
+    @Override
+    public boolean deleteDocument(Integer docID) {
+        super.deleteDocument(docID);
+        return true;
     }
 }

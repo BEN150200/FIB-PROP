@@ -9,8 +9,15 @@ public class Author extends Sentence{
         AuthorCtrl.getInstance().addAuthor(this);
     }
 
+    @Override
     public void delete() {
-        AuthorCtrl.getInstance().deleteAuthor(this.toString());
+        if (getNbDocuments() == 0) AuthorCtrl.getInstance().deleteAuthor(this.toString());
+    }
+
+    @Override
+    public boolean deleteDocument(Integer docID) {
+        super.deleteDocument(docID);
+        return true;
     }
 
 }
