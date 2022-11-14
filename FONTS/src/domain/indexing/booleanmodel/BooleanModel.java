@@ -43,6 +43,7 @@ public class BooleanModel<SentenceId> {
     @SuppressWarnings("deprecation")
     public HashSet<SentenceId> querySet(Collection<String> set)
     {
+        //System.out.println("corxetes   " + set.toString());
         var sets = List.ofAll(set).map(this::queryTerm);
         return sets
             .minBy(Set::size)
@@ -96,13 +97,14 @@ public class BooleanModel<SentenceId> {
     }
 
     private Collection<String> parse(String terms) {
-        return Arrays.asList(terms.substring(1, terms.length()-2).split(" "));
+        return Arrays.asList(terms.substring(1, terms.length()-1).split(" "));
     } 
 
     public HashSet<SentenceId> query(ExpressionTreeNode root) {
         if(root == null) return HashSet.empty();
         
         var value = root.getValue();
+
         switch (value.charAt(0)) {
             case '&':
                 return query(root.getLeft()).intersect(query(root.getRight()));
@@ -111,6 +113,7 @@ public class BooleanModel<SentenceId> {
             case '!':
                 return all().diff(query(root.getRight()));
             case '{':
+
                 return querySet(parse(value));
             case '"':
                 return querySequence(parse(value));

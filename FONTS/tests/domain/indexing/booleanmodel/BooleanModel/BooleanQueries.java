@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 
 import io.vavr.collection.HashMap;
 import io.vavr.collection.HashSet;
+import org.junit.Test;
 import src.domain.core.ExpressionTreeNode;
 import src.domain.indexing.booleanmodel.BooleanModel;
 import src.domain.indexing.core.Index;
@@ -56,5 +57,134 @@ public class BooleanQueries {
             HashSet.empty(),
             model.query(new ExpressionTreeNode("", null, null))
         );
+    }
+
+    @Test
+    public void query(){
+        {
+            ExpressionTreeNode root1 = new ExpressionTreeNode(); //comprovem que les cometes van be
+            root1.setValue("\"form and void \"");
+            assertEquals(HashSet.of("d1"), model.query(root1));
+
+            ExpressionTreeNode root2 = new ExpressionTreeNode();
+            root2.setValue("form and not void");
+            assertEquals(HashSet.empty(), model.query(root2));
+        }
+
+        {
+            ExpressionTreeNode root3 = new ExpressionTreeNode(); //comprovem que els corxetes van be
+            root3.setValue("{spirit waters}");
+            assertEquals(HashSet.of("d3"), model.query(root3));
+
+            ExpressionTreeNode root4 = new ExpressionTreeNode();
+            root4.setValue("{spirit waters no}");
+            assertEquals(HashSet.empty(), model.query(root4));
+        }
+        {
+            ExpressionTreeNode root1 = new ExpressionTreeNode(); //comprovem que les paraules soles van be
+            root1.setValue("face");
+            assertEquals(HashSet.of("d2","d3"), model.query(root1));
+
+            ExpressionTreeNode root2 = new ExpressionTreeNode();
+            root2.setValue("noesta");
+            assertEquals(HashSet.empty(), model.query(root2));
+        }
+
+        {
+            ExpressionTreeNode root = new ExpressionTreeNode(); //ara expressions amb operadors
+            ExpressionTreeNode right = new ExpressionTreeNode();
+            ExpressionTreeNode left = new ExpressionTreeNode();
+            ExpressionTreeNode leftRight = new ExpressionTreeNode();
+            //    |
+            //   / \
+            //  !  {spirit of god}
+            //   \
+            //  darkness
+            root.setValue("|");
+            right.setValue("{spirit of god}");
+            left.setValue("!");
+            leftRight.setValue("darkness");
+
+            left.setRight(leftRight);
+            root.setRight(right);
+            root.setLeft(left);
+
+            assertEquals(HashSet.of("d1","d3"), model.query(root));
+        }
+
+        {
+            ExpressionTreeNode root = new ExpressionTreeNode(); //ara expressions amb operadors
+            ExpressionTreeNode right = new ExpressionTreeNode();
+            ExpressionTreeNode left = new ExpressionTreeNode();
+            ExpressionTreeNode leftRight = new ExpressionTreeNode();
+            //    &
+            //   / \
+            //  !  {spirit of god}
+            //   \
+            //  darkness
+            root.setValue("&");
+            right.setValue("{spirit of god}");
+            left.setValue("!");
+            leftRight.setValue("darkness");
+
+            left.setRight(leftRight);
+            root.setRight(right);
+            root.setLeft(left);
+
+            assertEquals(HashSet.of("d3"), model.query(root));
+        }
+
+        {
+            ExpressionTreeNode root = new ExpressionTreeNode(); //ara expressions amb operadors
+            ExpressionTreeNode right = new ExpressionTreeNode();
+            ExpressionTreeNode left = new ExpressionTreeNode();
+            ExpressionTreeNode leftRight = new ExpressionTreeNode();
+            //    &
+            //   / \
+            //  !  darkness
+            //   \
+            //  "spirit of god"
+            root.setValue("&");
+            right.setValue("darkness");
+            left.setValue("!");
+            leftRight.setValue("\"spirit of god\"");
+
+            left.setRight(leftRight);
+            root.setRight(right);
+            root.setLeft(left);
+
+            assertEquals(HashSet.of("d2"), model.query(root));
+        }
+
+        {
+            ExpressionTreeNode root = new ExpressionTreeNode(); //ara expressions amb operadors
+            ExpressionTreeNode right = new ExpressionTreeNode();
+            ExpressionTreeNode left = new ExpressionTreeNode();
+            ExpressionTreeNode leftRight = new ExpressionTreeNode();
+            ExpressionTreeNode rightLeft = new ExpressionTreeNode();
+            ExpressionTreeNode rightRight = new ExpressionTreeNode();
+
+            //          &
+            //    /              \
+            //   !                   |
+            //    \               /      \
+            //"spirit of god"  darkness  earth
+            root.setValue("&");
+            right.setValue("|");
+            left.setValue("!");
+            leftRight.setValue("\"spirit of god\"");
+            rightLeft.setValue("darkness");
+            rightRight.setValue("earth");
+
+            left.setRight(leftRight);
+            right.setLeft(rightLeft);
+            right.setRight(rightRight);
+            root.setRight(right);
+            root.setLeft(left);
+
+            assertEquals(HashSet.of("d1","d2"), model.query(root));
+        }
+
+
     }
 }
