@@ -1,8 +1,8 @@
 package tests.domain.core;
 
-import src.domain.DocumentInfo;
 import src.domain.core.Author;
 import src.domain.core.Document;
+import src.domain.core.DocumentInfo;
 import src.domain.core.Sentence;
 import src.domain.core.Title;
 

@@ -1,7 +1,7 @@
 package src;
 
-import src.domain.DocumentInfo;
 import src.domain.controllers.DomainCtrl;
+import src.domain.core.DocumentInfo;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;

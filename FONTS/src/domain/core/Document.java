@@ -1,6 +1,5 @@
 package src.domain.core;
 
-import src.domain.DocumentInfo;
 import src.domain.controllers.DocumentCtrl;
 import src.domain.controllers.SearchCtrl;
 
