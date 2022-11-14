@@ -1,9 +1,9 @@
 package src.domain.controllers;
 
+import src.domain.core.Title;
+
 import java.util.ArrayList;
 import java.util.HashMap;
-
-import src.domain.core.Title;
 
 public class TitleCtrl {
     private static TitleCtrl instance = null;

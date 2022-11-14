@@ -1,18 +1,20 @@
 package src.domain.indexing.core;
 
-import java.util.Arrays;
-import java.util.Map;
+import src.domain.core.ExpressionTreeNode;
+import src.domain.indexing.booleanmodel.BooleanModel;
+import src.domain.indexing.vectorial.VectorialModel;
 
 import src.helpers.Maths;
 import src.helpers.Parsing;
 import src.helpers.Strings;
+
+import java.util.Arrays;
+import java.util.Map;
+
 import io.vavr.collection.HashMap;
 import io.vavr.collection.HashSet;
 import io.vavr.collection.Stream;
 import io.vavr.control.Either;
-import src.domain.core.ExpressionTreeNode;
-import src.domain.indexing.booleanmodel.BooleanModel;
-import src.domain.indexing.vectorial.VectorialModel;
 
 public class IndexingController<DocId, SentenceId> {
     private VectorialModel<DocId> vectorialModel;

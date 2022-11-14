@@ -1,7 +1,7 @@
 package src.domain.indexing.vectorial;
 
-
 import src.helpers.Maths;
+
 import io.vavr.Tuple;
 import io.vavr.collection.HashMap;
 import io.vavr.control.Try;

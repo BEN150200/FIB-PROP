@@ -1,21 +1,16 @@
 package src.domain.indexing.booleanmodel;
 
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.function.BiFunction;
-import java.util.function.Function;
-
-import io.vavr.Tuple;
-import io.vavr.Tuple2;
-import io.vavr.collection.Array;
-import io.vavr.collection.HashMap;
-import io.vavr.collection.HashSet;
-import io.vavr.collection.List;
-import io.vavr.collection.Set;
 import src.domain.core.ExpressionTreeNode;
 import src.domain.indexing.core.Index;
 
 import static src.helpers.Functional.*;
+
+import java.util.Arrays;
+import java.util.Collection;
+
+import io.vavr.collection.HashSet;
+import io.vavr.collection.List;
+import io.vavr.collection.Set;
 
 public class BooleanModel<SentenceId> {
 

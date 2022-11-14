@@ -1,23 +1,32 @@
 package src.domain.controllers;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Set;
-
-import io.vavr.Tuple2;
-import javafx.util.Pair;
 import src.domain.core.Author;
 import src.domain.core.Document;
 import src.domain.core.Title;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Set;
+import io.vavr.Tuple2;
 
 public class DocumentCtrl {
     private static DocumentCtrl instance = null;
     private int usedID;
     
-    //private HashMap<Pair<String,String>, Integer> documentsID = new HashMap<Pair<String,String>, Integer>();
     private HashMap<Tuple2<String,String>, Integer> documentsID = new HashMap<Tuple2<String,String>, Integer>();
     private HashMap<Integer, Document> documents = new HashMap<Integer, Document>();
 
+    /**
+     * Constructor
+     */
+    private DocumentCtrl() {
+        usedID = 0;
+    }
+
+    /**
+     * Function to get the instance of the class
+     * @return the instance of the class
+     */
     public static DocumentCtrl getInstance() {
         if (instance == null) {
             instance = new DocumentCtrl();
@@ -25,17 +34,20 @@ public class DocumentCtrl {
         return instance;
     }
     
-    public DocumentCtrl() {
-        usedID = 0;
-    }
 
     /**
      * Public Functions
-    **/
+     */
 
     /**
      * Getters
-    **/
+     */
+
+    /**
+     * 
+     * @param docID ID of the document that 
+     * @return
+     */
     public boolean existsDocument(Integer docID) {
         return documents.containsKey(docID);
     }

@@ -117,7 +117,7 @@ public class BooleanExpressionCtrl {
      * @cost 0(1)
      * @param a boolean expression
      */
-    private void addHistorial(BooleanExpression expr){
+    private void addHistorial(BooleanExpression expr) {
         historial.add(expr);
         if(historial.size()>midaHistorial) historial.remove(0);
     }

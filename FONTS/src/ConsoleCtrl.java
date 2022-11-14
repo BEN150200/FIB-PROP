@@ -1,18 +1,14 @@
 package src;
-import java.security.DrbgParameters.Reseed;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.HashSet;
-import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.Scanner;
-import java.util.Set;
 
 import src.domain.DocumentInfo;
 import src.domain.controllers.DomainCtrl;
-import src.domain.controllers.SearchCtrl;
 
-
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.HashSet;
+import java.util.NoSuchElementException;
+import java.util.Scanner;
+import java.util.Set;
 import java.util.HashMap;
 
 public class ConsoleCtrl extends PresentationCtrl{
@@ -33,162 +29,181 @@ public class ConsoleCtrl extends PresentationCtrl{
 		"\\_|  |_/\\__,_|\\___|_|  \\___/|___/\\___/|_|  \\__|  \\/  \\/ \\___/|_|  \\__,_|",
 		"\n" + RESET,
 
-        WHITE_BACKGROUND_BRIGHT + GREEN_BOLD_BRIGHT + "By Marcel Claramunt, Biel Escorsell, Xavier García, Jan Samaranch" + RESET
+        GREEN_BOLD_BRIGHT + "By Marcel Claramunt, Biel Escorsell, Xavier García, Jan Samaranch" + RESET
     };
 
     String[] mainMenu = {  
                         "",
-                        WHITE_UNDERLINED,
-                        "                                                     ",
-                        //"_____________________________________________________",
-                        "                     Main Menu                       ",
+                        WHITE_UNDERLINED +
+                        "                     Main Menu                       " +
                         RESET,
-                        WHITE_BOLD,
-                        "Choose the type of operation:",
+                        WHITE_BOLD + "Choose the type of operation:",
                         "   1 - Add document",
                         "   2 - Open document",
                         "   3 - Manage boolean expressions",
                         "   4 - Search in the system",
                         "   0 - Exit",
-                        WHITE_UNDERLINED,
-                        "                                                     ",
-                        RESET,
+                        //WHITE_UNDERLINED +"                                                     " + RESET,
                         "",
     };
 
     String[] booleanExpressionsMenuHeader = {
                         "",
-                        "_____________________________________________________",
-                        "________________Boolean Expressions__________________",
+                        WHITE_UNDERLINED +
+                        "                Boolean Expressions                  " +
+                        RESET,
                         ""
     };
 
     String[] booleanExpressionsMenuOptions = {
                         "",
-                        "Choose the type of operation:",
+                        WHITE_UNDERLINED +
+                        "           Boolean Expressions options               "
+                        + RESET,
+                        WHITE_BOLD + "Choose the type of operation:",
                         "   1 - Add a new boolean expression",
                         "   2 - Modify an existing boolean expression",
                         "   3 - Delete an existing boolean expression",
                         "   0 - Return to Main Menu",
-                        "_____________________________________________________",
+                        //WHITE_UNDERLINED +"                                                     " + RESET,
+                        ""
+    };
+
+    String[] booleanSearchOptions = {
+                        "",
+                        WHITE_UNDERLINED +
+                        "              Boolean Expressions Search             "
+                        + RESET,
+                        WHITE_BOLD + "Choose the type of operation:",
+                        "   1 - Use a saved expression",
+                        "   2 - New expression",
+                        //WHITE_UNDERLINED +"                                                     " + RESET,
                         ""
     };
                     
     String[] searchMenu = {
                         "",
-                        "_____________________________________________________",
-                        "____________________Search Menu______________________",
-                        "Choose the type of operation:",
+                        WHITE_UNDERLINED +
+                        "                    Search Menu                      "
+                        + RESET,
+                        WHITE_BOLD + "Choose the type of operation:",
                         "   1 - Search authors",
                         "   2 - Search titles",
                         "   3 - List all documents",
                         "   4 - Documents by boolean expression",
                         "   5 - Documents by query",
                         "   0 - Return to Main Menu",
-                        "_____________________________________________________",
+                        //WHITE_UNDERLINED +"                                                     " + RESET,
                         ""
     };
 
     String[] documentHeader = {
                         "",
-                        "______________________Document_______________________",
+                        WHITE_UNDERLINED +
+                        "                      Document                       "
+                        + RESET,
                         ""
     };
 
     String[] documentOptions = {
                         "",
-                        "_________________Document options____________________",
-                        "   1 - Modify content",
+                        WHITE_UNDERLINED +
+                        "                 Document options                    "
+                        + RESET,
+                        WHITE_BOLD + "   1 - Modify content",
                         "   2 - Delete",
                         "   3 - Search similar documents",
-                        "   0 - Exit",
-                        "_____________________________________________________",
+                        "   0 - Exit" + RESET,
+                        //WHITE_UNDERLINED +"                                                     " + RESET,
                         ""
 
     };
 
     String[] similarDocumentsHeader = {
                         "",
-                        "_________________Similar Documents___________________",
+                        WHITE_UNDERLINED +
+                        "                 Similar Documents                   "
+                        + RESET,
                         ""
     };
 
     String[] similarDocumentsOptions = {
                         "",
-                        "______________Similar Documents options______________",
+                        WHITE_UNDERLINED +
+                        "              Similar Documents options              "
+                        + RESET,
                         "   1 - Sort results",
                         "   2 - Open one of the documents",
                         "   0 - Exit",
-                        "_____________________________________________________",
+                        //WHITE_UNDERLINED +"                                                     " + RESET,
                         ""
     };
 
     String[] authorsHeader = {
-                        "",
-                        "______________________Authors_______________________",
-                        ""
+                        WHITE_UNDERLINED + "",
+                        "                       Authors                       ",
+                        "" + RESET
     };
 
     String[] authorsOptions = {
                         "",
-                        "__________________Authors options____________________",
+                        WHITE_UNDERLINED +
+                        "                  Authors options                    "
+                        + RESET,
                         "   1 - Sort results",
                         "   2 - Get the titles of one of the authors",
                         "   0 - Exit",
-                        "_____________________________________________________",
+                        //WHITE_UNDERLINED +"                                                     " + RESET,
                         ""
     };
 
     String[] titlesHeader = {
-                        "",
-                        "_______________________Titles________________________",
-                        ""
+                        WHITE_UNDERLINED + "",
+                        "                       Titles                        ",
+                        "" + RESET
     };
 
     String[] titlesOptions = {
                         "",
-                        "___________________Titles options____________________",
+                        WHITE_UNDERLINED +
+                        "                   Titles options                    "
+                        + RESET,
                         "   1 - Sort results",
                         "   2 - Get the authors of one of the titles",
                         "   0 - Exit",
-                        "_____________________________________________________",
-                        ""
-    };
-
-    String[] titlesOfAnAuthorHeader = {
-                        "",
-                        "_______________________Titles________________________",
-                        ""
-    };
-
-    String[] authorOfATitleHeader = {
-                        "",
-                        "_______________________Authors________________________",
+                        //WHITE_UNDERLINED +"                                                     " + RESET,
                         ""
     };
 
     String[] optionStrings = {
                         "",
-                        "_______________________Options________________________",
+                        WHITE_UNDERLINED +
+                        "                      Options                        "
+                        + RESET,
                         "   1 - Sort results",
                         "   2 - Open document",
                         "   0 - Exit",
+                        //WHITE_UNDERLINED +"                                                     " + RESET,
                         ""
     };
 
     String[] sortingArrayMenu = {
                         "",
-                        "__________________Sorting options____________________",
+                        WHITE_UNDERLINED +
+                        "                  Sorting options                    "
+                        + RESET,
                         "   1 - Ascending order  (A -> Z)",
                         "   2 - Descending order (Z -> A)",
                         "   0 - Cancel sorting",
-                        "_____________________________________________________",
+                        //WHITE_UNDERLINED +"                                                     " + RESET,
                         ""
     };
 
     String[] sortingDocumentsMenu = {
                         "",
-                        "__________________Sorting options____________________",
+                        WHITE_UNDERLINED +
+                        "                  Sorting options                    "
+                        + RESET,
                         "   1 - Sort by title ascending                 (A -> Z)",
                         "   2 - Sort by title descending                (Z -> A)",
                         "   3 - Sort by author ascending                (A -> Z)",
@@ -198,19 +213,23 @@ public class ConsoleCtrl extends PresentationCtrl{
                         "   7 - Sort by last modified date ascending    (A -> Z)",
                         "   8 - Sort by last modified date descending   (Z -> A)",
                         "   0 - Cancel sorting",
-                        "_____________________________________________________",
+                        //WHITE_UNDERLINED +"                                                     " + RESET,
                         ""
     };
 
     String[] allDocumentsHeader = {
                         "",
-                        "__________________System documents___________________",
+                        WHITE_UNDERLINED +
+                        "                  System documents                   "
+                        + RESET,
                         ""
     };
 
     String[] queryDocumentsHeader = {
                         "",
-                        "___________________Query documents___________________",
+                        WHITE_UNDERLINED +
+                        "                   Query documents                   "
+                        + RESET,
                         ""
     };
 
@@ -234,7 +253,8 @@ public class ConsoleCtrl extends PresentationCtrl{
     **/
     private void exit() {
         System.out.println("\n");
-        System.out.println("Closing the program");
+        System.out.println(BLUE_BOLD_BRIGHT + "Closing the program" + RESET);
+        System.out.println("\n");
         System.exit(0);
     }
 
@@ -322,7 +342,7 @@ public class ConsoleCtrl extends PresentationCtrl{
             Integer command = getInputAsInt(0, 3,"Enter an option number:");
             switch (command) {
                 case 1:
-                    addBooleanExpresion();
+                    addBooleanExpression();
                     break;
                 case 2:
                     modifyBooleanExpression();
@@ -369,7 +389,6 @@ public class ConsoleCtrl extends PresentationCtrl{
      * Boolean Expresion Manager
     **/
     public void searchAllBooleanExpresions() {
-        System.out.println("____Boolean Expresions____");
         HashMap<String,String> expresions = domain.getAllBooleanExpresions();
         if(expresions!=null){
             for (String string : expresions.keySet()) {
@@ -390,20 +409,20 @@ public class ConsoleCtrl extends PresentationCtrl{
 
     public void modifyBooleanExpression(){
         //terminalIn.nextLine();
-        printEnter("-Enter the Boolean Expresion Name:");
+        printEnter("-Enter the Boolean Expression Name:");
         String boolExpName = terminalIn.nextLine();
         if(!domain.existsBooleanExpression(boolExpName)) System.out.println(RED_BACKGROUND + "There is not a expression with this name" + RESET);
         else{
-            printEnter("-Enter a Boolean Expresion:");
+            printEnter("-Enter a Boolean Expression:");
             String boolExp = terminalIn.nextLine();
-            if (domain.addBooleanExpresion(boolExpName, boolExp)) {
-                printCorrect("Title modified successfully");
+            if (domain.addBooleanExpression(boolExpName, boolExp)) {
+                printCorrect("Boolean Expression modified successfully");
             }
             else printError("The expression is not correct");
         }
     }
 
-    public void addBooleanExpresion() {
+    public void addBooleanExpression() {
         //terminalIn.nextLine();
         printEnter("-Enter the Boolean Expresion Name:");
         String boolExpName = terminalIn.nextLine();
@@ -411,8 +430,8 @@ public class ConsoleCtrl extends PresentationCtrl{
         else{
             printEnter("-Enter a Boolean Expresion:");
             String boolExp = terminalIn.nextLine();
-            if (domain.addBooleanExpresion(boolExpName, boolExp)) {
-                printCorrect("Title added successfully");
+            if (domain.addBooleanExpression(boolExpName, boolExp)) {
+                printCorrect("Boolean Expression added successfully");
             }
             else printError("The expression is not correct");
         }
@@ -429,7 +448,7 @@ public class ConsoleCtrl extends PresentationCtrl{
                 String s = terminalIn.nextLine();
                 if(s.equals("*end*")) {
                     System.out.println("");
-                    System.out.println(YELLOW_BOLD_BRIGHT + "End of the document" + RESET);
+                    System.out.println(BLUE_BOLD_BRIGHT + "End of the document" + RESET);
                     break;
                 }
                 content.add(s);
@@ -509,7 +528,7 @@ public class ConsoleCtrl extends PresentationCtrl{
     public void titlesOfAnAuthor(String authorName){
         ArrayList<String> titles = domain.getAllAuthorTitles(authorName);
         while(true){
-            printToConsole(titlesOfAnAuthorHeader);
+            printToConsole(titlesHeader);
             for(int i = 0; i < titles.size(); ++i){
                 System.out.println(WHITE_BOLD_BRIGHT + (i + 1) + " - " + WHITE_BRIGHT + titles.get(i) + RESET);
             }
@@ -560,7 +579,7 @@ public class ConsoleCtrl extends PresentationCtrl{
     public void authorsOfATitle(String titleName){
         ArrayList<String> authors = domain.getAllTitleAuthors(titleName);
         while(true){
-            printToConsole(authorOfATitleHeader);
+            printToConsole(authorsHeader);
             for(int i = 0; i < authors.size(); ++i){
                 System.out.println(WHITE_BOLD_BRIGHT + (i + 1) + " - " + WHITE_BRIGHT + authors.get(i) + RESET);
             }
@@ -642,7 +661,7 @@ public class ConsoleCtrl extends PresentationCtrl{
     **/
     private void similarDocumentsSearch(String titleName, String authorName){
         int k = getInputAsInt(0, 100,"Enter the number of documents showed:");
-        ArrayList<DocumentInfo> similarDocuments = domain.getInstance().similarDocumentsSearch(titleName, authorName, k);
+        ArrayList<DocumentInfo> similarDocuments = domain.similarDocumentsSearch(titleName, authorName, k);
         if (similarDocuments == null) printError("No Similar Documents Found!!!");
         while(similarDocuments != null){
             for(int i = 0; i < similarDocuments.size(); ++i){
@@ -671,10 +690,8 @@ public class ConsoleCtrl extends PresentationCtrl{
     }
     
     public void booleanExpressionSearch(){
-        System.out.println("_______________________Options________________________" );
-        System.out.println("   1 - Use a saved expression");
-        System.out.println("   2 - New expression");
-
+        printToConsole(booleanSearchOptions);
+        
         ArrayList<DocumentInfo> docsInfo = new ArrayList<>();
 
         Integer command = getInputAsInt(1,2, "Enter an option number:");

@@ -1,9 +1,9 @@
 package src.domain.controllers;
 
+import src.domain.core.Sentence;
+
 import java.util.ArrayList;
 import java.util.HashMap;
-
-import src.domain.core.Sentence;
 
 public class SentenceCtrl {
 

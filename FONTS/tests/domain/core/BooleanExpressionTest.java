@@ -1,7 +1,6 @@
 package tests.domain.core;
 
 import io.vavr.Tuple2;
-import javafx.util.Pair;
 import src.domain.core.BooleanExpression;
 
 import org.junit.Before;
