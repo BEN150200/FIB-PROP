@@ -4,7 +4,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import src.domain.core.ExpressionTreeNode;
+import src.domain.expressions.ExpressionTreeNode;
 
 import static org.junit.Assert.*;
 

@@ -5,7 +5,8 @@ import static org.junit.Assert.assertEquals;
 import io.vavr.collection.HashMap;
 import io.vavr.collection.HashSet;
 import org.junit.Test;
-import src.domain.core.ExpressionTreeNode;
+
+import src.domain.expressions.ExpressionTreeNode;
 import src.domain.indexing.booleanmodel.BooleanModel;
 import src.domain.indexing.core.Index;
 

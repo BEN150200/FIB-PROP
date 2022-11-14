@@ -1,7 +1,7 @@
 package tests.domain.core;
 
 import io.vavr.Tuple2;
-import src.domain.core.BooleanExpression;
+import src.domain.expressions.BooleanExpression;
 
 import org.junit.Before;
 import org.junit.Test;

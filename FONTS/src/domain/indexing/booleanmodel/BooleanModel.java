@@ -1,6 +1,6 @@
 package src.domain.indexing.booleanmodel;
 
-import src.domain.core.ExpressionTreeNode;
+import src.domain.expressions.ExpressionTreeNode;
 import src.domain.indexing.core.Index;
 
 import static src.helpers.Functional.*;

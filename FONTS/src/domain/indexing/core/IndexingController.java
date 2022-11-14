@@ -1,6 +1,6 @@
 package src.domain.indexing.core;
 
-import src.domain.core.ExpressionTreeNode;
+import src.domain.expressions.ExpressionTreeNode;
 import src.domain.indexing.booleanmodel.BooleanModel;
 import src.domain.indexing.vectorial.VectorialModel;
 

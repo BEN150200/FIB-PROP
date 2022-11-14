@@ -1,4 +1,4 @@
-package src.domain.core;
+package src.domain.expressions;
 
 //import src.domain.indexing.booleanmodel.BooleanModel;
 

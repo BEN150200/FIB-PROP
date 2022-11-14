@@ -1,7 +1,7 @@
 package src.domain.controllers;
 
-import src.domain.core.BooleanExpression;
-import src.domain.core.ExpressionTreeNode;
+import src.domain.expressions.BooleanExpression;
+import src.domain.expressions.ExpressionTreeNode;
 
 //import java.io.*;
 import java.util.*;

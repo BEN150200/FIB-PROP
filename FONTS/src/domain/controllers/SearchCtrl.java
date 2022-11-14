@@ -2,7 +2,7 @@ package src.domain.controllers;
 
 import src.domain.DocumentInfo;
 import src.domain.core.Document;
-import src.domain.core.ExpressionTreeNode;
+import src.domain.expressions.ExpressionTreeNode;
 import src.domain.indexing.core.IndexingController;
 
 import java.util.ArrayList;

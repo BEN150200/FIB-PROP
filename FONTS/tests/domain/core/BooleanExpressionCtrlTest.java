@@ -3,7 +3,7 @@ package tests.domain.core;
 import org.junit.Before;
 import org.junit.Test;
 import src.domain.controllers.BooleanExpressionCtrl;
-import src.domain.core.BooleanExpression;
+import src.domain.expressions.BooleanExpression;
 
 import java.util.HashMap;
 

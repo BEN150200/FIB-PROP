@@ -9,7 +9,7 @@ import org.junit.Test;
 
 import io.vavr.collection.HashMap;
 import io.vavr.collection.HashSet;
-import src.domain.core.ExpressionTreeNode;
+import src.domain.expressions.ExpressionTreeNode;
 import src.domain.indexing.booleanmodel.BooleanModel;
 import src.domain.indexing.core.Index;
 
