@@ -1,11 +1,9 @@
-Membres del equip:
-    Claramunt Bassegoda, Marcel
-    Escorsell Negro, Biel
-    García Orihuela, Xavier
-    Samaranch Mas,Jan
+Claramunt Bassegoda, Marcel
+Escorsell Negro, Biel
+García Orihuela, Xavier
+Samaranch Mas,Jan
 
-Correus:
-    marcel.claramunt@estudiantat.upc.edu
-    biel.escorsell@estudiantat.upc.edu
-    xavier.garcia.orihuela@estudiantat.upc.edu
-    jan.samaranch.i@estudiantat.upc.edu
+marcel.claramunt@estudiantat.upc.edu
+biel.escorsell@estudiantat.upc.edu
+xavier.garcia.orihuela@estudiantat.upc.edu
+jan.samaranch.i@estudiantat.upc.edu
