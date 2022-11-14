@@ -10,7 +10,6 @@ import org.junit.Test;
 
 import io.vavr.collection.HashMap;
 import io.vavr.collection.HashSet;
-import src.domain.expressions.ExpressionTreeNode;
 import src.domain.indexing.booleanmodel.BooleanModel;
 import src.domain.indexing.core.Index;
 
@@ -73,6 +72,11 @@ public class TestBooleanModel {
         assertEquals(
             HashSet.empty(),
             BooleanModel.empty().queryTerm("")
+        );
+
+        assertEquals(
+            HashSet.empty(),
+            BooleanModel.empty().queryTerm("as")
         );
     }
 
