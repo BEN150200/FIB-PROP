@@ -1,4 +1,5 @@
 package src;
+import java.security.DrbgParameters.Reseed;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashSet;
@@ -22,28 +23,36 @@ public class ConsoleCtrl extends PresentationCtrl{
 
     Set<Integer> documents = new HashSet<Integer>();
 
-    String[] logo = {   "\n",
+    String[] logo = {   GREEN_BOLD_BRIGHT,
+        "\n",
         "___  ___                                __ _     _    _               _ ",
 		"|  \\/  |                               / _| |   | |  | |             | |",
 		"| .  . | __ _  ___ _ __ ___  ___  ___ | |_| |_  | |  | | ___  _ __ __| |",
 		"| |\\/| |/ _` |/ __| '__/ _ \\/ __|/ _ \\|  _| __| | |/\\| |/ _ \\| '__/ _` |",
 		"| |  | | (_| | (__| | | (_) \\__ \\ (_) | | | |_  \\  /\\  / (_) | | | (_| |",
 		"\\_|  |_/\\__,_|\\___|_|  \\___/|___/\\___/|_|  \\__|  \\/  \\/ \\___/|_|  \\__,_|",
-		"\n"
+		"\n",
+        ANSI_RESET
     };
 
-    String[] mainMenu = {   
+    String[] mainMenu = {  
                         "",
-                        "_____________________________________________________",
-                        "_____________________Main Menu_______________________",
+                        WHITE_UNDERLINED,
+                        "                                                     ",
+                        //"_____________________________________________________",
+                        "                     Main Menu                       ",
+                        RESET,
+                        WHITE_BOLD,
                         "Choose the type of operation:",
                         "   1 - Add document",
                         "   2 - Open document",
                         "   3 - Manage boolean expressions",
                         "   4 - Search in the system",
                         "   0 - Exit",
-                        "_____________________________________________________",
-                        ""
+                        WHITE_UNDERLINED,
+                        "                                                     ",
+                        RESET,
+                        "",
     };
 
     String[] booleanExpressionsMenuHeader = {
@@ -228,18 +237,30 @@ public class ConsoleCtrl extends PresentationCtrl{
         System.exit(0);
     }
 
+    private void printError(String error) {
+        System.out.println(RED_BOLD_BRIGHT + error + RESET);
+    }
+
+    private void printCorrect(String message) {
+        System.out.println(GREEN_BOLD_BRIGHT + message + RESET);
+    }
+
+    private void printEnter(String message) {
+        System.out.println(BLACK_BOLD_BRIGHT + WHITE_BACKGROUND_BRIGHT+ message + RESET);
+    }
+
     private int getInputAsInt(int min, int max, String message) {
-        System.out.println(message);
+        System.out.println(BLACK_BOLD_BRIGHT + WHITE_BACKGROUND_BRIGHT + message + RESET);
         Integer command;
         while(true){
             try{
                 command = terminalIn.nextInt();
                 if(min > command || max < command){
-                    System.out.println("Please enter a number from " + min + " to " + max);
+                    System.out.println(YELLOW_BOLD_BRIGHT + "Please enter a number from " + min + " to " + max + RESET);
                 } else break;
             } catch(Exception e){
                 terminalIn.nextLine();
-                System.out.println("Please enter a valid option (number)");
+                System.out.println(YELLOW_BOLD_BRIGHT + "Please enter a valid option (number)" + RESET);
             }
         }
         // this makes sure all line is consumed because nextInt() consumes only the number, not the "end of line"
@@ -297,7 +318,7 @@ public class ConsoleCtrl extends PresentationCtrl{
             */
             searchAllBooleanExpresions();
             printToConsole(booleanExpressionsMenuOptions);
-            Integer command = getInputAsInt(0, 3, "Enter an option number:");
+            Integer command = getInputAsInt(0, 3,"Enter an option number:");
             switch (command) {
                 case 1:
                     addBooleanExpresion();
@@ -358,48 +379,48 @@ public class ConsoleCtrl extends PresentationCtrl{
 
     public void deleteBooleanExpression() {
         terminalIn.nextLine();
-        System.out.println("-Enter the Boolean Expresion Name:");
+        printEnter("-Enter the Boolean Expresion Name:");
         String boolExpName = terminalIn.nextLine();
         if(!domain.deleteBooleanExpression(boolExpName)){
-            System.out.println("There was no saved expression with this name");
+            printError("There was no saved expression with this name");
         }
-        else System.out.println("Expression deleted");
+        else printCorrect("Expression deleted");
     }
 
     public void modifyBooleanExpression(){
         //terminalIn.nextLine();
-        System.out.println("-Enter the Boolean Expresion Name:");
+        printEnter("-Enter the Boolean Expresion Name:");
         String boolExpName = terminalIn.nextLine();
-        if(!domain.existsBooleanExpression(boolExpName)) System.out.println("There is not a expression with this name");
+        if(!domain.existsBooleanExpression(boolExpName)) System.out.println(RED_BACKGROUND + "There is not a expression with this name" + RESET);
         else{
-            System.out.println("-Enter a Boolean Expresion:");
+            printEnter("-Enter a Boolean Expresion:");
             String boolExp = terminalIn.nextLine();
             if (domain.addBooleanExpresion(boolExpName, boolExp)) {
-                System.out.println("Title modified successfully");
+                printCorrect("Title modified successfully");
             }
-            else System.out.println("The expression is not correct");
+            else printError("The expression is not correct");
         }
     }
 
     public void addBooleanExpresion() {
         //terminalIn.nextLine();
-        System.out.println("-Enter the Boolean Expresion Name:");
+        printEnter("-Enter the Boolean Expresion Name:");
         String boolExpName = terminalIn.nextLine();
-        if(domain.existsBooleanExpression(boolExpName)) System.out.println("There is already a expression with this name");
+        if(domain.existsBooleanExpression(boolExpName)) printError("There is already a expression with this name");
         else{
-            System.out.println("-Enter a Boolean Expresion:");
+            printEnter("-Enter a Boolean Expresion:");
             String boolExp = terminalIn.nextLine();
             if (domain.addBooleanExpresion(boolExpName, boolExp)) {
-                System.out.println("Title added successfully");
+                printCorrect("Title added successfully");
             }
-            else System.out.println("The expression is not correct");
+            else printError("The expression is not correct");
         }
     }
 
 
     
     public ArrayList<String> getContentByInput(){
-        System.out.println("Enter the content of the document (enter *end* as the last line to finish): ");
+        printEnter("Enter the content of the document (enter *end* as the last line to finish): ");
         System.out.println("");
         ArrayList<String> content = new ArrayList<>();
         while(true){
@@ -407,7 +428,7 @@ public class ConsoleCtrl extends PresentationCtrl{
                 String s = terminalIn.nextLine();
                 if(s.equals("*end*")) {
                     System.out.println("");
-                    System.out.println("End of the document");
+                    System.out.println(YELLOW_BOLD_BRIGHT + "End of the document" + RESET);
                     break;
                 }
                 content.add(s);
@@ -420,15 +441,15 @@ public class ConsoleCtrl extends PresentationCtrl{
     }
 
     public void addDocument(){
-        System.out.println("Enter the name of the author: ");
+        printEnter("Enter the name of the author: ");
         currentAuthor = terminalIn.nextLine();
-        System.out.println("Enter the title: ");
+        printEnter("Enter the title: ");
         currentTitle = terminalIn.nextLine();
         ArrayList<String> content = getContentByInput();
         if (domain.addDocument(currentTitle, currentAuthor, content)) {
-            System.out.println("Document added successfully");
+            printCorrect("Document added successfully");
         }
-        else System.out.println("The Document with title '" + currentTitle + "' and author '" + currentAuthor + "' already exists");
+        else printError("The Document with title '" + currentTitle + "' and author '" + currentAuthor + "' already exists");
     }
 
     public void openDocument(String titleName, String authorName){
@@ -436,8 +457,8 @@ public class ConsoleCtrl extends PresentationCtrl{
             ArrayList<String> content = domain.getDocumentContent(titleName, authorName);
             if (content != null){
                 printToConsole(documentHeader);
-                System.out.println("Author: " + authorName);
-                System.out.println("Title:  " + titleName);
+                System.out.println(WHITE_BOLD_BRIGHT + "Author: " + WHITE_BRIGHT+ authorName + RESET);
+                System.out.println(WHITE_BOLD_BRIGHT +"Title:  "+ WHITE_BRIGHT + titleName + RESET);
                 System.out.println("");
                 for(String sentence: content){
                     System.out.println(sentence);
@@ -449,8 +470,8 @@ public class ConsoleCtrl extends PresentationCtrl{
                         updateDocumentContent(titleName, authorName);
                         break;
                     case 2:
-                        if(domain.deleteDocument(titleName, authorName)) System.out.println("Document deleted successfuly");
-                        else System.out.println("There has been an error when trying to delete the document");
+                        if(domain.deleteDocument(titleName, authorName)) printCorrect("Document deleted successfuly");
+                        else printError("There has been an error when trying to delete the document");
                         return;
                     case 3:
                         similarDocumentsSearch(titleName, authorName);
@@ -461,7 +482,7 @@ public class ConsoleCtrl extends PresentationCtrl{
                         return;
                 }
             } else {
-                System.out.println("The Document with title '" + titleName + "' and author '" + authorName + "' does not exist");
+                printError("The Document with title '" + titleName + "' and author '" + authorName + "' does not exist");
                 return;
             }
         }
@@ -471,14 +492,14 @@ public class ConsoleCtrl extends PresentationCtrl{
     public void updateDocumentContent(String titleName, String authorName){
         ArrayList<String> content = getContentByInput();
         if(domain.updateDocument(titleName, authorName, content)){
-            System.out.println("Document updated successfuly");
-        } else System.out.println("There has been an error when trying to update the document");
+            printCorrect("Document updated successfuly");
+        } else printError("There has been an error when trying to update the document");
     }
 
     public void openDocumentByInput(){
-        System.out.println("Enter the name of the author: ");
+        printEnter("Enter the name of the author: ");
         currentAuthor = terminalIn.nextLine();
-        System.out.println("Enter the title: ");
+        printEnter("Enter the title: ");
         currentTitle = terminalIn.nextLine();
         System.out.println("");
         openDocument(currentTitle, currentAuthor);
@@ -489,7 +510,7 @@ public class ConsoleCtrl extends PresentationCtrl{
         while(true){
             printToConsole(titlesOfAnAuthorHeader);
             for(int i = 0; i < titles.size(); ++i){
-                System.out.println((i + 1) + " - " + titles.get(i));
+                System.out.println(WHITE_BOLD_BRIGHT + (i + 1) + " - " + WHITE_BRIGHT + titles.get(i) + RESET);
             }
             printToConsole(optionStrings);
             Integer command = getInputAsInt(0, 2, "Enter an option number:");
@@ -508,15 +529,15 @@ public class ConsoleCtrl extends PresentationCtrl{
     }
 
     public void authorsSearch(){
-        System.out.println("Enter an author name or a prefix:");
+        printEnter("Enter an author name or a prefix:");
         String authorName = terminalIn.nextLine();
         ArrayList<String> authors = domain.getAllAuthors(authorName);
-        if (authors.isEmpty()) System.out.println("There are no authors in the system");
+        if (authors.isEmpty()) printError("There are no authors in the system");
         else{
             while(true){
                 printToConsole(authorsHeader);
                 for(int i = 0; i < authors.size(); ++i){
-                    System.out.println((i + 1) + " - " + authors.get(i));
+                    System.out.println(WHITE_BOLD_BRIGHT + (i + 1) + " - " + WHITE_BRIGHT + authors.get(i) + RESET);
                 }
                 printToConsole(authorsOptions);
                 Integer command = getInputAsInt(0, 2, "Enter an option number:");
@@ -540,7 +561,7 @@ public class ConsoleCtrl extends PresentationCtrl{
         while(true){
             printToConsole(authorOfATitleHeader);
             for(int i = 0; i < authors.size(); ++i){
-                System.out.println((i + 1) + " - " + authors.get(i));
+                System.out.println(WHITE_BOLD_BRIGHT + (i + 1) + " - " + WHITE_BRIGHT + authors.get(i) + RESET);
             }
             printToConsole(optionStrings);
             Integer command = getInputAsInt(0, 2, "Enter an option number:");
@@ -559,15 +580,15 @@ public class ConsoleCtrl extends PresentationCtrl{
     }
     
     public void titlesSearch(){
-        System.out.println("Enter a title name or a prefix:");
+        printEnter("Enter a title name or a prefix:");
         String titleName = terminalIn.nextLine();
         ArrayList<String> titles = domain.getAllTitles(titleName);
-        if (titles.isEmpty()) System.out.println("There are no titles in the system");
+        if (titles.isEmpty()) printError("There are no titles in the system");
         else{
             while(true){
                 printToConsole(titlesHeader);
                 for(int i = 0; i < titles.size(); ++i){
-                     System.out.println((i + 1) + " - " + titles.get(i));
+                     System.out.println(WHITE_BOLD_BRIGHT + (i + 1) + " - " + WHITE_BRIGHT + titles.get(i) + RESET);
                 }
                 printToConsole(titlesOptions);
                 Integer command = getInputAsInt(0, 2, "Enter an option number:");
@@ -588,12 +609,12 @@ public class ConsoleCtrl extends PresentationCtrl{
 
     public void allDocumentSearch(){
         ArrayList<DocumentInfo> documentsInfo = domain.getAllDocumentsInfo();
-        if(documentsInfo.isEmpty()) System.out.println("There are no documents in the system");
+        if(documentsInfo.isEmpty()) printError("There are no documents in the system");
         else {
             while(true){
                 printToConsole(allDocumentsHeader);
                 for(int i = 0; i < documentsInfo.size(); ++i){
-                    System.out.println((i + 1) + " - " + documentsInfo.get(i).toString());
+                    System.out.println(WHITE_BOLD_BRIGHT + (i + 1) + " - " + WHITE_BRIGHT + documentsInfo.get(i).toString() + RESET);
                 }
                 printToConsole(optionStrings);
                 Integer command = getInputAsInt(0, 2, "Enter an option number:");
@@ -621,10 +642,10 @@ public class ConsoleCtrl extends PresentationCtrl{
     private void similarDocumentsSearch(String titleName, String authorName){
         int k = getInputAsInt(0, 100,"Enter the number of documents showed:");
         ArrayList<DocumentInfo> similarDocuments = domain.getInstance().similarDocumentsSearch(titleName, authorName, k);
-        if (similarDocuments == null) System.out.println("No Similar Documents Found!!!");
+        if (similarDocuments == null) printError("No Similar Documents Found!!!");
         while(similarDocuments != null){
             for(int i = 0; i < similarDocuments.size(); ++i){
-                System.out.println((i + 1) + " - " + similarDocuments.get(i).toString());
+                System.out.println(WHITE_BOLD_BRIGHT + (i + 1) + " - " + WHITE_BRIGHT + similarDocuments.get(i).toString() + RESET);
             }
             printToConsole(similarDocumentsOptions);
             Integer command = getInputAsInt(0, 2, "Enter an option number:");
@@ -639,7 +660,7 @@ public class ConsoleCtrl extends PresentationCtrl{
                         currentAuthor = similarDocuments.get(docNumber - 1).author();
                         openDocument(currentTitle, currentAuthor);
                     } else {
-                        System.out.println("There are no documents to open");
+                        printError("There are no documents to open");
                     }
                     return;
                 case 0:
@@ -657,54 +678,54 @@ public class ConsoleCtrl extends PresentationCtrl{
 
         Integer command = getInputAsInt(1,2, "Enter an option number:");
         if (command == 1) {
-            System.out.println("-Enter the Boolean Expresion Name:");
+            printEnter("-Enter the Boolean Expresion Name:");
             String boolExpName = terminalIn.nextLine();
             docsInfo = domain.storedBooleanExpressionSearch(boolExpName);
             
             if (docsInfo == null) {
-                System.out.println("There is not a expression with this name");
+                printError("There is not a expression with this name");
                 return;
             }
         }
 
         else {
-            System.out.println("-Enter the Boolean Expresion:");
+            printEnter("-Enter the Boolean Expresion:");
             String boolExp = terminalIn.nextLine();
             docsInfo = domain.tempBooleanExpressionSearch(boolExp);
             if (docsInfo == null) {
-                System.out.println("Invalid expression");
+                printError("Invalid expression");
                 return;
             }
         }
         
         if (docsInfo.isEmpty()) {
-            System.out.println("There is not a Sentence in all the Documents that satisfy this expresion");
+            printError("There is not a Sentence in all the Documents that satisfy this expresion");
             return;
         }
         else {
             printToConsole(allDocumentsHeader);
             for(int i = 0; i < docsInfo.size(); ++i){
-                System.out.println((i + 1) + " - " + docsInfo.get(i).toString());
+                System.out.println(WHITE_BOLD_BRIGHT + (i + 1) + " - " + WHITE_BRIGHT + docsInfo.get(i).toString() + RESET);
             }
         }
     }
 
     public void searchDocumentsByQuery(){
-        System.out.println("Enter a query:");
+        printEnter("Enter a query:");
         String query = terminalIn.nextLine();
         if (query.isEmpty()){
-            System.out.println("The query entered is empty");
+            printError("The query entered is empty");
             return;
         }
         ArrayList<DocumentInfo> queryDocs = domain.documentsByQuery(query);
         if(queryDocs.isEmpty()){ 
-            System.out.println("There are no documents that satisfy the query");
+            printError("There are no documents that satisfy the query");
             return;
         }
         while(true){
             printToConsole(queryDocumentsHeader);
             for(int i = 0; i < queryDocs.size(); ++i){
-                System.out.println((i + 1) + " - " + queryDocs.get(i).toString());
+                System.out.println(WHITE_BOLD_BRIGHT + (i + 1) + " - " + WHITE_BRIGHT + queryDocs.get(i).toString() + RESET);
             }
             printToConsole(similarDocumentsOptions);
             Integer command = getInputAsInt(0, 2, "Enter an option number:");
@@ -777,4 +798,97 @@ public class ConsoleCtrl extends PresentationCtrl{
             }
         return docInfos;
     }
+
+    public static final String ANSI_RESET = "\u001B[0m";
+    public static final String ANSI_BLACK = "\u001B[30m";
+    public static final String ANSI_RED = "\u001B[31m";
+    public static final String ANSI_GREEN = "\u001B[32m";
+    public static final String ANSI_YELLOW = "\u001B[33m";
+    public static final String ANSI_BLUE = "\u001B[34m";
+    public static final String ANSI_PURPLE = "\u001B[35m";
+    public static final String ANSI_CYAN = "\u001B[36m";
+    public static final String ANSI_WHITE = "\u001B[37m";
+
+    public static final String ANSI_BLACK_BACKGROUND = "\u001B[40m";
+    public static final String ANSI_RED_BACKGROUND = "\u001B[41m";
+    public static final String ANSI_GREEN_BACKGROUND = "\u001B[42m";
+    public static final String ANSI_YELLOW_BACKGROUND = "\u001B[43m";
+    public static final String ANSI_BLUE_BACKGROUND = "\u001B[44m";
+    public static final String ANSI_PURPLE_BACKGROUND = "\u001B[45m";
+    public static final String ANSI_CYAN_BACKGROUND = "\u001B[46m";
+    public static final String ANSI_WHITE_BACKGROUND = "\u001B[47m";
+    public static final String RESET = "\033[0m";  // Text Reset
+
+    
+    // Regular Colors
+    public static final String BLACK = "\033[0;30m";   // BLACK
+    public static final String RED = "\033[0;31m";     // RED
+    public static final String GREEN = "\033[0;32m";   // GREEN
+    public static final String YELLOW = "\033[0;33m";  // YELLOW
+    public static final String BLUE = "\033[0;34m";    // BLUE
+    public static final String PURPLE = "\033[0;35m";  // PURPLE
+    public static final String CYAN = "\033[0;36m";    // CYAN
+    public static final String WHITE = "\033[0;37m";   // WHITE
+
+    // Bold
+    public static final String BLACK_BOLD = "\033[1;30m";  // BLACK
+    public static final String RED_BOLD = "\033[1;31m";    // RED
+    public static final String GREEN_BOLD = "\033[1;32m";  // GREEN
+    public static final String YELLOW_BOLD = "\033[1;33m"; // YELLOW
+    public static final String BLUE_BOLD = "\033[1;34m";   // BLUE
+    public static final String PURPLE_BOLD = "\033[1;35m"; // PURPLE
+    public static final String CYAN_BOLD = "\033[1;36m";   // CYAN
+    public static final String WHITE_BOLD = "\033[1;37m";  // WHITE
+
+    // Underline
+    public static final String BLACK_UNDERLINED = "\033[4;30m";  // BLACK
+    public static final String RED_UNDERLINED = "\033[4;31m";    // RED
+    public static final String GREEN_UNDERLINED = "\033[4;32m";  // GREEN
+    public static final String YELLOW_UNDERLINED = "\033[4;33m"; // YELLOW
+    public static final String BLUE_UNDERLINED = "\033[4;34m";   // BLUE
+    public static final String PURPLE_UNDERLINED = "\033[4;35m"; // PURPLE
+    public static final String CYAN_UNDERLINED = "\033[4;36m";   // CYAN
+    public static final String WHITE_UNDERLINED = "\033[4;37m";  // WHITE
+
+    // Background
+    public static final String BLACK_BACKGROUND = "\033[40m";  // BLACK
+    public static final String RED_BACKGROUND = "\033[41m";    // RED
+    public static final String GREEN_BACKGROUND = "\033[42m";  // GREEN
+    public static final String YELLOW_BACKGROUND = "\033[43m"; // YELLOW
+    public static final String BLUE_BACKGROUND = "\033[44m";   // BLUE
+    public static final String PURPLE_BACKGROUND = "\033[45m"; // PURPLE
+    public static final String CYAN_BACKGROUND = "\033[46m";   // CYAN
+    public static final String WHITE_BACKGROUND = "\033[47m";  // WHITE
+
+    // High Intensity
+    public static final String BLACK_BRIGHT = "\033[0;90m";  // BLACK
+    public static final String RED_BRIGHT = "\033[0;91m";    // RED
+    public static final String GREEN_BRIGHT = "\033[0;92m";  // GREEN
+    public static final String YELLOW_BRIGHT = "\033[0;93m"; // YELLOW
+    public static final String BLUE_BRIGHT = "\033[0;94m";   // BLUE
+    public static final String PURPLE_BRIGHT = "\033[0;95m"; // PURPLE
+    public static final String CYAN_BRIGHT = "\033[0;96m";   // CYAN
+    public static final String WHITE_BRIGHT = "\033[0;97m";  // WHITE
+
+    // Bold High Intensity
+    public static final String BLACK_BOLD_BRIGHT = "\033[1;90m"; // BLACK
+    public static final String RED_BOLD_BRIGHT = "\033[1;91m";   // RED
+    public static final String GREEN_BOLD_BRIGHT = "\033[1;92m"; // GREEN
+    public static final String YELLOW_BOLD_BRIGHT = "\033[1;93m";// YELLOW
+    public static final String BLUE_BOLD_BRIGHT = "\033[1;94m";  // BLUE
+    public static final String PURPLE_BOLD_BRIGHT = "\033[1;95m";// PURPLE
+    public static final String CYAN_BOLD_BRIGHT = "\033[1;96m";  // CYAN
+    public static final String WHITE_BOLD_BRIGHT = "\033[1;97m"; // WHITE
+
+    // High Intensity backgrounds
+    public static final String BLACK_BACKGROUND_BRIGHT = "\033[0;100m";// BLACK
+    public static final String RED_BACKGROUND_BRIGHT = "\033[0;101m";// RED
+    public static final String GREEN_BACKGROUND_BRIGHT = "\033[0;102m";// GREEN
+    public static final String YELLOW_BACKGROUND_BRIGHT = "\033[0;103m";// YELLOW
+    public static final String BLUE_BACKGROUND_BRIGHT = "\033[0;104m";// BLUE
+    public static final String PURPLE_BACKGROUND_BRIGHT = "\033[0;105m"; // PURPLE
+    public static final String CYAN_BACKGROUND_BRIGHT = "\033[0;106m";  // CYAN
+    public static final String WHITE_BACKGROUND_BRIGHT = "\033[0;107m";   // WHITE
+
+
 }
