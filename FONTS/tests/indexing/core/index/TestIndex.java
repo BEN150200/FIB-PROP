@@ -2,12 +2,7 @@ package tests.indexing.core.index;
 
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
-import java.time.Duration;
-import java.time.Instant;
-import java.util.Arrays;
-import java.util.List;
 import java.util.stream.IntStream;
 
 import org.junit.Test;
@@ -16,9 +11,10 @@ import io.vavr.collection.HashMap;
 import io.vavr.collection.HashSet;
 import src.domain.indexing.core.Index;
 import src.domain.indexing.core.Parsing;
-import src.helpers.Strings;
 
 public class TestIndex {
+
+    // Index::of
     @Test
     public void empty() {
         var actual = Index.<String>of(HashMap.empty());
