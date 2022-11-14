@@ -3,10 +3,10 @@ sources = $(shell find ./src -type f -name '*.java')
 javafile = $(sources:.java=.class)
 classes = $(shell find .. -type f -name '*.class')
 
-all : $(javafile)
+all : Driver.class
 
-%.class : %.java
-	$(JAVAC) $<
+Driver.class : Driver.java
+	$(JAVAC) Driver.java
 
 clean :
 	rm -f $(classes)

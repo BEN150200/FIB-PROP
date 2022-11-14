@@ -1,4 +1,4 @@
-package src;
+
 
 import src.domain.controllers.DomainCtrl;
 import src.domain.core.DocumentInfo;
@@ -12,10 +12,10 @@ import java.util.Scanner;
 import java.util.Set;
 import java.util.HashMap;
 
-public class ConsoleCtrl{
+public class Driver{
     
     public static void main(String[] args) {
-        ConsoleCtrl c = new ConsoleCtrl();
+        Driver c = new Driver();
         c.launchPresentation();
 	}
 
@@ -251,7 +251,7 @@ public class ConsoleCtrl{
     /**
      * Constructor
     **/
-    public ConsoleCtrl() {
+    public Driver() {
         domain = DomainCtrl.getInstance();
     }
 
