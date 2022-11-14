@@ -1,4 +1,4 @@
-package domain.indexing.booleanmodel.BooleanModel;
+package domain.indexing.booleanmodel.BooleanModel.Queries;
 
 import static org.junit.Assert.assertEquals;
 
@@ -10,7 +10,7 @@ import src.domain.expressions.ExpressionTreeNode;
 import src.domain.indexing.booleanmodel.BooleanModel;
 import src.domain.indexing.core.Index;
 
-public class BooleanQueries {
+public class TestBooleanQueries {
     /*private HashMap<String, Iterable<String>> corpus = Parsing.makeCollection(
         "d1", "and the earth was without form and void",
         "d2", "and darkness was upon the face of the deep",

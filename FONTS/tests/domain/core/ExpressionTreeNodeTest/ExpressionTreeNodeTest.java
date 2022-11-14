@@ -1,4 +1,4 @@
-package domain.core;
+package domain.core.ExpressionTreeNodeTest;
 
 import org.junit.After;
 import org.junit.Before;
