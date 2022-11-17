@@ -1,4 +1,4 @@
-
+package src.presentation;
 
 import src.domain.controllers.DomainCtrl;
 import src.domain.core.DocumentInfo;
@@ -13,11 +13,6 @@ import java.util.Set;
 import java.util.HashMap;
 
 public class Driver{
-    
-    public static void main(String[] args) {
-        Driver c = new Driver();
-        c.launchPresentation();
-	}
 
 
     /**
