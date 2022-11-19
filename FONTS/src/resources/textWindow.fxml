@@ -54,7 +54,7 @@
       <menus>
         <Menu mnemonicParsing="false" text="File">
           <items>
-            <MenuItem onAction="#newTab" mnemonicParsing="false" text="New" />
+            <MenuItem mnemonicParsing="false" onAction="#newTab" text="New" />
             <MenuItem mnemonicParsing="false" text="Open…" />
             <Menu mnemonicParsing="false" text="Open Recent" />
             <SeparatorMenuItem mnemonicParsing="false" />
@@ -116,7 +116,7 @@
             </Label>
           </children>
         </AnchorPane>
-            <TabPane fx:id="tabPane" prefHeight="551.0" prefWidth="704.0" tabClosingPolicy="UNAVAILABLE" />
+            <TabPane fx:id="tabPane" prefHeight="551.0" prefWidth="704.0" />
       </items>
     </SplitPane>
     <HBox id="HBox" alignment="CENTER_LEFT" spacing="5.0" VBox.vgrow="NEVER">

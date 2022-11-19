@@ -312,7 +312,11 @@ public class DomainCtrl {
     
     }
 
-    public void openFile(String path) {
+    public DocumentInfo openFile(String path) {
+        //cria al controlador de persistencia per obtenir contingut del document
+        DocumentInfo docInfo; // docInfo = persistencia.openFile(path)
 
+        addDocument(null,null,null);
+        return null;
     }
 }

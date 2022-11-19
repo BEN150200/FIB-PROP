@@ -9,6 +9,12 @@ public class DocumentInfo {
     private String authorName;
     private LocalDateTime creationDate;
     private LocalDateTime modificationDate;
+
+    private String path;
+    private String fileName;
+    private String extencion;
+    private String content;
+
     private Double semblance;
 
     /*private void print(String s) {
