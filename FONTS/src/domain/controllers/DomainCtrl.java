@@ -311,4 +311,8 @@ public class DomainCtrl {
         return SearchCtrl.getInstance().documentsByQuery(query);
     
     }
+
+    public void openFile(String path) {
+
+    }
 }

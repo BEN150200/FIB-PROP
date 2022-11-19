@@ -1,11 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
 
-
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="src.presentation.Main">
-   <children>
-      <Button layoutX="171.0" layoutY="132.0" mnemonicParsing="false" text="Button" />
-   </children>
-</AnchorPane>
+<BorderPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/19" fx:controller="src.presentation.MainCtrl">
+    <center>
+        <TabPane fx:id="tabPane" />
+    </center>
+    <bottom>
+        <HBox alignment="CENTER" spacing="5">
+            <padding>
+                <Insets bottom="5" left="5" right="5" top="5" />
+            </padding>
+            <Button text="Load..." />
+            <Button onAction="#newTab" text="New" />
+        </HBox>
+    </bottom>
+</BorderPane>
