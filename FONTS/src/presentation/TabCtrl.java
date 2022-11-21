@@ -18,6 +18,14 @@ public class TabCtrl {
         author = new TextField();
     }
 
+    /**
+     * Setters
+     */
+
+    /**
+     *
+     * @param title
+     */
     public void setTitle(String title) {
         this.title.setText(title);
     }
@@ -25,6 +33,24 @@ public class TabCtrl {
     public void setAuthor(String author) {
         this.author.setText(author);
     }
+
+    public void setContent(String content) {
+        this.textArea.setText(content);
+    }
+
+    @FXML
+    public void save() {
+        PresentationCtrl.getInstance().saveDocument(title.getText(), author.getText(), textArea.getText());
+    }
+
+    /**
+     * Getters
+     */
+
+    /**
+     *
+     * @return
+     */
 
     public String getTitle() {
         return title.getText();

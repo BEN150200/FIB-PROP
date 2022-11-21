@@ -312,6 +312,31 @@ public class DomainCtrl {
     
     }
 
+
+    /**
+     * presentation functions
+     */
+
+    /**
+     * chech if document exists, if not, adds it in the system and creates the file.
+     */
+    public void saveDocument(String title, String author, List<String> content) {
+        Document doc = DocumentCtrl.getInstance().getDocument(title, author);
+
+        if (doc != null) {
+            updateDocumentContent(doc, content);
+            //TODO: call update the file
+        }
+        else {
+            addDocument(title, author, content);
+            //TODO: create file in the sistem
+        }
+    }
+
+    public void exportsDocument() {
+
+    }
+
     public DocumentInfo openFile(String path) {
         //cria al controlador de persistencia per obtenir contingut del document
         DocumentInfo docInfo; // docInfo = persistencia.openFile(path)

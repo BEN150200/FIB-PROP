@@ -1,6 +1,5 @@
 package src.presentation;
 
-import javafx.stage.FileChooser;
 import src.domain.controllers.DomainCtrl;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -8,8 +7,11 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import src.domain.preprocessing.Tokenizer;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class PresentationCtrl {
     private static PresentationCtrl instance;
@@ -33,11 +35,17 @@ public class PresentationCtrl {
     }
 
     public void switchToTextScene(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/textWindow.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/mainEditorWindow.fxml"));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
+    }
+
+    public void saveDocument(String title, String author, String content) {
+        List<String> strings = new ArrayList<>();
+        strings = List.of(Tokenizer.splitSentences(content));
+        DomainCtrl.getInstance().saveDocument(title, author, strings);
     }
 
     public void newDocument(ActionEvent e) throws IOException {
