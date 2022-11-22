@@ -2,51 +2,38 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d2991d3d-5c40-4108-ac62-9c44333baa2c" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/out/production/subgrup-prop33.2/editorTab.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/subgrup-prop33.2/index.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/subgrup-prop33.2/main.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/subgrup-prop33.2/mainEditorWindow.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/subgrup-prop33.2/src/domain/controllers/AuthorCtrl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/subgrup-prop33.2/src/domain/controllers/BooleanExpressionCtrl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/subgrup-prop33.2/src/domain/controllers/DocumentCtrl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/subgrup-prop33.2/src/domain/controllers/DomainCtrl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/subgrup-prop33.2/src/domain/controllers/SearchCtrl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/subgrup-prop33.2/src/domain/controllers/SentenceCtrl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/subgrup-prop33.2/src/domain/controllers/TitleCtrl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/subgrup-prop33.2/src/domain/core/Author.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/subgrup-prop33.2/src/domain/core/Document.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/subgrup-prop33.2/src/domain/core/DocumentInfo.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/subgrup-prop33.2/src/domain/core/Sentence.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/subgrup-prop33.2/src/domain/core/Title.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/subgrup-prop33.2/src/domain/expressions/BooleanExpression.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/subgrup-prop33.2/src/domain/expressions/ExpressionTreeNode.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/subgrup-prop33.2/src/domain/index.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/subgrup-prop33.2/src/domain/indexing/booleanmodel/BooleanModel.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/subgrup-prop33.2/src/domain/indexing/core/Index.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/subgrup-prop33.2/src/domain/indexing/core/IndexingController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/subgrup-prop33.2/src/domain/indexing/core/Parsing.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/subgrup-prop33.2/src/domain/indexing/index.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/subgrup-prop33.2/src/domain/indexing/vectorial/TFIDF.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/subgrup-prop33.2/src/domain/indexing/vectorial/VectorialModel.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/subgrup-prop33.2/src/domain/preprocessing/Stemmer.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/subgrup-prop33.2/src/domain/preprocessing/Stopwords.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/subgrup-prop33.2/src/domain/preprocessing/TokenFilter.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/subgrup-prop33.2/src/domain/preprocessing/Tokenizer.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/subgrup-prop33.2/src/domain/preprocessing/stopwords-ca.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/subgrup-prop33.2/src/domain/preprocessing/stopwords-en.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/subgrup-prop33.2/src/domain/preprocessing/stopwords-es.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/subgrup-prop33.2/src/helpers/Functional.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/subgrup-prop33.2/src/helpers/Maps.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/subgrup-prop33.2/src/helpers/Maths.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/subgrup-prop33.2/src/helpers/Sets.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/subgrup-prop33.2/src/helpers/Strings.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/subgrup-prop33.2/src/presentation/Main.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/subgrup-prop33.2/src/presentation/MainCtrl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/subgrup-prop33.2/src/presentation/PresentationCtrl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/subgrup-prop33.2/src/presentation/TabCtrl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/subgrup-prop33.2/src/resources/editorTab.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/subgrup-prop33.2/src/resources/main.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/subgrup-prop33.2/src/resources/mainEditorWindow.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/lib.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/lib.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FONTS/src/presentation/MainCtrl.java" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/src/presentation/MainCtrl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/javafx-swt.jar" beforeDir="false" afterPath="$PROJECT_DIR$/lib/JavaFx/javafx-swt.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/javafx.base.jar" beforeDir="false" afterPath="$PROJECT_DIR$/lib/JavaFx/javafx.base.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/javafx.controls.jar" beforeDir="false" afterPath="$PROJECT_DIR$/lib/JavaFx/javafx.controls.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/javafx.fxml.jar" beforeDir="false" afterPath="$PROJECT_DIR$/lib/JavaFx/javafx.fxml.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/javafx.graphics.jar" beforeDir="false" afterPath="$PROJECT_DIR$/lib/JavaFx/javafx.graphics.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/javafx.media.jar" beforeDir="false" afterPath="$PROJECT_DIR$/lib/JavaFx/javafx.media.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/javafx.properties" beforeDir="false" afterPath="$PROJECT_DIR$/lib/JavaFx/javafx.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/javafx.swing.jar" beforeDir="false" afterPath="$PROJECT_DIR$/lib/JavaFx/javafx.swing.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/javafx.web.jar" beforeDir="false" afterPath="$PROJECT_DIR$/lib/JavaFx/javafx.web.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/libavplugin-54.so" beforeDir="false" afterPath="$PROJECT_DIR$/lib/JavaFx/libavplugin-54.so" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/libavplugin-56.so" beforeDir="false" afterPath="$PROJECT_DIR$/lib/JavaFx/libavplugin-56.so" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/libavplugin-57.so" beforeDir="false" afterPath="$PROJECT_DIR$/lib/JavaFx/libavplugin-57.so" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/libavplugin-ffmpeg-56.so" beforeDir="false" afterPath="$PROJECT_DIR$/lib/JavaFx/libavplugin-ffmpeg-56.so" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/libavplugin-ffmpeg-57.so" beforeDir="false" afterPath="$PROJECT_DIR$/lib/JavaFx/libavplugin-ffmpeg-57.so" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/libavplugin-ffmpeg-58.so" beforeDir="false" afterPath="$PROJECT_DIR$/lib/JavaFx/libavplugin-ffmpeg-58.so" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/libdecora_sse.so" beforeDir="false" afterPath="$PROJECT_DIR$/lib/JavaFx/libdecora_sse.so" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/libfxplugins.so" beforeDir="false" afterPath="$PROJECT_DIR$/lib/JavaFx/libfxplugins.so" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/libglass.so" beforeDir="false" afterPath="$PROJECT_DIR$/lib/JavaFx/libglass.so" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/libglassgtk2.so" beforeDir="false" afterPath="$PROJECT_DIR$/lib/JavaFx/libglassgtk2.so" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/libglassgtk3.so" beforeDir="false" afterPath="$PROJECT_DIR$/lib/JavaFx/libglassgtk3.so" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/libgstreamer-lite.so" beforeDir="false" afterPath="$PROJECT_DIR$/lib/JavaFx/libgstreamer-lite.so" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/libjavafx_font.so" beforeDir="false" afterPath="$PROJECT_DIR$/lib/JavaFx/libjavafx_font.so" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/libjavafx_font_freetype.so" beforeDir="false" afterPath="$PROJECT_DIR$/lib/JavaFx/libjavafx_font_freetype.so" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/libjavafx_font_pango.so" beforeDir="false" afterPath="$PROJECT_DIR$/lib/JavaFx/libjavafx_font_pango.so" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/libjavafx_iio.so" beforeDir="false" afterPath="$PROJECT_DIR$/lib/JavaFx/libjavafx_iio.so" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/libjfxmedia.so" beforeDir="false" afterPath="$PROJECT_DIR$/lib/JavaFx/libjfxmedia.so" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/libjfxwebkit.so" beforeDir="false" afterPath="$PROJECT_DIR$/lib/JavaFx/libjfxwebkit.so" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/libprism_common.so" beforeDir="false" afterPath="$PROJECT_DIR$/lib/JavaFx/libprism_common.so" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/libprism_es2.so" beforeDir="false" afterPath="$PROJECT_DIR$/lib/JavaFx/libprism_es2.so" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/libprism_sw.so" beforeDir="false" afterPath="$PROJECT_DIR$/lib/JavaFx/libprism_sw.so" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -76,23 +63,24 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;11&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/biel/Documents/Q5/PROP/Exemples de Projectes/Java-A3C-PROP-Ejemplo&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.10548526&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.11806375&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "jdk.selected.JAVA_MODULE": "11",
+    "last_opened_file_path": "/home/biel/Documents/Q5/PROP/subgrup-prop33.2/lib/JavaFx",
+    "project.structure.last.edited": "Libraries",
+    "project.structure.proportion": "0.10548526",
+    "project.structure.side.proportion": "0.11806375",
+    "settings.editor.selected.configurable": "preferences.pluginManager"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/lib/JavaFx" />
       <recent name="$PROJECT_DIR$/FONTS" />
       <recent name="$PROJECT_DIR$/FONTS/src/resources" />
       <recent name="$PROJECT_DIR$/FONTS/src" />
