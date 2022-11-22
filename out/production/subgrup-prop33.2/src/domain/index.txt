@@ -1,5 +1,0 @@
-- controllers:	Implementacions dels controladors de les classes del domini.
-- core:		Implementacions de les classes principals del programa.
-- expressions:	Implementacions de les classes que tenene a veure amb Expressions booleanes.
-- indexing:	Implementacions de les classes dels models booleans i vectorial.
-- preprocessing:Implementacions de les classes per tractar el contingut de les frases.

@@ -2,27 +2,51 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d2991d3d-5c40-4108-ac62-9c44333baa2c" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FONTS/src/presentation/AutocompletionlTextField.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FONTS/src/presentation/SearchStageCtrl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FONTS/src/resources/search.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.attach_pid11708" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.attach_pid20618" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.attach_pid20943" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.attach_pid22069" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.attach_pid23222" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.attach_pid23323" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FONTS/src/presentation/MainCtrl.java" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/src/presentation/MainCtrl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FONTS/src/presentation/PresentationCtrl.java" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/src/presentation/PresentationCtrl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FONTS/src/resources/main.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FONTS/src/resources/mainEditorWindow.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/src/resources/mainEditorWindow.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/subgrup-prop33.2/main.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/subgrup-prop33.2/mainEditorWindow.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/subgrup-prop33.2/mainEditorWindow.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/subgrup-prop33.2/src/presentation/MainCtrl.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/subgrup-prop33.2/src/presentation/MainCtrl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/subgrup-prop33.2/src/presentation/PresentationCtrl.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/subgrup-prop33.2/src/presentation/PresentationCtrl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/subgrup-prop33.2/src/resources/main.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/subgrup-prop33.2/src/resources/mainEditorWindow.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/subgrup-prop33.2/src/resources/mainEditorWindow.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/subgrup-prop33.2/editorTab.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/subgrup-prop33.2/index.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/subgrup-prop33.2/main.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/subgrup-prop33.2/mainEditorWindow.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/subgrup-prop33.2/src/domain/controllers/AuthorCtrl.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/subgrup-prop33.2/src/domain/controllers/BooleanExpressionCtrl.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/subgrup-prop33.2/src/domain/controllers/DocumentCtrl.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/subgrup-prop33.2/src/domain/controllers/DomainCtrl.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/subgrup-prop33.2/src/domain/controllers/SearchCtrl.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/subgrup-prop33.2/src/domain/controllers/SentenceCtrl.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/subgrup-prop33.2/src/domain/controllers/TitleCtrl.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/subgrup-prop33.2/src/domain/core/Author.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/subgrup-prop33.2/src/domain/core/Document.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/subgrup-prop33.2/src/domain/core/DocumentInfo.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/subgrup-prop33.2/src/domain/core/Sentence.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/subgrup-prop33.2/src/domain/core/Title.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/subgrup-prop33.2/src/domain/expressions/BooleanExpression.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/subgrup-prop33.2/src/domain/expressions/ExpressionTreeNode.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/subgrup-prop33.2/src/domain/index.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/subgrup-prop33.2/src/domain/indexing/booleanmodel/BooleanModel.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/subgrup-prop33.2/src/domain/indexing/core/Index.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/subgrup-prop33.2/src/domain/indexing/core/IndexingController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/subgrup-prop33.2/src/domain/indexing/core/Parsing.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/subgrup-prop33.2/src/domain/indexing/index.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/subgrup-prop33.2/src/domain/indexing/vectorial/TFIDF.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/subgrup-prop33.2/src/domain/indexing/vectorial/VectorialModel.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/subgrup-prop33.2/src/domain/preprocessing/Stemmer.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/subgrup-prop33.2/src/domain/preprocessing/Stopwords.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/subgrup-prop33.2/src/domain/preprocessing/TokenFilter.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/subgrup-prop33.2/src/domain/preprocessing/Tokenizer.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/subgrup-prop33.2/src/domain/preprocessing/stopwords-ca.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/subgrup-prop33.2/src/domain/preprocessing/stopwords-en.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/subgrup-prop33.2/src/domain/preprocessing/stopwords-es.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/subgrup-prop33.2/src/helpers/Functional.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/subgrup-prop33.2/src/helpers/Maps.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/subgrup-prop33.2/src/helpers/Maths.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/subgrup-prop33.2/src/helpers/Sets.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/subgrup-prop33.2/src/helpers/Strings.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/subgrup-prop33.2/src/presentation/Main.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/subgrup-prop33.2/src/presentation/MainCtrl.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/subgrup-prop33.2/src/presentation/PresentationCtrl.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/subgrup-prop33.2/src/presentation/TabCtrl.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/subgrup-prop33.2/src/resources/editorTab.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/subgrup-prop33.2/src/resources/main.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/subgrup-prop33.2/src/resources/mainEditorWindow.fxml" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
