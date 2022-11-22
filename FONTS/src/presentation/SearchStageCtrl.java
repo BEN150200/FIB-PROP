@@ -1,10 +1,13 @@
 package src.presentation;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -13,13 +16,22 @@ import javafx.stage.Stage;
 import src.domain.core.DocumentInfo;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class SearchStageCtrl {
 
+    /*
+    @FXML
+    AutoCompleteTextField titleField;
+    @FXML
+    AutoCompleteTextField authorField;
 
-    //AutocompletionlTextField titleField;
+     */
+    @FXML
+    ChoiceBox authorBox;
 
-    //AutocompletionlTextField authorField;
+    @FXML
+    ChoiceBox titleBox;
 
     @FXML
     TableColumn tableTitle;
@@ -48,10 +60,6 @@ public class SearchStageCtrl {
     ArrayList<String> allAuthors = new ArrayList<>();
 
     public SearchStageCtrl() {
-        AutocompletionlTextField titleField = new AutocompletionlTextField();
-        AutocompletionlTextField authorField = new AutocompletionlTextField();
-        fieldBox.getChildren().add(titleField);
-        fieldBox.getChildren().add(authorField);
     }
 
     public void initialize() {
@@ -60,11 +68,35 @@ public class SearchStageCtrl {
         allTitles = PresentationCtrl.getInstance().getAllTitles();
         allAuthors = PresentationCtrl.getInstance().getAllAuthors();
 
-        //titleField.setEntries(allTitles);
-        //authorField.setEntries(allAuthors);
+        ObservableList<String> oTitles = FXCollections.observableArrayList(allTitles);
+        titleBox.setItems(oTitles);
 
-        //fieldBox.getChildren().add(titleField);
-        //fieldBox.getChildren().add(authorField);
+        ObservableList<String> oAuthors = FXCollections.observableArrayList(allAuthors);
+        authorBox.setItems(oAuthors);
+
+        titleBox.setOnAction(event -> {
+            //authorBox.getItems().clear();
+            //The above line is important otherwise everytime there is an action it will just keep adding more
+            if(titleBox.getValue()!=null & authorBox.getValue() == null) {//This cannot be null but I added because idk what yours will look like
+                ArrayList<String> authors = PresentationCtrl.getInstance().getAuthors((String) titleBox.getValue());
+                ObservableList<String> authorsTitle = FXCollections.observableArrayList(authors);
+                authorBox.setItems(authorsTitle);
+            }
+        });
+
+        authorBox.setOnAction(event -> {
+            //titleBox.getItems().clear();
+            //The above line is important otherwise everytime there is an action it will just keep adding more
+            if(authorBox.getValue()!=null & titleBox.getValue() == null) {//This cannot be null but I added because idk what yours will look like
+                ArrayList<String> titles = PresentationCtrl.getInstance().getTitles((String) authorBox.getValue());
+                ObservableList<String> titlesAuthor = FXCollections.observableArrayList(titles);
+                titleBox.setItems(titlesAuthor);
+            }
+        });
+
+
+
+
 
         /*
         TableColumn titleCol = new TableColumn("Title");
@@ -96,6 +128,29 @@ public class SearchStageCtrl {
 
 
         stage.close();
+    }
+
+    @FXML
+    private void getTitles() {
+        /*
+        allTitles = PresentationCtrl.getInstance().getAllTitles();
+        //System.out.println("eieei");
+        //titleField.getEntries().addAll(allTitles);
+
+        ObservableList<String> oTitles = FXCollections.observableArrayList(allTitles);
+        titleBox.setItems(oTitles);
+         */
+    }
+
+    @FXML
+    private void getAuthors() {
+        /*
+        allAuthors = PresentationCtrl.getInstance().getAllAuthors();
+
+        //authorField.getEntries().addAll(allAuthors);
+        ObservableList<String> oAuthors = FXCollections.observableArrayList(allAuthors);
+        authorBox.setItems(oAuthors);
+         */
     }
 
 

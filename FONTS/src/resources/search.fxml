@@ -3,6 +3,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -10,19 +11,25 @@
 <?import javafx.scene.layout.VBox?>
 
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="src.presentation.SearchStageCtrl">
-      <HBox fx:id="fieldBox" prefHeight="40.0" prefWidth="600.0">
+      <HBox fx:id="fieldBox" alignment="CENTER_LEFT" prefHeight="40.0" VBox.vgrow="NEVER">
             <Label alignment="CENTER" contentDisplay="CENTER" text="Title" textAlignment="CENTER">
                <HBox.margin>
-                  <Insets bottom="5.0" left="5.0" right="5.0" top="8.0" />
+                  <Insets left="5.0" right="5.0" />
                </HBox.margin>
             </Label>
+      <ChoiceBox maxWidth="1.7976931348623157E308" prefWidth="150.0" HBox.hgrow="ALWAYS" fx:id="titleBox"/>
             <Label alignment="CENTER" contentDisplay="CENTER" text="Author">
                <HBox.margin>
-                  <Insets bottom="5.0" left="5.0" right="5.0" top="8.0" />
+                  <Insets left="5.0" right="5.0" />
                </HBox.margin>
             </Label>
+      <ChoiceBox maxWidth="1.7976931348623157E308" prefWidth="150.0" HBox.hgrow="ALWAYS" fx:id="authorBox">
+         <HBox.margin>
+            <Insets right="5.0" />
+         </HBox.margin>
+      </ChoiceBox>
          <VBox.margin>
-            <Insets top="5.0" />
+            <Insets bottom="5.0" top="5.0" />
          </VBox.margin>
       </HBox>
       <TableView fx:id="table" prefHeight="387.0" prefWidth="600.0" VBox.vgrow="ALWAYS">

@@ -65,8 +65,16 @@ public class PresentationCtrl {
         return DomainCtrl.getInstance().getAllTitles(new String());
     }
 
+    public ArrayList<String> getTitles(String author) {
+        return DomainCtrl.getInstance().getAllAuthorTitles(author);
+    }
+
     public ArrayList<String> getAllAuthors() {
         return DomainCtrl.getInstance().getAllAuthors(new String());
+    }
+
+    public ArrayList<String> getAuthors(String title) {
+        return DomainCtrl.getInstance().getAllTitleAuthors(title);
     }
 
     /**

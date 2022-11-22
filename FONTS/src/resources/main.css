@@ -9,3 +9,7 @@
     -fx-text-fill: "white";
     -fx-alignment: center;
 }
+
+.button:hover {
+    -fx-opacity: 0.6;
+}

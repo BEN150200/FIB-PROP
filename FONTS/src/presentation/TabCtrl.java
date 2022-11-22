@@ -13,9 +13,6 @@ public class TabCtrl {
     private TextField author;
 
     public void initialize () {
-        textArea = new TextArea();
-        title = new TextField();
-        author = new TextField();
     }
 
     /**
