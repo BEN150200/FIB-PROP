@@ -7,7 +7,10 @@
       <root url="file://$PROJECT_DIR$/lib/JavaFx" />
     </CLASSES>
     <JAVADOC />
-    <SOURCES />
+    <SOURCES>
+      <root url="file://$PROJECT_DIR$/lib/javafx-sdk-19" />
+    </SOURCES>
     <jarDirectory url="file://$PROJECT_DIR$/lib/JavaFx" recursive="false" />
+    <jarDirectory url="file://$PROJECT_DIR$/lib/javafx-sdk-19" recursive="false" type="SOURCES" />
   </library>
 </component>
