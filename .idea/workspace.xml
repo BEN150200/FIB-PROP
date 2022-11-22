@@ -2,38 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d2991d3d-5c40-4108-ac62-9c44333baa2c" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/lib.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/lib.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FONTS/src/presentation/MainCtrl.java" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/src/presentation/MainCtrl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/javafx-swt.jar" beforeDir="false" afterPath="$PROJECT_DIR$/lib/JavaFx/javafx-swt.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/javafx.base.jar" beforeDir="false" afterPath="$PROJECT_DIR$/lib/JavaFx/javafx.base.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/javafx.controls.jar" beforeDir="false" afterPath="$PROJECT_DIR$/lib/JavaFx/javafx.controls.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/javafx.fxml.jar" beforeDir="false" afterPath="$PROJECT_DIR$/lib/JavaFx/javafx.fxml.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/javafx.graphics.jar" beforeDir="false" afterPath="$PROJECT_DIR$/lib/JavaFx/javafx.graphics.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/javafx.media.jar" beforeDir="false" afterPath="$PROJECT_DIR$/lib/JavaFx/javafx.media.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/javafx.properties" beforeDir="false" afterPath="$PROJECT_DIR$/lib/JavaFx/javafx.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/javafx.swing.jar" beforeDir="false" afterPath="$PROJECT_DIR$/lib/JavaFx/javafx.swing.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/javafx.web.jar" beforeDir="false" afterPath="$PROJECT_DIR$/lib/JavaFx/javafx.web.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/libavplugin-54.so" beforeDir="false" afterPath="$PROJECT_DIR$/lib/JavaFx/libavplugin-54.so" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/libavplugin-56.so" beforeDir="false" afterPath="$PROJECT_DIR$/lib/JavaFx/libavplugin-56.so" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/libavplugin-57.so" beforeDir="false" afterPath="$PROJECT_DIR$/lib/JavaFx/libavplugin-57.so" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/libavplugin-ffmpeg-56.so" beforeDir="false" afterPath="$PROJECT_DIR$/lib/JavaFx/libavplugin-ffmpeg-56.so" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/libavplugin-ffmpeg-57.so" beforeDir="false" afterPath="$PROJECT_DIR$/lib/JavaFx/libavplugin-ffmpeg-57.so" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/libavplugin-ffmpeg-58.so" beforeDir="false" afterPath="$PROJECT_DIR$/lib/JavaFx/libavplugin-ffmpeg-58.so" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/libdecora_sse.so" beforeDir="false" afterPath="$PROJECT_DIR$/lib/JavaFx/libdecora_sse.so" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/libfxplugins.so" beforeDir="false" afterPath="$PROJECT_DIR$/lib/JavaFx/libfxplugins.so" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/libglass.so" beforeDir="false" afterPath="$PROJECT_DIR$/lib/JavaFx/libglass.so" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/libglassgtk2.so" beforeDir="false" afterPath="$PROJECT_DIR$/lib/JavaFx/libglassgtk2.so" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/libglassgtk3.so" beforeDir="false" afterPath="$PROJECT_DIR$/lib/JavaFx/libglassgtk3.so" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/libgstreamer-lite.so" beforeDir="false" afterPath="$PROJECT_DIR$/lib/JavaFx/libgstreamer-lite.so" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/libjavafx_font.so" beforeDir="false" afterPath="$PROJECT_DIR$/lib/JavaFx/libjavafx_font.so" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/libjavafx_font_freetype.so" beforeDir="false" afterPath="$PROJECT_DIR$/lib/JavaFx/libjavafx_font_freetype.so" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/libjavafx_font_pango.so" beforeDir="false" afterPath="$PROJECT_DIR$/lib/JavaFx/libjavafx_font_pango.so" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/libjavafx_iio.so" beforeDir="false" afterPath="$PROJECT_DIR$/lib/JavaFx/libjavafx_iio.so" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/libjfxmedia.so" beforeDir="false" afterPath="$PROJECT_DIR$/lib/JavaFx/libjfxmedia.so" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/libjfxwebkit.so" beforeDir="false" afterPath="$PROJECT_DIR$/lib/JavaFx/libjfxwebkit.so" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/libprism_common.so" beforeDir="false" afterPath="$PROJECT_DIR$/lib/JavaFx/libprism_common.so" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/libprism_es2.so" beforeDir="false" afterPath="$PROJECT_DIR$/lib/JavaFx/libprism_es2.so" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/libprism_sw.so" beforeDir="false" afterPath="$PROJECT_DIR$/lib/JavaFx/libprism_sw.so" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/instruccions.txt" beforeDir="false" afterPath="$PROJECT_DIR$/instruccions.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -90,7 +60,7 @@
     <configuration name="Main" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="src.presentation.Main" />
       <module name="subgrup-prop33.2" />
-      <option name="VM_PARAMETERS" value="--module-path lib --add-modules javafx.controls,javafx.fxml" />
+      <option name="VM_PARAMETERS" value="--module-path lib/JavaFx --add-modules javafx.controls,javafx.fxml" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="src.presentation.*" />

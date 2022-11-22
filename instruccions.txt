@@ -7,4 +7,4 @@ per la carpeta on es guarda el projecte.
 
 si es en linux s'ha de cambiar per :
 
---module-path lib --add-modules javafx.controls,javafx.fxml
+--module-path lib/JavaFx --add-modules javafx.controls,javafx.fxml
