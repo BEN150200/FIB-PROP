@@ -2,24 +2,27 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d2991d3d-5c40-4108-ac62-9c44333baa2c" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FONTS/src/presentation/AutocompletionlTextField.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FONTS/src/presentation/SearchStageCtrl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FONTS/src/resources/search.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.attach_pid11708" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.attach_pid20618" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.attach_pid20943" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.attach_pid22069" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.attach_pid23222" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.attach_pid23323" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FONTS/src/domain/controllers/DomainCtrl.java" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/src/domain/controllers/DomainCtrl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FONTS/src/presentation/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/src/presentation/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/FONTS/src/presentation/MainCtrl.java" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/src/presentation/MainCtrl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/FONTS/src/presentation/PresentationCtrl.java" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/src/presentation/PresentationCtrl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FONTS/src/presentation/TabCtrl.java" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/src/presentation/TabCtrl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FONTS/src/resources/textEditor.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/src/resources/editorTab.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FONTS/src/resources/textWindow.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/src/resources/mainEditorWindow.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/subgrup-prop33.2/src/domain/controllers/DomainCtrl.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/subgrup-prop33.2/src/domain/controllers/DomainCtrl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/subgrup-prop33.2/src/domain/core/DocumentInfo.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/subgrup-prop33.2/src/domain/core/DocumentInfo.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/subgrup-prop33.2/src/presentation/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/subgrup-prop33.2/src/presentation/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FONTS/src/resources/main.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FONTS/src/resources/mainEditorWindow.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/src/resources/mainEditorWindow.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/subgrup-prop33.2/main.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/subgrup-prop33.2/mainEditorWindow.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/subgrup-prop33.2/mainEditorWindow.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/subgrup-prop33.2/src/presentation/MainCtrl.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/subgrup-prop33.2/src/presentation/MainCtrl.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/subgrup-prop33.2/src/presentation/PresentationCtrl.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/subgrup-prop33.2/src/presentation/PresentationCtrl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/subgrup-prop33.2/src/presentation/TabCtrl.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/subgrup-prop33.2/src/presentation/TabCtrl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/subgrup-prop33.2/src/resources/textEditor.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/subgrup-prop33.2/src/resources/textWindow.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/subgrup-prop33.2/textEditor.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/subgrup-prop33.2/textWindow.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/subgrup-prop33.2/src/resources/main.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/subgrup-prop33.2/src/resources/mainEditorWindow.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/subgrup-prop33.2/src/resources/mainEditorWindow.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

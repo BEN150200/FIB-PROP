@@ -83,8 +83,8 @@ public class MainCtrl {
 
     }
 
-    public void openSearch(ActionEvent event) throws IOException {
-
+    public void switchToSearch(ActionEvent event) throws IOException {
+        PresentationCtrl.getInstance().switchToSearch();
     }
 
     public void newDocument(ActionEvent event) throws IOException {

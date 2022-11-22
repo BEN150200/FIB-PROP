@@ -7,6 +7,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import src.domain.core.DocumentInfo;
 import src.domain.preprocessing.Tokenizer;
 
 import java.io.IOException;
@@ -29,18 +30,51 @@ public class PresentationCtrl {
     private Scene scene;
     private Parent root;
 
+    /**
+     * Functions to controll the UI
+     */
 
-    public void openDocument(String path) {
-        DomainCtrl.getInstance().openFile(path);
+    /**
+     *
+     * @param newScene
+     * @throws IOException
+     */
+    private void switchScene(String newScene) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource(newScene));
+        Stage newStage = new Stage();
+        newStage.setScene(new Scene(root));
+        newStage.show();
     }
 
-    public void switchToTextScene(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/mainEditorWindow.fxml"));
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+    public void switchToSearch() throws IOException {
+        switchScene("/search.fxml");
     }
+
+    public void switchToText() throws IOException {
+
+    }
+
+    /**
+     * Getters from the domain
+     */
+    public ArrayList<DocumentInfo> getAllDocuments() {
+        return DomainCtrl.getInstance().getAllDocumentsInfo();
+    }
+
+    public ArrayList<String> getAllTitles() {
+        return DomainCtrl.getInstance().getAllTitles(new String());
+    }
+
+    public ArrayList<String> getAllAuthors() {
+        return DomainCtrl.getInstance().getAllAuthors(new String());
+    }
+
+    /**
+     *
+     * @param title
+     * @param author
+     * @param content
+     */
 
     public void saveDocument(String title, String author, String content) {
         List<String> strings = new ArrayList<>();
@@ -48,15 +82,8 @@ public class PresentationCtrl {
         DomainCtrl.getInstance().saveDocument(title, author, strings);
     }
 
-    public void newDocument(ActionEvent e) throws IOException {
-        switchToTextScene(e);
-        System.out.println("new document on scene text");
+    public void openDocument(String path) {
+        DomainCtrl.getInstance().openFile(path);
     }
-
-    public void search(ActionEvent e) throws IOException {
-        switchToTextScene(e);
-        System.out.println("open");
-    }
-
 
 }
