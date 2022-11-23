@@ -1,9 +1,7 @@
 package src.presentation;
 
 import src.domain.controllers.DomainCtrl;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -47,7 +45,7 @@ public class PresentationCtrl {
     }
 
     public void switchToSearch() throws IOException {
-        switchScene("/search.fxml");
+        switchScene("/src/presentation/search.fxml");
     }
 
     public void switchToText() throws IOException {
@@ -59,6 +57,10 @@ public class PresentationCtrl {
      */
     public ArrayList<DocumentInfo> getAllDocuments() {
         return DomainCtrl.getInstance().getAllDocumentsInfo();
+    }
+
+    public ArrayList<DocumentInfo> getDocuments (String title, String author) {
+        return DomainCtrl.getInstance().getDocsByTitleAndAuthor(title, author);
     }
 
     public ArrayList<String> getAllTitles() {

@@ -219,8 +219,14 @@ public class DomainCtrl {
     }
 
     public ArrayList<DocumentInfo> getDocsByTitleAndAuthor(String titleName, String authorName) {
-        ArrayList<Title> titles = TitleCtrl.getInstance().getTitlesPrefix(titleName);
-        ArrayList<Author> authors = AuthorCtrl.getInstance().getAuthorsPrefix(authorName);
+        ArrayList<Title> titles = new ArrayList<>();
+        if (titleName != null) titles = TitleCtrl.getInstance().getTitlesPrefix(titleName);
+        else titles = TitleCtrl.getInstance().getAllTitles();
+
+        ArrayList<Author> authors = new ArrayList<>();
+        if (authorName != null) authors = AuthorCtrl.getInstance().getAuthorsPrefix(authorName);
+        else authors = AuthorCtrl.getInstance().getAllAuthors();
+
         Set<Integer> titlesDocsIDs = new HashSet<Integer>();
         Set<Integer> authorsDocsIDs = new HashSet<Integer>();
         Set<Integer> docsIDs = new HashSet<Integer>();

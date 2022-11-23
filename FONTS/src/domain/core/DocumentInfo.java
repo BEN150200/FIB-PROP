@@ -5,8 +5,8 @@ import java.time.format.DateTimeFormatter;
 
 public class DocumentInfo {
     private Integer docID;
-    private String titleName;
-    private String authorName;
+    private String title;
+    private String author;
     private LocalDateTime creationDate;
     private LocalDateTime modificationDate;
 
@@ -23,8 +23,8 @@ public class DocumentInfo {
 
     public DocumentInfo(Integer docID, String titleName, String authorName, LocalDateTime creationDate, LocalDateTime modificationDate) {
         this.docID = docID;
-        this.titleName = titleName;
-        this.authorName = authorName;
+        this.title = titleName;
+        this.author = authorName;
         this.creationDate = creationDate;
         this.modificationDate = modificationDate;
     }
@@ -45,30 +45,30 @@ public class DocumentInfo {
     }*/
     public String toString(){
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
-        return  titleName + "    " + authorName + "    " + dtf.format(creationDate) + "    " + dtf.format(modificationDate);
+        return  title + "    " + author + "    " + dtf.format(creationDate) + "    " + dtf.format(modificationDate);
     }
 
-    public Integer id() {
+    public Integer getId() {
         return docID;
     }
 
-    public String title() {
-        return titleName;
+    public String getTitle() {
+        return title;
     }
 
-    public String author() {
-        return authorName;
+    public String getAuthor() {
+        return author;
     }
 
-    public LocalDateTime creationDate() {
+    public LocalDateTime getCreationDate() {
         return creationDate;
     }
 
-    public LocalDateTime modificationDate() {
+    public LocalDateTime getModificationDate() {
         return modificationDate;
     }
 
-    public Double semblance() {
+    public Double getSemblance() {
         return semblance;
     }
 

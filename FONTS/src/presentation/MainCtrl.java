@@ -1,24 +1,18 @@
 package src.presentation;
 
-import io.vavr.Tuple2;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import src.domain.core.DocumentInfo;
 
-import java.awt.*;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
 
 public class MainCtrl {
 
@@ -36,7 +30,7 @@ public class MainCtrl {
     @FXML
     private void newTab() throws IOException {
         Tab tab = new Tab("Doc");
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/editorTab.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/src/presentation/editorTab.fxml"));
 
         tab.setContent(loader.load());
         //TabCtrl controller = loader.getController();

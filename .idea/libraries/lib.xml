@@ -5,6 +5,7 @@
       <root url="jar://$PROJECT_DIR$/lib/junit-4.13.2.jar!/" />
       <root url="jar://$PROJECT_DIR$/lib/vavr-1.0.0-alpha-4.jar!/" />
       <root url="file://$PROJECT_DIR$/lib/JavaFx" />
+      <root url="jar://$PROJECT_DIR$/lib/controlsfx-11.1.2.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

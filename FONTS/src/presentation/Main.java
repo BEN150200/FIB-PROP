@@ -18,10 +18,10 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) throws IOException {
 
-        Parent root = FXMLLoader.load(getClass().getResource("/mainEditorWindow.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/src/presentation/mainEditorWindow.fxml"));
         Scene scene = new Scene(root);
 
-        String css = this.getClass().getResource("/main.css").toExternalForm();
+        String css = this.getClass().getResource("/src/presentation/main.css").toExternalForm();
         scene.getStylesheets().add(css);
 
         stage.setTitle("Macrosoft Word");
