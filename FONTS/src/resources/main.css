@@ -6,10 +6,11 @@
     -fx-background-color: #222222;
     -fx-font-size: 12;
     -fx-font-family: "Lucida Console";
-    -fx-text-fill: "white";
+    -fx-text-fill: "gray";
     -fx-alignment: center;
+    -fx-cursor: hand;
 }
 
 .button:hover {
-    -fx-opacity: 0.6;
+    -fx-text-fill: "white";
 }
