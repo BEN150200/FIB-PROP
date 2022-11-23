@@ -3,7 +3,7 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ButtonBar?>
-<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -17,17 +17,13 @@
                   <Insets left="5.0" right="5.0" />
                </HBox.margin>
             </Label>
-      <ChoiceBox maxWidth="1.7976931348623157E308" prefWidth="150.0" HBox.hgrow="ALWAYS" fx:id="titleBox"/>
+      <ComboBox fx:id="titleBox" editable="true" maxWidth="1.7976931348623157E308" prefWidth="150.0" HBox.hgrow="ALWAYS" />
             <Label alignment="CENTER" contentDisplay="CENTER" text="Author">
                <HBox.margin>
                   <Insets left="5.0" right="5.0" />
                </HBox.margin>
             </Label>
-      <ChoiceBox maxWidth="1.7976931348623157E308" prefWidth="150.0" HBox.hgrow="ALWAYS" fx:id="authorBox">
-         <HBox.margin>
-            <Insets right="5.0" />
-         </HBox.margin>
-      </ChoiceBox>
+      <ComboBox fx:id="authorBox" editable="true" maxWidth="1.7976931348623157E308" prefWidth="150.0" HBox.hgrow="ALWAYS" />
          <VBox.margin>
             <Insets bottom="5.0" top="5.0" />
          </VBox.margin>

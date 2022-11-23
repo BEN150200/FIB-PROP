@@ -1,18 +1,18 @@
 package src.presentation;
 
+import impl.org.controlsfx.autocompletion.AutoCompletionTextFieldBinding;
+import impl.org.controlsfx.autocompletion.SuggestionProvider;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import org.controlsfx.control.textfield.AutoCompletionBinding;
+import org.controlsfx.control.textfield.TextFields;
 import src.domain.core.DocumentInfo;
 
 import java.net.URL;
@@ -23,35 +23,31 @@ import java.util.ResourceBundle;
 public class SearchStageCtrl implements Initializable {
 
     @FXML
-    private ChoiceBox authorBox;
+    private ComboBox<String> authorBox;
     @FXML
-    private ChoiceBox titleBox;
+    private ComboBox<String> titleBox;
+
     @FXML
     private TableView<DocumentInfo> table;
-
     @FXML
     private TableColumn<DocumentInfo, String> tableTitle;
     @FXML
     private TableColumn<DocumentInfo, String> tableAuthor;
-
     @FXML
     private TableColumn<DocumentInfo, LocalDateTime> tableCreation;
-
     @FXML
     private TableColumn<DocumentInfo, LocalDateTime> tableModification;
 
     @FXML
-    private HBox fieldBox;
-
-    @FXML
     private Button closeButton;
-
 
     private String currentTitle;
     private String currentAuthor;
 
-    private AutoCompletionBinding<String> autoCompTitle;
-    private AutoCompletionBinding<String> autoCompAuthor;
+    //private AutoCompletionBinding<String> autoCompTitle;
+    //private AutoCompletionBinding<String> autoCompAuthor;
+    //private SuggestionProvider<String> titleProvider;
+    //private SuggestionProvider<String> authorProvider;
     ArrayList<DocumentInfo> listDocs = new ArrayList<>();
     ArrayList<String> listTitles = new ArrayList<>();
     ArrayList<String> listAuthors = new ArrayList<>();
@@ -71,61 +67,56 @@ public class SearchStageCtrl implements Initializable {
         listTitles = PresentationCtrl.getInstance().getAllTitles();
         listAuthors = PresentationCtrl.getInstance().getAllAuthors();
 
-        ObservableList<String> oTitles = FXCollections.observableArrayList(listTitles);
-        titleBox.setItems(oTitles);
+        ObservableList<String> obsTitles = FXCollections.observableArrayList(listTitles);
+        ObservableList<String> obsAuthors = FXCollections.observableArrayList(listAuthors);
 
-        ObservableList<String> oAuthors = FXCollections.observableArrayList(listAuthors);
-        authorBox.setItems(oAuthors);
+        titleBox.setItems(obsTitles);
+        authorBox.setItems(obsAuthors);
+        /*
+        titleProvider = SuggestionProvider.create(listTitles);
+        new AutoCompletionTextFieldBinding<>(titleBox, titleProvider).setDelay(0);
 
+        authorProvider = SuggestionProvider.create(listAuthors);
+        new AutoCompletionTextFieldBinding<>(authorBox, authorProvider).setDelay(0);
+         */
         titleBox.setOnAction(event -> {
-            //authorBox.getItems().clear();
-            //The above line is important otherwise everytime there is an action it will just keep adding more
-            /*
-            if(titleBox.getValue()!=null & authorBox.getValue() == null) {//This cannot be null but I added because idk what yours will look like
-                ArrayList<String> authors = PresentationCtrl.getInstance().getAuthors((String) titleBox.getValue());
-                ObservableList<String> authorsTitle = FXCollections.observableArrayList(authors);
-                authorBox.setItems(authorsTitle);
-                currentTitle = (String)titleBox.getValue();
+            if (authorBox.getValue() != null) {
+                /*
+                titleProvider.clearSuggestions();
+                titleProvider.addPossibleSuggestions(PresentationCtrl.getInstance().getTitles(authorBox.getText()));
+                new AutoCompletionTextFieldBinding<>(titleBox, titleProvider);
+                 */
+
+                titleBox.setItems(FXCollections.observableArrayList(PresentationCtrl.getInstance().getTitles(authorBox.getValue())));
             }
-            else if (currentAuthor != (String)authorBox.getValue()) {
-                titleBox.getSelectionModel().clearSelection();
-                ArrayList<String> authors = PresentationCtrl.getInstance().getAuthors((String) titleBox.getValue());
-                ObservableList<String> authorsTitle = FXCollections.observableArrayList(authors);
-                authorBox.setItems(authorsTitle);
-                currentAuthor = (String)titleBox.getValue();
-            }
-             */
-            if(titleBox.getValue()!=null & authorBox.getValue() == null) {
-                listDocs = PresentationCtrl.getInstance().getDocuments((String)titleBox.getValue(), null);
-            }
-            else listDocs = PresentationCtrl.getInstance().getDocuments((String)titleBox.getValue(), (String)authorBox.getValue());
+            listDocs = PresentationCtrl.getInstance().getDocuments(titleBox.getValue(), authorBox.getValue());
             ObservableList<DocumentInfo> obsDocs = FXCollections.observableArrayList(listDocs);
             table.setItems(obsDocs);
         });
 
+        titleBox.getEditor().focusedProperty().addListener((obs, wasFocused, isNowFocused) -> {
+            if (! isNowFocused) {
+                titleBox.setValue(titleBox.getEditor().getText());
+            }
+        });
+
+        authorBox.getEditor().focusedProperty().addListener((obs, wasFocused, isNowFocused) -> {
+            if (! isNowFocused) {
+                authorBox.setValue(authorBox.getEditor().getText());
+            }
+        });
+
 
         authorBox.setOnAction(event -> {
-            //titleBox.getItems().clear();
-            //The above line is important otherwise everytime there is an action it will just keep adding more
-            /*
-            if(authorBox.getValue()!=null & titleBox.getValue() == null) {//This cannot be null but I added because idk what yours will look like
-                ArrayList<String> titles = PresentationCtrl.getInstance().getTitles((String) authorBox.getValue());
-                ObservableList<String> titlesAuthor = FXCollections.observableArrayList(titles);
-                titleBox.setItems(titlesAuthor);
-                currentAuthor = (String)authorBox.getValue();
+            if (titleBox.getValue() != null) {
+                /*
+                authorProvider.clearSuggestions();
+                authorProvider.addPossibleSuggestions(PresentationCtrl.getInstance().getAuthors(titleBox.getText()));
+                new AutoCompletionTextFieldBinding<>(authorBox, authorProvider);
+                */
+                authorBox.setItems(FXCollections.observableArrayList(PresentationCtrl.getInstance().getAuthors(titleBox.getValue())));
             }
-            else if (currentTitle != (String)titleBox.getValue()) {
-                authorBox.getSelectionModel().clearSelection();
-                ArrayList<String> titles = PresentationCtrl.getInstance().getTitles((String) authorBox.getValue());
-                ObservableList<String> titlesAuthor = FXCollections.observableArrayList(titles);
-                titleBox.setItems(titlesAuthor);
-                currentTitle = (String)authorBox.getValue();
-            }
-             */
-            if(authorBox.getValue()!=null & titleBox.getValue() == null) {
-                listDocs = PresentationCtrl.getInstance().getDocuments(null, (String)authorBox.getValue());
-            }
-            else listDocs = PresentationCtrl.getInstance().getDocuments((String)titleBox.getValue(), (String)authorBox.getValue());
+            listDocs = PresentationCtrl.getInstance().getDocuments(titleBox.getValue(), authorBox.getValue());
             ObservableList<DocumentInfo> obsDocs = FXCollections.observableArrayList(listDocs);
             table.setItems(obsDocs);
         });

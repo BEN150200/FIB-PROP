@@ -2,18 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d2991d3d-5c40-4108-ac62-9c44333baa2c" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/lib.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/lib.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FONTS/src/domain/controllers/DomainCtrl.java" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/src/domain/controllers/DomainCtrl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FONTS/src/domain/core/DocumentInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/src/domain/core/DocumentInfo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FONTS/src/presentation/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/src/presentation/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FONTS/src/presentation/MainCtrl.java" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/src/presentation/MainCtrl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FONTS/src/presentation/PresentationCtrl.java" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/src/presentation/PresentationCtrl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/FONTS/src/presentation/SearchStageCtrl.java" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/src/presentation/SearchStageCtrl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FONTS/src/resources/editorTab.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/src/presentation/editorTab.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FONTS/src/resources/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/src/presentation/main.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FONTS/src/resources/mainEditorWindow.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/src/presentation/mainEditorWindow.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FONTS/src/resources/search.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/src/presentation/search.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FONTS/src/presentation/search.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/src/presentation/search.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -71,7 +62,7 @@
     <configuration name="Main" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="src.presentation.Main" />
       <module name="subgrup-prop33.2" />
-      <option name="VM_PARAMETERS" value="--module-path &quot;C:\Users\biele\OneDrive\Documents\GitHub\subgrup-prop33.2\lib\javafx-sdk-19\lib&quot; --add-modules javafx.controls,javafx.fxml" />
+      <option name="VM_PARAMETERS" value="--module-path &quot;C:\Users\biele\OneDrive\Documents\GitHub\subgrup-prop33.2\lib\javafx-sdk-19\lib&quot; --add-modules javafx.controls,javafx.fxml --add-exports javafx.base/com.sun.javafx.event=ALL-UNNAMED" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="src.presentation.*" />
