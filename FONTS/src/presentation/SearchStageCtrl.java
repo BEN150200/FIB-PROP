@@ -134,4 +134,11 @@ public class SearchStageCtrl implements Initializable {
 
         stage.close();
     }
+
+    @FXML
+    public void updateTable() {
+        listDocs = PresentationCtrl.getInstance().getDocuments(titleBox.getValue(), authorBox.getValue());
+        ObservableList<DocumentInfo> obsDocs = FXCollections.observableArrayList(listDocs);
+        table.setItems(obsDocs);
+    }
 }

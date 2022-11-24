@@ -85,7 +85,6 @@ public class PresentationCtrl {
      * @param author
      * @param content
      */
-
     public void saveDocument(String title, String author, String content) {
         List<String> strings = new ArrayList<>();
         strings = List.of(Tokenizer.splitSentences(content));
