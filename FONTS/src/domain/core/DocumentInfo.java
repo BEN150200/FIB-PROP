@@ -2,6 +2,8 @@ package src.domain.core;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import src.enums.Format;
 
 public class DocumentInfo {
     private Integer docID;
@@ -9,11 +11,10 @@ public class DocumentInfo {
     private String author;
     private LocalDateTime creationDate;
     private LocalDateTime modificationDate;
+    private ArrayList<String> content;
 
     private String path;
-    private String fileName;
-    private String extencion;
-    private String content;
+    private Format fileFormat;
 
     private Double semblance;
 
@@ -21,28 +22,17 @@ public class DocumentInfo {
         System.out.println(s);
     }*/
 
-    public DocumentInfo(Integer docID, String titleName, String authorName, LocalDateTime creationDate, LocalDateTime modificationDate) {
+    public DocumentInfo(Integer docID, String titleName, String authorName, LocalDateTime creationDate, LocalDateTime modificationDate, ArrayList<String> content, String path, Format fileFormat) {
         this.docID = docID;
         this.title = titleName;
         this.author = authorName;
         this.creationDate = creationDate;
         this.modificationDate = modificationDate;
+        this.content = content;
+        this.path = path;
+        this.fileFormat = fileFormat;
     }
 
-    /*public void printCMDoneLine() {
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");  
-        print("    " + docID + "    " + titleName + "    " + authorName + "    " + dtf.format(creationDate) + "    " + modificationDate);
-    }
-
-    public void printCMD() {
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");  
-        print("Document:  " + docID );
-        print("    -Title:  " + titleName);
-        print("    -Author:  " + authorName);
-        print("    -Dates:");
-        print("        Creation: "+ dtf.format(creationDate) + "    Modification: " + dtf.format(modificationDate));
-        print("\n");
-    }*/
     public String toString(){
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
         return  title + "    " + author + "    " + dtf.format(creationDate) + "    " + dtf.format(modificationDate);
@@ -60,12 +50,24 @@ public class DocumentInfo {
         return author;
     }
 
+    public ArrayList<String> getContent(){
+        return content;
+    }
+
     public LocalDateTime getCreationDate() {
         return creationDate;
     }
 
     public LocalDateTime getModificationDate() {
         return modificationDate;
+    }
+
+    public String getPath(){
+        return path;
+    }
+
+    public Format getFormat(){
+        return fileFormat;
     }
 
     public Double getSemblance() {

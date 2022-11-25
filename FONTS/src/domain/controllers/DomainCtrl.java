@@ -5,6 +5,8 @@ import src.domain.core.Document;
 import src.domain.core.DocumentInfo;
 import src.domain.core.Sentence;
 import src.domain.core.Title;
+import src.enums.Format;
+import src.persistance.controllers.PersistanceCtrl;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -18,6 +20,7 @@ public class DomainCtrl {
      * Attributes
     **/
     private static DomainCtrl instance = null;
+    private static PersistanceCtrl persistanceCtrl = null;
     
     /**
      * Constructor
@@ -31,6 +34,7 @@ public class DomainCtrl {
     public static DomainCtrl getInstance() {
         if (instance == null) {
             instance = new DomainCtrl();
+            persistanceCtrl = new PersistanceCtrl();
         }
         return instance;
     }
@@ -339,15 +343,81 @@ public class DomainCtrl {
         }
     }
 
-    public void exportsDocument() {
-
-    }
-
     public DocumentInfo openFile(String path) {
         //cria al controlador de persistencia per obtenir contingut del document
         DocumentInfo docInfo; // docInfo = persistencia.openFile(path)
         System.out.println(path);
         addDocument(null,null,null);
         return null;
+    }
+
+    //-------------------------------------------------------------------------------------------------------------------------
+    //  Persistance related methods
+    //-------------------------------------------------------------------------------------------------------------------------
+
+    public void loadData(){
+        // Load documents, titles and authors
+        ArrayList<DocumentInfo> docsData = persistanceCtrl.loadDocumentsData();
+        DocumentCtrl documentCtrl = DocumentCtrl.getInstance();
+        for(DocumentInfo docInfo: docsData){
+            addDocument(docInfo.getTitle(), docInfo.getAuthor(), docInfo.getContent());
+            Document doc = documentCtrl.getDocument(docInfo.getTitle(), docInfo.getAuthor());
+            doc.setCreationDate(docInfo.getCreationDate());
+            doc.setModificationDate(docInfo.getModificationDate());
+            doc.setPath(docInfo.getPath());
+            doc.setFormat(docInfo.getFormat());
+        }
+        // Load saved boolean expressions
+        ArrayList<String> expressionsNames = persistanceCtrl.loadExpressionsNames();
+        ArrayList<String> expressions = persistanceCtrl.loadExpressions();
+        for(int i = 0; i < expressionsNames.size(); i++){
+            addBooleanExpression(expressionsNames.get(i), expressions.get(i));
+        }
+    }
+
+    public void saveData(){
+        // Save documents data
+        ArrayList<DocumentInfo> docsData = new ArrayList<DocumentInfo>();
+        ArrayList<Document> documents = DocumentCtrl.getInstance().getAllDocuments();
+        for(Document doc: documents){
+            docsData.add(doc.getInfo());
+        }
+        persistanceCtrl.saveDocumentsData(docsData);
+
+        // Save boolean expressions data
+        ArrayList<String> expressionsNames = new ArrayList<String>();
+        ArrayList<String> expressions = new ArrayList<String>();
+        HashMap<String, String> expressionsMap = BooleanExpressionCtrl.getInstance().getSavedExpressionsNames();
+        for(String expressionName: expressionsMap.keySet()){
+            expressionsNames.add(expressionName);
+            expressions.add(expressionsMap.get(expressionName));
+        }
+        persistanceCtrl.saveBooleanexpressionsData(expressionsNames, expressions);
+    }
+
+
+    // Exports data to file in given path, if the file does not exists, creates it.
+    public boolean exportDocument(String titleName, String authorName, Format fileFormat, String path){
+        if(DocumentCtrl.getInstance().existsDocument(titleName, authorName)){
+            Document doc = DocumentCtrl.getInstance().getDocument(titleName, authorName);
+            ArrayList<Sentence> sentences = doc.getSentences();
+            ArrayList<String> content = new ArrayList<String>();
+            for(Sentence sentence: sentences){
+                content.add(sentence.toString());
+            }
+            return persistanceCtrl.exportToFile(titleName, authorName, content, fileFormat, path);
+        } 
+        return false;
+    }
+
+    public boolean importDocumentFromFile(String path, Format fileFormat){
+        DocumentInfo docInfo = persistanceCtrl.importFromFile(path, fileFormat);
+        if(addDocument(docInfo.getTitle(), docInfo.getAuthor(), docInfo.getContent())){
+            Document doc = DocumentCtrl.getInstance().getDocument(docInfo.getTitle(), docInfo.getAuthor());
+            doc.setPath(path);
+            doc.setFormat(fileFormat);
+            return true;
+        }
+        return false;
     }
 }

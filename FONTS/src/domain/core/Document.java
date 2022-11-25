@@ -2,6 +2,7 @@ package src.domain.core;
 
 import src.domain.controllers.DocumentCtrl;
 import src.domain.controllers.SearchCtrl;
+import src.enums.Format;
 
 import java.time.*;
 import java.util.ArrayList;
@@ -11,7 +12,7 @@ public class Document {
     private Integer docID;
     private Author  author;
     private Title  title;
-    //private String filePath;
+    private String filePath;
     //private String fileName;
     private LocalDateTime creationDate;
     private LocalDateTime modificationDate;
@@ -19,7 +20,7 @@ public class Document {
     private ArrayList<Sentence> sentences = new ArrayList<Sentence>();
     
     //private enum Format {TXT, XML, PROP}
-    //private Format format;
+    private Format format;
 
     public Document(Title t, Author a) {
         creationDate = LocalDateTime.now();
@@ -57,11 +58,14 @@ public class Document {
         return title;
     }
 
-    /*
+    
     public String getPath() {
         return filePath;
     }
-    */
+    
+    public Format getFormat(){
+        return format;
+    }
 
     public Integer getID() {
         return docID;
@@ -76,7 +80,11 @@ public class Document {
     }
 
     public DocumentInfo getInfo() {
-        return new DocumentInfo(docID, title.toString(), author.toString(), creationDate, modificationDate);
+        ArrayList<String> content = new ArrayList<String>();
+        for(Sentence sentence: sentences){
+            content.add(sentence.toString());
+        }
+        return new DocumentInfo(docID, title.toString(), author.toString(), creationDate, modificationDate, content, filePath, format);
     }
 
     public ArrayList<Sentence> getSentences() {
@@ -86,7 +94,7 @@ public class Document {
     /**
      * Setters
      */
-    /* 
+    
     public boolean setPath(String path) {
         if (filePath == null) {
             filePath = path;
@@ -94,7 +102,10 @@ public class Document {
         }
         return false;
     }
-    */
+    
+    public void setFormat(Format fileFormat){
+        format = fileFormat;
+    }
 
     private boolean setDocumentID(Integer id) {
         if (docID == null) {
@@ -125,6 +136,13 @@ public class Document {
         sentence.addDoc(docID);
     }
 
+    public void setCreationDate(LocalDateTime date){
+        creationDate = date;
+    }
+
+    public void setModificationDate(LocalDateTime date){
+        modificationDate = date;
+    }
 
     public void updateModificationDate() {
         modificationDate = LocalDateTime.now();
