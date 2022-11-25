@@ -65,9 +65,9 @@ public class BooleanExpressionCtrl {
      * @param //The expression and its name
      * @return Return true if the expression is valid, false if invalid
      */
-    public boolean saveExpression(String exp, String name){
+    public void saveExpression(String exp, String name) throws exception {
         BooleanExpression newexp = BooleanExpression.createBooleanExpression(exp);
-        if(newexp==null) return false;
+        //if(newexp==null) return false;
         savedExpressions.put(name,newexp);
         return true;
     }
@@ -89,10 +89,10 @@ public class BooleanExpressionCtrl {
      * @param //The expression to be solved
      * @return returns null if the expression is not correct, else returns the root of the expressions tree
      */
-    public ExpressionTreeNode createExpressionTree(String exp){
+    public ExpressionTreeNode createExpressionTree(String exp) throws exception{
 
         BooleanExpression newexp = BooleanExpression.createBooleanExpression(exp);
-        if(newexp==null) return null;//haura de retornar excepcio si no es correcte
+        //if(newexp==null) return null;//haura de retornar excepcio si no es correcte
         //addHistorial(newexp);
         return newexp.getRoot();
     }
