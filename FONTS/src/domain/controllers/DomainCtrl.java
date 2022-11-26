@@ -80,8 +80,8 @@ public class DomainCtrl {
      * @param boolExp The boolean expresion in a String
      * @return Return True if the boolean expresin is added, if return False the boolean expresion is incorrect or there is another in the System with this name
      */
-    public boolean addBooleanExpression(String boolExpName, String boolExp) {
-        return BooleanExpressionCtrl.getInstance().saveExpression(boolExp, boolExpName);
+    public void addBooleanExpression(String boolExpName, String boolExp) throws Exception{
+        BooleanExpressionCtrl.getInstance().saveExpression(boolExp, boolExpName);
     }
 
     /**
@@ -304,7 +304,7 @@ public class DomainCtrl {
         return SearchCtrl.getInstance().storedBooleanExpressionSearch(boolExpName);
     }
 
-    public ArrayList<DocumentInfo> tempBooleanExpressionSearch (String boolExp) {
+    public ArrayList<DocumentInfo> tempBooleanExpressionSearch (String boolExp) throws Exception {
         return SearchCtrl.getInstance().tempBooleanExpressionSearch(boolExp);
     }
 
@@ -355,7 +355,7 @@ public class DomainCtrl {
     //  Persistance related methods
     //-------------------------------------------------------------------------------------------------------------------------
 
-    public void loadData(){
+    public void loadData() throws  Exception{
         // Load documents, titles and authors
         ArrayList<DocumentInfo> docsData = persistanceCtrl.loadDocumentsData();
         DocumentCtrl documentCtrl = DocumentCtrl.getInstance();
@@ -371,7 +371,7 @@ public class DomainCtrl {
         ArrayList<String> expressionsNames = persistanceCtrl.loadExpressionsNames();
         ArrayList<String> expressions = persistanceCtrl.loadExpressions();
         for(int i = 0; i < expressionsNames.size(); i++){
-            addBooleanExpression(expressionsNames.get(i), expressions.get(i));
+                addBooleanExpression(expressionsNames.get(i), expressions.get(i));
         }
     }
 

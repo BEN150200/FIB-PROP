@@ -19,7 +19,7 @@ public class BooleanExpression{
         root=rot;
     }
 
-    static public BooleanExpression createBooleanExpression(String expr) throws exception{
+    static public BooleanExpression createBooleanExpression(String expr) throws Exception{
         ExpressionTreeNode rot=new ExpressionTreeNode();
         buildTree(rot,expr);
         return new BooleanExpression(expr,rot);
@@ -55,16 +55,16 @@ public class BooleanExpression{
      * @param  //the root of the tree and the expression to be converted to a tree
      * @return true if the expression is correct, else false
      */
-    static private void buildTree(ExpressionTreeNode rot,String s)throws exception{
+    static private void buildTree(ExpressionTreeNode rot,String s)throws Exception{
         while(parentesis(s)){
             s=s.substring(1,s.length()-1);
         }
-        if(s.length()==0) throw exception("Incorrect expression: missing operand");
+        if(s.length()==0) throw new Exception("Incorrect expression: missing operand");
         int index =findLastOperation(s);//també fa control d'errors
-        if(index==-1) throw exception("Algo passa");//no haura de saltar mai aquesta
+        if(index==-1) throw new Exception("Algo passa");//no haura de saltar mai aquesta
         if(index==-2){
             
-            if(missingOperator(s)) throw exception("Incorrect expression: missing operator");
+            if(missingOperator(s)) throw new Exception("Incorrect expression: missing operator");
             rot.setValue(s);
             return;
         }
@@ -80,13 +80,14 @@ public class BooleanExpression{
                  ExpressionTreeNode r = new ExpressionTreeNode();
                  rot.setRight(r);
                  //Exception exc = new Exception("aaasaaa"); 
-                buildTree(l, s1) & buildTree(r, s2);//return build(s.l).map(l -> build(r).map(r -> new Node(rot, l, r) per tornar excepcions
+                buildTree(l, s1);
+                buildTree(r, s2);//return build(s.l).map(l -> build(r).map(r -> new Node(rot, l, r) per tornar excepcions
                 return;
             }
             else{
                  ExpressionTreeNode r = new ExpressionTreeNode();
                  rot.setRight(r);
-                 if(s1.length()>0) throw exception("Incorrect expression: missing operator");
+                 if(s1.length()>0) throw new Exception("Incorrect expression: missing operator");
                 buildTree(r, s2);
                 return;
             }
@@ -138,7 +139,7 @@ public class BooleanExpression{
      * @param //a expression
      * @return the index of the last operation that should be computed, -1 if its not correct, -2 if there arent any operations
      */
-    static private int findLastOperation(String s){
+    static private int findLastOperation(String s) throws Exception{
         char[] x = s.toCharArray();
         int[] ranking = new int[s.length()];
         int rank = 0;
@@ -164,7 +165,7 @@ public class BooleanExpression{
             else if(c=='}' && !cntrCometes){
                 ranking[index] = -1;
                 if(cntrCorxetes) cntrCorxetes=false;
-                else throw exception("Incorrect expression: there is a problem with brakets");//la expressio no es correcte
+                else throw new Exception("Incorrect expression: there is a problem with brakets");//la expressio no es correcte
             }
             else if(c=='"' && !cntrCorxetes){
                 ranking[index] = -1;
@@ -172,15 +173,15 @@ public class BooleanExpression{
             }
             else ranking[index] = -1;
             
-            if(ultimParentesi==index-1 && (c==')'))throw exception("Incorrect expression: there is a problem with parentheses"); //la expressio es incorrecte
+            if(ultimParentesi==index-1 && (c==')'))throw new Exception("Incorrect expression: there is a problem with parentheses"); //la expressio es incorrecte
             if(ultimParentesi==index-1 && (c==' ')) ultimParentesi++;
             
-            if(rank<0) throw exception("Incorrect expression: there is a problem with parentheses");//la expressió no és correcte
+            if(rank<0) throw new Exception("Incorrect expression: there is a problem with parentheses");//la expressió no és correcte
             index++;
         }
-        if(rank!=0) throw exception("Incorrect expression: there is a problem with parentheses");//la expressió no és correcte
-        if(cntrCometes) throw exception("Incorrect expression: there is a problem with quotation marks");
-        if(cntrCorxetes)throw exception("Incorrect expression: there is a problem with brakets"); //la expressio no es correcte
+        if(rank!=0) throw new Exception("Incorrect expression: there is a problem with parentheses");//la expressió no és correcte
+        if(cntrCometes) throw new Exception("Incorrect expression: there is a problem with quotation marks");
+        if(cntrCorxetes)throw new Exception("Incorrect expression: there is a problem with brakets"); //la expressio no es correcte
         int min = s.length() + 1;
         int indexMin = -2;
         for (int i = 0; i < ranking.length; ++i) {

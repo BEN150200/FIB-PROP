@@ -84,12 +84,10 @@ public class SearchCtrl {
         else return null;
     }
 
-    public ArrayList<DocumentInfo> tempBooleanExpressionSearch (String boolExp) {
+    public ArrayList<DocumentInfo> tempBooleanExpressionSearch (String boolExp) throws Exception {
         ExpressionTreeNode root = BooleanExpressionCtrl.getInstance().createExpressionTree(boolExp);
-        if (root != null) {
-            return booleanExpressionSearch(root);
-        }
-        else return null;
+        return booleanExpressionSearch(root);
+
     }
 
     private ArrayList<DocumentInfo> booleanExpressionSearch(ExpressionTreeNode root) {
