@@ -45,7 +45,7 @@ public class PresentationCtrl {
     }
 
     public void switchToSearch() throws IOException {
-        switchScene("/src/presentation/search.fxml");
+        switchScene("/src/presentation/fxml/search.fxml");
     }
 
     public void switchToText() throws IOException {

@@ -30,7 +30,8 @@ public class MainCtrl {
     @FXML
     private void newTab() throws IOException {
         Tab tab = new Tab("Doc");
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/src/presentation/editorTab.fxml"));
+        
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/src/presentation/fxml/editorTab.fxml"));
 
         tab.setContent(loader.load());
         //TabCtrl controller = loader.getController();
