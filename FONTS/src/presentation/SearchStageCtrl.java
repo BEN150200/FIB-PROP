@@ -1,26 +1,21 @@
 package src.presentation;
 
-import impl.org.controlsfx.autocompletion.AutoCompletionTextFieldBinding;
-import impl.org.controlsfx.autocompletion.SuggestionProvider;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import org.controlsfx.control.textfield.AutoCompletionBinding;
-import org.controlsfx.control.textfield.TextFields;
 import src.domain.core.DocumentInfo;
 
-import java.net.URL;
-import java.time.LocalDateTime;
+import java.io.IOException;
 import java.util.ArrayList;
-import java.util.ResourceBundle;
 
-public class SearchStageCtrl implements Initializable {
+public class SearchStageCtrl {
 
     @FXML
     private ComboBox<String> authorBox;
@@ -28,26 +23,16 @@ public class SearchStageCtrl implements Initializable {
     private ComboBox<String> titleBox;
 
     @FXML
-    private TableView<DocumentInfo> table;
-    @FXML
-    private TableColumn<DocumentInfo, String> tableTitle;
-    @FXML
-    private TableColumn<DocumentInfo, String> tableAuthor;
-    @FXML
-    private TableColumn<DocumentInfo, LocalDateTime> tableCreation;
-    @FXML
-    private TableColumn<DocumentInfo, LocalDateTime> tableModification;
+    private Button closeButton;
 
     @FXML
-    private Button closeButton;
+    private Pane resultPane;
+
+    private ResultTable resultTableCtrl;
 
     private String currentTitle;
     private String currentAuthor;
 
-    //private AutoCompletionBinding<String> autoCompTitle;
-    //private AutoCompletionBinding<String> autoCompAuthor;
-    //private SuggestionProvider<String> titleProvider;
-    //private SuggestionProvider<String> authorProvider;
     ArrayList<DocumentInfo> listDocs = new ArrayList<>();
     ArrayList<String> listTitles = new ArrayList<>();
     ArrayList<String> listAuthors = new ArrayList<>();
@@ -55,48 +40,66 @@ public class SearchStageCtrl implements Initializable {
     public SearchStageCtrl() {
     }
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        tableTitle.setCellValueFactory(new PropertyValueFactory<DocumentInfo, String>("title"));
-        tableAuthor.setCellValueFactory(new PropertyValueFactory<DocumentInfo, String>("author"));
-        tableCreation.setCellValueFactory(new PropertyValueFactory<DocumentInfo, LocalDateTime>("creationDate"));
-        tableModification.setCellValueFactory(new PropertyValueFactory<DocumentInfo, LocalDateTime>("modificationDate"));
+    public void initialize() throws IOException{
+        //load Result Table
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/src/presentation/fxml/resultTable.fxml"));
+        Pane table = loader.load();
+        resultPane.getChildren().add(table);
+        resultTableCtrl = loader.getController();
+
 
 
         listDocs = PresentationCtrl.getInstance().getAllDocuments();
         listTitles = PresentationCtrl.getInstance().getAllTitles();
         listAuthors = PresentationCtrl.getInstance().getAllAuthors();
 
+        //resultTableCtrl.updateTable(listDocs);
+
         ObservableList<String> obsTitles = FXCollections.observableArrayList(listTitles);
         ObservableList<String> obsAuthors = FXCollections.observableArrayList(listAuthors);
 
         titleBox.setItems(obsTitles);
         authorBox.setItems(obsAuthors);
-        /*
-        titleProvider = SuggestionProvider.create(listTitles);
-        new AutoCompletionTextFieldBinding<>(titleBox, titleProvider).setDelay(0);
 
-        authorProvider = SuggestionProvider.create(listAuthors);
-        new AutoCompletionTextFieldBinding<>(authorBox, authorProvider).setDelay(0);
-         */
         titleBox.setOnAction(event -> {
             if (authorBox.getValue() != null) {
-                /*
-                titleProvider.clearSuggestions();
-                titleProvider.addPossibleSuggestions(PresentationCtrl.getInstance().getTitles(authorBox.getText()));
-                new AutoCompletionTextFieldBinding<>(titleBox, titleProvider);
-                 */
-
                 titleBox.setItems(FXCollections.observableArrayList(PresentationCtrl.getInstance().getTitles(authorBox.getValue())));
             }
-            listDocs = PresentationCtrl.getInstance().getDocuments(titleBox.getValue(), authorBox.getValue());
-            ObservableList<DocumentInfo> obsDocs = FXCollections.observableArrayList(listDocs);
-            table.setItems(obsDocs);
+            //resultTableCtrl.updateTable(PresentationCtrl.getInstance().getDocuments(titleBox.getValue(), authorBox.getValue()));
         });
+
+
+        titleBox.getEditor().textProperty().addListener(new ChangeListener<String>() {
+
+            @Override
+            public void changed(ObservableValue<? extends String> observable,
+                                String oldValue, String newValue) {
+
+                resultTableCtrl.updateTable(PresentationCtrl.getInstance().getDocuments(newValue, authorBox.getValue()));
+            }
+        });
+
 
         titleBox.getEditor().focusedProperty().addListener((obs, wasFocused, isNowFocused) -> {
             if (! isNowFocused) {
                 titleBox.setValue(titleBox.getEditor().getText());
+            }
+        });
+
+        authorBox.setOnAction(event -> {
+            if (titleBox.getValue() != null) {
+                authorBox.setItems(FXCollections.observableArrayList(PresentationCtrl.getInstance().getAuthors(titleBox.getValue())));
+            }
+        });
+
+
+        authorBox.getEditor().textProperty().addListener(new ChangeListener<String>() {
+
+            @Override
+            public void changed(ObservableValue<? extends String> observable,
+                                String oldValue, String newValue) {
+
+                resultTableCtrl.updateTable(PresentationCtrl.getInstance().getDocuments(titleBox.getValue(), newValue));
             }
         });
 
@@ -105,40 +108,20 @@ public class SearchStageCtrl implements Initializable {
                 authorBox.setValue(authorBox.getEditor().getText());
             }
         });
+    }
 
-
-        authorBox.setOnAction(event -> {
-            if (titleBox.getValue() != null) {
-                /*
-                authorProvider.clearSuggestions();
-                authorProvider.addPossibleSuggestions(PresentationCtrl.getInstance().getAuthors(titleBox.getText()));
-                new AutoCompletionTextFieldBinding<>(authorBox, authorProvider);
-                */
-                authorBox.setItems(FXCollections.observableArrayList(PresentationCtrl.getInstance().getAuthors(titleBox.getValue())));
-            }
-            listDocs = PresentationCtrl.getInstance().getDocuments(titleBox.getValue(), authorBox.getValue());
-            ObservableList<DocumentInfo> obsDocs = FXCollections.observableArrayList(listDocs);
-            table.setItems(obsDocs);
-        });
-
-        ObservableList<DocumentInfo> obsDocs = FXCollections.observableArrayList(listDocs);
-        table.setItems(obsDocs);
-
-
+    public void initializeTable() throws IOException {
+        System.out.println("es carregara la taula");
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/src/presentation/fxml/resultTable.fxml"));
+        System.out.println("s'ha carregat");
+        resultPane.getChildren().add(loader.load());
+        resultTableCtrl = loader.getController();
     }
 
     @FXML
     private void close(ActionEvent e) {
         Stage stage = (Stage) closeButton.getScene().getWindow();
 
-
         stage.close();
-    }
-
-    @FXML
-    public void updateTable() {
-        listDocs = PresentationCtrl.getInstance().getDocuments(titleBox.getValue(), authorBox.getValue());
-        ObservableList<DocumentInfo> obsDocs = FXCollections.observableArrayList(listDocs);
-        table.setItems(obsDocs);
     }
 }

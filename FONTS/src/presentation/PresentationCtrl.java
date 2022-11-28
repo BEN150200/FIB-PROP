@@ -40,6 +40,9 @@ public class PresentationCtrl {
     private void switchScene(String newScene) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource(newScene));
         Stage newStage = new Stage();
+        //newStage.setMaxWidth(600);
+        newStage.setMinWidth(600);
+        newStage.setMinHeight(400);
         newStage.setScene(new Scene(root));
         newStage.show();
     }
