@@ -21,7 +21,7 @@ import java.io.FileOutputStream;
 
 public class BEDataManager {
 
-    private static final String DATAPATH = "\\Fonts\\data\\booleanExpressionsData.xml";
+    private static final String DATAPATH = "./data/booleanExpressionsData.xml";
 
     public boolean saveData(ArrayList<String> expressionNames, ArrayList<String> expressions){
         DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
