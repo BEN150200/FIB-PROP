@@ -126,6 +126,9 @@ public class MainViewCtrl {
         PresentationCtrl.getInstance().switchToSearch();
     }
 
+    public void switchToBooleanExpression (ActionEvent event) throws IOException {
+        PresentationCtrl.getInstance().switchToBooleanExpression();
+    }
     public void newDocument(ActionEvent event) throws IOException {
 
     }

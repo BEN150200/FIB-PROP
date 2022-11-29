@@ -53,6 +53,11 @@ public class PresentationCtrl {
         switchScene("/src/presentation/fxml/search.fxml");
     }
 
+    public void switchToBooleanExpression() throws IOException {
+        switchScene("/src/presentation/fxml/booleanExpressionTab.fxml");
+    }
+
+
     public void switchToText() throws IOException {
 
     }
