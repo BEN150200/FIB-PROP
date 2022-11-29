@@ -9,13 +9,14 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import src.domain.core.DocumentInfo;
 
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class SearchStageCtrl {
+public class SearchViewCtrl {
 
     @FXML
     private ComboBox<String> authorBox;
@@ -26,7 +27,10 @@ public class SearchStageCtrl {
     private Button closeButton;
 
     @FXML
-    private Pane resultPane;
+    private VBox resultPane;
+
+    @FXML
+    private VBox vbox;
 
     private ResultTable resultTableCtrl;
 
@@ -37,14 +41,17 @@ public class SearchStageCtrl {
     ArrayList<String> listTitles = new ArrayList<>();
     ArrayList<String> listAuthors = new ArrayList<>();
 
-    public SearchStageCtrl() {
+    public SearchViewCtrl() {
     }
 
     public void initialize() throws IOException{
         //load Result Table
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/src/presentation/fxml/resultTable.fxml"));
-        Pane table = loader.load();
-        resultPane.getChildren().add(table);
+        VBox table = loader.load();
+
+        vbox.getChildren().add(1,table);
+
+        //resultPane.getChildren().add(table);
         resultTableCtrl = loader.getController();
 
 
@@ -110,6 +117,7 @@ public class SearchStageCtrl {
         });
     }
 
+    /*
     public void initializeTable() throws IOException {
         System.out.println("es carregara la taula");
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/src/presentation/fxml/resultTable.fxml"));
@@ -117,6 +125,8 @@ public class SearchStageCtrl {
         resultPane.getChildren().add(loader.load());
         resultTableCtrl = loader.getController();
     }
+
+     */
 
     @FXML
     private void close(ActionEvent e) {

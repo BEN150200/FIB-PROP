@@ -332,7 +332,6 @@ public class DomainCtrl {
      */
     public void saveDocument(String title, String author, List<String> content) {
         Document doc = DocumentCtrl.getInstance().getDocument(title, author);
-
         if (doc != null) {
             updateDocumentContent(doc, content);
             //TODO: call update the file
@@ -341,8 +340,10 @@ public class DomainCtrl {
             addDocument(title, author, content);
             //TODO: create file in the sistem
         }
+
     }
 
+    /*
     public DocumentInfo openFile(String path) {
         //cria al controlador de persistencia per obtenir contingut del document
         DocumentInfo docInfo; // docInfo = persistencia.openFile(path)
@@ -350,6 +351,8 @@ public class DomainCtrl {
         addDocument(null,null,null);
         return null;
     }
+
+     */
 
     //-------------------------------------------------------------------------------------------------------------------------
     //  Persistance related methods

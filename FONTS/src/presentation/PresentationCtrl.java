@@ -7,6 +7,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import src.domain.core.DocumentInfo;
 import src.domain.preprocessing.Tokenizer;
+import src.enums.Format;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -82,6 +83,14 @@ public class PresentationCtrl {
         return DomainCtrl.getInstance().getAllTitleAuthors(title);
     }
 
+    public DocumentInfo openDocument(String title, String author) {
+        return null;
+    }
+
+    /**
+     * Persistance related functions
+     */
+
     /**
      *
      * @param title
@@ -94,8 +103,13 @@ public class PresentationCtrl {
         DomainCtrl.getInstance().saveDocument(title, author, strings);
     }
 
-    public void openDocument(String path) {
-        DomainCtrl.getInstance().openFile(path);
+    public void importDocument(String path, Format format) {
+        DomainCtrl.getInstance().importDocumentFromFile(path, format);
     }
+
+    public void exportDocument() {
+
+    }
+
 
 }

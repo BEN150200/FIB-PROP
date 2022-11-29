@@ -2,13 +2,14 @@
 
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
 
-<Pane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="src.presentation.ResultTable">
+
+<VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="100.0" minWidth="100.0" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="src.presentation.ResultTable">
    <children>
-      <TableView fx:id="table" layoutY="-6.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="400.0" prefWidth="600.0">
+      <TableView fx:id="table" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="100.0" minWidth="100.0" VBox.vgrow="ALWAYS">
          <columns>
-            <TableColumn fx:id="tableTitle" prefWidth="167.0" text="Title" />
+            <TableColumn fx:id="tableTitle" editable="false" prefWidth="167.0" text="Title" />
             <TableColumn fx:id="tableAuthor" minWidth="0.0" prefWidth="159.0" text="Author" />
             <TableColumn fx:id="tableCreation" minWidth="0.0" prefWidth="126.0" text="Creation Date" />
             <TableColumn fx:id="tableModification" prefWidth="147.0" text="Modification Date" />
@@ -18,4 +19,4 @@
          </columnResizePolicy>
       </TableView>
    </children>
-</Pane>
+</VBox>
