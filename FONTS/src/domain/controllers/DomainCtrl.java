@@ -34,7 +34,7 @@ public class DomainCtrl {
     public static DomainCtrl getInstance() {
         if (instance == null) {
             instance = new DomainCtrl();
-            persistanceCtrl = new PersistanceCtrl();
+            persistanceCtrl = PersistanceCtrl.getInstance();
         }
         return instance;
     }
@@ -340,6 +340,27 @@ public class DomainCtrl {
             addDocument(title, author, content);
             //TODO: create file in the sistem
         }
+
+    }
+
+    public void saveDocument(DocumentInfo docToBeSaved) {
+        //Document doc = DocumentCtrl.getInstance().getDocument(title, author);
+
+
+
+
+        Title title = TitleCtrl.getInstance().getTitle(docToBeSaved.getTitle());
+        Author author = AuthorCtrl.getInstance().getAuthor(docToBeSaved.getAuthor());
+        if (title == null) {
+            title = new Title(docToBeSaved.getTitle());
+        }
+        if (author == null) {
+            author = new Author(docToBeSaved.getAuthor());
+        }
+
+        Document doc = new Document(title, author, docToBeSaved.getCreationDate(),docToBeSaved.getModificationDate(),docToBeSaved.getPath(), docToBeSaved.getFormat());
+        updateDocumentContent(doc, docToBeSaved.getContent());
+        exportDocument(docToBeSaved.getTitle(), docToBeSaved.getAuthor(), docToBeSaved.getFormat(),docToBeSaved.getPath());
 
     }
 

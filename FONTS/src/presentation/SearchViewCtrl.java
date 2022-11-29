@@ -9,6 +9,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import src.domain.core.DocumentInfo;
@@ -23,8 +24,8 @@ public class SearchViewCtrl {
     @FXML
     private ComboBox<String> titleBox;
 
-    @FXML
-    private Button closeButton;
+    //@FXML
+    //private Button closeButton;
 
     @FXML
     private VBox resultPane;
@@ -49,25 +50,37 @@ public class SearchViewCtrl {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/src/presentation/fxml/resultTable.fxml"));
         VBox table = loader.load();
 
+        VBox.setVgrow(table, Priority.ALWAYS);
         vbox.getChildren().add(1,table);
+        VBox.setVgrow(vbox, Priority.ALWAYS);
 
         //resultPane.getChildren().add(table);
         resultTableCtrl = loader.getController();
 
+        setListeners();
 
 
+
+        update();
+
+
+    }
+
+    public void update() {
         listDocs = PresentationCtrl.getInstance().getAllDocuments();
         listTitles = PresentationCtrl.getInstance().getAllTitles();
         listAuthors = PresentationCtrl.getInstance().getAllAuthors();
 
-        //resultTableCtrl.updateTable(listDocs);
+        resultTableCtrl.updateTable(listDocs);
 
         ObservableList<String> obsTitles = FXCollections.observableArrayList(listTitles);
         ObservableList<String> obsAuthors = FXCollections.observableArrayList(listAuthors);
 
         titleBox.setItems(obsTitles);
         authorBox.setItems(obsAuthors);
+    }
 
+    private void setListeners() {
         titleBox.setOnAction(event -> {
             if (authorBox.getValue() != null) {
                 titleBox.setItems(FXCollections.observableArrayList(PresentationCtrl.getInstance().getTitles(authorBox.getValue())));
@@ -115,23 +128,5 @@ public class SearchViewCtrl {
                 authorBox.setValue(authorBox.getEditor().getText());
             }
         });
-    }
-
-    /*
-    public void initializeTable() throws IOException {
-        System.out.println("es carregara la taula");
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/src/presentation/fxml/resultTable.fxml"));
-        System.out.println("s'ha carregat");
-        resultPane.getChildren().add(loader.load());
-        resultTableCtrl = loader.getController();
-    }
-
-     */
-
-    @FXML
-    private void close(ActionEvent e) {
-        Stage stage = (Stage) closeButton.getScene().getWindow();
-
-        stage.close();
     }
 }

@@ -19,9 +19,14 @@ public class MainViewCtrl {
     private TabPane tabPane;
 
     @FXML
+    private SplitPane splitPane;
+
+    @FXML
     private ScrollPane documentPane;
 
     private ResultTable resultTableCtrl;
+
+    private SearchViewCtrl searchViewCtrl;
 
     String currentTitle;
     String currentAuthor;
@@ -29,12 +34,13 @@ public class MainViewCtrl {
     public void initialize() throws IOException {
         // load an initial tab:
         //newDocTab();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/src/presentation/fxml/resultTable.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/src/presentation/fxml/search.fxml"));
         VBox table = loader.load();
-        documentPane.setContent(table);
+        splitPane.getItems().add(1,table);
+        //documentPane.setContent(table);
         //documentPane.getChildrenUnmodifiable().add(table);
         //documentPane.getChildren().add(table);
-        resultTableCtrl = loader.getController();
+        searchViewCtrl = loader.getController();
     }
 
     @FXML
@@ -64,8 +70,8 @@ public class MainViewCtrl {
 
     @FXML
     private void newSearchTab() throws IOException {
-        Tab tab = new Tab("Doc");
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/src/presentation/fxml/resultTable.fxml"));
+        Tab tab = new Tab("Search");
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/src/presentation/fxml/search.fxml"));
         tab.setContent(loader.load());
         tabPane.getTabs().add(tab);
         tabPane.getSelectionModel().select(tab);
@@ -82,6 +88,8 @@ public class MainViewCtrl {
         System.out.println("Current Tab Title: " + title.getText());
         System.out.println("Current Tab Author: " + author.getText());
         System.out.println("Current Tab content: " + content.getText());
+
+        searchViewCtrl.update();
 
     }
 
@@ -128,21 +136,21 @@ public class MainViewCtrl {
 
     @FXML
     private void doBackup() {
-
+        PresentationCtrl.getInstance().doBackup();
     }
 
     @FXML
-    private void restoreBackup() {
-
+    private void restoreBackup() throws Exception {
+        PresentationCtrl.getInstance().restoreBackup();
     }
 
     @FXML
     private void deleteBackup() {
-
+        PresentationCtrl.getInstance().deleteBackup();
     }
 
     @FXML
     private void deleteData() {
-
+        PresentationCtrl.getInstance().deleteData();
     }
 }

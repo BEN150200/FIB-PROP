@@ -32,6 +32,18 @@ public class Document {
         author.addDoc(docID);
     }
 
+    public Document(Title t, Author a, LocalDateTime creationDate, LocalDateTime modificationDate, String filePath, Format format) {
+        this.creationDate = creationDate;
+        this.modificationDate = modificationDate;
+        this.filePath = filePath;
+        this.format = format;
+        title = t;
+        author = a;
+        setDocumentID(DocumentCtrl.getInstance().addDocument(this));
+        title.addDoc(docID);
+        author.addDoc(docID);
+    }
+
     public void delete() {
         for (Sentence sentence : sentences) {
             sentence.deleteDocument(docID);

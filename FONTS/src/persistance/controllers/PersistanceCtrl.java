@@ -16,11 +16,14 @@ public class PersistanceCtrl {
     private static BEDataManager beDataManager = null;
     private static DocumentsDataManager documentsDataManager = null;
 
+    private PersistanceCtrl() {
+        beDataManager = new BEDataManager();
+        documentsDataManager = new DocumentsDataManager();
+    }
+
     public static PersistanceCtrl getInstance(){
         if(instance == null){
             instance = new PersistanceCtrl();
-            beDataManager = new BEDataManager();
-            documentsDataManager = new DocumentsDataManager();
         }
         return instance;
     }
@@ -58,6 +61,7 @@ public class PersistanceCtrl {
     }
 
     public boolean saveDocumentsData(ArrayList<DocumentInfo> docsInfos){
+
         return documentsDataManager.saveData(docsInfos);
     }
 

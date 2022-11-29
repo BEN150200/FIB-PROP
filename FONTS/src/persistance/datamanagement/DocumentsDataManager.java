@@ -25,7 +25,8 @@ import java.io.FileOutputStream;
 import java.util.Collections;
 
 public class DocumentsDataManager {
-    private static final String DATAPATH = "\\Fonts\\data\\DocumentsData.xml";
+    //private static final String DATAPATH = "\\Fonts\\data\\DocumentsData.xml";
+    private static final String DATAPATH = "./data/DocumentsData.xml";
 
     public boolean saveData(ArrayList<DocumentInfo> docsInfo){
         DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
@@ -57,6 +58,7 @@ public class DocumentsDataManager {
             transformer.transform(source, result);
             return true;
         } catch(Exception e){
+            e.printStackTrace();
             return false;
         }
     }

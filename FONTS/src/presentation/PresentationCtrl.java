@@ -1,5 +1,6 @@
 package src.presentation;
 
+import javafx.fxml.FXML;
 import src.domain.controllers.DomainCtrl;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -97,10 +98,8 @@ public class PresentationCtrl {
      * @param author
      * @param content
      */
-    public void saveDocument(String title, String author, String content) {
-        List<String> strings = new ArrayList<>();
-        strings = List.of(Tokenizer.splitSentences(content));
-        DomainCtrl.getInstance().saveDocument(title, author, strings);
+    public void saveDocument(DocumentInfo docToBeSaved) {
+        DomainCtrl.getInstance().saveDocument(docToBeSaved);
     }
 
     public void importDocument(String path, Format format) {
@@ -108,6 +107,26 @@ public class PresentationCtrl {
     }
 
     public void exportDocument() {
+
+    }
+
+
+    public void doBackup() {
+        DomainCtrl.getInstance().saveData();
+    }
+
+    public void restoreBackup() throws Exception {
+        DomainCtrl.getInstance().loadData();
+
+    }
+
+    //TODO: afegir funcio per eliminar els fitxers de data
+    public void deleteBackup() {
+
+    }
+
+    //TODO: afegir funcio per eliminar tot el contingut del sistema
+    public void deleteData() {
 
     }
 

@@ -3,6 +3,18 @@ package src.presentation;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
+import src.domain.controllers.DomainCtrl;
+import src.domain.core.DocumentInfo;
+import src.domain.preprocessing.Tokenizer;
+import src.enums.Format;
+
+import java.io.File;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class DocumentTabCtrl {
     @FXML
@@ -37,7 +49,38 @@ public class DocumentTabCtrl {
 
     @FXML
     public void save() {
-        PresentationCtrl.getInstance().saveDocument(title.getText(), author.getText(), textArea.getText());
+
+        FileChooser fileChooser = new FileChooser();
+        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("TEXT files", "*.txt", "*.xml", "*.prop");
+        fileChooser.getExtensionFilters().add(extFilter);
+        //Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        Stage fileStage = new Stage();
+        File file = fileChooser.showSaveDialog(fileStage);
+        String path = file.getPath();
+        String name = file.getName();
+        Format format = null;
+        switch (path.substring(path.lastIndexOf(".") + 1)) {
+            case "txt" : {
+                format = Format.TXT;
+                break;
+            }
+            case "xml" :  {
+                format = Format.XML;
+                break;
+            }
+            default :{
+                format = Format.TXT;
+            }
+        }
+
+        System.out.println(path);
+        System.out.println(name);
+        ArrayList<String> content = new ArrayList(Arrays.asList(Tokenizer.splitSentences(textArea.getText())));
+        //content = Arrays.asList(Tokenizer.splitSentences(textArea.getText()));
+
+        DocumentInfo docToBeSaved = new DocumentInfo(null, title.getText(), author.getText(), LocalDateTime.now(), LocalDateTime.now(), content, path, format);
+
+        PresentationCtrl.getInstance().saveDocument(docToBeSaved);
     }
 
     /**

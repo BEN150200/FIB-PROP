@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ButtonBar?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
 <VBox fx:id="vbox" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="400.0" minWidth="600.0" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="src.presentation.SearchViewCtrl">
-      <HBox fx:id="fieldBox" alignment="CENTER_LEFT" prefHeight="40.0" VBox.vgrow="NEVER">
+      <HBox fx:id="fieldBox" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="40.0" prefHeight="40.0" VBox.vgrow="NEVER">
             <Label alignment="CENTER" contentDisplay="CENTER" text="Title" textAlignment="CENTER">
                <HBox.margin>
                   <Insets left="5.0" right="5.0" />
@@ -29,15 +27,4 @@
             <Insets bottom="5.0" top="5.0" />
          </VBox.margin>
       </HBox>
-      <ButtonBar minHeight="40.0" prefHeight="40.0" prefWidth="600.0" VBox.vgrow="NEVER">
-        <buttons>
-          <Button fx:id="closeButton" mnemonicParsing="false" onAction="#close" text="Close" />
-        </buttons>
-         <VBox.margin>
-            <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
-         </VBox.margin>
-      <padding>
-         <Insets bottom="3.0" left="5.0" right="5.0" top="3.0" />
-      </padding>
-      </ButtonBar>
 </VBox>
