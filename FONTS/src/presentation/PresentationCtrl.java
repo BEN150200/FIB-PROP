@@ -149,5 +149,9 @@ public class PresentationCtrl {
         return DomainCtrl.getInstance().tempBooleanExpressionSearch(boolExp);
     }
 
+    public void addBooleanExpression (String boolExpName, String boolExp) throws Exception{
+        DomainCtrl.getInstance().addBooleanExpression(boolExpName,boolExp);
+    }
+
 
 }

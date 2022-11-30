@@ -8,16 +8,32 @@
 <?import javafx.scene.layout.VBox?>
 
 <VBox fx:id="vbox" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="400.0" minWidth="200.0" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="src.presentation.booleanExpressionTabCtrl">
-   <HBox fx:id="fieldBox" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="40.0" prefHeight="40.0" VBox.vgrow="NEVER">
-      <Label alignment="CENTER" contentDisplay="CENTER" text="Expression" textAlignment="CENTER">
-         <HBox.margin>
-            <Insets left="5.0" right="5.0" />
-         </HBox.margin>
-      </Label>
-      <TextField fx:id="expression" prefHeight="26.0" prefWidth="521.0" />
-      <VBox.margin>
-         <Insets bottom="5.0" top="5.0" />
-      </VBox.margin>
-   </HBox>
-   <Button mnemonicParsing="false" onAction="#SearchBooleanExpression" text="Search" />
+   <VBox prefHeight="90.0" prefWidth="600.0">
+      <children>
+         <HBox fx:id="fieldBox" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="40.0" prefHeight="40.0" VBox.vgrow="NEVER">
+            <Label alignment="CENTER" contentDisplay="CENTER" text="Expression" textAlignment="CENTER">
+               <HBox.margin>
+                  <Insets left="5.0" right="5.0" />
+               </HBox.margin>
+            </Label>
+            <TextField fx:id="expression" prefHeight="26.0" prefWidth="522.0" />
+            <VBox.margin>
+               <Insets bottom="5.0" top="5.0" />
+            </VBox.margin>
+         </HBox>
+         <HBox prefHeight="38.0" prefWidth="600.0">
+            <children>
+               <Label prefHeight="18.0" prefWidth="82.0" text="  Name" />
+               <TextField fx:id="name" prefHeight="42.0" prefWidth="555.0" />
+            </children>
+         </HBox>
+         <HBox prefHeight="100.0" prefWidth="200.0">
+            <children>
+               <Button alignment="TOP_LEFT" mnemonicParsing="false" onAction="#SearchBooleanExpression" text="Search" />
+               <Button fx:id="saveExpression" mnemonicParsing="false" onAction="#SaveExpression" text="Save" />
+            </children>
+         </HBox>
+      </children>
+   </VBox>
+   <VBox prefHeight="200.0" prefWidth="100.0" />
 </VBox>

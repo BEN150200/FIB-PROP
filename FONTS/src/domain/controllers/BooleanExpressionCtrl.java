@@ -91,8 +91,9 @@ public class BooleanExpressionCtrl {
     public ExpressionTreeNode createExpressionTree(String exp) throws Exception{
 
         BooleanExpression newexp = BooleanExpression.createBooleanExpression(exp);
-        //if(newexp==null) return null;//haura de retornar excepcio si no es correcte
-        //addHistorial(newexp);
+        //System.out.println(newexp.printTree());
+
+
         return newexp.getRoot();
     }
     

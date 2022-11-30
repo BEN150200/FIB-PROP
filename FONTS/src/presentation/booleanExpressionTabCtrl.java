@@ -25,6 +25,9 @@ public class booleanExpressionTabCtrl {
     @FXML
     private TextField expression;
 
+    @FXML
+    private TextField name;
+
     private ResultTable resultTableCtrl;
     @FXML
     private TextField author;
@@ -66,6 +69,10 @@ public class booleanExpressionTabCtrl {
      */
     public void setExpression(String expression) {
         this.expression.setText(expression);
+    }
+
+    public void setName(String name) {
+        this.name.setText(name);
     }
 
     public void setAuthor(String author) {
@@ -114,14 +121,21 @@ public class booleanExpressionTabCtrl {
 
     public void SearchBooleanExpression(){
         try {
-            System.out.println(expression.getText());
-            System.out.println(PresentationCtrl.getInstance().tempBooleanExpressionSearch(expression.getText()).size());
-
-
             resultTableCtrl.updateTable( PresentationCtrl.getInstance().tempBooleanExpressionSearch(expression.getText()));
         }
         catch (Exception e){
-            System.out.println("UPS!!!");
+            System.out.println(e);
+        }
+    }
+
+    public void SaveExpression(){
+
+        if(name.getText().length()==0) System.out.println("falta un nom");
+        try{
+            PresentationCtrl.getInstance().addBooleanExpression (name.getText(),  expression.getText());
+        }
+        catch (Exception e){
+            System.out.println(e);
         }
     }
 

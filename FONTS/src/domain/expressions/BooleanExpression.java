@@ -73,22 +73,25 @@ public class BooleanExpression{
             String val=String.valueOf(s.charAt(index));
             rot.setValue(val);
             String s1= s.substring(0,index).trim();
-            String s2= s.substring(index+1).trim();
+            String s2= s.substring(index+1,s.length()).trim();
             if(!val.equals("!")){
                  ExpressionTreeNode l = new ExpressionTreeNode();
+                buildTree(l, s1);
                  rot.setLeft(l);
                  ExpressionTreeNode r = new ExpressionTreeNode();
+                buildTree(r, s2);
                  rot.setRight(r);
                  //Exception exc = new Exception("aaasaaa"); 
-                buildTree(l, s1);
-                buildTree(r, s2);//return build(s.l).map(l -> build(r).map(r -> new Node(rot, l, r) per tornar excepcions
+
+                //return build(s.l).map(l -> build(r).map(r -> new Node(rot, l, r) per tornar excepcions
                 return;
             }
             else{
                  ExpressionTreeNode r = new ExpressionTreeNode();
+                 buildTree(r, s2);
                  rot.setRight(r);
                  if(s1.length()>0) throw new Exception("Incorrect expression: missing operator");
-                buildTree(r, s2);
+
                 return;
             }
             
