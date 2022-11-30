@@ -36,12 +36,18 @@ public class BEDataManager {
                 expression.setAttribute("name", expressionNames.get(i));
                 expression.setAttribute("expression", expressions.get(i));
             }
-            FileOutputStream output = new FileOutputStream(DATAPATH);
+            File docFile = new File(DATAPATH);
+            docFile.createNewFile();
+            // Creates a file output stream to write to the file represented by the specified File.
+            // Overwrites the file content.
+            FileOutputStream output = new FileOutputStream(docFile, false);
             TransformerFactory transformerFactory = TransformerFactory.newInstance();
             Transformer transformer = transformerFactory.newTransformer();
+            transformer.setOutputProperty(OutputKeys.INDENT, "yes");
             DOMSource source = new DOMSource(doc);
             StreamResult result = new StreamResult(output);
             transformer.transform(source, result);
+            output.close();
             return true;
         } catch(Exception e){
             return false;
