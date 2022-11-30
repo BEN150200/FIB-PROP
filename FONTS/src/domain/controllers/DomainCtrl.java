@@ -440,8 +440,6 @@ public class DomainCtrl {
         }
     }
 
-
-
     public void loadData() throws  Exception{
         // Load documents, titles and authors
         ArrayList<DocumentInfo> docsData = persistanceCtrl.loadDocumentsData();
@@ -482,7 +480,6 @@ public class DomainCtrl {
         persistanceCtrl.saveBooleanexpressionsData(expressionsNames, expressions);
     }
 
-
     // Exports data to file in given path, if the file does not exists, creates it.
     public boolean exportDocument(String titleName, String authorName, Format fileFormat, String path){
         if(DocumentCtrl.getInstance().existsDocument(titleName, authorName)){
@@ -501,8 +498,8 @@ public class DomainCtrl {
         DocumentInfo docInfo = persistanceCtrl.importFromFile(path, fileFormat);
         if(addDocument(docInfo)){
             Document doc = DocumentCtrl.getInstance().getDocument(docInfo.getTitle(), docInfo.getAuthor());
-            doc.setPath(path);
-            doc.setFormat(fileFormat);
+            //doc.setPath(path);
+            //doc.setFormat(fileFormat);
             return true;
         }
         return false;

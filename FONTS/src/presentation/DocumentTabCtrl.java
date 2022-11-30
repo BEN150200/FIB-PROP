@@ -22,6 +22,7 @@ public class DocumentTabCtrl {
     private TextField author;
 
     public void initialize () {
+        
     }
 
     /**

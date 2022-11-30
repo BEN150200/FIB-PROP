@@ -2,11 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d2991d3d-5c40-4108-ac62-9c44333baa2c" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/DocumentsData.xml" beforeDir="false" afterPath="$PROJECT_DIR$/data/DocumentsData.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/booleanExpressionsData.xml" beforeDir="false" afterPath="$PROJECT_DIR$/data/booleanExpressionsData.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/prova.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/FONTS/src/domain/controllers/DomainCtrl.java" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/src/domain/controllers/DomainCtrl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FONTS/src/persistance/documentexporter/DocumentExporterXML.java" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/src/persistance/documentexporter/DocumentExporterXML.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FONTS/src/presentation/DocumentTabCtrl.java" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/src/presentation/DocumentTabCtrl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FONTS/src/presentation/MainViewCtrl.java" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/src/presentation/MainViewCtrl.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,21 +36,21 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;11&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/jansa/IdeaProjects/subgrup-prop33.2/FONTS/src/presentation/fxml&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.10548526&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.11806375&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "jdk.selected.JAVA_MODULE": "11",
+    "last_opened_file_path": "C:/Users/jansa/IdeaProjects/subgrup-prop33.2/FONTS/src/presentation/fxml",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.10548526",
+    "project.structure.side.proportion": "0.11806375",
+    "settings.editor.selected.configurable": "preferences.pluginManager"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\jansa\IdeaProjects\subgrup-prop33.2\FONTS\src\presentation\fxml" />

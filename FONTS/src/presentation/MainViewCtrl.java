@@ -83,35 +83,8 @@ public class MainViewCtrl {
         tabPane.getSelectionModel().select(tab);
     }
 
-
-
-
-    public void openDocument(String title, String author) {
-        PresentationCtrl.getInstance().openDocument(title, author);
-    }
-
     public void openFile(ActionEvent event) throws IOException {
-        FileChooser fileChooser = new FileChooser();
-        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("TEXT files", "*.txt", "*.xml", "*.prop");
-        fileChooser.getExtensionFilters().add(extFilter);
-        //Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        Stage fileStage = new Stage();
-        File file = fileChooser.showOpenDialog(fileStage);
-        String path = file.getPath();
-        String format = path.substring(path.lastIndexOf(".") + 1);
-        switch (format) {
-            case "txt" : {
-                PresentationCtrl.getInstance().importDocument(file.getPath(), Format.TXT);
-                break;
-            }
-            case "xml" :  {
-                PresentationCtrl.getInstance().importDocument(file.getPath(), Format.XML);
-                break;
-            }
-            default :{
-                System.out.println("format not correct");
-            }
-        }
+        importFile();
     }
 
     public void switchToSearch(ActionEvent event) throws IOException {
@@ -120,9 +93,6 @@ public class MainViewCtrl {
 
     public void switchToBooleanExpression (ActionEvent event) throws IOException {
         PresentationCtrl.getInstance().switchToBooleanExpression();
-    }
-    public void newDocument(ActionEvent event) throws IOException {
-
     }
 
     /**
@@ -145,7 +115,6 @@ public class MainViewCtrl {
         resultTableCtrl.updateTable(PresentationCtrl.getInstance().getAllDocuments());
     }
 
-
     @FXML
     private void saveAsDocument() {
 
@@ -160,87 +129,36 @@ public class MainViewCtrl {
         Stage fileStage = new Stage();
         File file = fileChooser.showSaveDialog(fileStage);
         String path = file.getPath();
-        String name = file.getName();
-        Format format = null;
-        switch (path.substring(path.lastIndexOf(".") + 1)) {
-            case "txt" : {
-                format = Format.TXT;
-                break;
-            }
-            case "xml" :  {
-                format = Format.XML;
-                break;
-            }
-            default :{
-                format = Format.TXT;
-            }
-        }
+        Format format = extractFormat(path);
 
         ArrayList<String> content = Tokenizer.splitSentences(textArea.getText());
-
 
         DocumentInfo docToBeSaved = new DocumentInfo(null, title.getText(), author.getText(), LocalDateTime.now(), LocalDateTime.now(), content, path, format);
 
         PresentationCtrl.getInstance().saveAsDocument(docToBeSaved);
         resultTableCtrl.updateTable(PresentationCtrl.getInstance().getAllDocuments());
-
     }
 
 
-
-
-
+    /**
+     * Export  and Import functions
+     */
     @FXML
     private void exportTXT() {
-
-        Node currentTab = tabPane.getSelectionModel().getSelectedItem().getContent();
-        TextField title = (TextField) currentTab.lookup("#title");
-        TextField author = (TextField) currentTab.lookup("#author");
-        TextArea textArea = (TextArea) currentTab.lookup("#textArea");
-
-        FileChooser fileChooser = new FileChooser();
-        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("TEXT files", "*.txt", "*.xml", "*.prop");
-        fileChooser.getExtensionFilters().add(extFilter);
-        Stage fileStage = new Stage();
-        File file = fileChooser.showSaveDialog(fileStage);
-        String path = file.getPath();
-        String name = file.getName();
-        Format format = Format.TXT;
-
-        ArrayList<String> content = Tokenizer.splitSentences(textArea.getText());
-
-        DocumentInfo docToBeSaved = new DocumentInfo(null, title.getText(), author.getText(), LocalDateTime.now(), LocalDateTime.now(), content, path, format);
-
-        PresentationCtrl.getInstance().export(docToBeSaved);
-        resultTableCtrl.updateTable(PresentationCtrl.getInstance().getAllDocuments());
+        export(Format.TXT);
     }
 
     @FXML
     private void exportXML() {
-        Node currentTab = tabPane.getSelectionModel().getSelectedItem().getContent();
-        TextField title = (TextField) currentTab.lookup("#title");
-        TextField author = (TextField) currentTab.lookup("#author");
-        TextArea textArea = (TextArea) currentTab.lookup("#textArea");
-
-        FileChooser fileChooser = new FileChooser();
-        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("TEXT files", "*.txt", "*.xml", "*.prop");
-        fileChooser.getExtensionFilters().add(extFilter);
-        Stage fileStage = new Stage();
-        File file = fileChooser.showSaveDialog(fileStage);
-        String path = file.getPath();
-        String name = file.getName();
-        Format format = Format.XML;
-
-        ArrayList<String> content = Tokenizer.splitSentences(textArea.getText());
-
-        DocumentInfo docToBeSaved = new DocumentInfo(null, title.getText(), author.getText(), LocalDateTime.now(), LocalDateTime.now(), content, path, format);
-
-        PresentationCtrl.getInstance().export(docToBeSaved);
-        resultTableCtrl.updateTable(PresentationCtrl.getInstance().getAllDocuments());
+        export(Format.XML);
     }
 
     @FXML
     private void exportPROP() {
+        export(Format.PROP);
+    }
+
+    private void export(Format format) {
         Node currentTab = tabPane.getSelectionModel().getSelectedItem().getContent();
         TextField title = (TextField) currentTab.lookup("#title");
         TextField author = (TextField) currentTab.lookup("#author");
@@ -253,7 +171,6 @@ public class MainViewCtrl {
         File file = fileChooser.showSaveDialog(fileStage);
         String path = file.getPath();
         String name = file.getName();
-        Format format = Format.PROP;
 
         ArrayList<String> content = Tokenizer.splitSentences(textArea.getText());
 
@@ -265,8 +182,18 @@ public class MainViewCtrl {
 
     @FXML
     private void importFile() {
+        FileChooser fileChooser = new FileChooser();
+        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("TEXT files", "*.txt", "*.xml", "*.prop");
+        fileChooser.getExtensionFilters().add(extFilter);
+        Stage fileStage = new Stage();
+        File file = fileChooser.showOpenDialog(fileStage);
+        String path = file.getPath();
+        Format format = extractFormat(path);
 
+        PresentationCtrl.getInstance().importDocument(path,format);
+        resultTableCtrl.updateTable(PresentationCtrl.getInstance().getAllDocuments());
     }
+
 
     /**
      * Data Persistence Functions
@@ -290,5 +217,23 @@ public class MainViewCtrl {
     @FXML
     private void deleteData() {
         PresentationCtrl.getInstance().deleteData();
+    }
+
+    private Format extractFormat(String path) {
+        switch (path.substring(path.lastIndexOf(".") + 1)) {
+            case "txt" : {
+                return Format.TXT;
+            }
+            case "xml" :  {
+                return Format.XML;
+            }
+            case "prop" :  {
+                return Format.PROP;
+            }
+
+            default :{
+                return Format.TXT;
+            }
+        }
     }
 }
