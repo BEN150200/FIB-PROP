@@ -1,0 +1,3 @@
+aaa
+Doc2
+contingut del document 2 modificat despres de haver cambiat el path.
