@@ -1,67 +1,14 @@
+@import "theme.css";
+
 .root{
-    -fx-background-color: #444444;
+    -fx-background-color: -bg-color;
 }
 
-.side-bar,
-.main-layout {
-    -fx-background-color: #222222;
+.split-pane {
+    -fx-box-border: transparent;
 }
 
-.button{
-    -fx-background-color: #222222;
-    -fx-font-size: 12;
-    -fx-font-family: "Lucida Console";
-    -fx-text-fill: "gray";
-    -fx-alignment: center;
-    -fx-cursor: hand;
-    -fx-opacity: 0.8;
-    -fx-background-size: 60%;
-    -fx-background-position: center;
-    -fx-background-repeat: stretch;
+.tab-pane,
+.split-pane-divider {
+    -fx-background-color: -tabs-color;
 }
-
-.button:hover {
-    -fx-opacity: 1;
-    -fx-text-fill: "white";
-}
-
-#files {
-    -fx-background-image: url("../img/folder-gray.png");
-}
-
-#files:hover {
-    -fx-background-image: url("../img/folder-lightgray.png");
-}
-
-#prefix-search {
-    -fx-background-image: url("../img/list-search-gray.png");
-}
-
-#prefix-search:hover {
-    -fx-background-image: url("../img/list-search-lightgray.png");
-}
-
-#boolean-query {
-    -fx-background-image: url("../img/target-gray.png");
-}
-
-#boolean-query:hover {
-    -fx-background-image: url("../img/target-lightgray.png");
-}
-
-#similar-query {
-    -fx-background-image: url("../img/approx-gray.png");
-}
-
-#similar-query:hover {
-    -fx-background-image: url("../img/approx-lightgray.png");
-}
-
-#weighted-query {
-    -fx-background-image: url("../img/weighted-gray.png");
-}
-
-#weighted-query:hover {
-    -fx-background-image: url("../img/weighted-lightgray.png");
-}
-

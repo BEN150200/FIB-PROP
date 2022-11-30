@@ -108,9 +108,9 @@
         </Menu>
       </menus>
     </MenuBar>
-    <SplitPane fx:id="splitPane" dividerPositions="0.0" prefHeight="-1.0" prefWidth="-1.0" styleClass="main-layout" stylesheets="@../css/main.css" VBox.vgrow="ALWAYS">
+    <SplitPane fx:id="splitPane" dividerPositions="0.0757238307349666" prefHeight="-1.0" prefWidth="-1.0" stylesheets="@../css/main.css" VBox.vgrow="ALWAYS">
       <items>
-            <VBox maxWidth="65.0" minWidth="65.0" prefHeight="551.0" prefWidth="65.0" styleClass="side-bar" stylesheets="@../css/main.css">
+            <VBox maxWidth="65.0" minWidth="65.0" prefHeight="551.0" prefWidth="65.0" styleClass="side-bar" stylesheets="@../css/side-bar.css">
                <children>
                   <Button id="files" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#newSearchTab" prefHeight="50.0" prefWidth="50.0">
                      <VBox.margin>
@@ -139,7 +139,7 @@
                   </Button>
                </children>
             </VBox>
-            <TabPane fx:id="tabPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="100.0" minWidth="600.0" prefHeight="551.0" prefWidth="704.0" styleClass="tab-container" />
+            <TabPane fx:id="tabPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="100.0" minWidth="600.0" prefHeight="551.0" prefWidth="704.0" stylesheets="@../css/tabs.css" />
       </items>
     </SplitPane>
     <HBox id="HBox" alignment="CENTER_LEFT" spacing="5.0" VBox.vgrow="NEVER">
