@@ -139,7 +139,7 @@
                   </Button>
                </children>
             </VBox>
-            <TabPane fx:id="tabPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="100.0" minWidth="600.0" prefHeight="551.0" prefWidth="704.0" stylesheets="@../css/tabs.css" />
+            <TabPane fx:id="tabPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="100.0" minWidth="600.0" prefHeight="551.0" prefWidth="704.0" stylesheets="@../css/tabs.css" tabClosingPolicy="ALL_TABS" />
       </items>
     </SplitPane>
     <HBox id="HBox" alignment="CENTER_LEFT" spacing="5.0" VBox.vgrow="NEVER">

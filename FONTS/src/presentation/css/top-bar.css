@@ -22,6 +22,7 @@
 
 .menu-item {
     -fx-background-color: -menu-color; 
+    -fx-cursor: hand;
 }
 
 .menu-item .label {
