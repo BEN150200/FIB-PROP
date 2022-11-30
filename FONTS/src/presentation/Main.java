@@ -21,9 +21,6 @@ public class Main extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("/src/presentation/fxml/mainView.fxml"));
         Scene scene = new Scene(root);
 
-        String css = this.getClass().getResource("/src/presentation/css/main.css").toExternalForm();
-        scene.getStylesheets().add(css);
-
         stage.setTitle("Macrosoft Word");
         //stage.sizeToScene();
         //stage.setHeight(500);
