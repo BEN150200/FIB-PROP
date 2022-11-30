@@ -57,15 +57,15 @@
             <MenuItem mnemonicParsing="false" onAction="#openFile" text="Open…" />
             <SeparatorMenuItem mnemonicParsing="false" />
             <MenuItem mnemonicParsing="false" text="Close" />
-            <MenuItem mnemonicParsing="false" onAction="#saveDocument" text="Save" />
-            <MenuItem mnemonicParsing="false" text="Save As…" />
+            <MenuItem fx:id="saveButton" mnemonicParsing="false" onAction="#saveDocument" text="Save" />
+            <MenuItem mnemonicParsing="false" onAction="#saveAsDocument" text="Save As…" />
             <SeparatorMenuItem mnemonicParsing="false" />
-            <MenuItem mnemonicParsing="false" text="Import" />
+            <MenuItem mnemonicParsing="false" onAction="#importFile" text="Import" />
                   <Menu mnemonicParsing="false" text="Export As...">
                     <items>
-                      <MenuItem mnemonicParsing="false" text="TXT" />
-                        <MenuItem mnemonicParsing="false" text="XML" />
-                        <MenuItem mnemonicParsing="false" text="PROP" />
+                      <MenuItem mnemonicParsing="false" onAction="#exportTXT" text="TXT" />
+                        <MenuItem mnemonicParsing="false" onAction="#exportXML" text="XML" />
+                        <MenuItem mnemonicParsing="false" onAction="#exportPROP" text="PROP" />
                     </items>
                   </Menu>
                   <MenuItem mnemonicParsing="false" text="Quit" />
@@ -122,7 +122,7 @@
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </VBox.margin>
                   </Button>
-                  <Button id="boolean-query" layoutX="10.0" layoutY="60.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#switchToBooleanExpression" prefHeight="50.0" prefWidth="50.0">
+                  <Button id="boolean-query" layoutX="10.0" layoutY="60.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#newBoolTab" prefHeight="50.0" prefWidth="50.0">
                      <VBox.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </VBox.margin>

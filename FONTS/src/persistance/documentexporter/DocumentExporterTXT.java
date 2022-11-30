@@ -15,7 +15,8 @@ public class DocumentExporterTXT implements DocumentExporter{
             FileWriter myWriter = new FileWriter(doc, false);
             String text = authorName + "\n" + titleName + "\n";
             for(String sentence: content){
-                text = text + sentence + "\n";
+                //text = text + sentence + "\n";
+                text = text + sentence;
             }
             myWriter.write(text);
             myWriter.close();

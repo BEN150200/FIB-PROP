@@ -107,12 +107,8 @@ public class Document {
      * Setters
      */
     
-    public boolean setPath(String path) {
-        if (filePath == null) {
-            filePath = path;
-            return true;
-        }
-        return false;
+    public void setPath(String path) {
+        filePath = path;
     }
     
     public void setFormat(Format fileFormat){

@@ -1,5 +1,9 @@
 package src.domain.preprocessing;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public class Tokenizer {
     /**
      * @param sentence a sentence (doesn't contain '.', '...', etc.)
@@ -15,7 +19,13 @@ public class Tokenizer {
      * @param text
      * @return an array of sentences (in String form) of the text
      */
-    public static String[] splitSentences(String text) {
-        return text.split(".");
+    public static ArrayList<String> splitSentences(String text) {
+        String[] enterSplit = text.split("((?=\\n))"); //split the text by enter but keeping the enter after the string
+
+        ArrayList<String> result = new ArrayList<>();
+        for (String s: enterSplit) {
+            result.addAll(Arrays.asList(s.split("((?<=\\.))")));
+        }
+        return result;
     }
 }

@@ -109,7 +109,7 @@ public class DomainCtrl {
         if (doc == null) return false;
 
         updateDocumentContent(doc, content);
-        
+
         return true;
     }
 
@@ -256,6 +256,12 @@ public class DomainCtrl {
         return docsInfo;
     }
 
+    public DocumentInfo getOneDocument(String titleName, String authorName) {
+        Document doc = DocumentCtrl.getInstance().getDocument(titleName, authorName);
+        if (doc != null) return doc.getInfo();
+        return null;
+    }
+
     public ArrayList<String> getDocumentContent(Integer docId) {
         Document doc = DocumentCtrl.getInstance().getDocument(docId);
         if (doc == null) return null;
@@ -330,6 +336,7 @@ public class DomainCtrl {
     /**
      * chech if document exists, if not, adds it in the system and creates the file.
      */
+    /*
     public void saveDocument(String title, String author, List<String> content) {
         Document doc = DocumentCtrl.getInstance().getDocument(title, author);
         if (doc != null) {
@@ -363,6 +370,7 @@ public class DomainCtrl {
         exportDocument(docToBeSaved.getTitle(), docToBeSaved.getAuthor(), docToBeSaved.getFormat(),docToBeSaved.getPath());
 
     }
+     */
 
     /*
     public DocumentInfo openFile(String path) {
@@ -378,6 +386,61 @@ public class DomainCtrl {
     //-------------------------------------------------------------------------------------------------------------------------
     //  Persistance related methods
     //-------------------------------------------------------------------------------------------------------------------------
+
+    private boolean addDocument(DocumentInfo docToBeSaved) {
+        if (DocumentCtrl.getInstance().existsDocument(docToBeSaved.getTitle(), docToBeSaved.getAuthor())) return false;
+        Title title = TitleCtrl.getInstance().getTitle(docToBeSaved.getTitle());
+        Author author = AuthorCtrl.getInstance().getAuthor(docToBeSaved.getAuthor());
+        if (title == null) {
+            title = new Title(docToBeSaved.getTitle());
+        }
+        if (author == null) {
+            author = new Author(docToBeSaved.getAuthor());
+        }
+
+        Document doc = new Document(title, author, docToBeSaved.getCreationDate(),docToBeSaved.getModificationDate(),docToBeSaved.getPath(), docToBeSaved.getFormat());
+        updateDocumentContent(doc, docToBeSaved.getContent());
+        return true;
+        //exportDocument(docToBeSaved.getTitle(), docToBeSaved.getAuthor(), docToBeSaved.getFormat(),docToBeSaved.getPath());
+
+    }
+
+
+    public boolean saveDocument(String titleName, String authorName, ArrayList<String> content) {
+        Document doc = DocumentCtrl.getInstance().getDocument(titleName, authorName);
+        if (doc != null) {
+            updateDocumentContent(doc, content);
+            exportDocument(titleName, authorName, doc.getFormat(), doc.getPath());
+            return true;
+        }
+        return false;
+    }
+
+    public void saveAsDocument(DocumentInfo docToBeSaved) {
+        Document doc = DocumentCtrl.getInstance().getDocument(docToBeSaved.getTitle(), docToBeSaved.getAuthor());
+        if(doc != null) {
+            doc.setPath(docToBeSaved.getPath());
+            doc.setFormat(docToBeSaved.getFormat());
+            saveDocument(docToBeSaved.getTitle(), docToBeSaved.getAuthor(), docToBeSaved.getContent());
+        }
+        else {
+            addDocument(docToBeSaved);
+            saveDocument(docToBeSaved.getTitle(), docToBeSaved.getAuthor(), docToBeSaved.getContent());
+        }
+    }
+
+    public void exportDocument(DocumentInfo docToBeSaved) {
+        Document doc = DocumentCtrl.getInstance().getDocument(docToBeSaved.getTitle(), docToBeSaved.getAuthor());
+        if(doc == null) {
+            saveAsDocument(docToBeSaved);
+        }
+        else {
+            saveDocument(docToBeSaved.getTitle(), docToBeSaved.getAuthor(), docToBeSaved.getContent());
+            exportDocument(docToBeSaved.getTitle(), docToBeSaved.getAuthor(), docToBeSaved.getFormat(), docToBeSaved.getPath());
+        }
+    }
+
+
 
     public void loadData() throws  Exception{
         // Load documents, titles and authors
@@ -436,7 +499,7 @@ public class DomainCtrl {
 
     public boolean importDocumentFromFile(String path, Format fileFormat){
         DocumentInfo docInfo = persistanceCtrl.importFromFile(path, fileFormat);
-        if(addDocument(docInfo.getTitle(), docInfo.getAuthor(), docInfo.getContent())){
+        if(addDocument(docInfo)){
             Document doc = DocumentCtrl.getInstance().getDocument(docInfo.getTitle(), docInfo.getAuthor());
             doc.setPath(path);
             doc.setFormat(fileFormat);

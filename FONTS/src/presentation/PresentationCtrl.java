@@ -1,18 +1,15 @@
 package src.presentation;
 
-import javafx.fxml.FXML;
 import src.domain.controllers.DomainCtrl;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import src.domain.core.DocumentInfo;
-import src.domain.preprocessing.Tokenizer;
 import src.enums.Format;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 
 public class PresentationCtrl {
     private static PresentationCtrl instance;
@@ -75,6 +72,10 @@ public class PresentationCtrl {
         return DomainCtrl.getInstance().getDocsByTitleAndAuthor(title, author);
     }
 
+    public DocumentInfo getOneDocument (String title, String author) {
+        return DomainCtrl.getInstance().getOneDocument(title, author);
+    }
+
     public ArrayList<String> getAllTitles() {
         return DomainCtrl.getInstance().getAllTitles(new String());
     }
@@ -95,29 +96,36 @@ public class PresentationCtrl {
         return null;
     }
 
+
     /**
-     * Persistance related functions
+     * Persistence related functions
      */
 
     /**
-     *
-     * @param title
-     * @param author
-     * @param content
+     * File Management Functions
      */
-    public void saveDocument(DocumentInfo docToBeSaved) {
-        DomainCtrl.getInstance().saveDocument(docToBeSaved);
+
+    public boolean saveDocument(String title, String author, ArrayList<String> content) {
+        return DomainCtrl.getInstance().saveDocument(title, author, content);
+    }
+
+    public void saveAsDocument(DocumentInfo docToBeSaved) {
+        DomainCtrl.getInstance().saveAsDocument(docToBeSaved);
+    }
+
+    public void export(DocumentInfo docToBeSaved) {
+        DomainCtrl.getInstance().exportDocument(docToBeSaved);
     }
 
     public void importDocument(String path, Format format) {
         DomainCtrl.getInstance().importDocumentFromFile(path, format);
     }
 
-    public void exportDocument() {
-
-    }
 
 
+    /**
+     * Data Persistance Functions
+     */
     public void doBackup() {
         DomainCtrl.getInstance().saveData();
     }

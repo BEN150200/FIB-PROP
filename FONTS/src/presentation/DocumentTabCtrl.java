@@ -5,7 +5,6 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import src.domain.controllers.DomainCtrl;
 import src.domain.core.DocumentInfo;
 import src.domain.preprocessing.Tokenizer;
 import src.enums.Format;
@@ -13,8 +12,6 @@ import src.enums.Format;
 import java.io.File;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 public class DocumentTabCtrl {
     @FXML
@@ -75,12 +72,12 @@ public class DocumentTabCtrl {
 
         System.out.println(path);
         System.out.println(name);
-        ArrayList<String> content = new ArrayList(Arrays.asList(Tokenizer.splitSentences(textArea.getText())));
+        ArrayList<String> content = Tokenizer.splitSentences(textArea.getText());
         //content = Arrays.asList(Tokenizer.splitSentences(textArea.getText()));
 
         DocumentInfo docToBeSaved = new DocumentInfo(null, title.getText(), author.getText(), LocalDateTime.now(), LocalDateTime.now(), content, path, format);
 
-        PresentationCtrl.getInstance().saveDocument(docToBeSaved);
+        PresentationCtrl.getInstance().saveAsDocument(docToBeSaved);
     }
 
     /**
