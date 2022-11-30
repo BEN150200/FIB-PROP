@@ -2,8 +2,11 @@ package src.persistance.documentexporter;
 import src.persistance.documentexporter.DocumentExporter;
 
 import java.util.ArrayList;
+import java.io.File;
+import java.io.IOException;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.DocumentBuilder;
+import javax.xml.transform.*;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
@@ -33,23 +36,28 @@ public class DocumentExporterXML implements DocumentExporter{
 
             String text = "";
             for(String sentence: content){
-                //text = text + sentence + "\n";
-                text = text + sentence;
+                text = text + sentence + "\n";
+                //text = text + sentence;
             }
 
             Element contentElement = doc.createElement("contingut");
             contentElement.setTextContent(text);
             root.appendChild(contentElement);
 
-
-            FileOutputStream output = new FileOutputStream(path);
+            File docFile = new File(path);
+            docFile.createNewFile();
+            // Creates a file output stream to write to the file represented by the specified File.
+            // Overwrites the file content.
+            FileOutputStream output = new FileOutputStream(docFile, false);
             TransformerFactory transformerFactory = TransformerFactory.newInstance();
             Transformer transformer = transformerFactory.newTransformer();
+            transformer.setOutputProperty(OutputKeys.INDENT, "yes");
             DOMSource source = new DOMSource(doc);
             StreamResult result = new StreamResult(output);
 
             transformer.transform(source, result);
 
+            output.close();
             return true;
         } catch(Exception e){
             return false;
