@@ -1,8 +1,11 @@
 package src.presentation;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import src.domain.core.DocumentInfo;
@@ -11,6 +14,7 @@ import src.enums.Format;
 import src.presentation.PresentationCtrl;
 
 import java.io.File;
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -19,11 +23,37 @@ public class booleanExpressionTabCtrl {
     @FXML
     private TextArea textArea;
     @FXML
-    private TextField title;
+    private TextField expression;
+
+    private ResultTable resultTableCtrl;
     @FXML
     private TextField author;
 
-    public void initialize () {
+    @FXML
+    private VBox resultPane;
+
+    @FXML
+    private VBox vbox;
+
+    public void initialize() throws IOException {
+        //load Result Table
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/src/presentation/fxml/resultTable.fxml"));
+        VBox table = loader.load();
+
+        VBox.setVgrow(table, Priority.ALWAYS);
+        vbox.getChildren().add(1,table);
+        VBox.setVgrow(vbox, Priority.ALWAYS);
+
+        //resultPane.getChildren().add(table);
+        resultTableCtrl = loader.getController();
+
+        //setListeners();
+
+
+
+        //update();
+
+
     }
 
     /**
@@ -32,10 +62,10 @@ public class booleanExpressionTabCtrl {
 
     /**
      *
-     * @param title
+     * @param //title
      */
-    public void setTitle(String title) {
-        this.title.setText(title);
+    public void setExpression(String expression) {
+        this.expression.setText(expression);
     }
 
     public void setAuthor(String author) {
@@ -47,7 +77,7 @@ public class booleanExpressionTabCtrl {
     }
 
     @FXML
-    public void save() {
+    /*public void save() {
 
         FileChooser fileChooser = new FileChooser();
         FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("TEXT files", "*.txt", "*.xml", "*.prop");
@@ -80,6 +110,19 @@ public class booleanExpressionTabCtrl {
         DocumentInfo docToBeSaved = new DocumentInfo(null, title.getText(), author.getText(), LocalDateTime.now(), LocalDateTime.now(), content, path, format);
 
         PresentationCtrl.getInstance().saveDocument(docToBeSaved);
+    }*/
+
+    public void SearchBooleanExpression(){
+        try {
+            System.out.println(expression.getText());
+            System.out.println(PresentationCtrl.getInstance().tempBooleanExpressionSearch(expression.getText()).size());
+
+
+            resultTableCtrl.updateTable( PresentationCtrl.getInstance().tempBooleanExpressionSearch(expression.getText()));
+        }
+        catch (Exception e){
+            System.out.println("UPS!!!");
+        }
     }
 
     /**
@@ -91,8 +134,8 @@ public class booleanExpressionTabCtrl {
      * @return
      */
 
-    public String getTitle() {
-        return title.getText();
+    public String getExpression() {
+        return expression.getText();
     }
 
     public String getAuthor() {

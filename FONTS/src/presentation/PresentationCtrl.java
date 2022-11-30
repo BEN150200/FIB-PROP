@@ -53,6 +53,7 @@ public class PresentationCtrl {
         switchScene("/src/presentation/fxml/search.fxml");
     }
 
+
     public void switchToBooleanExpression() throws IOException {
         switchScene("/src/presentation/fxml/booleanExpressionTab.fxml");
     }
@@ -61,6 +62,7 @@ public class PresentationCtrl {
     public void switchToText() throws IOException {
 
     }
+
 
     /**
      * Getters from the domain
@@ -133,6 +135,10 @@ public class PresentationCtrl {
     //TODO: afegir funcio per eliminar tot el contingut del sistema
     public void deleteData() {
 
+    }
+
+    public ArrayList<DocumentInfo> tempBooleanExpressionSearch(String boolExp)throws Exception{
+        return DomainCtrl.getInstance().tempBooleanExpressionSearch(boolExp);
     }
 
 

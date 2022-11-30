@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="d2991d3d-5c40-4108-ac62-9c44333baa2c" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/FONTS/src/presentation/booleanExpressionTabCtrl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FONTS/src/presentation/fxml/booleanExpressionTab.fxml" afterDir="false" />
+    <list default="true" id="d2991d3d-5c40-4108-ac62-9c44333baa2c" name="Changes" comment="pestanya expressions booleanes creada">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FONTS/src/presentation/MainViewCtrl.java" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/src/presentation/MainViewCtrl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FONTS/src/domain/controllers/SearchCtrl.java" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/src/domain/controllers/SearchCtrl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/FONTS/src/presentation/PresentationCtrl.java" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/src/presentation/PresentationCtrl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FONTS/src/presentation/fxml/mainView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/src/presentation/fxml/mainView.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FONTS/src/presentation/booleanExpressionTabCtrl.java" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/src/presentation/booleanExpressionTabCtrl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FONTS/src/presentation/fxml/booleanExpressionTab.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/src/presentation/fxml/booleanExpressionTab.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,21 +36,21 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "jdk.selected.JAVA_MODULE": "11",
-    "last_opened_file_path": "C:/Users/jansa/IdeaProjects/subgrup-prop33.2/FONTS/src/presentation/fxml",
-    "project.structure.last.edited": "Libraries",
-    "project.structure.proportion": "0.10548526",
-    "project.structure.side.proportion": "0.11806375",
-    "settings.editor.selected.configurable": "preferences.pluginManager"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;11&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/jansa/IdeaProjects/subgrup-prop33.2/FONTS/src/presentation/fxml&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.10548526&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.11806375&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\jansa\IdeaProjects\subgrup-prop33.2\FONTS\src\presentation\fxml" />
@@ -92,6 +91,14 @@
       <option name="presentableId" value="Default" />
       <updated>1668706776871</updated>
     </task>
+    <task id="LOCAL-00001" summary="pestanya expressions booleanes creada">
+      <created>1669760677264</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1669760677264</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -107,6 +114,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="pestanya expressions booleanes creada" />
+    <option name="LAST_COMMIT_MESSAGE" value="pestanya expressions booleanes creada" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
