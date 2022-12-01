@@ -71,10 +71,7 @@ public class DocumentTabCtrl {
             }
         }
 
-        System.out.println(path);
-        System.out.println(name);
         ArrayList<String> content = Tokenizer.splitSentences(textArea.getText());
-        //content = Arrays.asList(Tokenizer.splitSentences(textArea.getText()));
 
         DocumentInfo docToBeSaved = new DocumentInfo(null, title.getText(), author.getText(), LocalDateTime.now(), LocalDateTime.now(), content, path, format);
 

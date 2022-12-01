@@ -112,12 +112,12 @@
       <items>
             <VBox maxWidth="65.0" minWidth="65.0" prefHeight="551.0" prefWidth="65.0" styleClass="side-bar" stylesheets="@../css/side-bar.css">
                <children>
-                  <Button id="files" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#newSearchTab" prefHeight="50.0" prefWidth="50.0">
+                  <Button id="files" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#newAllDocsTab" prefHeight="50.0" prefWidth="50.0">
                      <VBox.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </VBox.margin>
                   </Button>
-                  <Button id="prefix-search" layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0">
+                  <Button id="prefix-search" layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#newSearchTab" prefHeight="50.0" prefWidth="50.0">
                      <VBox.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </VBox.margin>

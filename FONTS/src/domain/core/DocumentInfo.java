@@ -16,6 +16,10 @@ public class DocumentInfo {
     private String path;
     private Format fileFormat;
 
+
+
+    private String fileName;
+
     private Double semblance;
 
     /*private void print(String s) {
@@ -31,6 +35,12 @@ public class DocumentInfo {
         this.content = content;
         this.path = path;
         this.fileFormat = fileFormat;
+        if (path.lastIndexOf("/") != path.length()-1) {
+            fileName = path.substring(path.lastIndexOf("/") + 1);
+        }
+        else if (path.lastIndexOf("\\") != path.length()-1) {
+            fileName = path.substring(path.lastIndexOf("\\") + 1);
+        }
     }
 
     public String toString(){
@@ -68,6 +78,10 @@ public class DocumentInfo {
 
     public Format getFormat(){
         return fileFormat;
+    }
+
+    public String getFileName() {
+        return fileName;
     }
 
     public Double getSemblance() {

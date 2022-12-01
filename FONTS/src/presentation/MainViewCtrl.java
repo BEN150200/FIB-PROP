@@ -43,14 +43,25 @@ public class MainViewCtrl {
 
     public void initialize() throws IOException {
         // load result tab:
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/src/presentation/fxml/resultTable.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/src/presentation/fxml/search.fxml"));
         VBox table = loader.load();
         splitPane.getItems().add(1,table);
-        resultTableCtrl = loader.getController();
+        contractSearch();
+        //table.setVisible(false);
+        //table.setManaged(false);
+        //resultTableCtrl = loader.getController();
 
         saveButton.setAccelerator(new KeyCodeCombination(KeyCode.S, KeyCombination.CONTROL_DOWN));
 
         newDocCounter = 0;
+    }
+
+    public void contractSearch() {
+        Node table = splitPane.getItems().get(1);
+        table.setDisable(true);
+        table.setVisible(false);
+        //table.setManaged(false);
+        table.managedProperty().bind(table.visibleProperty());
     }
 
     @FXML
@@ -65,8 +76,22 @@ public class MainViewCtrl {
     }
 
     @FXML
+    private void newAllDocsTab() throws IOException {
+        newEmptyTab("Documents", "resultTable.fxml");
+    }
+
+    @FXML
     private void newBoolTab() throws IOException {
         newEmptyTab("Boolean Search", "booleanExpressionTab.fxml");
+    }
+
+    public void openDocOnTab(DocumentInfo documentInfo) throws IOException {
+        Tab tab = new Tab(documentInfo.getFileName());
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/src/presentation/fxml/documentTab.fxml"));
+        tab.setContent(loader.load());
+
+        tabPane.getTabs().add(tab);
+        tabPane.getSelectionModel().select(tab);
     }
 
     /**
@@ -87,6 +112,7 @@ public class MainViewCtrl {
         importFile();
     }
 
+    /*
     public void switchToSearch(ActionEvent event) throws IOException {
         PresentationCtrl.getInstance().switchToSearch();
     }
@@ -94,6 +120,7 @@ public class MainViewCtrl {
     public void switchToBooleanExpression (ActionEvent event) throws IOException {
         PresentationCtrl.getInstance().switchToBooleanExpression();
     }
+     */
 
     /**
      * File Management Functions

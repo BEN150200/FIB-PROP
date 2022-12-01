@@ -14,6 +14,9 @@ import java.util.ArrayList;
 public class PresentationCtrl {
     private static PresentationCtrl instance;
 
+    private MainViewCtrl mainViewCtrl;
+    private DocumentTabCtrl documentTabCtrl;
+
     public PresentationCtrl() {}
 
     public static PresentationCtrl getInstance() {
@@ -21,6 +24,14 @@ public class PresentationCtrl {
             instance = new PresentationCtrl();
         }
         return instance;
+    }
+
+    public void setMainViewCtrl(MainViewCtrl mainViewCtrl) {
+        this.mainViewCtrl = mainViewCtrl;
+    }
+
+    public void setDocumentTabCtrl(DocumentTabCtrl documentTabCtrl) {
+        this.documentTabCtrl = documentTabCtrl;
     }
 
     private Stage stage;
@@ -31,15 +42,10 @@ public class PresentationCtrl {
      * Functions to controll the UI
      */
 
-    /**
-     *
-     * @param newScene
-     * @throws IOException
-     */
+    /*
     private void switchScene(String newScene) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource(newScene));
         Stage newStage = new Stage();
-        //newStage.setMaxWidth(600);
         newStage.setMinWidth(600);
         newStage.setMinHeight(400);
         newStage.setScene(new Scene(root));
@@ -50,20 +56,19 @@ public class PresentationCtrl {
         switchScene("/src/presentation/fxml/search.fxml");
     }
 
-
     public void switchToBooleanExpression() throws IOException {
         switchScene("/src/presentation/fxml/booleanExpressionTab.fxml");
     }
 
-
     public void switchToText() throws IOException {
 
     }
-
+     */
 
     /**
      * Getters from the domain
      */
+
     public ArrayList<DocumentInfo> getAllDocuments() {
         return DomainCtrl.getInstance().getAllDocumentsInfo();
     }
@@ -72,9 +77,11 @@ public class PresentationCtrl {
         return DomainCtrl.getInstance().getDocsByTitleAndAuthor(title, author);
     }
 
+    /*
     public DocumentInfo getOneDocument (String title, String author) {
         return DomainCtrl.getInstance().getOneDocument(title, author);
     }
+    */
 
     public ArrayList<String> getAllTitles() {
         return DomainCtrl.getInstance().getAllTitles(new String());
@@ -91,11 +98,6 @@ public class PresentationCtrl {
     public ArrayList<String> getAuthors(String title) {
         return DomainCtrl.getInstance().getAllTitleAuthors(title);
     }
-
-    public DocumentInfo openDocument(String title, String author) {
-        return null;
-    }
-
 
     /**
      * Persistence related functions
@@ -120,8 +122,6 @@ public class PresentationCtrl {
     public void importDocument(String path, Format format) {
         DomainCtrl.getInstance().importDocumentFromFile(path, format);
     }
-
-
 
     /**
      * Data Persistance Functions

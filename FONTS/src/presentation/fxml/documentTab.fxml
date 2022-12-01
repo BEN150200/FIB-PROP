@@ -43,7 +43,7 @@
             <Insets top="5.0" />
          </VBox.margin>
       </HBox>
-      <TextArea fx:id="textArea" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="50.0" minWidth="50.0" prefHeight="200.0" prefWidth="200.0" promptText="placeholder" styleClass="text-field" text="as" VBox.vgrow="ALWAYS">
+      <TextArea fx:id="textArea" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="50.0" minWidth="50.0" prefHeight="200.0" prefWidth="200.0" promptText="placeholder" styleClass="text-field" VBox.vgrow="ALWAYS">
          <VBox.margin>
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
          </VBox.margin></TextArea>

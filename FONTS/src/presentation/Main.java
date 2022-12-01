@@ -18,7 +18,13 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) throws IOException {
 
-        Parent root = FXMLLoader.load(getClass().getResource("/src/presentation/fxml/mainView.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/src/presentation/fxml/mainView.fxml"));
+
+        Parent root = loader.load();
+
+        MainViewCtrl mainViewCtrl = loader.getController();
+        PresentationCtrl.getInstance().setMainViewCtrl(mainViewCtrl);
+
         Scene scene = new Scene(root);
 
         stage.setTitle("Macrosoft Word");
