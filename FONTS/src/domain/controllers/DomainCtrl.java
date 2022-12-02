@@ -20,7 +20,7 @@ public class DomainCtrl {
      * Attributes
     **/
     private static DomainCtrl instance = null;
-    private static PersistanceCtrl persistanceCtrl = null;
+    private static PersistanceCtrl persistanceCtrl = PersistanceCtrl.getInstance();
     
     /**
      * Constructor
@@ -34,7 +34,6 @@ public class DomainCtrl {
     public static DomainCtrl getInstance() {
         if (instance == null) {
             instance = new DomainCtrl();
-            persistanceCtrl = PersistanceCtrl.getInstance();
         }
         return instance;
     }
@@ -503,5 +502,19 @@ public class DomainCtrl {
             return true;
         }
         return false;
+    }
+
+    // Clears all data in the domain and persistance
+    public void clearAllData(){
+        // Clear domain data
+        AuthorCtrl.getInstance().clear();
+        TitleCtrl.getInstance().clear();
+        DocumentCtrl.getInstance().clear();
+        SentenceCtrl.getInstance().clear();
+        BooleanExpressionCtrl.getInstance().clear();
+        SearchCtrl.getInstance().clear();
+
+        // Clear persistance data
+        persistanceCtrl.clearData();
     }
 }

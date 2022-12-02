@@ -71,4 +71,9 @@ public class SentenceCtrl {
         }
         return false;
     }
+
+    public void clear(){
+        sentencesByKey.clear();
+        sentencesById.clear();
+    }
 }

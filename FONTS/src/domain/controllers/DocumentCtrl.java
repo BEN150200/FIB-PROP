@@ -114,6 +114,11 @@ public class DocumentCtrl {
         return false;
     }
 
+    public void clear(){
+        documentsID.clear();
+        documents.clear();
+    }
+
 }
 
 

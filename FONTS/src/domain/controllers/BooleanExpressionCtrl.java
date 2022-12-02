@@ -91,9 +91,8 @@ public class BooleanExpressionCtrl {
     public ExpressionTreeNode createExpressionTree(String exp) throws Exception{
 
         BooleanExpression newexp = BooleanExpression.createBooleanExpression(exp);
-        //System.out.println(newexp.printTree());
-
-
+        //if(newexp==null) return null;//haura de retornar excepcio si no es correcte
+        //addHistorial(newexp);
         return newexp.getRoot();
     }
     
@@ -120,5 +119,10 @@ public class BooleanExpressionCtrl {
     private void addHistorial(BooleanExpression expr) {
         historial.add(expr);
         if(historial.size()>midaHistorial) historial.remove(0);
+    }
+
+    public void clear(){
+        savedExpressions.clear();
+        historial.clear();
     }
 }

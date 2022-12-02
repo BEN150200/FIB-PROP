@@ -78,4 +78,8 @@ public class AuthorCtrl {
         }
         return false;
     }
+
+    public void clear(){
+        authors.clear();
+    }
 }

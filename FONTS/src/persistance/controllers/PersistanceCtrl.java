@@ -34,26 +34,6 @@ public class PersistanceCtrl {
         return documentExporter.exportToFile(titleName, authorName, content, path);
     }
 
-    /*
-    public String importAuthorFromFile(String path, Format fileFormat){
-        DocumentImporterFactory importerFactory = DocumentImporterFactory.getInstance();
-        DocumentImporter documentImporter = importerFactory.getImporter(fileFormat);
-        return documentImporter.getAuthor(path);
-    } 
-
-    public String importTitleFromFile(String path, Format fileFormat){
-        DocumentImporterFactory importerFactory = DocumentImporterFactory.getInstance();
-        DocumentImporter documentImporter = importerFactory.getImporter(fileFormat);
-        return documentImporter.getTitle(path);
-    } 
-
-    public ArrayList<String> importContentFromFile(String path, Format fileFormat){
-        DocumentImporterFactory importerFactory = DocumentImporterFactory.getInstance();
-        DocumentImporter documentImporter = importerFactory.getImporter(fileFormat);
-        return documentImporter.getContent(path);
-    } 
-    */
-
     public DocumentInfo importFromFile(String path, Format fileFormat){
         DocumentImporterFactory importerFactory = DocumentImporterFactory.getInstance();
         DocumentImporter documentImporter = importerFactory.getImporter(fileFormat);
@@ -79,6 +59,13 @@ public class PersistanceCtrl {
 
     public ArrayList<String> loadExpressions(){
         return beDataManager.loadExpressions();
+    }
+
+    // Deletes boolean expressions and documents from their backup files.
+    public boolean clearData(){
+        if(!beDataManager.clearData()) return false;
+        if(!documentsDataManager.clearData()) return false;
+        return true;
     }
 
 }

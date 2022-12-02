@@ -87,4 +87,9 @@ public class BEDataManager {
         } catch(Exception e ){}
         return expressions;
     }
+
+    // Cleans boolean expressions data by overwriting the current content with nothing.
+    public boolean clearData(){
+        return saveData(new ArrayList<String>(), new ArrayList<String>());
+    }
 }

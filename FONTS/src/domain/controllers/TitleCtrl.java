@@ -92,4 +92,8 @@ public class TitleCtrl {
         }
         return false;
     }
+
+    public void clear(){
+        titles.clear();
+    }
 }

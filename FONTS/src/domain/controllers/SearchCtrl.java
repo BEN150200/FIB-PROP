@@ -86,6 +86,7 @@ public class SearchCtrl {
 
     public ArrayList<DocumentInfo> tempBooleanExpressionSearch (String boolExp) throws Exception {
         ExpressionTreeNode root = BooleanExpressionCtrl.getInstance().createExpressionTree(boolExp);
+        System.out.println("arriba fins aqui");
         return booleanExpressionSearch(root);
 
 
@@ -128,11 +129,14 @@ public class SearchCtrl {
     }
     
     public void removeDocument(Integer docId) {
-        indexingCtrl.removeSentence(docId);
+        indexingCtrl.removeDocument(docId);
     }
 
     public void removeSentence(Integer sentenceId) {
         indexingCtrl.removeSentence(sentenceId);
     }
     
+    public void clear(){
+        indexingCtrl = new IndexingController<Integer, Integer>();
+    }
 }
