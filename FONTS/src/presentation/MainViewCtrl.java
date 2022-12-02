@@ -31,37 +31,138 @@ public class MainViewCtrl {
     @FXML
     private MenuItem saveButton;
 
+    @FXML
+    private Button allDocsButton;
+
+    @FXML
+    private Button titleAuthorButton;
+
+    @FXML
+    private Button booleanButton;
+
+    @FXML
+    private Button similarButton;
+
+    @FXML
+    private Button weightButton;
+
     private ResultTable resultTableCtrl;
 
     private int newDocCounter;
 
-    //private SearchViewCtrl searchViewCtrl;
-    //private ResultTable resultTable;
+    private boolean searchVisible;
+
+    private VBox allDocumentsView;
+    private ResultTable allDocumentsCtrl;
+
+    private VBox titleAuthorSearchView;
+    private SearchViewCtrl titleAuthorSearchCtrl;
+
+    private VBox similaritySearchView;
+    private ResultTable similaritySearchCtrl;
+
+    private VBox booleanSearchView;
+    private ResultTable booleanSearchCtrl;
+
+    private VBox weightSearchView;
+    private ResultTable weightSearchCtrl;
+
 
     //String currentTitle;
     //String currentAuthor;
 
     public void initialize() throws IOException {
         // load result tab:
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/src/presentation/fxml/search.fxml"));
-        VBox table = loader.load();
-        splitPane.getItems().add(1,table);
-        contractSearch();
+        initializeSearchPanels();
+        setListeners();
+        searchVisible = false;
+
         //table.setVisible(false);
         //table.setManaged(false);
-        //resultTableCtrl = loader.getController();
+
 
         saveButton.setAccelerator(new KeyCodeCombination(KeyCode.S, KeyCombination.CONTROL_DOWN));
-
         newDocCounter = 0;
     }
 
-    public void contractSearch() {
-        Node table = splitPane.getItems().get(1);
-        table.setDisable(true);
-        table.setVisible(false);
-        //table.setManaged(false);
-        table.managedProperty().bind(table.visibleProperty());
+    private void initializeSearchPanels() throws IOException {
+        FXMLLoader loader1 = new FXMLLoader(getClass().getResource("/src/presentation/fxml/resultTable.fxml"));
+        allDocumentsView = loader1.load();
+        allDocumentsCtrl = loader1.getController();
+        SplitPane.setResizableWithParent(allDocumentsView, false);
+
+        FXMLLoader loader2 = new FXMLLoader(getClass().getResource("/src/presentation/fxml/search.fxml"));
+        titleAuthorSearchView = loader2.load();
+        titleAuthorSearchCtrl = loader2.getController();
+        SplitPane.setResizableWithParent(titleAuthorSearchView, false);
+
+        FXMLLoader loader3 = new FXMLLoader(getClass().getResource("/src/presentation/fxml/resultTable.fxml"));
+        similaritySearchView = loader3.load();
+        similaritySearchCtrl = loader3.getController();
+        SplitPane.setResizableWithParent(similaritySearchView, false);
+
+        FXMLLoader loader4 = new FXMLLoader(getClass().getResource("/src/presentation/fxml/resultTable.fxml"));
+        booleanSearchView = loader4.load();
+        booleanSearchCtrl = loader4.getController();
+        SplitPane.setResizableWithParent(booleanSearchView, false);
+
+        FXMLLoader loader5 = new FXMLLoader(getClass().getResource("/src/presentation/fxml/resultTable.fxml"));
+        weightSearchView = loader5.load();
+        weightSearchCtrl = loader5.getController();
+        SplitPane.setResizableWithParent(weightSearchView, false);
+
+    }
+
+    private void setListeners() {
+        allDocsButton.setOnAction(event -> {
+            contractSearch(allDocumentsView);
+            allDocumentsCtrl.updateTable(PresentationCtrl.getInstance().getAllDocuments());
+        });
+
+        titleAuthorButton.setOnAction(event -> {
+            contractSearch(titleAuthorSearchView);
+            titleAuthorSearchCtrl.update();
+        });
+
+        booleanButton.setOnAction(event -> {
+            contractSearch(booleanSearchView);
+        });
+
+        similarButton.setOnAction(event -> {
+            contractSearch(similaritySearchView);
+        });
+
+        weightButton.setOnAction(event -> {
+            contractSearch(weightSearchView);
+        });
+
+    }
+    public void contractSearch(VBox newView) {
+        //splitPane.setDividerPosition(1,0);
+        if (searchVisible) {
+            VBox current = (VBox) splitPane.getItems().get(1);
+            if (current != newView) {
+                splitPane.getItems().remove(1);
+                splitPane.getItems().add(1, newView);
+            }
+            else {
+                splitPane.getItems().remove(1);
+                searchVisible = false;
+            }
+        }
+        else {
+            splitPane.getItems().add(1, newView);
+            searchVisible = true;
+            /*
+            VBox table = (VBox) splitPane.getItems().get(1);
+            table.setDisable(false);
+            table.setVisible(true);
+            table.setMaxWidth(600);
+            table.managedProperty().bind(table.visibleProperty());
+            splitPane.setDividerPosition(1, 150);
+            searchVisible = true;
+             */
+        }
     }
 
     @FXML

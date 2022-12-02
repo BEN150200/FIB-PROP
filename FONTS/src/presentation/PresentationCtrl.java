@@ -1,14 +1,12 @@
 package src.presentation;
 
 import src.domain.controllers.DomainCtrl;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import src.domain.core.DocumentInfo;
 import src.enums.Format;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 public class PresentationCtrl {
@@ -87,7 +85,11 @@ public class PresentationCtrl {
         return DomainCtrl.getInstance().getAllTitles(new String());
     }
 
-    public ArrayList<String> getTitles(String author) {
+    public ArrayList<String> getTitles(String t) {
+        return DomainCtrl.getInstance().getAllTitles(t);
+    }
+
+    public ArrayList<String> getTitlesByAuthor(String author) {
         return DomainCtrl.getInstance().getAllAuthorTitles(author);
     }
 
@@ -95,7 +97,11 @@ public class PresentationCtrl {
         return DomainCtrl.getInstance().getAllAuthors(new String());
     }
 
-    public ArrayList<String> getAuthors(String title) {
+    public ArrayList<String> getAuthors(String a) {
+        return DomainCtrl.getInstance().getAllAuthors(a);
+    }
+
+    public ArrayList<String> getAuthorsByTitle(String title) {
         return DomainCtrl.getInstance().getAllTitleAuthors(title);
     }
 
