@@ -48,7 +48,7 @@ public class SearchViewCtrl {
         VBox table = loader.load();
 
         VBox.setVgrow(table, Priority.ALWAYS);
-        vbox.getChildren().add(1,table);
+        vbox.getChildren().add(2,table);
         VBox.setVgrow(vbox, Priority.ALWAYS);
 
         //resultPane.getChildren().add(table);

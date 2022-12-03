@@ -141,7 +141,7 @@
             </VBox>
           <SplitPane fx:id="splitPane" maxHeight="1.7976931348623157E308" prefHeight="797.0" prefWidth="835.0" stylesheets="@../css/main.css" HBox.hgrow="ALWAYS">
             <items>
-                  <TabPane fx:id="tabPane" maxHeight="1.7976931348623157E308" minWidth="600.0" prefWidth="938.0" stylesheets="@../css/tabs.css" tabClosingPolicy="ALL_TABS" />
+                  <TabPane fx:id="tabPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" stylesheets="@../css/tabs.css" tabClosingPolicy="ALL_TABS" />
             </items>
           </SplitPane>
          </children>
