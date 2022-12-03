@@ -1,0 +1,41 @@
+@import "theme.css";
+
+.search-layout {
+    -fx-background-color: -left-panel-color;
+}
+
+.label {
+    -fx-text-fill: -font-color;
+}
+
+.combo-box .text-input {
+    -fx-text-fill: -font-color;
+    -fx-background-color: -text-field-color;
+    -fx-border-radius: 4px;
+}
+
+.combo-box:focused {
+    -fx-border-color: rgb(6, 81, 219);
+}
+
+.combo-box .arrow-button { 
+    -fx-background-color: -tabs-color;
+    -fx-border-color: -tabs-color; 
+}
+
+.combo-box .arrow {
+    -fx-background-color: -lighter-field-color;
+}
+
+.combo-box-popup .list-view { 
+    -fx-background-color: -text-field-color;
+    -fx-text-fill: -font-color;
+}
+
+.combo-box {
+    -fx-border-radius: 4px;
+    -fx-background-color: -left-panel-color;
+    -fx-text-fill: -font-color;
+    -fx-alignment: center;
+    -fx-content-display: left;
+}

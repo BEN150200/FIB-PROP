@@ -145,6 +145,7 @@ public class MainViewCtrl {
                 splitPane.getItems().remove(0);
                 splitPane.getItems().add(0, newView);
                 splitPane.setDividerPosition(0, 0.3d);
+                newView.setMinWidth(220.0);
             }
             else {
                 splitPane.getItems().remove(0);
@@ -152,6 +153,7 @@ public class MainViewCtrl {
             }
         }
         else {
+            newView.setMinWidth(220.0);
             splitPane.setDividerPosition(0, 0.3d);
             splitPane.getItems().add(0, newView);
             searchVisible = true;

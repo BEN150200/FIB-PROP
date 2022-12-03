@@ -7,8 +7,10 @@
     -side-bar-color: #333333;
     -tabs-color: #252525;
     -text-field-color: #444444;
+    -lighter-field-color: #404040;
     -bg-color: -side-bar-color;
-    -menu-color: #373737;                 
+    -menu-color: #373737;
+    -left-panel-color: #303030;              
 
     /* top-bar */
     -hover-menu-color: #444;
@@ -16,4 +18,6 @@
     /* tabs */
     -inactive-tab-color: #323232;
     -active-tab-color: -tabs-color;
+
+    /* left-panel */
 }
