@@ -140,18 +140,18 @@ public class MainViewCtrl {
     public void contractSearch(VBox newView) {
         //splitPane.setDividerPosition(1,0);
         if (searchVisible) {
-            VBox current = (VBox) splitPane.getItems().get(1);
+            VBox current = (VBox) splitPane.getItems().get(0);
             if (current != newView) {
-                splitPane.getItems().remove(1);
-                splitPane.getItems().add(1, newView);
+                splitPane.getItems().remove(0);
+                splitPane.getItems().add(0, newView);
             }
             else {
-                splitPane.getItems().remove(1);
+                splitPane.getItems().remove(0);
                 searchVisible = false;
             }
         }
         else {
-            splitPane.getItems().add(1, newView);
+            splitPane.getItems().add(0, newView);
             searchVisible = true;
             /*
             VBox table = (VBox) splitPane.getItems().get(1);

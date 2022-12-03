@@ -15,11 +15,13 @@
 	-fx-background-insets: 0 0 0 0;
 	-fx-background-radius: 0 0 0 0;
 }
+
 .tab .tab-label { 
  	-fx-alignment: center;
 	-fx-text-fill: -font-color;
 	-fx-padding: 0 10 0 10;
 }
+
 .tab-pane:top *.tab-header-area {
 	-fx-padding: 0 0 0 0;
 	
@@ -27,7 +29,7 @@
 	/* -fx-padding: 0 0 0 30; */
 }
 .tab-pane {
-	-fx-background-color: transparent;
+	-fx-background-color: -tabs-color;
 	-fx-tab-max-width: 10em;
     -fx-tab-min-height: 2.5em;
 }
