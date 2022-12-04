@@ -31,7 +31,6 @@ public class DocumentsDataManager {
     public boolean saveData(ArrayList<DocumentInfo> docsInfo){
         DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
         try{
-            System.out.println("Empezamos");
             DocumentBuilder docBuilder = docFactory.newDocumentBuilder();
             Document doc = docBuilder.newDocument();
             Element rootElement = doc.createElement("Documents");
@@ -43,7 +42,8 @@ public class DocumentsDataManager {
                 documElement.setAttribute("author", documentInfo.getAuthor());
                 String content = "";
                 for(String sentence: documentInfo.getContent()){
-                    content = content + sentence + "\n";
+                    //content = content + sentence + "\n";
+                    content += sentence;
                 }
                 documElement.setAttribute("content", content);
                 documElement.setAttribute("creationDate", documentInfo.getCreationDate().toString());
@@ -53,18 +53,15 @@ public class DocumentsDataManager {
             }
             File docFile = new File(DATAPATH);
             docFile.createNewFile();
-            System.out.println("File created");
             // Creates a file output stream to write to the file represented by the specified File.
             // Overwrites the file content.
             FileOutputStream output = new FileOutputStream(docFile, false);
             TransformerFactory transformerFactory = TransformerFactory.newInstance();
             Transformer transformer = transformerFactory.newTransformer();
             transformer.setOutputProperty(OutputKeys.INDENT, "yes");
-            System.out.println("Video de transformacion");
             DOMSource source = new DOMSource(doc);
             StreamResult result = new StreamResult(output);
             transformer.transform(source, result);
-            System.out.println("Transformado");
             output.close();
             return true;
         } catch(Exception e){

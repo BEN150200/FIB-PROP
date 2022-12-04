@@ -36,8 +36,8 @@ public class DocumentExporterXML implements DocumentExporter{
 
             String text = "";
             for(String sentence: content){
-                text = text + sentence + "\n";
-                //text = text + sentence;
+                //text = text + sentence + "\n";
+                text = text + sentence;
             }
 
             Element contentElement = doc.createElement("contingut");
