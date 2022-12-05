@@ -4,6 +4,7 @@ import src.enums.Format;
 import src.persistance.documentexporter.DocumentExporter;
 import src.persistance.documentexporter.DocumentExporterTXT;
 import src.persistance.documentexporter.DocumentExporterXML;
+import src.persistance.documentexporter.DocumentExporterPROP;
 
 import java.util.HashMap;
 
@@ -17,7 +18,7 @@ public class DocumentExporterFactory {
             instance = new DocumentExporterFactory();
             exporters.put(Format.TXT, new DocumentExporterTXT());
             exporters.put(Format.XML, new DocumentExporterXML());
-            //exporters.put(Format.PROP, new ExporterPROP());
+            exporters.put(Format.PROP, new DocumentExporterPROP());
         }
         return instance;
     }
