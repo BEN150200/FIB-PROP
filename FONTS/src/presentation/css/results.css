@@ -1,0 +1,14 @@
+@import "theme.css";
+
+.table-view {
+    -fx-background-color: -left-panel-color;
+}
+
+.table-view .column-header {
+    -fx-background-color: -text-field-color;
+}
+
+
+.table-view .column-header-background .label{
+    -fx-text-fill: -font-color;
+}
