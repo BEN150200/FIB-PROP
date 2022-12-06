@@ -5,17 +5,16 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.VBox?>
 
-
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="WeightedSearch">
+<VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="src.presentation.WeightedSearch">
    <children>
-      <VBox maxHeight="-Infinity" prefHeight="100.0" prefWidth="100.0" styleClass="query-container" stylesheets="@../css/weighted.css" VBox.vgrow="NEVER">
+      <VBox maxHeight="-Infinity" minHeight="-Infinity" prefHeight="50.0" prefWidth="100.0" styleClass="query-container" stylesheets="@../css/weighted.css" VBox.vgrow="NEVER">
          <children>
-            <TextField id="input" fx:id="input" maxWidth="1.7976931348623157E308" promptText="example^2 weighted query^0.1" />
+            <TextField id="input" fx:id="input" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="20.0" promptText="example^2 weighted query^0.1" />
          </children>
       </VBox>
-      <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="100.0" minWidth="100.0" prefHeight="400.0" prefWidth="600.0" stylesheets="@../css/results.css">
+      <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="100.0" minWidth="100.0" prefWidth="600.0" stylesheets="@../css/results.css">
          <children>
-            <TableView fx:id="table" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="100.0" minWidth="100.0" VBox.vgrow="ALWAYS">
+            <TableView fx:id="table" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="100.0" minWidth="100.0" prefHeight="2000.0" VBox.vgrow="ALWAYS">
                <columns>
                   <TableColumn fx:id="tableTitle" editable="false" prefWidth="167.0" text="Title" />
                   <TableColumn fx:id="tableAuthor" minWidth="0.0" prefWidth="159.0" text="Author" />

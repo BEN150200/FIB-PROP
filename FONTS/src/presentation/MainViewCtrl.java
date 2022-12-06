@@ -65,7 +65,7 @@ public class MainViewCtrl {
     private ResultTable booleanSearchCtrl;
 
     private VBox weightSearchView;
-    private ResultTable weightSearchCtrl;
+    private WeightedSearch weightSearchCtrl;
 
 
     //String currentTitle;
@@ -106,7 +106,7 @@ public class MainViewCtrl {
         booleanSearchCtrl = loader4.getController();
         SplitPane.setResizableWithParent(booleanSearchView, false);
 
-        FXMLLoader loader5 = new FXMLLoader(getClass().getResource("/src/presentation/fxml/resultTable.fxml"));
+        FXMLLoader loader5 = new FXMLLoader(getClass().getResource("/src/presentation/fxml/weightedPanel.fxml"));
         weightSearchView = loader5.load();
         weightSearchCtrl = loader5.getController();
         SplitPane.setResizableWithParent(weightSearchView, false);

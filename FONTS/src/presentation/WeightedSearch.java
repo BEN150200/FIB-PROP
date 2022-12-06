@@ -7,4 +7,8 @@ public class WeightedSearch {
     @FXML
     private TextField input;
 
+    public void initialize() {
+
+    }
+
 }
