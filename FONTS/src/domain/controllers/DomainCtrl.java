@@ -18,13 +18,13 @@ public class DomainCtrl {
 
     /**
      * Attributes
-    **/
+     **/
     private static DomainCtrl instance = null;
     private static PersistanceCtrl persistanceCtrl = PersistanceCtrl.getInstance();
-    
+
     /**
      * Constructor
-    **/
+     **/
     private DomainCtrl() {}
 
     /**
@@ -94,10 +94,10 @@ public class DomainCtrl {
 
     /**
      * Update Elements
-    **/
+     **/
 
     /**
-     * 
+     *
      * @param titleName Title Name that identifies the Document to be modified
      * @param authorName Author Name that identifies the Document to be modified
      * @param content ArrayList of the Strings that will be the new content of the Document
@@ -113,7 +113,7 @@ public class DomainCtrl {
     }
 
     private void updateDocumentContent(Document doc, List<String> content) {
-        
+
         ArrayList<Sentence> newContent = new ArrayList<>();
         for (String sentenceDoc : content) {
             Sentence sentence;
@@ -131,12 +131,12 @@ public class DomainCtrl {
 
     /**
      * Delete Elements
-    **/
-    
+     **/
+
     public boolean deleteDocument(String titleName, String authorName){
         if (DocumentCtrl.getInstance().existsDocument(titleName, authorName)) {
             Document d = DocumentCtrl.getInstance().getDocument(titleName, authorName);
-            
+
             d.delete();
 
             return true;
@@ -151,7 +151,7 @@ public class DomainCtrl {
 
     /**
      * Search Elements
-    **/
+     **/
 
     public ArrayList<String> getAllTitles(String titleName) {
         if (titleName.isEmpty()) return TitleCtrl.getInstance().getAllTitlesNames();
@@ -289,13 +289,13 @@ public class DomainCtrl {
             return null;
         }
     }
-    
+
     /**
      * Complex Search
      */
 
     /**
-     * 
+     *
      * @param titleName title that identifies the document
      * @param authorName author that identifies the document
      * @param k number of document to be showed
@@ -324,7 +324,7 @@ public class DomainCtrl {
 
     public ArrayList<DocumentInfo> documentsByQuery(String query){
         return SearchCtrl.getInstance().documentsByQuery(query);
-    
+
     }
 
 
@@ -397,7 +397,8 @@ public class DomainCtrl {
             author = new Author(docToBeSaved.getAuthor());
         }
 
-        Document doc = new Document(title, author, docToBeSaved.getCreationDate(),docToBeSaved.getModificationDate(),docToBeSaved.getPath(), docToBeSaved.getFormat());
+        //Document doc = new Document(title, author, docToBeSaved.getCreationDate(),docToBeSaved.getModificationDate(),docToBeSaved.getPath(), docToBeSaved.getFormat());
+        Document doc = new Document(title, author, docToBeSaved);
         updateDocumentContent(doc, docToBeSaved.getContent());
         return true;
         //exportDocument(docToBeSaved.getTitle(), docToBeSaved.getAuthor(), docToBeSaved.getFormat(),docToBeSaved.getPath());
@@ -455,7 +456,7 @@ public class DomainCtrl {
         ArrayList<String> expressionsNames = persistanceCtrl.loadExpressionsNames();
         ArrayList<String> expressions = persistanceCtrl.loadExpressions();
         for(int i = 0; i < expressionsNames.size(); i++){
-                addBooleanExpression(expressionsNames.get(i), expressions.get(i));
+            addBooleanExpression(expressionsNames.get(i), expressions.get(i));
         }
     }
 
@@ -489,19 +490,20 @@ public class DomainCtrl {
                 content.add(sentence.toString());
             }
             return persistanceCtrl.exportToFile(titleName, authorName, content, fileFormat, path);
-        } 
+        }
         return false;
     }
 
-    public boolean importDocumentFromFile(String path, Format fileFormat){
+    public DocumentInfo importDocumentFromFile(String path, Format fileFormat){
         DocumentInfo docInfo = persistanceCtrl.importFromFile(path, fileFormat);
         if(addDocument(docInfo)){
-            Document doc = DocumentCtrl.getInstance().getDocument(docInfo.getTitle(), docInfo.getAuthor());
+            return docInfo;
+            //Document doc = DocumentCtrl.getInstance().getDocument(docInfo.getTitle(), docInfo.getAuthor());
             //doc.setPath(path);
             //doc.setFormat(fileFormat);
-            return true;
+            //return true;
         }
-        return false;
+        return null;
     }
 
     // Clears all data in the domain and persistance

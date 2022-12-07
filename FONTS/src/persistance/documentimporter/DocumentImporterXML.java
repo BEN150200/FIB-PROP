@@ -93,7 +93,7 @@ public class DocumentImporterXML implements DocumentImporter{
             }  
             String[] sentences = text.split("\\r?\\n");
             Collections.addAll(content, sentences);
-            docInfo = new DocumentInfo(0, title, author, null, null, content, path, Format.XML);
+            docInfo = new DocumentInfo(0, title, author, null, null, content, path, Format.XML, file.getName());
         } catch (Exception e) {}
         return docInfo;
     }

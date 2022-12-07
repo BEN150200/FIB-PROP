@@ -16,8 +16,6 @@ public class DocumentInfo {
     private String path;
     private Format fileFormat;
 
-
-
     private String fileName;
 
     private Double semblance;
@@ -26,7 +24,7 @@ public class DocumentInfo {
         System.out.println(s);
     }*/
 
-    public DocumentInfo(Integer docID, String titleName, String authorName, LocalDateTime creationDate, LocalDateTime modificationDate, ArrayList<String> content, String path, Format fileFormat) {
+    public DocumentInfo(Integer docID, String titleName, String authorName, LocalDateTime creationDate, LocalDateTime modificationDate, ArrayList<String> content, String path, Format fileFormat, String fileName) {
         this.docID = docID;
         this.title = titleName;
         this.author = authorName;
@@ -35,12 +33,21 @@ public class DocumentInfo {
         this.content = content;
         this.path = path;
         this.fileFormat = fileFormat;
+        this.fileName = fileName;
+        /*
         if (path.lastIndexOf("/") != path.length()-1) {
+            System.out.println(path.lastIndexOf("/"));
+            System.out.println(path.lastIndexOf(path.length()-1));
             fileName = path.substring(path.lastIndexOf("/") + 1);
         }
         else if (path.lastIndexOf("\\") != path.length()-1) {
+            System.out.println(path.lastIndexOf("\\"));
+            System.out.println(path.lastIndexOf(path.length()-1));
+
             fileName = path.substring(path.lastIndexOf("\\") + 1);
         }
+
+         */
     }
 
     public String toString(){

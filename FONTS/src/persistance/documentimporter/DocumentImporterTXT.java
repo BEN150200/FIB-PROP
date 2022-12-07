@@ -51,8 +51,8 @@ public class DocumentImporterTXT implements DocumentImporter{
     public DocumentInfo importFromFile(String path){
         DocumentInfo docInfo = null;
         try{
-            File myObj = new File(path);
-            Scanner scanner = new Scanner(myObj);
+            File file = new File(path);
+            Scanner scanner = new Scanner(file);
             String author = scanner.nextLine();
             String title = scanner.nextLine();
             ArrayList<String> content = new ArrayList<String>();
@@ -60,7 +60,7 @@ public class DocumentImporterTXT implements DocumentImporter{
                 content.add(scanner.nextLine());
             }
             scanner.close();
-            docInfo = new DocumentInfo(0, title, author, null, null, content, path, Format.TXT);
+            docInfo = new DocumentInfo(0, title, author, null, null, content, path, Format.TXT, file.getName());
         } catch (FileNotFoundException e) {}
         return docInfo;
     }

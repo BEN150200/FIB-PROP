@@ -7,6 +7,7 @@ import javafx.stage.Stage;
 import src.domain.core.DocumentInfo;
 import src.enums.Format;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class PresentationCtrl {
@@ -40,6 +41,9 @@ public class PresentationCtrl {
      * Functions to controll the UI
      */
 
+    public void openDocument(DocumentInfo docToOpen) throws IOException {
+        mainViewCtrl.openDocOnTab(docToOpen);
+    }
     /*
     private void switchScene(String newScene) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource(newScene));
@@ -62,6 +66,9 @@ public class PresentationCtrl {
 
     }
      */
+
+
+
 
     /**
      * Getters from the domain
@@ -105,6 +112,21 @@ public class PresentationCtrl {
         return DomainCtrl.getInstance().getAllTitleAuthors(title);
     }
 
+
+    /**
+     * Boolean Expressions functions
+     */
+    public ArrayList<DocumentInfo> tempBooleanExpressionSearch(String boolExp)throws Exception{
+        return DomainCtrl.getInstance().tempBooleanExpressionSearch(boolExp);
+    }
+
+    public void addBooleanExpression (String boolExpName, String boolExp) throws Exception{
+        DomainCtrl.getInstance().addBooleanExpression(boolExpName,boolExp);
+    }
+
+
+
+
     /**
      * Persistence related functions
      */
@@ -125,8 +147,8 @@ public class PresentationCtrl {
         DomainCtrl.getInstance().exportDocument(docToBeSaved);
     }
 
-    public void importDocument(String path, Format format) {
-        DomainCtrl.getInstance().importDocumentFromFile(path, format);
+    public DocumentInfo importDocument(String path, Format format) {
+        return DomainCtrl.getInstance().importDocumentFromFile(path, format);
     }
 
     /**
@@ -141,23 +163,16 @@ public class PresentationCtrl {
 
     }
 
-    //TODO: afegir funcio per eliminar els fitxers de data
     public void deleteBackup() {
-
+        DomainCtrl.getInstance().clearAllData();
     }
 
     //TODO: afegir funcio per eliminar tot el contingut del sistema
     public void deleteData() {
-
     }
 
-    public ArrayList<DocumentInfo> tempBooleanExpressionSearch(String boolExp)throws Exception{
-        return DomainCtrl.getInstance().tempBooleanExpressionSearch(boolExp);
+    public void setError(String error) {
+        mainViewCtrl.setError(error);
     }
-
-    public void addBooleanExpression (String boolExpName, String boolExp) throws Exception{
-        DomainCtrl.getInstance().addBooleanExpression(boolExpName,boolExp);
-    }
-
-
 }
+

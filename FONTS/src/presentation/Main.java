@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.stage.Stage;
 
 
@@ -27,12 +28,19 @@ public class Main extends Application {
 
         Scene scene = new Scene(root);
 
+        stage.setOnCloseRequest(windowEvent -> {
+            Alert closeAlert = new Alert(Alert.AlertType.CONFIRMATION);
+            closeAlert.setTitle("Save Backup");
+            closeAlert.setContentText("Do you want to save a backup of the current document before close the program?");
+            closeAlert.show();
+        });
+
         stage.setTitle("Macrosoft Word");
         //stage.sizeToScene();
-        //stage.setHeight(500);
-        //stage.setWidth(700);
-        stage.setMinHeight(300);
-        stage.setMinWidth(400);
+        stage.setHeight(500);
+        stage.setWidth(1000);
+        stage.setMinHeight(400);
+        stage.setMinWidth(800);
 
         stage.setScene(scene);
         stage.sizeToScene();

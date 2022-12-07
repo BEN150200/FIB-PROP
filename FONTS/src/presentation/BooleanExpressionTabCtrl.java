@@ -6,20 +6,10 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
-import javafx.stage.FileChooser;
-import javafx.stage.Stage;
-import src.domain.core.DocumentInfo;
-import src.domain.preprocessing.Tokenizer;
-import src.enums.Format;
-import src.presentation.PresentationCtrl;
 
-import java.io.File;
 import java.io.IOException;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Arrays;
 
-public class booleanExpressionTabCtrl {
+public class BooleanExpressionTabCtrl {
     @FXML
     private TextArea textArea;
     @FXML

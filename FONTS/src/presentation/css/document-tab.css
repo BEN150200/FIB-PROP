@@ -16,6 +16,10 @@
     -fx-border-color: rgb(6, 81, 219);
 }
 
+.text-field .content {
+    -fx-background-radius: 0;
+}
+
 .tab-layout {
     -fx-background-color: -tabs-color;
 }

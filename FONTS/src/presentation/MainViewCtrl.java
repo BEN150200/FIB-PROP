@@ -46,7 +46,10 @@ public class MainViewCtrl {
     @FXML
     private Button weightButton;
 
-    private ResultTable resultTableCtrl;
+    @FXML
+    private Label errorLable;
+
+
 
     private int newDocCounter;
 
@@ -62,25 +65,28 @@ public class MainViewCtrl {
     private ResultTable similaritySearchCtrl;
 
     private VBox booleanSearchView;
-    private ResultTable booleanSearchCtrl;
+    private BooleanExpressionTabCtrl booleanSearchCtrl;
 
     private VBox weightSearchView;
     private WeightedSearch weightSearchCtrl;
+
+    private Double dividerPosition;
 
 
     //String currentTitle;
     //String currentAuthor;
 
-    public void initialize() throws IOException {
+    public void initialize() throws Exception {
         // load result tab:
         initializeSearchPanels();
         setListeners();
         searchVisible = false;
+        dividerPosition = 250.0;
 
         //table.setVisible(false);
         //table.setManaged(false);
 
-
+        restoreBackup();
         saveButton.setAccelerator(new KeyCodeCombination(KeyCode.S, KeyCombination.CONTROL_DOWN));
         newDocCounter = 0;
     }
@@ -89,6 +95,7 @@ public class MainViewCtrl {
         FXMLLoader loader1 = new FXMLLoader(getClass().getResource("/src/presentation/fxml/resultTable.fxml"));
         allDocumentsView = loader1.load();
         allDocumentsCtrl = loader1.getController();
+        allDocumentsCtrl.setForAllDocs();
         SplitPane.setResizableWithParent(allDocumentsView, false);
 
         FXMLLoader loader2 = new FXMLLoader(getClass().getResource("/src/presentation/fxml/search.fxml"));
@@ -99,9 +106,10 @@ public class MainViewCtrl {
         FXMLLoader loader3 = new FXMLLoader(getClass().getResource("/src/presentation/fxml/resultTable.fxml"));
         similaritySearchView = loader3.load();
         similaritySearchCtrl = loader3.getController();
+        similaritySearchCtrl.setForSimilarity();
         SplitPane.setResizableWithParent(similaritySearchView, false);
 
-        FXMLLoader loader4 = new FXMLLoader(getClass().getResource("/src/presentation/fxml/resultTable.fxml"));
+        FXMLLoader loader4 = new FXMLLoader(getClass().getResource("/src/presentation/fxml/booleanExpressionTab.fxml"));
         booleanSearchView = loader4.load();
         booleanSearchCtrl = loader4.getController();
         SplitPane.setResizableWithParent(booleanSearchView, false);
@@ -140,12 +148,15 @@ public class MainViewCtrl {
     public void contractSearch(VBox newView) {
         //splitPane.setDividerPosition(1,0);
         if (searchVisible) {
+            dividerPosition = splitPane.getDividers().get(0).getPosition();
             VBox current = (VBox) splitPane.getItems().get(0);
             if (current != newView) {
                 splitPane.getItems().remove(0);
+                //newView.setMinWidth(220.0);
                 splitPane.getItems().add(0, newView);
-                splitPane.setDividerPosition(0, 0.3d);
-                newView.setMinWidth(220.0);
+                //splitPane.setDividerPosition(0, 0.3d);
+                splitPane.getDividers().get(0).setPosition(dividerPosition);
+
             }
             else {
                 splitPane.getItems().remove(0);
@@ -153,9 +164,11 @@ public class MainViewCtrl {
             }
         }
         else {
-            newView.setMinWidth(220.0);
-            splitPane.setDividerPosition(0, 0.3d);
+            //splitPane.setDividerPosition(0, 0.3d);
+            //newView.setMinWidth(220.0);
             splitPane.getItems().add(0, newView);
+            splitPane.getDividers().get(0).setPosition(dividerPosition);
+
             searchVisible = true;
             /*
             VBox table = (VBox) splitPane.getItems().get(1);
@@ -191,12 +204,20 @@ public class MainViewCtrl {
     }
 
     public void openDocOnTab(DocumentInfo documentInfo) throws IOException {
+        boolean noTabs = tabPane.getTabs().isEmpty();
         Tab tab = new Tab(documentInfo.getFileName());
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/src/presentation/fxml/documentTab.fxml"));
         tab.setContent(loader.load());
+        DocumentTabCtrl documentTabCtrl = loader.getController();
+        documentTabCtrl.setTitle(documentInfo.getTitle());
+        documentTabCtrl.setAuthor(documentInfo.getAuthor());
+        documentTabCtrl.setContent(documentInfo.getContent());
 
         tabPane.getTabs().add(tab);
         tabPane.getSelectionModel().select(tab);
+        if (noTabs && searchVisible) {
+            splitPane.getDividers().get(0).setPosition(dividerPosition);
+        }
     }
 
     /**
@@ -206,15 +227,20 @@ public class MainViewCtrl {
      * @throws IOException
      */
     private void newEmptyTab(String tabName, String fxmlFileName) throws IOException {
+        boolean noTabs = tabPane.getTabs().isEmpty();
         Tab tab = new Tab(tabName);
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/src/presentation/fxml/" + fxmlFileName));
         tab.setContent(loader.load());
         tabPane.getTabs().add(tab);
         tabPane.getSelectionModel().select(tab);
+        if (noTabs && searchVisible) {
+            splitPane.getDividers().get(0).setPosition(dividerPosition);
+        }
+
     }
 
     public void openFile(ActionEvent event) throws IOException {
-        importFile();
+        openDocOnTab(importFile());
     }
 
     /*
@@ -232,7 +258,6 @@ public class MainViewCtrl {
      */
     @FXML
     private void saveDocument() {
-
         Node currentTab = tabPane.getSelectionModel().getSelectedItem().getContent();
         TextField title = (TextField) currentTab.lookup("#title");
         TextField author = (TextField) currentTab.lookup("#author");
@@ -244,7 +269,7 @@ public class MainViewCtrl {
 
         if (!exists) saveAsDocument();
 
-        resultTableCtrl.updateTable(PresentationCtrl.getInstance().getAllDocuments());
+        allDocumentsCtrl.updateTable(PresentationCtrl.getInstance().getAllDocuments());
     }
 
     @FXML
@@ -264,11 +289,11 @@ public class MainViewCtrl {
         Format format = extractFormat(path);
 
         ArrayList<String> content = Tokenizer.splitSentences(textArea.getText());
-
-        DocumentInfo docToBeSaved = new DocumentInfo(null, title.getText(), author.getText(), LocalDateTime.now(), LocalDateTime.now(), content, path, format);
+        DocumentInfo docToBeSaved = new DocumentInfo(null, title.getText(), author.getText(), LocalDateTime.now(), LocalDateTime.now(), content, path, format, file.getName());
 
         PresentationCtrl.getInstance().saveAsDocument(docToBeSaved);
-        resultTableCtrl.updateTable(PresentationCtrl.getInstance().getAllDocuments());
+        tabPane.getSelectionModel().getSelectedItem().setText(file.getName());
+        allDocumentsCtrl.updateTable(PresentationCtrl.getInstance().getAllDocuments());
     }
 
 
@@ -306,14 +331,14 @@ public class MainViewCtrl {
 
         ArrayList<String> content = Tokenizer.splitSentences(textArea.getText());
 
-        DocumentInfo docToBeSaved = new DocumentInfo(null, title.getText(), author.getText(), LocalDateTime.now(), LocalDateTime.now(), content, path, format);
+        DocumentInfo docToBeSaved = new DocumentInfo(null, title.getText(), author.getText(), LocalDateTime.now(), LocalDateTime.now(), content, path, format, file.getName());
 
         PresentationCtrl.getInstance().export(docToBeSaved);
-        resultTableCtrl.updateTable(PresentationCtrl.getInstance().getAllDocuments());
+        allDocumentsCtrl.updateTable(PresentationCtrl.getInstance().getAllDocuments());
     }
 
     @FXML
-    private void importFile() {
+    private DocumentInfo importFile() throws IOException {
         FileChooser fileChooser = new FileChooser();
         FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("TEXT files", "*.txt", "*.xml", "*.prop");
         fileChooser.getExtensionFilters().add(extFilter);
@@ -322,8 +347,9 @@ public class MainViewCtrl {
         String path = file.getPath();
         Format format = extractFormat(path);
 
-        PresentationCtrl.getInstance().importDocument(path,format);
-        resultTableCtrl.updateTable(PresentationCtrl.getInstance().getAllDocuments());
+        DocumentInfo docInfo = PresentationCtrl.getInstance().importDocument(path,format);
+        allDocumentsCtrl.updateTable(PresentationCtrl.getInstance().getAllDocuments());
+        return docInfo;
     }
 
 
@@ -337,8 +363,12 @@ public class MainViewCtrl {
     }
 
     @FXML
-    private void restoreBackup() throws Exception {
-        PresentationCtrl.getInstance().restoreBackup();
+    private void restoreBackup() {
+        try {
+            PresentationCtrl.getInstance().restoreBackup();
+        } catch (Exception e) {
+            setError("ERROR: Backup not found");
+        }
     }
 
     @FXML
@@ -367,5 +397,9 @@ public class MainViewCtrl {
                 return Format.TXT;
             }
         }
+    }
+
+    public void setError(String error) {
+        errorLable.setText(error);
     }
 }

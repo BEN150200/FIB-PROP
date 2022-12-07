@@ -13,12 +13,13 @@ public class Document {
     private Author  author;
     private Title  title;
     private String filePath;
-    //private String fileName;
+    private String fileName;
     private LocalDateTime creationDate;
     private LocalDateTime modificationDate;
 
     private ArrayList<Sentence> sentences = new ArrayList<Sentence>();
-    
+
+
     //private enum Format {TXT, XML, PROP}
     private Format format;
 
@@ -37,6 +38,19 @@ public class Document {
         this.modificationDate = modificationDate;
         this.filePath = filePath;
         this.format = format;
+        title = t;
+        author = a;
+        setDocumentID(DocumentCtrl.getInstance().addDocument(this));
+        title.addDoc(docID);
+        author.addDoc(docID);
+    }
+
+    public Document(Title t, Author a, DocumentInfo doc) {
+        this.creationDate = doc.getCreationDate();
+        this.modificationDate = doc.getModificationDate();
+        this.filePath = doc.getPath();
+        this.format = doc.getFormat();
+        this.fileName = doc.getFileName();
         title = t;
         author = a;
         setDocumentID(DocumentCtrl.getInstance().addDocument(this));
@@ -70,11 +84,11 @@ public class Document {
         return title;
     }
 
-    
+
     public String getPath() {
         return filePath;
     }
-    
+
     public Format getFormat(){
         return format;
     }
@@ -96,7 +110,7 @@ public class Document {
         for(Sentence sentence: sentences){
             content.add(sentence.toString());
         }
-        return new DocumentInfo(docID, title.toString(), author.toString(), creationDate, modificationDate, content, filePath, format);
+        return new DocumentInfo(docID, title.toString(), author.toString(), creationDate, modificationDate, content, filePath, format, fileName);
     }
 
     public ArrayList<Sentence> getSentences() {
@@ -106,25 +120,23 @@ public class Document {
     /**
      * Setters
      */
-    
+
     public void setPath(String path) {
         filePath = path;
     }
-    
+
     public void setFormat(Format fileFormat){
         format = fileFormat;
     }
 
-    private boolean setDocumentID(Integer id) {
+    private void setDocumentID(Integer id) {
         if (docID == null) {
             docID = id;
-            return true;
         }
-        return false;
     }
 
     public void updateDocumentContent(ArrayList<Sentence> newContent) {
-        
+
         for (Sentence sentence : sentences) {
             if (!newContent.contains(sentence)) {
                 sentence.deleteDocument(docID);
@@ -172,5 +184,5 @@ public class Document {
         if (!tokens.isEmpty()) SearchCtrl.getInstance().addDocument(this.docID, tokens);
     }
 
-    
+
 }

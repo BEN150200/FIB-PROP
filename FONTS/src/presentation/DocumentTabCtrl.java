@@ -41,10 +41,13 @@ public class DocumentTabCtrl {
         this.author.setText(author);
     }
 
-    public void setContent(String content) {
-        this.textArea.setText(content);
+    public void setContent(ArrayList<String> content) {
+        for (String s : content) {
+            textArea.appendText(s);
+        }
     }
 
+    /*
     @FXML
     public void save() {
 
@@ -77,6 +80,7 @@ public class DocumentTabCtrl {
 
         PresentationCtrl.getInstance().saveAsDocument(docToBeSaved);
     }
+     */
 
     /**
      * Getters

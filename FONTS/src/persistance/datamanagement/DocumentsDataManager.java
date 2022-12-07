@@ -90,7 +90,7 @@ public class DocumentsDataManager {
                 Collections.addAll(content, sentences);
                 String path = element.getAttribute("filePath");
                 Format format = Format.valueOf(element.getAttribute("fileFormat")); 
-                DocumentInfo docInfoTemp = new DocumentInfo(0, title, author, creationDate, modificationDate, content, path, format);
+                DocumentInfo docInfoTemp = new DocumentInfo(0, title, author, creationDate, modificationDate, content, path, format, null);
                 docsInfos.add(docInfoTemp);
             }
         } catch(Exception e){}

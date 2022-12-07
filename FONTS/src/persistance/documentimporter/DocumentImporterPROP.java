@@ -13,8 +13,8 @@ public class DocumentImporterPROP implements DocumentImporter{
     public DocumentInfo importFromFile(String path) {
         DocumentInfo docInfo = null;
         try{
-            File myObj = new File(path);
-            Scanner scanner = new Scanner(myObj);
+            File file = new File(path);
+            Scanner scanner = new Scanner(file);
 
             scanner.nextLine();
             String title = scanner.nextLine();
@@ -28,7 +28,7 @@ public class DocumentImporterPROP implements DocumentImporter{
                 content.add(scanner.nextLine());
             }
             scanner.close();
-            docInfo = new DocumentInfo(0, title, author, null, null, content, path, Format.PROP);
+            docInfo = new DocumentInfo(0, title, author, null, null, content, path, Format.PROP, file.getName());
         } catch (FileNotFoundException e) {}
         return docInfo;
     }

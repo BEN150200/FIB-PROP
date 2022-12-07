@@ -6,9 +6,11 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
 import src.domain.core.DocumentInfo;
 
 import java.io.IOException;
@@ -50,17 +52,15 @@ public class SearchViewCtrl {
         VBox.setVgrow(table, Priority.ALWAYS);
         vbox.getChildren().add(2,table);
         VBox.setVgrow(vbox, Priority.ALWAYS);
+        Font f = new Font(14);
+        titleBox.getEditor().setFont(f);
+        authorBox.getEditor().setFont(f);
 
         //resultPane.getChildren().add(table);
         resultTableCtrl = loader.getController();
-
+        resultTableCtrl.setForTitleAuthorSearch();
         setListeners();
-
-
-
         update();
-
-
     }
 
     public void update() {
