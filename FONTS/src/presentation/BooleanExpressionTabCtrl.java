@@ -90,22 +90,40 @@ public class BooleanExpressionTabCtrl {
         }
     }
 
+
+    public void ModifyExpression(){
+        if(!PresentationCtrl.getInstance().existsBooleanExpression(name.getValue())){
+            System.out.println("no existeix");
+            return;
+        }
+        try{
+            PresentationCtrl.getInstance().addBooleanExpression (name.getValue(),  expression.getText());
+            initExpr();
+            System.out.println(expressions.size());
+            System.out.println("Expressio modificada");
+        }
+        catch (Exception e){
+            System.out.println(e);
+        }
+    }
     public void SaveExpression(){
 
         if(name.getValue().length()==0) {
             System.out.println("falta un nom");
             return;
         }
-        //falta mirar si ja existeix o no
+        if(PresentationCtrl.getInstance().existsBooleanExpression(name.getValue())){
+            System.out.println("ja existeix");
+            return;
+        }
         try{
             PresentationCtrl.getInstance().addBooleanExpression (name.getValue(),  expression.getText());
+            initExpr();
+            System.out.println("Expressio guardada");
         }
         catch (Exception e){
             System.out.println(e);
         }
-
-        initExpr();
-        System.out.println(expressions.size());
     }
 
     public void initExpr(){
@@ -119,8 +137,13 @@ public class BooleanExpressionTabCtrl {
     }
 
     public void deleteExpression(){
-        if(!PresentationCtrl.getInstance().deleteBooleanExpression(name.getValue()))  System.out.println("no existeixx");
-        initExpr();
+        if(!PresentationCtrl.getInstance().deleteBooleanExpression(name.getValue())) {
+            System.out.println("no existeixx");
+        }
+        else {
+            System.out.println("expressio eliminada");
+            initExpr();
+        }
     }
     public void getExpressionsNames(){
         //System.out.println("agafant expressionsss: " + expr.size());

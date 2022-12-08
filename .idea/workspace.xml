@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="d2991d3d-5c40-4108-ac62-9c44333baa2c" name="Changes" comment="pestanya expressions booleanes millorada">
+    <list default="true" id="d2991d3d-5c40-4108-ac62-9c44333baa2c" name="Changes" comment="pestanya expressions booleanes casi acabada">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/FONTS/src/presentation/BooleanExpressionTabCtrl.java" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/src/presentation/BooleanExpressionTabCtrl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FONTS/src/presentation/PresentationCtrl.java" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/src/presentation/PresentationCtrl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/FONTS/src/presentation/fxml/booleanExpressionTab.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/src/presentation/fxml/booleanExpressionTab.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -104,7 +103,14 @@
       <option name="project" value="LOCAL" />
       <updated>1670503911871</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="pestanya expressions booleanes casi acabada">
+      <created>1670521330107</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1670521330107</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -122,7 +128,8 @@
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="pestanya expressions booleanes creada" />
     <MESSAGE value="pestanya expressions booleanes millorada" />
-    <option name="LAST_COMMIT_MESSAGE" value="pestanya expressions booleanes millorada" />
+    <MESSAGE value="pestanya expressions booleanes casi acabada" />
+    <option name="LAST_COMMIT_MESSAGE" value="pestanya expressions booleanes casi acabada" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
