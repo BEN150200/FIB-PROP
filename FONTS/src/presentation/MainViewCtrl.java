@@ -1,5 +1,9 @@
 package src.presentation;
 
+import src.domain.core.DocumentInfo;
+import src.domain.preprocessing.Tokenizer;
+import src.enums.Format;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -11,9 +15,6 @@ import javafx.scene.input.KeyCombination;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import src.domain.core.DocumentInfo;
-import src.domain.preprocessing.Tokenizer;
-import src.enums.Format;
 
 import java.io.File;
 import java.io.IOException;
@@ -46,15 +47,12 @@ public class MainViewCtrl {
     @FXML
     private Button weightButton;
 
+    //bottom right lable that is used to show errors
     @FXML
     private Label errorLable;
 
 
-
-    private int newDocCounter;
-
-    private boolean searchVisible;
-
+    //all the search panels with his controllers
     private VBox allDocumentsView;
     private ResultTable allDocumentsCtrl;
 
@@ -70,27 +68,39 @@ public class MainViewCtrl {
     private VBox weightSearchView;
     private WeightedSearch weightSearchCtrl;
 
+
+    //stores the position of the divider for the search panels to make all open with the same width
     private Double dividerPosition;
+
+    //stores if the search panel is visible or not
+    private boolean searchVisible;
+
+    //counter of the new docs created, this value is only used in the name of the tab before the document is saved
+    private int newDocCounter;
+
+
 
 
     //String currentTitle;
     //String currentAuthor;
 
     public void initialize() throws Exception {
-        // load result tab:
+        //initialize the search menus and the listeners for the buttons
         initializeSearchPanels();
         setListeners();
-        searchVisible = false;
-        dividerPosition = 250.0;
+        searchVisible = false; //the program starts with the search panels not visible
+        dividerPosition = 250.0; //initial position of the search panels
 
-        //table.setVisible(false);
-        //table.setManaged(false);
+        restoreBackup(); //TODO: show a restore dialog if there is a backup
 
-        restoreBackup();
         saveButton.setAccelerator(new KeyCodeCombination(KeyCode.S, KeyCombination.CONTROL_DOWN));
-        newDocCounter = 0;
+        newDocCounter = 0; // counter initialized at 0
     }
 
+    /**
+     * Initialize all the search panels of the side menu and store the controllers
+     * @throws IOException
+     */
     private void initializeSearchPanels() throws IOException {
         FXMLLoader loader1 = new FXMLLoader(getClass().getResource("/src/presentation/fxml/resultTable.fxml"));
         allDocumentsView = loader1.load();
@@ -118,9 +128,11 @@ public class MainViewCtrl {
         weightSearchView = loader5.load();
         weightSearchCtrl = loader5.getController();
         SplitPane.setResizableWithParent(weightSearchView, false);
-
     }
 
+    /**
+     * Set the listeners for the buttons of the side menu
+     */
     private void setListeners() {
         allDocsButton.setOnAction(event -> {
             contractSearch(allDocumentsView);
@@ -143,45 +155,45 @@ public class MainViewCtrl {
         weightButton.setOnAction(event -> {
             contractSearch(weightSearchView);
         });
-
     }
+
+    /**
+     * Handler of the side menu buttons, it manages the search panel that is currently opened and the new to be open
+     * @param newView search that wants to be opened if it's not the current one
+     */
     public void contractSearch(VBox newView) {
-        //splitPane.setDividerPosition(1,0);
+        // if there are a search panel opened
         if (searchVisible) {
-            dividerPosition = splitPane.getDividers().get(0).getPosition();
+
+            dividerPosition = splitPane.getDividers().get(0).getPosition(); //save the position
             VBox current = (VBox) splitPane.getItems().get(0);
+
+            //if its diferent, change the panel
             if (current != newView) {
                 splitPane.getItems().remove(0);
-                //newView.setMinWidth(220.0);
                 splitPane.getItems().add(0, newView);
-                //splitPane.setDividerPosition(0, 0.3d);
-                splitPane.getDividers().get(0).setPosition(dividerPosition);
-
+                splitPane.getDividers().get(0).setPosition(dividerPosition); //to maintain the same position
             }
+
+            //if the current one is the same, close the search panel instead
             else {
                 splitPane.getItems().remove(0);
                 searchVisible = false;
             }
         }
-        else {
-            //splitPane.setDividerPosition(0, 0.3d);
-            //newView.setMinWidth(220.0);
-            splitPane.getItems().add(0, newView);
-            splitPane.getDividers().get(0).setPosition(dividerPosition);
 
+        // if there is no search panel visible, just opens the one requested
+        else {
+            splitPane.getItems().add(0, newView);
+            splitPane.getDividers().get(0).setPosition(dividerPosition); //to maintain the same position
             searchVisible = true;
-            /*
-            VBox table = (VBox) splitPane.getItems().get(1);
-            table.setDisable(false);
-            table.setVisible(true);
-            table.setMaxWidth(600);
-            table.managedProperty().bind(table.visibleProperty());
-            splitPane.setDividerPosition(1, 150);
-            searchVisible = true;
-             */
         }
     }
 
+    /**
+     * Opens a new Document Tab that is empty
+     * @throws IOException
+     */
     @FXML
     private void newDocTab() throws IOException {
         ++newDocCounter;
@@ -203,23 +215,6 @@ public class MainViewCtrl {
         newEmptyTab("Boolean Search", "booleanExpressionTab.fxml");
     }
 
-    public void openDocOnTab(DocumentInfo documentInfo) throws IOException {
-        boolean noTabs = tabPane.getTabs().isEmpty();
-        Tab tab = new Tab(documentInfo.getFileName());
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/src/presentation/fxml/documentTab.fxml"));
-        tab.setContent(loader.load());
-        DocumentTabCtrl documentTabCtrl = loader.getController();
-        documentTabCtrl.setTitle(documentInfo.getTitle());
-        documentTabCtrl.setAuthor(documentInfo.getAuthor());
-        documentTabCtrl.setContent(documentInfo.getContent());
-
-        tabPane.getTabs().add(tab);
-        tabPane.getSelectionModel().select(tab);
-        if (noTabs && searchVisible) {
-            splitPane.getDividers().get(0).setPosition(dividerPosition);
-        }
-    }
-
     /**
      *
      * @param tabName Name of the new Tab to be created
@@ -236,40 +231,60 @@ public class MainViewCtrl {
         if (noTabs && searchVisible) {
             splitPane.getDividers().get(0).setPosition(dividerPosition);
         }
-
     }
 
-    public void openFile(ActionEvent event) throws IOException {
+    /**
+     * Opens the content of the DocumentInfo in a new Tab
+     * @param documentInfo document to be opened
+     * @throws IOException
+     */
+    public void openDocOnTab(DocumentInfo documentInfo) throws IOException {
+        Tab tab = new Tab(documentInfo.getFileName());
+        //loads the content and gets the controller
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/src/presentation/fxml/documentTab.fxml"));
+        tab.setContent(loader.load());
+        DocumentTabCtrl documentTabCtrl = loader.getController();
+
+        //set the content
+        documentTabCtrl.setTitle(documentInfo.getTitle());
+        documentTabCtrl.setAuthor(documentInfo.getAuthor());
+        documentTabCtrl.setContent(documentInfo.getContent());
+
+        //adds the tab to the tabpane and selects it
+        tabPane.getTabs().add(tab);
+        tabPane.getSelectionModel().select(tab);
+    }
+
+    /**
+     * Imports a file and opens it in a new tab
+     * @throws IOException
+     */
+    public void openFile() throws IOException {
         openDocOnTab(importFile());
     }
 
-    /*
-    public void switchToSearch(ActionEvent event) throws IOException {
-        PresentationCtrl.getInstance().switchToSearch();
-    }
-
-    public void switchToBooleanExpression (ActionEvent event) throws IOException {
-        PresentationCtrl.getInstance().switchToBooleanExpression();
-    }
-     */
 
     /**
      * File Management Functions
      */
+
+    /**
+     * Default save option, if the document exists just save it, if not exists calls the Save As option
+     */
     @FXML
     private void saveDocument() {
+        //get the content of the current tab
         Node currentTab = tabPane.getSelectionModel().getSelectedItem().getContent();
         TextField title = (TextField) currentTab.lookup("#title");
         TextField author = (TextField) currentTab.lookup("#author");
         TextArea textArea = (TextArea) currentTab.lookup("#textArea");
-
         ArrayList<String> content = Tokenizer.splitSentences(textArea.getText());
 
+        //try to save it, if it exists
         boolean exists = PresentationCtrl.getInstance().saveDocument(title.getText(), author.getText(), content);
 
         if (!exists) saveAsDocument();
-
-        allDocumentsCtrl.updateTable(PresentationCtrl.getInstance().getAllDocuments());
+        else updateAllSearchViews();
     }
 
     @FXML
@@ -293,7 +308,7 @@ public class MainViewCtrl {
 
         PresentationCtrl.getInstance().saveAsDocument(docToBeSaved);
         tabPane.getSelectionModel().getSelectedItem().setText(file.getName());
-        allDocumentsCtrl.updateTable(PresentationCtrl.getInstance().getAllDocuments());
+        updateAllSearchViews();
     }
 
 
@@ -334,7 +349,7 @@ public class MainViewCtrl {
         DocumentInfo docToBeSaved = new DocumentInfo(null, title.getText(), author.getText(), LocalDateTime.now(), LocalDateTime.now(), content, path, format, file.getName());
 
         PresentationCtrl.getInstance().export(docToBeSaved);
-        allDocumentsCtrl.updateTable(PresentationCtrl.getInstance().getAllDocuments());
+        updateAllSearchViews();
     }
 
     @FXML
@@ -348,7 +363,7 @@ public class MainViewCtrl {
         Format format = extractFormat(path);
 
         DocumentInfo docInfo = PresentationCtrl.getInstance().importDocument(path,format);
-        allDocumentsCtrl.updateTable(PresentationCtrl.getInstance().getAllDocuments());
+        updateAllSearchViews();
         return docInfo;
     }
 
@@ -394,12 +409,19 @@ public class MainViewCtrl {
             }
 
             default :{
-                return Format.TXT;
+                return Format.PROP;
             }
         }
+    }
+
+    private void updateAllSearchViews() {
+        allDocumentsCtrl.updateTable(PresentationCtrl.getInstance().getAllDocuments());
+        titleAuthorSearchCtrl.update();
     }
 
     public void setError(String error) {
         errorLable.setText(error);
     }
+
+
 }

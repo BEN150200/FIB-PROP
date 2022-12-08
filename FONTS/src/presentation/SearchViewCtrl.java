@@ -23,12 +23,6 @@ public class SearchViewCtrl {
     @FXML
     private ComboBox<String> titleBox;
 
-    //@FXML
-    //private Button closeButton;
-
-    @FXML
-    private VBox resultPane;
-
     @FXML
     private VBox vbox;
 
@@ -102,7 +96,9 @@ public class SearchViewCtrl {
             public void changed(ObservableValue<? extends String> observable,
                                 String oldValue, String newValue) {
 
-                resultTableCtrl.updateTable(PresentationCtrl.getInstance().getDocuments(newValue, authorBox.getValue()));
+                ArrayList<DocumentInfo> docs = PresentationCtrl.getInstance().getDocuments(newValue, authorBox.getValue());
+                if (docs.isEmpty()) PresentationCtrl.getInstance().setError("There is no document with this title and author");
+                resultTableCtrl.updateTable(docs);
                 //titleBox.setItems(FXCollections.observableArrayList(PresentationCtrl.getInstance().getTitles(titleBox.getValue())));
             }
         });
@@ -110,7 +106,10 @@ public class SearchViewCtrl {
             @Override
             public void changed(ObservableValue<? extends String> observable,
                                 String oldValue, String newValue) {
-                resultTableCtrl.updateTable(PresentationCtrl.getInstance().getDocuments(titleBox.getValue(), newValue));
+
+                ArrayList<DocumentInfo> docs = PresentationCtrl.getInstance().getDocuments(titleBox.getValue(), newValue);
+                if (docs.isEmpty()) PresentationCtrl.getInstance().setError("There is no document with this title and author");
+                resultTableCtrl.updateTable(docs);
                 //authorBox.setItems(FXCollections.observableArrayList(PresentationCtrl.getInstance().getTitles(authorBox.getValue())));
             }
         });
@@ -121,20 +120,27 @@ public class SearchViewCtrl {
                 titleBox.setValue(titleBox.getEditor().getText());
                 titleBox.hide();
             }
-            else titleBox.show();
+            if(titleBox.getItems().isEmpty()) PresentationCtrl.getInstance().setError("There are no titles in the System");
+            titleBox.show();
         });
+
         authorBox.getEditor().focusedProperty().addListener((obs, wasFocused, isNowFocused) -> {
             if (! isNowFocused) {
                 authorBox.setValue(authorBox.getEditor().getText());
                 authorBox.hide();
             }
-            else authorBox.show();
+            if(authorBox.getItems().isEmpty()) PresentationCtrl.getInstance().setError("There are no authors in the System");
+            authorBox.show();
         });
 
         titleBox.getEditor().setOnMouseClicked(mouseEvent -> {
+            //titleBox.show();
+            if(titleBox.getItems().isEmpty()) PresentationCtrl.getInstance().setError("There are no titles in the System");
             titleBox.show();
         });
         authorBox.getEditor().setOnMouseClicked(mouseEvent -> {
+            //authorBox.show();
+            if(authorBox.getItems().isEmpty()) PresentationCtrl.getInstance().setError("There are no authors in the System");
             authorBox.show();
         });
     }

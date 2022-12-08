@@ -101,9 +101,19 @@ public class ResultTable implements Initializable{
         tableName.setVisible(false);
     }
 
+    public void setForWeightedSearch() {
+        tableSimilarity.setVisible(false);
+        tableModification.setVisible(false);
+        tableCreation.setVisible(false);
+    }
+
     public void updateTable(ArrayList<DocumentInfo> newDocsList) {
         ObservableList<DocumentInfo> obsDocs = FXCollections.observableArrayList(newDocsList);
         table.setItems(obsDocs);
+    }
+
+    public void clearTable() {
+        table.getItems().clear();
     }
 }
 

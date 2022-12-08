@@ -70,12 +70,9 @@ public class PresentationCtrl {
      */
 
 
-
-
     /**
      * Getters from the domain
      */
-
     public ArrayList<DocumentInfo> getAllDocuments() {
         return DomainCtrl.getInstance().getAllDocumentsInfo();
     }
@@ -83,12 +80,6 @@ public class PresentationCtrl {
     public ArrayList<DocumentInfo> getDocuments (String title, String author) {
         return DomainCtrl.getInstance().getDocsByTitleAndAuthor(title, author);
     }
-
-    /*
-    public DocumentInfo getOneDocument (String title, String author) {
-        return DomainCtrl.getInstance().getOneDocument(title, author);
-    }
-    */
 
     public ArrayList<String> getAllTitles() {
         return DomainCtrl.getInstance().getAllTitles(new String());
@@ -116,18 +107,32 @@ public class PresentationCtrl {
 
 
     /**
-     * Boolean Expressions functions
+     * Boolean Expressions Manage Functions
      */
-    public ArrayList<DocumentInfo> tempBooleanExpressionSearch(String boolExp)throws Exception{
-        return DomainCtrl.getInstance().tempBooleanExpressionSearch(boolExp);
-    }
-
     public void addBooleanExpression (String boolExpName, String boolExp) throws Exception{
         DomainCtrl.getInstance().addBooleanExpression(boolExpName,boolExp);
     }
 
+    /**
+     * Complex Searches Functions
+     */
+    public ArrayList<DocumentInfo> storedBooleanExpressionSearch(String boolExpName) {
+        return DomainCtrl.getInstance().storedBooleanExpressionSearch(boolExpName);
+    }
+    public ArrayList<DocumentInfo> tempBooleanExpressionSearch(String boolExp)throws Exception{
+        return DomainCtrl.getInstance().tempBooleanExpressionSearch(boolExp);
+    }
+
+    public ArrayList<DocumentInfo> similaritySearch(String title, String author, int k) {
+        return DomainCtrl.getInstance().similarDocumentsSearch(title, author, k);
+    }
+
     public HashMap<String,String> getAllBooleanExpresions() {
         return DomainCtrl.getInstance().getAllBooleanExpresions();
+    }
+    
+    public ArrayList<DocumentInfo> weightedSearch(String query) {
+        return DomainCtrl.getInstance().documentsByQuery(query);
     }
 
 
@@ -148,6 +153,10 @@ public class PresentationCtrl {
         DomainCtrl.getInstance().saveAsDocument(docToBeSaved);
     }
 
+    public void deleteDocument(String title, String author) {
+        DomainCtrl.getInstance().deleteDocument(title, author);
+    }
+
     public void export(DocumentInfo docToBeSaved) {
         DomainCtrl.getInstance().exportDocument(docToBeSaved);
     }
@@ -165,7 +174,6 @@ public class PresentationCtrl {
 
     public void restoreBackup() throws Exception {
         DomainCtrl.getInstance().loadData();
-
     }
 
     public void deleteBackup() {
