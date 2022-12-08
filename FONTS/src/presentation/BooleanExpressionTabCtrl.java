@@ -27,12 +27,11 @@ public class BooleanExpressionTabCtrl {
     private ComboBox<String> name;
 
     private ResultTable resultTableCtrl;
-    @FXML
-    private TextField author;
 
     @FXML
     private VBox resultPane;
 
+    private HashMap<String,String> expressions = new HashMap<>();
     @FXML
     private VBox vbox;
 
@@ -54,7 +53,7 @@ public class BooleanExpressionTabCtrl {
             name.show();
         });
 
-
+        initExpr();
 
         //update();
 
@@ -75,10 +74,6 @@ public class BooleanExpressionTabCtrl {
 
     public void setName(String name) {
         this.name.setValue(name);
-    }
-
-    public void setAuthor(String author) {
-        this.author.setText(author);
     }
 
     public void setContent(String content) {
@@ -108,15 +103,31 @@ public class BooleanExpressionTabCtrl {
         catch (Exception e){
             System.out.println(e);
         }
+
+        initExpr();
+        System.out.println(expressions.size());
     }
 
-    public void getExpressionsNames(){
+    public void initExpr(){
+        expressions = PresentationCtrl.getInstance().getAllBooleanExpresions();
+    }
 
-        HashMap<String,String> expr = PresentationCtrl.getInstance().getAllBooleanExpresions();
-        System.out.println("agafant expressionsss: " + expr.size());
+    public void putExpression(){
+        String expr = expressions.get(name.getValue());
+
+        if(expr!= null) setExpression(expr);
+    }
+
+    public void deleteExpression(){
+        if(!PresentationCtrl.getInstance().deleteBooleanExpression(name.getValue()))  System.out.println("no existeixx");
+        initExpr();
+    }
+    public void getExpressionsNames(){
+        //System.out.println("agafant expressionsss: " + expr.size());
         ArrayList<String> noms = new ArrayList<>();
-        for(Map.Entry<String, String> i : expr.entrySet() ){
-            //if(i.getKey() > name.getValue())noms.add(i.getKey());
+        for(Map.Entry<String, String> i : expressions.entrySet() ){
+            //if(i.getKey().compareTo(name.getValue()) >= 0 )noms.add(i.getKey());
+            //System.out.println("valor= " + name.getValue());
             noms.add(i.getKey());
         }
         ObservableList<String> nameList = FXCollections.observableArrayList(noms);
@@ -136,7 +147,4 @@ public class BooleanExpressionTabCtrl {
         return expression.getText();
     }
 
-    public String getAuthor() {
-        return author.getText();
-    }
 }

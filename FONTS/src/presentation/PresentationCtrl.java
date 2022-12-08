@@ -130,7 +130,15 @@ public class PresentationCtrl {
     public HashMap<String,String> getAllBooleanExpresions() {
         return DomainCtrl.getInstance().getAllBooleanExpresions();
     }
-    
+
+    public boolean existsBooleanExpression(String boolExpName){
+        return DomainCtrl.getInstance().existsBooleanExpression(boolExpName);
+    }
+
+    public boolean deleteBooleanExpression(String boolExpName) {
+        return DomainCtrl.getInstance().deleteBooleanExpression(boolExpName);
+    }
+
     public ArrayList<DocumentInfo> weightedSearch(String query) {
         return DomainCtrl.getInstance().documentsByQuery(query);
     }
