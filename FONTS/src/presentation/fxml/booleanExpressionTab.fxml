@@ -2,38 +2,57 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox fx:id="vbox" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="400.0" minWidth="200.0" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="src.presentation.BooleanExpressionTabCtrl">
+<VBox fx:id="vbox" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="220.0" prefWidth="250.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="src.presentation.BooleanExpressionTabCtrl">
    <VBox prefHeight="90.0" prefWidth="600.0">
       <children>
          <HBox fx:id="fieldBox" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="40.0" prefHeight="40.0" VBox.vgrow="NEVER">
-            <Label alignment="CENTER" contentDisplay="CENTER" text="Expression" textAlignment="CENTER">
+            <Label alignment="CENTER" contentDisplay="CENTER" maxWidth="60.0" minWidth="60.0" text="Expression" textAlignment="CENTER" HBox.hgrow="NEVER">
                <HBox.margin>
                   <Insets left="5.0" right="5.0" />
                </HBox.margin>
             </Label>
-            <TextField fx:id="expression" prefHeight="26.0" prefWidth="522.0" />
+            <TextField fx:id="expression" maxWidth="1.7976931348623157E308" prefWidth="150.0" HBox.hgrow="ALWAYS">
+               <HBox.margin>
+                  <Insets right="5.0" />
+               </HBox.margin></TextField>
             <VBox.margin>
                <Insets bottom="5.0" top="5.0" />
             </VBox.margin>
          </HBox>
-         <HBox prefHeight="38.0" prefWidth="600.0">
+         <HBox maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="34.0" prefHeight="34.0" prefWidth="250.0" VBox.vgrow="NEVER">
             <children>
-               <Label prefHeight="18.0" prefWidth="82.0" text="  Name" />
-               <TextField fx:id="name" prefHeight="42.0" prefWidth="555.0" />
+               <Label alignment="CENTER" contentDisplay="CENTER" maxWidth="60.0" minWidth="60.0" text="  Name" textAlignment="CENTER" HBox.hgrow="NEVER">
+                  <HBox.margin>
+                     <Insets left="5.0" right="5.0" />
+                  </HBox.margin></Label>
+               <ComboBox fx:id="name" editable="true" maxWidth="1.7976931348623157E308" onShowing="#getExpressionsNames" prefWidth="150.0" HBox.hgrow="ALWAYS">
+                  <HBox.margin>
+                     <Insets right="5.0" />
+                  </HBox.margin>
+               </ComboBox>
             </children>
+            <VBox.margin>
+               <Insets bottom="5.0" top="5.0" />
+            </VBox.margin>
          </HBox>
          <HBox prefHeight="100.0" prefWidth="200.0">
             <children>
-               <Button alignment="TOP_LEFT" mnemonicParsing="false" onAction="#SearchBooleanExpression" text="Search" />
-               <Button fx:id="saveExpression" mnemonicParsing="false" onAction="#SaveExpression" text="Save" />
+               <Button alignment="TOP_LEFT" mnemonicParsing="false" onAction="#SearchBooleanExpression" text="Search">
+                  <HBox.margin>
+                     <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                  </HBox.margin></Button>
+               <Button fx:id="saveExpression" mnemonicParsing="false" onAction="#SaveExpression" text="Save">
+                  <HBox.margin>
+                     <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                  </HBox.margin></Button>
             </children>
          </HBox>
       </children>
    </VBox>
-   <VBox prefHeight="200.0" prefWidth="100.0" />
 </VBox>

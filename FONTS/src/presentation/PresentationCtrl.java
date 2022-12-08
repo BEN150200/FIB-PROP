@@ -1,5 +1,6 @@
 package src.presentation;
 
+import src.domain.controllers.BooleanExpressionCtrl;
 import src.domain.controllers.DomainCtrl;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -9,6 +10,7 @@ import src.enums.Format;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class PresentationCtrl {
     private static PresentationCtrl instance;
@@ -124,6 +126,9 @@ public class PresentationCtrl {
         DomainCtrl.getInstance().addBooleanExpression(boolExpName,boolExp);
     }
 
+    public HashMap<String,String> getAllBooleanExpresions() {
+        return DomainCtrl.getInstance().getAllBooleanExpresions();
+    }
 
 
 

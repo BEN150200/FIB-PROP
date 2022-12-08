@@ -1,13 +1,21 @@
 package src.presentation;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TitledPane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
+import src.domain.expressions.BooleanExpression;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class BooleanExpressionTabCtrl {
     @FXML
@@ -16,7 +24,7 @@ public class BooleanExpressionTabCtrl {
     private TextField expression;
 
     @FXML
-    private TextField name;
+    private ComboBox<String> name;
 
     private ResultTable resultTableCtrl;
     @FXML
@@ -42,6 +50,10 @@ public class BooleanExpressionTabCtrl {
 
         //setListeners();
 
+        name.getEditor().setOnMouseClicked(mouseEvent -> {
+            name.show();
+        });
+
 
 
         //update();
@@ -62,7 +74,7 @@ public class BooleanExpressionTabCtrl {
     }
 
     public void setName(String name) {
-        this.name.setText(name);
+        this.name.setValue(name);
     }
 
     public void setAuthor(String author) {
@@ -73,41 +85,6 @@ public class BooleanExpressionTabCtrl {
         this.textArea.setText(content);
     }
 
-    @FXML
-    /*public void save() {
-
-        FileChooser fileChooser = new FileChooser();
-        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("TEXT files", "*.txt", "*.xml", "*.prop");
-        fileChooser.getExtensionFilters().add(extFilter);
-        //Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        Stage fileStage = new Stage();
-        File file = fileChooser.showSaveDialog(fileStage);
-        String path = file.getPath();
-        String name = file.getName();
-        Format format = null;
-        switch (path.substring(path.lastIndexOf(".") + 1)) {
-            case "txt" : {
-                format = Format.TXT;
-                break;
-            }
-            case "xml" :  {
-                format = Format.XML;
-                break;
-            }
-            default :{
-                format = Format.TXT;
-            }
-        }
-
-        System.out.println(path);
-        System.out.println(name);
-        ArrayList<String> content = new ArrayList(Arrays.asList(Tokenizer.splitSentences(textArea.getText())));
-        //content = Arrays.asList(Tokenizer.splitSentences(textArea.getText()));
-
-        DocumentInfo docToBeSaved = new DocumentInfo(null, title.getText(), author.getText(), LocalDateTime.now(), LocalDateTime.now(), content, path, format);
-
-        PresentationCtrl.getInstance().saveDocument(docToBeSaved);
-    }*/
 
     public void SearchBooleanExpression(){
         try {
@@ -120,13 +97,30 @@ public class BooleanExpressionTabCtrl {
 
     public void SaveExpression(){
 
-        if(name.getText().length()==0) System.out.println("falta un nom");
+        if(name.getValue().length()==0) {
+            System.out.println("falta un nom");
+            return;
+        }
+        //falta mirar si ja existeix o no
         try{
-            PresentationCtrl.getInstance().addBooleanExpression (name.getText(),  expression.getText());
+            PresentationCtrl.getInstance().addBooleanExpression (name.getValue(),  expression.getText());
         }
         catch (Exception e){
             System.out.println(e);
         }
+    }
+
+    public void getExpressionsNames(){
+
+        HashMap<String,String> expr = PresentationCtrl.getInstance().getAllBooleanExpresions();
+        System.out.println("agafant expressionsss: " + expr.size());
+        ArrayList<String> noms = new ArrayList<>();
+        for(Map.Entry<String, String> i : expr.entrySet() ){
+            //if(i.getKey() > name.getValue())noms.add(i.getKey());
+            noms.add(i.getKey());
+        }
+        ObservableList<String> nameList = FXCollections.observableArrayList(noms);
+        name.setItems(nameList);
     }
 
     /**
