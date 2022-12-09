@@ -25,7 +25,7 @@ import java.io.FileOutputStream;
 import java.util.Collections;
 
 public class DocumentsDataManager {
-    //private static final String DATAPATH = "\\Fonts\\data\\DocumentsData.xml";
+
     private static final String DATAPATH = "./data/DocumentsData.xml";
 
     public boolean saveData(ArrayList<DocumentInfo> docsInfo){
@@ -50,6 +50,7 @@ public class DocumentsDataManager {
                 documElement.setAttribute("modificationDate", documentInfo.getModificationDate().toString());
                 documElement.setAttribute("filePath", documentInfo.getPath());
                 documElement.setAttribute("fileFormat", documentInfo.getFormat().toString());
+                documElement.setAttribute("fileName", documentInfo.getFileName());
             }
             File docFile = new File(DATAPATH);
             docFile.createNewFile();
@@ -90,7 +91,8 @@ public class DocumentsDataManager {
                 Collections.addAll(content, sentences);
                 String path = element.getAttribute("filePath");
                 Format format = Format.valueOf(element.getAttribute("fileFormat")); 
-                DocumentInfo docInfoTemp = new DocumentInfo(0, title, author, creationDate, modificationDate, content, path, format, null);
+                String fileName = element.getAttribute("fileName");
+                DocumentInfo docInfoTemp = new DocumentInfo(0, title, author, creationDate, modificationDate, content, path, format, fileName);
                 docsInfos.add(docInfoTemp);
             }
         } catch(Exception e){}
