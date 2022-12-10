@@ -3,8 +3,13 @@
   <component name="ChangeListManager">
     <list default="true" id="d2991d3d-5c40-4108-ac62-9c44333baa2c" name="Changes" comment="pestanya expressions booleanes casi acabada">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FONTS/src/presentation/BooleanExpressionTabCtrl.java" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/src/presentation/BooleanExpressionTabCtrl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FONTS/src/presentation/fxml/booleanExpressionTab.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/src/presentation/fxml/booleanExpressionTab.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FONTS/src/persistance/documentimporter/DocumentImporterPROP.java" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/src/persistance/documentimporter/DocumentImporterPROP.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FONTS/src/persistance/documentimporter/DocumentImporterTXT.java" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/src/persistance/documentimporter/DocumentImporterTXT.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FONTS/src/persistance/documentimporter/DocumentImporterXML.java" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/src/persistance/documentimporter/DocumentImporterXML.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FONTS/src/presentation/MainViewCtrl.java" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/src/presentation/MainViewCtrl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FONTS/src/presentation/PresentationCtrl.java" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/src/presentation/PresentationCtrl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FONTS/src/presentation/SearchViewCtrl.java" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/src/presentation/TitleAuthorSearchCtrl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FONTS/src/presentation/fxml/search.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/src/presentation/fxml/titleAuthorPanel.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

@@ -8,7 +8,12 @@ import java.io.File;
 import javax.xml.parsers.DocumentBuilder;  
 import javax.xml.parsers.DocumentBuilderFactory;  
 import org.w3c.dom.Document;   
-import org.w3c.dom.NodeList;  
+import org.w3c.dom.NodeList;
+
+import java.nio.file.Files;
+import java.nio.file.attribute.FileTime;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
 
 import java.util.Collections;
@@ -93,8 +98,11 @@ public class DocumentImporterXML implements DocumentImporter{
             }  
             String[] sentences = text.split("\\r?\\n");
             Collections.addAll(content, sentences);
-            docInfo = new DocumentInfo(0, title, author, null, null, content, path, Format.XML, file.getName());
-        } catch (Exception e) {}
+            FileTime fileCreation = (FileTime) Files.getAttribute(file.toPath(), "creationTime");
+            FileTime fileModification = (FileTime) Files.getAttribute(file.toPath(), "lastModifiedTime");
+
+            docInfo = new DocumentInfo(0, title, author, LocalDateTime.ofInstant(fileCreation.toInstant(), ZoneId.systemDefault()), LocalDateTime.ofInstant(fileModification.toInstant(), ZoneId.systemDefault()), content, path, Format.XML, file.getName());
+        } catch (Exception ignored) {}
         return docInfo;
     }
 }

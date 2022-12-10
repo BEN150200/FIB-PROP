@@ -57,7 +57,7 @@ public class PresentationCtrl {
     }
 
     public void switchToSearch() throws IOException {
-        switchScene("/src/presentation/fxml/search.fxml");
+        switchScene("/src/presentation/fxml/titleAuthorPanel.fxml");
     }
 
     public void switchToBooleanExpression() throws IOException {

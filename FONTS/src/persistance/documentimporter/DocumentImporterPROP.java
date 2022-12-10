@@ -6,6 +6,11 @@ import src.enums.Format;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.attribute.FileTime;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.Scanner;
 import java.util.ArrayList;
 
@@ -28,8 +33,11 @@ public class DocumentImporterPROP implements DocumentImporter{
                 content.add(scanner.nextLine());
             }
             scanner.close();
-            docInfo = new DocumentInfo(0, title, author, null, null, content, path, Format.PROP, file.getName());
-        } catch (FileNotFoundException e) {}
+            FileTime fileCreation = (FileTime) Files.getAttribute(file.toPath(), "creationTime");
+            FileTime fileModification = (FileTime) Files.getAttribute(file.toPath(), "lastModifiedTime");
+
+            docInfo = new DocumentInfo(0, title, author, LocalDateTime.ofInstant(fileCreation.toInstant(), ZoneId.systemDefault()), LocalDateTime.ofInstant(fileModification.toInstant(), ZoneId.systemDefault()), content, path, Format.PROP, file.getName());
+        } catch (IOException ignored) {}
         return docInfo;
     }
 }

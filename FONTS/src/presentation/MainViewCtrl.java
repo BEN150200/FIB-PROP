@@ -4,7 +4,6 @@ import src.domain.core.DocumentInfo;
 import src.domain.preprocessing.Tokenizer;
 import src.enums.Format;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -57,7 +56,7 @@ public class MainViewCtrl {
     private ResultTable allDocumentsCtrl;
 
     private VBox titleAuthorSearchView;
-    private SearchViewCtrl titleAuthorSearchCtrl;
+    private TitleAuthorSearchCtrl titleAuthorSearchCtrl;
 
     private VBox similaritySearchView;
     private ResultTable similaritySearchCtrl;
@@ -108,7 +107,7 @@ public class MainViewCtrl {
         allDocumentsCtrl.setForAllDocs();
         SplitPane.setResizableWithParent(allDocumentsView, false);
 
-        FXMLLoader loader2 = new FXMLLoader(getClass().getResource("/src/presentation/fxml/search.fxml"));
+        FXMLLoader loader2 = new FXMLLoader(getClass().getResource("/src/presentation/fxml/titleAuthorPanel.fxml"));
         titleAuthorSearchView = loader2.load();
         titleAuthorSearchCtrl = loader2.getController();
         SplitPane.setResizableWithParent(titleAuthorSearchView, false);
@@ -202,7 +201,7 @@ public class MainViewCtrl {
 
     @FXML
     private void newSearchTab() throws IOException {
-        newEmptyTab("Search", "search.fxml");
+        newEmptyTab("Search", "titleAuthorPanel.fxml");
     }
 
     @FXML
