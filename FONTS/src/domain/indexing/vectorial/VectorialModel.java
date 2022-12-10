@@ -6,10 +6,14 @@ import src.helpers.Maps;
 import src.helpers.Maths;
 import src.helpers.Sets;
 
+import java.util.Optional;
+import java.util.function.Function;
+
 import io.vavr.Tuple;
 import io.vavr.Tuple2;
 import io.vavr.collection.HashMap;
 import io.vavr.collection.HashSet;
+import io.vavr.collection.List;
 import io.vavr.collection.Set;
 import io.vavr.control.Option;
 
@@ -18,11 +22,27 @@ public class VectorialModel<DocId> {
     Index<DocId> _index;
     HashMap<DocId, Long> _maxFrequencies; // docId -> maxFreq of any String in the document
     HashMap<DocId, HashMap<String, Double>> _tfidfVectors;   // docId -> String -> [position]
+    Function<String, Optional<String>> _tokenFilter;
 
-    private VectorialModel(Index<DocId> index, HashMap<DocId, Long> maxFrequencies, HashMap<DocId, HashMap<String, Double>> tfidfVectors) {
+    private VectorialModel(
+        Index<DocId> index, HashMap<DocId, Long> maxFrequencies,
+        HashMap<DocId, HashMap<String, Double>> tfidfVectors) 
+    {
         _index = index;
         _maxFrequencies = maxFrequencies;
         _tfidfVectors = tfidfVectors;
+        _tokenFilter = Optional::of;
+    }
+
+    private VectorialModel(
+        Index<DocId> index, HashMap<DocId, Long> maxFrequencies,
+        HashMap<DocId, HashMap<String, Double>> tfidfVectors,
+        Function<String, Optional<String>> tokenFilter) 
+    {
+        _index = index;
+        _maxFrequencies = maxFrequencies;
+        _tfidfVectors = tfidfVectors;
+        _tokenFilter = tokenFilter;
     }
 
     /**
@@ -38,7 +58,30 @@ public class VectorialModel<DocId> {
         );
     }
 
-    public static <DocId> VectorialModel<DocId> of(Index<DocId> index) {
+    /**
+     * 
+     * @param <DocId>
+     * @param tokenFilter a function to filter all inserted/queried/stored terms (i.e. tokens)
+     * @return an empty VectorialModel using tokenFilter
+     */
+    public static <DocId> VectorialModel<DocId> empty(Function<String, Optional<String>> tokenFilter)
+    {
+        return new VectorialModel<DocId>(
+            Index.empty(),
+            HashMap.empty(),
+            HashMap.empty(),
+            tokenFilter
+        );
+    }
+
+    /**
+     * 
+     * @param <DocId>
+     * @param index an index 
+     * @return
+     */
+    public static <DocId> VectorialModel<DocId> of(Index<DocId> index)
+    {
         var freqsTfidfs = index._directIndex.map(
             (docId, termsVector) -> {
                 long maxFreq = termsVector.mapValues(HashSet::size).values().max().getOrElse(0);
@@ -72,7 +115,9 @@ public class VectorialModel<DocId> {
      * @return a new VectorialModel with the document inserted. If it previously existed, it is replaced
      */
     public VectorialModel<DocId> insert(DocId docId, Iterable<String> content) {
-        var newIndex = _index.insert(docId, content);
+        var filteredContent = List.ofAll(content).map(_tokenFilter).filter(Optional::isPresent).map(Optional::get);
+        System.out.println(filteredContent);
+        var newIndex = _index.insert(docId, filteredContent);
         // terms changed = (new U old) - (new int old)
         var oldTerms = _index.terms(docId).getOrElse(HashSet::empty);
         var newTerms = newIndex.terms(docId).getOrElse(HashSet::empty);
@@ -98,7 +143,7 @@ public class VectorialModel<DocId> {
             )
         );
 
-        return new VectorialModel<DocId>(newIndex, newMaxFrequencies, newTfidfVectors);
+        return new VectorialModel<DocId>(newIndex, newMaxFrequencies, newTfidfVectors, _tokenFilter);
     }
     
     /**
@@ -106,7 +151,8 @@ public class VectorialModel<DocId> {
      * @param docId
      * @return a new VectorialModel with docId (and its term occurrences) removed (if it existed)
      */
-    public VectorialModel<DocId> remove(DocId docId) {
+    public VectorialModel<DocId> remove(DocId docId)
+    {
         var newIndex = _index.remove(docId);
         var newMaxFrequencies = _maxFrequencies.remove(docId);
 
@@ -124,7 +170,7 @@ public class VectorialModel<DocId> {
             )
         );
 
-        return new VectorialModel<DocId>(newIndex, newMaxFrequencies, newTfidfVectors);
+        return new VectorialModel<DocId>(newIndex, newMaxFrequencies, newTfidfVectors, _tokenFilter);
     }
 
     /**
@@ -132,7 +178,8 @@ public class VectorialModel<DocId> {
      * @param docId
      * @return mapping String -> tf-idf weight for all the Strings of the document docId
      */
-    public Option<HashMap<String, Double>> tfidfVector(DocId docId) {
+    public Option<HashMap<String, Double>> tfidfVector(DocId docId)
+    {
         return _tfidfVectors.get(docId);
     }
 
@@ -140,7 +187,8 @@ public class VectorialModel<DocId> {
      * @param docId
      * @return mapping doc_id -> cosine_similarity for all documents with similarity > 0 with docId
      */
-    public Option<HashMap<DocId, Double>> querySimilars(DocId docId) {
+    public Option<HashMap<DocId, Double>> querySimilars(DocId docId)
+    {
         return this.tfidfVector(docId).map(this::querySimilars);
     }
 
@@ -149,8 +197,11 @@ public class VectorialModel<DocId> {
      * @param termsWeights a (not necessarily normalized) terms+weights vector
      * @return mapping doc_id -> cosine_similarity for all documents with similarity > 0 with the given (term, tfidf weight) vector
      */
-    public HashMap<DocId, Double> querySimilars(HashMap<String, Double> termsWeights) {
-        return Maths.normalized(termsWeights)
+    public HashMap<DocId, Double> querySimilars(HashMap<String, Double> termsWeights)
+    {
+        var filteredTerms = termsWeights.mapKeys(_tokenFilter).filterKeys(Optional::isPresent).mapKeys(Optional::get);
+
+        return Maths.normalized(filteredTerms)
             .map(
                 (term, weight) -> Tuple.of(term, Maps.fromTraversable(
                     _index.documents(term),

@@ -3,6 +3,7 @@ package src.domain.indexing.core;
 import src.domain.expressions.ExpressionTreeNode;
 import src.domain.indexing.booleanmodel.BooleanModel;
 import src.domain.indexing.vectorial.VectorialModel;
+import src.domain.preprocessing.TokenFilter;
 
 import java.util.Map;
 
@@ -16,7 +17,7 @@ public class IndexingController<DocId, SentenceId> {
     
     // or exception plus add `updateDocument` method?
     public IndexingController() {
-        this.vectorialModel = VectorialModel.empty();
+        this.vectorialModel = VectorialModel.empty(TokenFilter::filter);
         this.booleanModel = BooleanModel.empty();
     }
 

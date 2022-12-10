@@ -12,7 +12,8 @@ public class Stopwords {
 
     private static Try<HashSet<String>> readFile(String filepath) {
         return  Try.of(() -> Files.readAllLines(Paths.get(filepath)))
-            .map(HashSet::ofAll);
+            .map(HashSet::ofAll)
+            .onFailure(System.out::println);
     }
 
     private static List<HashSet<String>> stopwords = List.of(
@@ -20,6 +21,7 @@ public class Stopwords {
         "stopwords-es.txt",
         "stopwords-en.txt"
     )
+    .map(filename -> "src/domain/preprocessing/" + filename)
     .map(Stopwords::readFile)
     .map(maybeSet -> maybeSet.getOrElse(HashSet::empty));
 

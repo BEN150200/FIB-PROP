@@ -1,4 +1,7 @@
 {
     "java.project.outputPath": "bin",
-    "java.project.sourcePaths": ["FONTS"]
+    "java.project.sourcePaths": ["FONTS"],
+    "java.test.config": {
+        "workingDirectory": "${workspaceFolder}\\FONTS",
+    },
 }
