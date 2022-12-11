@@ -246,6 +246,7 @@ public class MainViewCtrl {
      * @throws IOException
      */
     public void openDocOnTab(DocumentInfo documentInfo) throws IOException {
+        if (documentInfo == null) return;
         Tab tab = new Tab(documentInfo.getFileName());
         //loads the content and gets the controller
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/src/presentation/fxml/documentTab.fxml"));
@@ -374,7 +375,12 @@ public class MainViewCtrl {
         Format format = extractFormat(path);
 
         DocumentInfo docInfo = PresentationCtrl.getInstance().importDocument(path,format);
-        updateAllSearchViews();
+        if (docInfo == null) {
+            Alert docExists = new Alert(Alert.AlertType.ERROR);
+            docExists.setContentText("A document with the same title and author already exists in the system");
+            docExists.show();
+        }
+        else updateAllSearchViews();
         return docInfo;
     }
 

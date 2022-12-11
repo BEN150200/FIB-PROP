@@ -2,15 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d2991d3d-5c40-4108-ac62-9c44333baa2c" name="Changes" comment="pestanya expressions booleanes casi acabada">
-      <change afterPath="$PROJECT_DIR$/data/doc5.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/doc6.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/FONTS/src/domain/controllers/DomainCtrl.java" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/src/domain/controllers/DomainCtrl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FONTS/src/presentation/DocumentTabCtrl.java" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/src/presentation/DocumentTabCtrl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FONTS/src/presentation/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/src/presentation/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/FONTS/src/presentation/MainViewCtrl.java" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/src/presentation/MainViewCtrl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FONTS/src/presentation/PresentationCtrl.java" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/src/presentation/PresentationCtrl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/DocumentsData.xml" beforeDir="false" afterPath="$PROJECT_DIR$/data/DocumentsData.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

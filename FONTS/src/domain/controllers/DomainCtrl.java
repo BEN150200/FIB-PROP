@@ -440,21 +440,12 @@ public class DomainCtrl {
         }
     }
 
+
     public void loadData() throws  Exception{
         // Load documents, titles and authors
         ArrayList<DocumentInfo> docsData = persistanceCtrl.loadDocumentsData();
         DocumentCtrl documentCtrl = DocumentCtrl.getInstance();
-        for(DocumentInfo docInfo: docsData){
-            addDocument(docInfo);
-            /*
-            addDocument(docInfo.getTitle(), docInfo.getAuthor(), docInfo.getContent());
-            Document doc = documentCtrl.getDocument(docInfo.getTitle(), docInfo.getAuthor());
-            doc.setCreationDate(docInfo.getCreationDate());
-            doc.setModificationDate(docInfo.getModificationDate());
-            doc.setPath(docInfo.getPath());
-            doc.setFormat(docInfo.getFormat());
-             */
-        }
+        for(DocumentInfo docInfo: docsData) addDocument(docInfo);
         // Load saved boolean expressions
         ArrayList<String> expressionsNames = persistanceCtrl.loadExpressionsNames();
         ArrayList<String> expressions = persistanceCtrl.loadExpressions();
@@ -482,6 +473,7 @@ public class DomainCtrl {
         }
         persistanceCtrl.saveBooleanexpressionsData(expressionsNames, expressions);
     }
+
 
     // Exports data to file in given path, if the file does not exists, creates it.
     public boolean exportDocument(String titleName, String authorName, Format fileFormat, String path){
