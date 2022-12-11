@@ -23,6 +23,8 @@ public class DocumentTabCtrl {
 
     private boolean modified;
 
+    private boolean newdoc;
+
     public void initialize () {
         setListeners();
         modified = false;
@@ -57,20 +59,28 @@ public class DocumentTabCtrl {
      */
     public void setTitle(String title) {
         this.title.setText(title);
+        newdoc = false;
     }
 
     public void setAuthor(String author) {
         this.author.setText(author);
+        newdoc = false;
     }
 
     public void setContent(ArrayList<String> content) {
         for (String s : content) {
             textArea.appendText(s);
         }
+        newdoc = false;
     }
 
     public void setSaved() {
         modified = false;
+        newdoc = false;
+    }
+
+    public void setNew() {
+        newdoc = true;
     }
 
     /*
@@ -131,5 +141,9 @@ public class DocumentTabCtrl {
 
     public boolean modified() {
         return modified;
+    }
+
+    public boolean isNew() {
+        return newdoc;
     }
 }

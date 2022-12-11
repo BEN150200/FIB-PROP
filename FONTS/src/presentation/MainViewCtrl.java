@@ -236,7 +236,9 @@ public class MainViewCtrl {
             splitPane.getDividers().get(0).setPosition(dividerPosition);
         }
         if (fxmlFileName == "documentTab.fxml") {
-            tabControllers.put(tab, loader.getController());
+            DocumentTabCtrl docController = loader.getController();
+            tabControllers.put(tab, docController);
+            docController.setNew();
         }
     }
 
@@ -290,6 +292,17 @@ public class MainViewCtrl {
         DocumentTabCtrl currentTabCtrl = tabControllers.get(currentTab);
 
         ArrayList<String> content = Tokenizer.splitSentences(currentTabCtrl.getContent());
+
+        if (currentTabCtrl.isNew()) {
+            if (PresentationCtrl.getInstance().existsDocument(currentTabCtrl.getTitle(),currentTabCtrl.getAuthor())) {
+                Alert docExists = new Alert(Alert.AlertType.ERROR);
+                docExists.setContentText("The document is already in the system");
+                docExists.show();
+                return;
+            }
+        }
+
+        else PresentationCtrl.getInstance().saveDocument(currentTabCtrl.getTitle(), currentTabCtrl.getAuthor(), content);
 
         //try to save it, if it exists
         boolean exists = PresentationCtrl.getInstance().saveDocument(currentTabCtrl.getTitle(), currentTabCtrl.getAuthor(), content);

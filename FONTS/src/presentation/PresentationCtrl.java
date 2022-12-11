@@ -105,6 +105,13 @@ public class PresentationCtrl {
         return DomainCtrl.getInstance().getAllTitleAuthors(title);
     }
 
+    public boolean existsDocument(String title, String author) {
+        if (DomainCtrl.getInstance().getOneDocument(title, author) != null) {
+            return true;
+        }
+        return false;
+    }
+
 
     /**
      * Boolean Expressions Manage Functions
