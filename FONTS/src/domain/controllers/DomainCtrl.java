@@ -445,12 +445,15 @@ public class DomainCtrl {
         ArrayList<DocumentInfo> docsData = persistanceCtrl.loadDocumentsData();
         DocumentCtrl documentCtrl = DocumentCtrl.getInstance();
         for(DocumentInfo docInfo: docsData){
+            addDocument(docInfo);
+            /*
             addDocument(docInfo.getTitle(), docInfo.getAuthor(), docInfo.getContent());
             Document doc = documentCtrl.getDocument(docInfo.getTitle(), docInfo.getAuthor());
             doc.setCreationDate(docInfo.getCreationDate());
             doc.setModificationDate(docInfo.getModificationDate());
             doc.setPath(docInfo.getPath());
             doc.setFormat(docInfo.getFormat());
+             */
         }
         // Load saved boolean expressions
         ArrayList<String> expressionsNames = persistanceCtrl.loadExpressionsNames();

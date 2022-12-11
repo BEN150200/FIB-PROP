@@ -21,8 +21,30 @@ public class DocumentTabCtrl {
     @FXML
     private TextField author;
 
+    private boolean modified;
+
     public void initialize () {
-        
+        setListeners();
+        modified = false;
+    }
+
+    private void setListeners() {
+        title.textProperty().addListener((observableValue, oldValue, newValue) -> {
+            if (modified == false && oldValue != newValue) modified = true;
+        });
+
+        author.textProperty().addListener((observableValue, oldValue, newValue) -> {
+            if (modified == false && oldValue != newValue) modified = true;
+        });
+
+        textArea.textProperty().addListener((observableValue, oldValue, newValue) -> {
+            if (modified == false && oldValue != newValue) modified = true;
+        });
+    }
+
+    public void blockTitleAndAuthor() {
+        title.setEditable(false);
+        author.setEditable(false);
     }
 
     /**
@@ -45,6 +67,10 @@ public class DocumentTabCtrl {
         for (String s : content) {
             textArea.appendText(s);
         }
+    }
+
+    public void setSaved() {
+        modified = false;
     }
 
     /*
@@ -97,5 +123,13 @@ public class DocumentTabCtrl {
 
     public String getAuthor() {
         return author.getText();
+    }
+
+    public String getContent() {
+        return textArea.getText();
+    }
+
+    public boolean modified() {
+        return modified;
     }
 }

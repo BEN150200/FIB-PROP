@@ -2,14 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d2991d3d-5c40-4108-ac62-9c44333baa2c" name="Changes" comment="pestanya expressions booleanes casi acabada">
+      <change afterPath="$PROJECT_DIR$/data/doc5.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/doc6.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FONTS/src/persistance/documentimporter/DocumentImporterPROP.java" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/src/persistance/documentimporter/DocumentImporterPROP.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FONTS/src/persistance/documentimporter/DocumentImporterTXT.java" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/src/persistance/documentimporter/DocumentImporterTXT.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FONTS/src/persistance/documentimporter/DocumentImporterXML.java" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/src/persistance/documentimporter/DocumentImporterXML.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FONTS/src/domain/controllers/DomainCtrl.java" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/src/domain/controllers/DomainCtrl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FONTS/src/presentation/DocumentTabCtrl.java" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/src/presentation/DocumentTabCtrl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FONTS/src/presentation/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/src/presentation/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/FONTS/src/presentation/MainViewCtrl.java" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/src/presentation/MainViewCtrl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/FONTS/src/presentation/PresentationCtrl.java" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/src/presentation/PresentationCtrl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FONTS/src/presentation/SearchViewCtrl.java" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/src/presentation/TitleAuthorSearchCtrl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FONTS/src/presentation/fxml/search.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/src/presentation/fxml/titleAuthorPanel.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/DocumentsData.xml" beforeDir="false" afterPath="$PROJECT_DIR$/data/DocumentsData.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -73,13 +74,24 @@
     <configuration name="Main" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="src.presentation.Main" />
       <module name="subgrup-prop33.2" />
-      <option name="VM_PARAMETERS" value="--module-path &quot;.\lib\javafx-sdk-19\lib&quot; --add-modules javafx.controls,javafx.fxml --add-exports javafx.base/com.sun.javafx.event=ALL-UNNAMED" />
+      <option name="VM_PARAMETERS" value="--module-path ./lib/JavaFx --add-modules javafx.controls,javafx.fxml --add-exports javafx.base/com.sun.javafx.event=ALL-UNNAMED" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="src.presentation.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="JetRunConfigurationType">
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <option name="filePath" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>

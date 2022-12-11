@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <Documents>
-    <Document author="fff" content="jaaa" creationDate="2022-12-10T12:46:17.606710" fileFormat="TXT" fileName="fsss.txt" filePath="C:\Users\biele\OneDrive\Escritorio\fsss.txt" modificationDate="2022-12-10T12:46:17.695935" title="a"/>
-    <Document author="fsef" content="flñas" creationDate="2022-12-08T13:06:11.364533" fileFormat="TXT" fileName="fse.txt" filePath="C:\Users\biele\OneDrive\Escritorio\fse.txt" modificationDate="2022-12-08T13:06:11.537943" title="aa"/>
+    <Document author="AAAA" content="contingut del document 1 modificat." creationDate="2022-12-01T09:15:54.756091" fileFormat="TXT" fileName="doc1.txt" filePath="/home/biel/Documents/Q5/PROP/subgrup-prop33.2/data/doc1.txt" modificationDate="2022-12-01T09:15:54.756091" title="Doc1"/>
+    <Document author="aaa" content="contingut del document 2 modificat." creationDate="2022-12-01T09:15:54.756091" fileFormat="TXT" fileName="doc2.txt" filePath="/home/biel/Documents/Q5/PROP/subgrup-prop33.2/data/doc2.txt" modificationDate="2022-12-01T09:15:54.756091" title="Doc2"/>
+    <Document author="aaa" content="Doc 3 exportat i despres guardat." creationDate="2022-12-01T09:15:54.756091" fileFormat="TXT" fileName="doc3.txt" filePath="/home/biel/Documents/Q5/PROP/subgrup-prop33.2/data/doc3.txt" modificationDate="2022-12-01T09:15:54.756091" title="Doc3"/>
+    <Document author="aaafae" content="holamnf ne" creationDate="2022-12-01T09:15:54.756091" fileFormat="TXT" fileName="doc4.txt" filePath="/home/biel/Documents/Q5/PROP/subgrup-prop33.2/data/doc4.txt" modificationDate="2022-12-01T09:15:54.756091" title="Doc4"/>
+    <Document author="andreu" content="hola bon dia" creationDate="2022-12-11T18:09:36.558842" fileFormat="TXT" fileName="doc5.txt" filePath="/home/biel/Documents/Q5/PROP/subgrup-prop33.2/data/doc5.txt" modificationDate="2022-12-11T18:09:36.558842" title="pepe"/>
+    <Document author="josep" content="sssss" creationDate="2022-12-11T18:17:31.833666" fileFormat="TXT" fileName="doc6.txt" filePath="/home/biel/Documents/Q5/PROP/subgrup-prop33.2/data/doc6.txt" modificationDate="2022-12-11T18:17:31.833666" title="aa"/>
+    <Document author="flkse" content="lksel" creationDate="2022-12-11T18:23:23.555493" fileFormat="TXT" fileName="doc7.txt" filePath="/home/biel/Documents/Q5/PROP/subgrup-prop33.2/data/doc7.txt" modificationDate="2022-12-11T18:23:23.555493" title="pepe"/>
 </Documents>

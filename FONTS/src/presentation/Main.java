@@ -4,7 +4,8 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
+import javafx.scene.control.*;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 
@@ -28,11 +29,23 @@ public class Main extends Application {
 
         Scene scene = new Scene(root);
 
+
         stage.setOnCloseRequest(windowEvent -> {
-            Alert closeAlert = new Alert(Alert.AlertType.CONFIRMATION);
-            closeAlert.setTitle("Save Backup");
-            closeAlert.setContentText("Do you want to save a backup of the current document before close the program?");
-            closeAlert.show();
+            if (PresentationCtrl.getInstance().unsavedDocuments()) {
+                Alert saveAlert = new Alert(Alert.AlertType.CONFIRMATION, "Save all the files before exit?", ButtonType.YES, ButtonType.NO, ButtonType.CANCEL);
+                saveAlert.setTitle("Save Backup");
+                saveAlert.initModality(Modality.APPLICATION_MODAL);
+                saveAlert.initOwner(stage);
+                saveAlert.showAndWait();
+                if (saveAlert.getResult() == ButtonType.YES) {
+                    PresentationCtrl.getInstance().saveAllDocs();
+                }
+                else if (saveAlert.getResult() == ButtonType.CANCEL) {
+                    windowEvent.consume();
+                }
+            }
+            PresentationCtrl.getInstance().doBackup();
+
         });
 
         stage.setTitle("Macrosoft Word");

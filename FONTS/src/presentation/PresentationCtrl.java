@@ -195,5 +195,12 @@ public class PresentationCtrl {
     public void setError(String error) {
         mainViewCtrl.setError(error);
     }
+
+    public void saveAllDocs() {
+    }
+
+    public boolean unsavedDocuments() {
+        return mainViewCtrl.unsavedDocuments();
+    }
 }
 

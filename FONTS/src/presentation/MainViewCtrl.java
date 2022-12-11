@@ -19,6 +19,7 @@ import java.io.File;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class MainViewCtrl {
 
@@ -77,6 +78,8 @@ public class MainViewCtrl {
     //counter of the new docs created, this value is only used in the name of the tab before the document is saved
     private int newDocCounter;
 
+    HashMap<Tab, DocumentTabCtrl> tabControllers = new HashMap<>();
+
 
 
 
@@ -89,6 +92,7 @@ public class MainViewCtrl {
         setListeners();
         searchVisible = false; //the program starts with the search panels not visible
         dividerPosition = 250.0; //initial position of the search panels
+
 
         restoreBackup(); //TODO: show a restore dialog if there is a backup
 
@@ -221,6 +225,7 @@ public class MainViewCtrl {
      * @throws IOException
      */
     private void newEmptyTab(String tabName, String fxmlFileName) throws IOException {
+
         boolean noTabs = tabPane.getTabs().isEmpty();
         Tab tab = new Tab(tabName);
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/src/presentation/fxml/" + fxmlFileName));
@@ -229,6 +234,9 @@ public class MainViewCtrl {
         tabPane.getSelectionModel().select(tab);
         if (noTabs && searchVisible) {
             splitPane.getDividers().get(0).setPosition(dividerPosition);
+        }
+        if (fxmlFileName == "documentTab.fxml") {
+            tabControllers.put(tab, loader.getController());
         }
     }
 
@@ -248,10 +256,14 @@ public class MainViewCtrl {
         documentTabCtrl.setTitle(documentInfo.getTitle());
         documentTabCtrl.setAuthor(documentInfo.getAuthor());
         documentTabCtrl.setContent(documentInfo.getContent());
+        documentTabCtrl.blockTitleAndAuthor();
+        documentTabCtrl.setSaved();
 
         //adds the tab to the tabpane and selects it
         tabPane.getTabs().add(tab);
         tabPane.getSelectionModel().select(tab);
+        tabControllers.put(tab, documentTabCtrl);
+
     }
 
     /**
@@ -273,26 +285,26 @@ public class MainViewCtrl {
     @FXML
     private void saveDocument() {
         //get the content of the current tab
-        Node currentTab = tabPane.getSelectionModel().getSelectedItem().getContent();
-        TextField title = (TextField) currentTab.lookup("#title");
-        TextField author = (TextField) currentTab.lookup("#author");
-        TextArea textArea = (TextArea) currentTab.lookup("#textArea");
-        ArrayList<String> content = Tokenizer.splitSentences(textArea.getText());
+        Tab currentTab = tabPane.getSelectionModel().getSelectedItem();
+        DocumentTabCtrl currentTabCtrl = tabControllers.get(currentTab);
+
+        ArrayList<String> content = Tokenizer.splitSentences(currentTabCtrl.getContent());
 
         //try to save it, if it exists
-        boolean exists = PresentationCtrl.getInstance().saveDocument(title.getText(), author.getText(), content);
+        boolean exists = PresentationCtrl.getInstance().saveDocument(currentTabCtrl.getTitle(), currentTabCtrl.getAuthor(), content);
 
         if (!exists) saveAsDocument();
-        else updateAllSearchViews();
+        else  {
+            updateAllSearchViews();
+            currentTabCtrl.setSaved();
+        }
     }
 
     @FXML
     private void saveAsDocument() {
 
-        Node currentTab = tabPane.getSelectionModel().getSelectedItem().getContent();
-        TextField title = (TextField) currentTab.lookup("#title");
-        TextField author = (TextField) currentTab.lookup("#author");
-        TextArea textArea = (TextArea) currentTab.lookup("#textArea");
+        Tab currentTab = tabPane.getSelectionModel().getSelectedItem();
+        DocumentTabCtrl currentTabCtrl = tabControllers.get(currentTab);
 
         FileChooser fileChooser = new FileChooser();
         FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("TEXT files", "*.txt", "*.xml", "*.prop");
@@ -302,12 +314,14 @@ public class MainViewCtrl {
         String path = file.getPath();
         Format format = extractFormat(path);
 
-        ArrayList<String> content = Tokenizer.splitSentences(textArea.getText());
-        DocumentInfo docToBeSaved = new DocumentInfo(null, title.getText(), author.getText(), LocalDateTime.now(), LocalDateTime.now(), content, path, format, file.getName());
+        ArrayList<String> content = Tokenizer.splitSentences(currentTabCtrl.getContent());
+        DocumentInfo docToBeSaved = new DocumentInfo(null, currentTabCtrl.getTitle(), currentTabCtrl.getAuthor(), LocalDateTime.now(), LocalDateTime.now(), content, path, format, file.getName());
 
         PresentationCtrl.getInstance().saveAsDocument(docToBeSaved);
         tabPane.getSelectionModel().getSelectedItem().setText(file.getName());
         updateAllSearchViews();
+        currentTabCtrl.setSaved();
+        currentTabCtrl.blockTitleAndAuthor();
     }
 
 
@@ -330,10 +344,8 @@ public class MainViewCtrl {
     }
 
     private void export(Format format) {
-        Node currentTab = tabPane.getSelectionModel().getSelectedItem().getContent();
-        TextField title = (TextField) currentTab.lookup("#title");
-        TextField author = (TextField) currentTab.lookup("#author");
-        TextArea textArea = (TextArea) currentTab.lookup("#textArea");
+        Tab currentTab = tabPane.getSelectionModel().getSelectedItem();
+        DocumentTabCtrl currentTabCtrl = tabControllers.get(currentTab);
 
         FileChooser fileChooser = new FileChooser();
         FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("TEXT files", "*.txt", "*.xml", "*.prop");
@@ -343,9 +355,9 @@ public class MainViewCtrl {
         String path = file.getPath();
         String name = file.getName();
 
-        ArrayList<String> content = Tokenizer.splitSentences(textArea.getText());
+        ArrayList<String> content = Tokenizer.splitSentences(currentTabCtrl.getContent());
 
-        DocumentInfo docToBeSaved = new DocumentInfo(null, title.getText(), author.getText(), LocalDateTime.now(), LocalDateTime.now(), content, path, format, file.getName());
+        DocumentInfo docToBeSaved = new DocumentInfo(null, currentTabCtrl.getTitle(), currentTabCtrl.getAuthor(), LocalDateTime.now(), LocalDateTime.now(), content, path, format, file.getName());
 
         PresentationCtrl.getInstance().export(docToBeSaved);
         updateAllSearchViews();
@@ -423,4 +435,12 @@ public class MainViewCtrl {
     }
 
 
+    public boolean unsavedDocuments() {
+        for (Tab docTab : tabPane.getTabs()) {
+            if (tabControllers.get(docTab).modified()) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
