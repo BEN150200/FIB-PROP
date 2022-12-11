@@ -323,8 +323,8 @@ public class DomainCtrl {
         return info;
     }
 
-    public ArrayList<DocumentInfo> documentsByQuery(String query){
-        return SearchCtrl.getInstance().documentsByQuery(query);
+    public ArrayList<DocumentInfo> documentsByQuery(String query, Integer numResults){
+        return SearchCtrl.getInstance().documentsByQuery(query, numResults);
 
     }
 

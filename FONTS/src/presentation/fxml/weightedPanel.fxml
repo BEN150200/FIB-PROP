@@ -2,6 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Spinner?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
@@ -12,7 +13,11 @@
          <children>
             <HBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="50.0" prefWidth="249.0" VBox.vgrow="ALWAYS">
                <children>
-                  <TextField id="input" fx:id="input" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="20.0" promptText="example^2 weighted query^0.1" HBox.hgrow="ALWAYS" />
+                  <TextField id="input" fx:id="input" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="20.0" promptText="example^2 weighted query^0.1" HBox.hgrow="ALWAYS">
+                     <HBox.margin>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </HBox.margin></TextField>
+                  <Spinner fx:id="numSpinner" editable="true" maxWidth="78.0" minWidth="78.0" prefHeight="26.0" prefWidth="78.0" HBox.hgrow="NEVER" />
                   <Button fx:id="searchButton" mnemonicParsing="false" onAction="#search" text="Search">
                      <HBox.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
