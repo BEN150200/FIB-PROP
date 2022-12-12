@@ -18,7 +18,7 @@ public class DocumentInfo {
 
     private String fileName;
 
-    private Double semblance;
+    private Double similarity;
 
     /*private void print(String s) {
         System.out.println(s);
@@ -91,12 +91,15 @@ public class DocumentInfo {
         return fileName;
     }
 
-    public Double getSemblance() {
-        return semblance;
+    public Double getSimilarity() {
+        return similarity;
     }
 
-    public void setSemblance(Double s) {
-        semblance = s;
+    public void setSimilarity(Double s) {
+
+        if (s == 0.0) similarity = 100.0;
+        else similarity = s*100;
+
     }
 
 }

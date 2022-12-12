@@ -46,7 +46,7 @@ public class ResultTable implements Initializable{
         tableCreation.setCellValueFactory(new PropertyValueFactory<DocumentInfo, LocalDateTime>("creationDate"));
         tableModification.setCellValueFactory(new PropertyValueFactory<DocumentInfo, LocalDateTime>("modificationDate"));
         tableName.setCellValueFactory(new PropertyValueFactory<DocumentInfo, String>("fileName"));
-        tableSimilarity.setCellValueFactory(new PropertyValueFactory<DocumentInfo, Double>("semblance"));
+        tableSimilarity.setCellValueFactory(new PropertyValueFactory<DocumentInfo, Double>("similarity"));
 
         table.widthProperty().addListener(new ChangeListener<Number>()
         {

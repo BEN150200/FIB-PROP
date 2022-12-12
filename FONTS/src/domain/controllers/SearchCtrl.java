@@ -65,7 +65,7 @@ public class SearchCtrl {
                 ArrayList<DocumentInfo> docsInfo = new ArrayList<>(); 
                 sortedMap.forEach((id, value) -> {
                     DocumentInfo docInf = DocumentCtrl.getInstance().getDocument(id).getInfo();
-                    docInf.setSemblance(value);
+                    docInf.setSimilarity(value);
                     docsInfo.add(docInf);
                 });
 

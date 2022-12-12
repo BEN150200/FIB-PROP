@@ -3,14 +3,7 @@ package src.presentation;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.stage.FileChooser;
-import javafx.stage.Stage;
-import src.domain.core.DocumentInfo;
-import src.domain.preprocessing.Tokenizer;
-import src.enums.Format;
 
-import java.io.File;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class DocumentTabCtrl {

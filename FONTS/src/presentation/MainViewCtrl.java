@@ -60,7 +60,7 @@ public class MainViewCtrl {
     private TitleAuthorSearchCtrl titleAuthorSearchCtrl;
 
     private VBox similaritySearchView;
-    private ResultTable similaritySearchCtrl;
+    private SimilaritySearchCtrl similaritySearchCtrl;
 
     private VBox booleanSearchView;
     private BooleanExpressionTabCtrl booleanSearchCtrl;
@@ -116,10 +116,9 @@ public class MainViewCtrl {
         titleAuthorSearchCtrl = loader2.getController();
         SplitPane.setResizableWithParent(titleAuthorSearchView, false);
 
-        FXMLLoader loader3 = new FXMLLoader(getClass().getResource("/src/presentation/fxml/resultTable.fxml"));
+        FXMLLoader loader3 = new FXMLLoader(getClass().getResource("/src/presentation/fxml/similarityPanel.fxml"));
         similaritySearchView = loader3.load();
         similaritySearchCtrl = loader3.getController();
-        similaritySearchCtrl.setForSimilarity();
         SplitPane.setResizableWithParent(similaritySearchView, false);
 
         FXMLLoader loader4 = new FXMLLoader(getClass().getResource("/src/presentation/fxml/booleanExpressionTab.fxml"));
