@@ -19,8 +19,12 @@
     -inactive-tab-color: #323232;
     -active-tab-color: -tabs-color;
 
-    /* left-panel */
+    /* results table */
+    -cell-color: #404040;
+    -alt-cell-color: #444444;
 
-    /* colors */
+
+
+    /* text fields */
     -focus-blue: rgb(6, 81, 219);
 }
