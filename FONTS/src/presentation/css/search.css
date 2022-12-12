@@ -8,22 +8,37 @@
     -fx-text-fill: -font-color;
 }
 
-.combo-box .text-input {
+.text-input, .text-field {
     -fx-text-fill: -font-color;
     -fx-background-color: -text-field-color;
+    -fx-prompt-text-fill: -disabled-font-color;
+    -fx-control-inner-background: -text-field-color;
     -fx-border-radius: 4px;
 }
 
-.combo-box:focused {
-    -fx-border-color: rgb(6, 81, 219);
+.spinner:focused {
+  -fx-background-color: transparent;
 }
 
-.combo-box .arrow-button { 
+.text-field:focused,
+.text-input:focused {
+    -fx-border-color: -focus-blue;
+}
+
+.arrow-button, .increment-arrow-button, .decrement-arrow-button, .button {
+    -fx-text-fill: -font-color; 
     -fx-background-color: -tabs-color;
-    -fx-border-color: -tabs-color; 
+    -fx-border-color: -tabs-color;
+    -fx-border-radius: 4px;
+    -fx-cursor: hand;
 }
 
-.combo-box .arrow {
+.arrow-button:hover,
+.button:hover {
+    -fx-opacity: 0.7;
+}
+
+.arrow, .increment-arrow, .decrement-arrow {
     -fx-background-color: -lighter-field-color;
 }
 

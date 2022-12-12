@@ -20,4 +20,7 @@
     -active-tab-color: -tabs-color;
 
     /* left-panel */
+
+    /* colors */
+    -focus-blue: rgb(6, 81, 219);
 }
