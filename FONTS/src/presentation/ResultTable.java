@@ -88,21 +88,27 @@ public class ResultTable implements Initializable{
         tableModification.setVisible(false);
         tableCreation.setVisible(false);
     }
-
+    
     public void setForAllDocs() {
         tableSimilarity.setVisible(false);
-        tableModification.setVisible(false);
-        tableCreation.setVisible(false);
+        tableModification.setVisible(true);
+        tableCreation.setVisible(true);
     }
 
-    public void setForSimilarity() {
-        tableModification.setVisible(false);
-        tableCreation.setVisible(false);
-        tableName.setVisible(false);
-    }
-
-    public void setForWeightedSearch() {
+    public void setForBoolean() {
         tableSimilarity.setVisible(false);
+        tableModification.setVisible(false);
+        tableCreation.setVisible(false);
+    }
+    
+    public void setForSimilarity() {
+        tableSimilarity.setVisible(true);
+        tableModification.setVisible(false);
+        tableCreation.setVisible(false);
+    }
+    
+    public void setForWeightedSearch() {
+        tableSimilarity.setVisible(true);
         tableModification.setVisible(false);
         tableCreation.setVisible(false);
     }

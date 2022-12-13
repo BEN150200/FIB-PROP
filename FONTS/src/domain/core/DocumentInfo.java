@@ -50,6 +50,27 @@ public class DocumentInfo {
          */
     }
 
+    public DocumentInfo(
+            Integer docID, String titleName, String authorName,
+            LocalDateTime creationDate, LocalDateTime modificationDate,
+            ArrayList<String> content, String path, Format fileFormat, String fileName, double similarity)
+    {
+        this.docID = docID;
+        this.title = titleName;
+        this.author = authorName;
+        this.creationDate = creationDate;
+        this.modificationDate = modificationDate;
+        this.content = content;
+        this.path = path;
+        this.fileFormat = fileFormat;
+        this.fileName = fileName;
+        this.similarity = similarity;
+    }
+
+    public DocumentInfo withSimilarity(double similarity) {
+        return new DocumentInfo(docID, title, author, creationDate, modificationDate, content, path, fileFormat, fileName, similarity);
+    }
+
     public String toString(){
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
         return  title + "    " + author + "    " + dtf.format(creationDate) + "    " + dtf.format(modificationDate);

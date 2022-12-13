@@ -60,10 +60,9 @@ public class IndexingController<DocId, SentenceId> {
         return booleanModel.query(root);
     }
 
-    public Either<String, java.util.HashMap<DocId, Double>> weightedQuery(String query) {
+    public Either<String, HashMap<DocId, Double>> weightedQuery(String query) {
         return  Parsing
             .weightedQuery(query)
-            .map(vectorialModel::querySimilars)
-            .map(HashMap::toJavaMap);
+            .map(vectorialModel::querySimilars);
     }
 }

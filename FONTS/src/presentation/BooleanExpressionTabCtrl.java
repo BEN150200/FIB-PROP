@@ -56,7 +56,7 @@ public class BooleanExpressionTabCtrl {
         initExpr();
 
         //update();
-
+        resultTableCtrl.setForBoolean();
 
     }
 

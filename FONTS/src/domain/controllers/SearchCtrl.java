@@ -5,11 +5,14 @@ import src.domain.core.DocumentInfo;
 import src.domain.expressions.ExpressionTreeNode;
 import src.domain.indexing.core.IndexingController;
 
+import static src.helpers.Functional.value;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map.Entry;
+import java.util.stream.Collectors;
 
 import io.vavr.collection.HashSet;
 import io.vavr.control.Either;
@@ -108,18 +111,21 @@ public class SearchCtrl {
         return docsInfo;
     }
 
+    @SuppressWarnings("deprecation")
     public Either<String, ArrayList<DocumentInfo>> documentsByQuery(String query) {
         return indexingCtrl
             .weightedQuery(query)
             .map(
-                results -> {
-                    ArrayList<Document> docs = DocumentCtrl.getInstance().getDocuments(results.keySet());
-                    ArrayList<DocumentInfo> docsInfo = new ArrayList<DocumentInfo>();
-                    for(Document d: docs){
-                        docsInfo.add(d.getInfo());
-                    }
-                    return docsInfo;
-                }
+                results
+                ->
+                results.map(value
+                (
+                    (docId, similarity) -> DocumentCtrl.getInstance()
+                        .getDocument(docId)
+                        .getInfo().withSimilarity(similarity)
+                ))
+                .values()
+                .collect(Collectors.toCollection(ArrayList::new))
             );
     }
 
