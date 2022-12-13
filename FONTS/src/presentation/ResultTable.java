@@ -66,7 +66,7 @@ public class ResultTable implements Initializable{
         table.setRowFactory(tv -> {
             TableRow<DocumentInfo> row = new TableRow<>();
             row.setOnMouseClicked(event -> {
-                if (row.isEmpty()) {
+                if (!row.isEmpty()) {
                     DocumentInfo rowData = row.getItem();
                     try {
                         PresentationCtrl.getInstance().openDocument(rowData);
