@@ -19,7 +19,7 @@ public class WeightedSearch {
     private TextField input;
 
     @FXML
-    private VBox vbox;
+    private VBox layout;
 
     @FXML
     private Spinner<Integer> numSpinner;
@@ -34,8 +34,8 @@ public class WeightedSearch {
         currentNum = 5;
 
         VBox.setVgrow(table, Priority.ALWAYS);
-        vbox.getChildren().add(1,table);
-        VBox.setVgrow(vbox, Priority.ALWAYS);
+        layout.getChildren().add(1,table);
+        VBox.setVgrow(layout, Priority.ALWAYS);
         SpinnerValueFactory<Integer> spinnerFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 100);
         spinnerFactory.setValue(currentNum);
         numSpinner.setValueFactory(spinnerFactory);
@@ -48,21 +48,38 @@ public class WeightedSearch {
     }
 
     private void setListeners() {
-        input.setOnKeyPressed(keyEvent -> {
+        layout.setOnKeyPressed(keyEvent -> {
             if (keyEvent.getCode() == KeyCode.ENTER) {
-                search();
+                search(input.getText());
             }
         });
+
+        input.textProperty().addListener((_1, _2, query) -> search(query));
+    }
+
+    @FXML
+    private void search(String query) {
+        if (query.isEmpty()) resultTableCtrl.clearTable();
+        else {
+            PresentationCtrl.getInstance()
+                .weightedSearch(query)
+                .peek(
+                    error -> {
+                        resultTableCtrl.clearTable();
+                        PresentationCtrl.getInstance().setError(error);
+                    },
+                    result -> {
+                        if(result.isEmpty())
+                            PresentationCtrl.getInstance().setError("No document matches the search");
+                        
+                        resultTableCtrl.updateTable(result);
+                    }
+                );
+        }
     }
 
     @FXML
     private void search() {
-        if (input.getText().isEmpty()) resultTableCtrl.clearTable();
-        else {
-            ArrayList<DocumentInfo> docs = PresentationCtrl.getInstance().weightedSearch(input.getText(), numSpinner.getValue());
-            if (docs.isEmpty()) PresentationCtrl.getInstance().setError("No document match the search");
-            resultTableCtrl.updateTable(docs);
-        }
+        search(input.getText());
     }
-
 }

@@ -12,6 +12,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import io.vavr.control.Either;
+
 public class PresentationCtrl {
     private static PresentationCtrl instance;
 
@@ -146,8 +148,8 @@ public class PresentationCtrl {
         return DomainCtrl.getInstance().deleteBooleanExpression(boolExpName);
     }
 
-    public ArrayList<DocumentInfo> weightedSearch(String query, Integer numResults) {
-        return DomainCtrl.getInstance().documentsByQuery(query, numResults);
+    public Either<String, ArrayList<DocumentInfo>> weightedSearch(String query) {
+        return DomainCtrl.getInstance().documentsByQuery(query);
     }
 
 

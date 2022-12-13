@@ -108,16 +108,19 @@ public class SearchCtrl {
         return docsInfo;
     }
 
-    public ArrayList<DocumentInfo> documentsByQuery(String query, Integer numResults) {
-        Either<String, java.util.HashMap<Integer, Double>> resultsId = indexingCtrl.weightedQuery(query);
-        ArrayList<Document> docs = DocumentCtrl.getInstance().getDocuments(resultsId.get().keySet());
-        ArrayList<DocumentInfo> docsInfo = new ArrayList<DocumentInfo>();
-        for(Document d: docs){
-            docsInfo.add(d.getInfo());
-        }
-        if (numResults > docsInfo.size()) return docsInfo;
-        else return new ArrayList<>(docsInfo.subList(0, numResults));
-
+    public Either<String, ArrayList<DocumentInfo>> documentsByQuery(String query) {
+        return indexingCtrl
+            .weightedQuery(query)
+            .map(
+                results -> {
+                    ArrayList<Document> docs = DocumentCtrl.getInstance().getDocuments(results.keySet());
+                    ArrayList<DocumentInfo> docsInfo = new ArrayList<DocumentInfo>();
+                    for(Document d: docs){
+                        docsInfo.add(d.getInfo());
+                    }
+                    return docsInfo;
+                }
+            );
     }
 
 

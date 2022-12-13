@@ -71,7 +71,7 @@ public class Parsing {
 
     public static Either<String, HashMap<String, Double>> weightedQuery(String query) {
         if(query.isEmpty())
-            return Either.left("Unexpected empty query");
+            return Either.left("Empty query");
         
         var terms = Stream.of(
             query.strip().split(" ")

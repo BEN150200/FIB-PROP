@@ -14,6 +14,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import io.vavr.control.Either;
+
 public class DomainCtrl {
 
     /**
@@ -323,8 +325,8 @@ public class DomainCtrl {
         return info;
     }
 
-    public ArrayList<DocumentInfo> documentsByQuery(String query, Integer numResults){
-        return SearchCtrl.getInstance().documentsByQuery(query, numResults);
+    public Either<String, ArrayList<DocumentInfo>> documentsByQuery(String query){
+        return SearchCtrl.getInstance().documentsByQuery(query);
 
     }
 
