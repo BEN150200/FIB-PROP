@@ -116,7 +116,6 @@ public class VectorialModel<DocId> {
      */
     public VectorialModel<DocId> insert(DocId docId, Iterable<String> content) {
         var filteredContent = List.ofAll(content).map(_tokenFilter).filter(Optional::isPresent).map(Optional::get);
-        System.out.println(filteredContent);
         var newIndex = _index.insert(docId, filteredContent);
         // terms changed = (new U old) - (new int old)
         var oldTerms = _index.terms(docId).getOrElse(HashSet::empty);
