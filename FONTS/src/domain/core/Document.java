@@ -19,8 +19,6 @@ public class Document {
 
     private ArrayList<Sentence> sentences = new ArrayList<Sentence>();
 
-
-    //private enum Format {TXT, XML, PROP}
     private Format format;
 
     public Document(Title t, Author a) {

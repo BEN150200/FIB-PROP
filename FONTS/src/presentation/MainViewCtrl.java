@@ -20,6 +20,7 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class MainViewCtrl {
 
@@ -31,6 +32,9 @@ public class MainViewCtrl {
 
     @FXML
     private MenuItem saveButton;
+
+    @FXML
+    private MenuItem newDocButton;
 
     @FXML
     private Button allDocsButton;
@@ -90,6 +94,7 @@ public class MainViewCtrl {
         //initialize the search menus and the listeners for the buttons
         initializeSearchPanels();
         setListeners();
+        setShortcuts();
         searchVisible = false; //the program starts with the search panels not visible
         dividerPosition = 250.0; //initial position of the search panels
 
@@ -159,6 +164,10 @@ public class MainViewCtrl {
         });
     }
 
+    private void setShortcuts() {
+        saveButton.setAccelerator(new KeyCodeCombination(KeyCode.S, KeyCombination.CONTROL_DOWN));
+        newDocButton.setAccelerator(new KeyCodeCombination(KeyCode.N, KeyCombination.CONTROL_DOWN));
+    }
     /**
      * Handler of the side menu buttons, it manages the search panel that is currently opened and the new to be open
      * @param newView search that wants to be opened if it's not the current one
@@ -273,9 +282,13 @@ public class MainViewCtrl {
      * @throws IOException
      */
     public void openFile() throws IOException {
-        openDocOnTab(importFile());
+        FileChooser fileChooser = new FileChooser();
+        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("TEXT files", "*.txt", "*.xml", "*.prop");
+        fileChooser.getExtensionFilters().add(extFilter);
+        Stage fileStage = new Stage();
+        File file = fileChooser.showOpenDialog(fileStage);
+        openDocOnTab(importOneFile(file));
     }
-
 
     /**
      * File Management Functions
@@ -376,6 +389,7 @@ public class MainViewCtrl {
         updateAllSearchViews();
     }
 
+    /*
     @FXML
     private DocumentInfo importFile() throws IOException {
         FileChooser fileChooser = new FileChooser();
@@ -383,6 +397,26 @@ public class MainViewCtrl {
         fileChooser.getExtensionFilters().add(extFilter);
         Stage fileStage = new Stage();
         File file = fileChooser.showOpenDialog(fileStage);
+        return importFile(file);
+
+
+    }
+     */
+
+    @FXML
+    private void importFile() throws IOException {
+        FileChooser fileChooser = new FileChooser();
+        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("TEXT files", "*.txt", "*.xml", "*.prop");
+        fileChooser.getExtensionFilters().add(extFilter);
+        Stage fileStage = new Stage();
+        List<File> fileList = fileChooser.showOpenMultipleDialog(fileStage);
+        for (File file: fileList) {
+            importOneFile(file);
+        }
+    }
+
+    private DocumentInfo importOneFile(File file) throws IOException {
+
         String path = file.getPath();
         Format format = extractFormat(path);
 
@@ -395,6 +429,7 @@ public class MainViewCtrl {
         else updateAllSearchViews();
         return docInfo;
     }
+
 
 
     /**

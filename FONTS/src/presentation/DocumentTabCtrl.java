@@ -62,7 +62,8 @@ public class DocumentTabCtrl {
 
     public void setContent(ArrayList<String> content) {
         for (String s : content) {
-            textArea.appendText(s);
+            if (s.lastIndexOf("\n") == -1) textArea.appendText(s+"\n");
+            else textArea.appendText(s);
         }
         newdoc = false;
     }

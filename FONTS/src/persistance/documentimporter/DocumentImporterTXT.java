@@ -21,7 +21,9 @@ public class DocumentImporterTXT implements DocumentImporter{
             File file = new File(path);
             Scanner scanner = new Scanner(file);
             String author = scanner.nextLine();
+            while (author == "\n") author = scanner.nextLine();
             String title = scanner.nextLine();
+            while (title == "\n") title = scanner.nextLine();
             ArrayList<String> content = new ArrayList<String>();
             while(scanner.hasNextLine()){
                 content.add(scanner.nextLine() + "\n");
