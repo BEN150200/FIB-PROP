@@ -29,16 +29,8 @@ public class BooleanModel<SentenceId> {
         return new BooleanModel<SentenceId>(index);
     }
 
-    public CompletableFuture<BooleanModel<SentenceId>> asyncInsert(SentenceId sentenceId, Iterable<String> content) {
-        return CompletableFuture.supplyAsync(() -> insert(sentenceId, content));
-    }
-
     public BooleanModel<SentenceId> insert(SentenceId sentenceId, Iterable<String> content) {
         return BooleanModel.of(this.index.insert(sentenceId, content));
-    }
-
-    public CompletableFuture<BooleanModel<SentenceId>> asyncRemove(SentenceId sentenceId) {
-        return CompletableFuture.supplyAsync(() -> remove(sentenceId));
     }
 
     public BooleanModel<SentenceId> remove(SentenceId sentenceId) {

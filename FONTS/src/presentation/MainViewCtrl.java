@@ -17,6 +17,8 @@ import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.IOException;
+import java.time.Duration;
+import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -405,6 +407,7 @@ public class MainViewCtrl {
 
     @FXML
     private void importFile() throws IOException {
+        var start = Instant.now();
         FileChooser fileChooser = new FileChooser();
         FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("TEXT files", "*.txt", "*.xml", "*.prop");
         fileChooser.getExtensionFilters().add(extFilter);
@@ -413,6 +416,8 @@ public class MainViewCtrl {
         for (File file: fileList) {
             importOneFile(file);
         }
+        var end = Instant.now();
+        System.out.println("Loaded files in " + Duration.between(start, end).getSeconds() + " secs");
     }
 
     private DocumentInfo importOneFile(File file) throws IOException {

@@ -6,19 +6,20 @@ import src.domain.indexing.vectorial.VectorialModel;
 import src.domain.preprocessing.TokenFilter;
 
 import java.util.Map;
+import java.util.concurrent.CompletableFuture;
 
 import io.vavr.collection.HashMap;
 import io.vavr.collection.HashSet;
 import io.vavr.control.Either;
 
 public class IndexingController<DocId, SentenceId> {
-    private VectorialModel<DocId> vectorialModel;
-    private BooleanModel<SentenceId> booleanModel;
+    private CompletableFuture<VectorialModel<DocId>> vectorialModel;
+    private CompletableFuture<BooleanModel<SentenceId>> booleanModel;
     
     // or exception plus add `updateDocument` method?
     public IndexingController() {
-        this.vectorialModel = VectorialModel.empty(TokenFilter::filter);
-        this.booleanModel = BooleanModel.empty();
+        this.vectorialModel = CompletableFuture.completedFuture(VectorialModel.empty(TokenFilter::filter));
+        this.booleanModel = CompletableFuture.completedFuture(BooleanModel.empty());
     }
 
     public static <DocId, SentenceId> IndexingController<DocId, SentenceId> of(VectorialModel<DocId> vectorialModel, BooleanModel<SentenceId> booleanModel) {
@@ -26,60 +27,42 @@ public class IndexingController<DocId, SentenceId> {
     }
     
     private IndexingController(VectorialModel<DocId> vectorialModel, BooleanModel<SentenceId> booleanModel) {
-        this.vectorialModel = vectorialModel;
-        this.booleanModel = booleanModel;
+        this.vectorialModel = CompletableFuture.completedFuture(vectorialModel);
+        this.booleanModel = CompletableFuture.completedFuture(booleanModel);
     }
 
     public void addDocument(DocId docId, Iterable<String> content) {
-        this.vectorialModel.asyncInsert(docId, content).thenAccept(newModel -> { this.vectorialModel = newModel; });
-    }
-
-
-    public void addDocumentOld(DocId docId, Iterable<String> content) {
-        this.vectorialModel = this.vectorialModel.insert(docId, content);
-    }
-
-    public void addSentence(SentenceId sentenceId, Iterable<String> content) {
-        this.booleanModel.asyncInsert(sentenceId, content).thenAccept(newModel -> { this.booleanModel = newModel; });
+        this.vectorialModel = this.vectorialModel.thenApplyAsync(model -> model.insert(docId, content));
     }
     
-    public void addSentenceOld(SentenceId sentenceId, Iterable<String> content) {
-        this.booleanModel = this.booleanModel.insert(sentenceId, content);
+    public void addSentence(SentenceId sentenceId, Iterable<String> content) {
+        this.booleanModel = this.booleanModel.thenApplyAsync(model -> model.insert(sentenceId, content));
     }
     
     public void removeDocument(DocId docId) {
-        this.vectorialModel.asyncRemove(docId).thenAccept(newModel -> { this.vectorialModel = newModel; });
-    }
-
-    public void removeDocumentOld(DocId docId) {
-        this.vectorialModel = this.vectorialModel.remove(docId);
+        this.vectorialModel = this.vectorialModel.thenApplyAsync(model -> model.remove(docId));
     }
 
     public void removeSentence(SentenceId sentenceId) {
-        this.booleanModel.asyncRemove(sentenceId).thenAccept(newModel -> { this.booleanModel = newModel; });
-    }
-
-
-    public void removeSentenceOld(SentenceId sentenceId) {
-        this.booleanModel = this.booleanModel.remove(sentenceId);
+        this.booleanModel = this.booleanModel.thenApplyAsync(model -> model.remove(sentenceId));
     }
 
     public java.util.HashMap<DocId, Double> weightedQuery(Map<String, Double> termsWeights) {
-        return this.vectorialModel.querySimilars(HashMap.ofAll(termsWeights)).toJavaMap();
+        return this.vectorialModel.join().querySimilars(HashMap.ofAll(termsWeights)).toJavaMap();
     }
 
     @SuppressWarnings("deprecation")
     public Either<String, java.util.HashMap<DocId, Double>> querySimilarDocuments(DocId docId) {
-        return this.vectorialModel.querySimilars(docId).map(HashMap::toJavaMap).toEither("DocId " + docId + " does not exist");
+        return this.vectorialModel.join().querySimilars(docId).map(HashMap::toJavaMap).toEither("DocId " + docId + " does not exist");
     }
 
     public HashSet<SentenceId> booleanQuery(ExpressionTreeNode root) {
-        return booleanModel.query(root);
+        return booleanModel.join().query(root);
     }
 
     public Either<String, HashMap<DocId, Double>> weightedQuery(String query) {
         return  Parsing
             .weightedQuery(query)
-            .map(vectorialModel::querySimilars);
+            .map(termsWeights -> vectorialModel.join().querySimilars(termsWeights));
     }
 }
