@@ -7,6 +7,7 @@ import src.helpers.Maths;
 import src.helpers.Sets;
 
 import java.util.Optional;
+import java.util.concurrent.CompletableFuture;
 import java.util.function.Function;
 
 import io.vavr.Tuple;
@@ -108,6 +109,10 @@ public class VectorialModel<DocId> {
                 );
     }
 
+    public CompletableFuture<VectorialModel<DocId>> asyncInsert(DocId docId, Iterable<String> content) {
+        return CompletableFuture.supplyAsync(() -> insert(docId, content));
+    }
+
     /**
      * 
      * @param docId id of the document to be inserted
@@ -143,6 +148,10 @@ public class VectorialModel<DocId> {
         );
 
         return new VectorialModel<DocId>(newIndex, newMaxFrequencies, newTfidfVectors, _tokenFilter);
+    }
+
+    public CompletableFuture<VectorialModel<DocId>> asyncRemove(DocId docId) {
+        return CompletableFuture.supplyAsync(() -> remove(docId));
     }
     
     /**

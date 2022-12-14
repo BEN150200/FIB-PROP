@@ -30,20 +30,37 @@ public class IndexingController<DocId, SentenceId> {
         this.booleanModel = booleanModel;
     }
 
-
     public void addDocument(DocId docId, Iterable<String> content) {
+        this.vectorialModel.asyncInsert(docId, content).thenAccept(newModel -> { this.vectorialModel = newModel; });
+    }
+
+
+    public void addDocumentOld(DocId docId, Iterable<String> content) {
         this.vectorialModel = this.vectorialModel.insert(docId, content);
     }
-    
+
     public void addSentence(SentenceId sentenceId, Iterable<String> content) {
+        this.booleanModel.asyncInsert(sentenceId, content).thenAccept(newModel -> { this.booleanModel = newModel; });
+    }
+    
+    public void addSentenceOld(SentenceId sentenceId, Iterable<String> content) {
         this.booleanModel = this.booleanModel.insert(sentenceId, content);
     }
     
     public void removeDocument(DocId docId) {
+        this.vectorialModel.asyncRemove(docId).thenAccept(newModel -> { this.vectorialModel = newModel; });
+    }
+
+    public void removeDocumentOld(DocId docId) {
         this.vectorialModel = this.vectorialModel.remove(docId);
     }
 
     public void removeSentence(SentenceId sentenceId) {
+        this.booleanModel.asyncRemove(sentenceId).thenAccept(newModel -> { this.booleanModel = newModel; });
+    }
+
+
+    public void removeSentenceOld(SentenceId sentenceId) {
         this.booleanModel = this.booleanModel.remove(sentenceId);
     }
 

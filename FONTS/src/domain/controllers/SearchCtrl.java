@@ -129,8 +129,6 @@ public class SearchCtrl {
             );
     }
 
-
-    
     public void addDocument(Integer docId, Iterable<String> content) {
         indexingCtrl.addDocument(docId, content);
     }

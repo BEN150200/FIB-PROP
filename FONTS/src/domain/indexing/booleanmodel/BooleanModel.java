@@ -7,6 +7,7 @@ import static src.helpers.Functional.*;
 
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.concurrent.CompletableFuture;
 
 import io.vavr.collection.HashSet;
 import io.vavr.collection.List;
@@ -28,20 +29,28 @@ public class BooleanModel<SentenceId> {
         return new BooleanModel<SentenceId>(index);
     }
 
+    public CompletableFuture<BooleanModel<SentenceId>> asyncInsert(SentenceId sentenceId, Iterable<String> content) {
+        return CompletableFuture.supplyAsync(() -> insert(sentenceId, content));
+    }
+
     public BooleanModel<SentenceId> insert(SentenceId sentenceId, Iterable<String> content) {
         return BooleanModel.of(this.index.insert(sentenceId, content));
+    }
+
+    public CompletableFuture<BooleanModel<SentenceId>> asyncRemove(SentenceId sentenceId) {
+        return CompletableFuture.supplyAsync(() -> remove(sentenceId));
     }
 
     public BooleanModel<SentenceId> remove(SentenceId sentenceId) {
         return BooleanModel.of(this.index.remove(sentenceId));
     }
 
-    public HashSet<SentenceId> queryTerm(String term) {
+    private HashSet<SentenceId> queryTerm(String term) {
         return (HashSet<SentenceId>) this.index.postingList(term).keySet();
     }
 
     @SuppressWarnings("deprecation")
-    public HashSet<SentenceId> querySet(Collection<String> set)
+    private HashSet<SentenceId> querySet(Collection<String> set)
     {
         //System.out.println("corxetes   " + set.toString());
         var sets = List.ofAll(set).map(this::queryTerm);
@@ -58,7 +67,7 @@ public class BooleanModel<SentenceId> {
     }
 
     @SuppressWarnings("deprecation")
-    public HashSet<SentenceId> querySequence(Iterable<String> sequence)
+    private HashSet<SentenceId> querySequence(Iterable<String> sequence)
     {
         var postingLists = List.ofAll(sequence).map(index::postingList);
 
@@ -92,7 +101,7 @@ public class BooleanModel<SentenceId> {
             .getOrElse(HashSet::empty);
     }
 
-    public HashSet<SentenceId> all() {
+    private HashSet<SentenceId> all() {
         return this.index.allDocIds();
     }
 
@@ -113,7 +122,6 @@ public class BooleanModel<SentenceId> {
             case '!':
                 return all().diff(query(root.getRight()));
             case '{':
-
                 return querySet(parse(value));
             case '"':
                 return querySequence(parse(value));

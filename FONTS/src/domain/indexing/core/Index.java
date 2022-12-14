@@ -1,6 +1,9 @@
 package src.domain.indexing.core;
 
 import src.helpers.Maps;
+
+import java.util.concurrent.CompletableFuture;
+
 import io.vavr.Tuple;
 import io.vavr.Tuple2;
 import io.vavr.collection.HashMap;
