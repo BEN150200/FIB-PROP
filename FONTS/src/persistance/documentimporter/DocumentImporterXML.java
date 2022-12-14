@@ -19,59 +19,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class DocumentImporterXML implements DocumentImporter{
-    /*
-    public String getAuthor(String path){
-        String author = "";
-        try{
-            File file = new File(path);  
-            DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();  
-            DocumentBuilder db = dbf.newDocumentBuilder();  
-            Document doc = db.parse(file);  
-            doc.getDocumentElement().normalize();  
-            NodeList nodeList = doc.getElementsByTagName("autor");  
-            for (int i = 0; i < nodeList.getLength(); i++){
-                author = nodeList.item(i).getTextContent(); 
-            }  
-        } catch(Exception e){}
-        return author;
-    }
-
-    public String getTitle(String path){
-        String title = "";
-        try{
-            File file = new File(path);  
-            DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();  
-            DocumentBuilder db = dbf.newDocumentBuilder();  
-            Document doc = db.parse(file);  
-            doc.getDocumentElement().normalize();  
-            NodeList nodeList = doc.getElementsByTagName("títol");  
-            for (int i = 0; i < nodeList.getLength(); i++){
-                title = nodeList.item(i).getTextContent(); 
-            }  
-        } catch(Exception e){}
-        return title;
-    }
-
-    public ArrayList<String> getContent(String path){
-        ArrayList<String> content = new ArrayList<String>();
-        try{
-            File file = new File(path);  
-            DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();  
-            DocumentBuilder db = dbf.newDocumentBuilder();  
-            Document doc = db.parse(file);  
-            doc.getDocumentElement().normalize();  
-            NodeList nodeList = doc.getElementsByTagName("contingut");  
-            String text = "";
-            for (int i = 0; i < nodeList.getLength(); i++){
-                text = nodeList.item(i).getTextContent(); 
-            }  
-            String[] sentences = text.split("\\r?\\n");
-            Collections.addAll(content, sentences);
-        } catch(Exception e){}
-        return content;
-    }
-    */
-
     public DocumentInfo importFromFile(String path){
         DocumentInfo docInfo = null;
         try{
@@ -97,6 +44,9 @@ public class DocumentImporterXML implements DocumentImporter{
                 text = nodeList.item(i).getTextContent(); 
             }  
             String[] sentences = text.split("\\r?\\n");
+            for(int i = 0; i < sentences.length; i++){
+                sentences[i] = sentences[i] + "\n";
+            }
             Collections.addAll(content, sentences);
             FileTime fileCreation = (FileTime) Files.getAttribute(file.toPath(), "creationTime");
             FileTime fileModification = (FileTime) Files.getAttribute(file.toPath(), "lastModifiedTime");

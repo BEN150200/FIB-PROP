@@ -30,7 +30,7 @@ public class DocumentImporterPROP implements DocumentImporter{
             scanner.nextLine();
             ArrayList<String> content = new ArrayList<String>();
             while(scanner.hasNextLine()){
-                content.add(scanner.nextLine());
+                content.add(scanner.nextLine() + "\n");
             }
             scanner.close();
             FileTime fileCreation = (FileTime) Files.getAttribute(file.toPath(), "creationTime");
