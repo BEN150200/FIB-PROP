@@ -1,5 +1,6 @@
 package src.persistance.documentimporter;
 
+import src.domain.core.DocumentInfo;
 import src.enums.Format;
 import src.persistance.documentimporter.DocumentImporter;
 import src.persistance.documentimporter.DocumentImporterTXT;
@@ -19,6 +20,7 @@ public class DocumentImporterFactory {
             importers.put(Format.TXT, new DocumentImporterTXT());
             importers.put(Format.XML, new DocumentImporterXML());
             importers.put(Format.PROP, new DocumentImporterPROP());
+            importers.put(Format.GUTEMBERG, DocumentImporterGutemberg::importFile);
         }
         return instance;
     }
