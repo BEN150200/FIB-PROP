@@ -35,10 +35,6 @@ public class SentenceCtrl {
         return sentencesByKey.containsKey(sentence);
     }
 
-    public boolean existsSentence(int sentenceId){
-        return sentencesById.containsKey(sentenceId);
-    }
-
     public Sentence getSentence(String sentence){
         return sentencesByKey.get(sentence);
     }

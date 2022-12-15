@@ -20,10 +20,6 @@ public class DocumentInfo {
 
     private Double similarity;
 
-    /*private void print(String s) {
-        System.out.println(s);
-    }*/
-
     public DocumentInfo(Integer docID, String titleName, String authorName, LocalDateTime creationDate, LocalDateTime modificationDate, ArrayList<String> content, String path, Format fileFormat, String fileName) {
         this.docID = docID;
         this.title = titleName;
@@ -34,20 +30,6 @@ public class DocumentInfo {
         this.path = path;
         this.fileFormat = fileFormat;
         this.fileName = fileName;
-        /*
-        if (path.lastIndexOf("/") != path.length()-1) {
-            System.out.println(path.lastIndexOf("/"));
-            System.out.println(path.lastIndexOf(path.length()-1));
-            fileName = path.substring(path.lastIndexOf("/") + 1);
-        }
-        else if (path.lastIndexOf("\\") != path.length()-1) {
-            System.out.println(path.lastIndexOf("\\"));
-            System.out.println(path.lastIndexOf(path.length()-1));
-
-            fileName = path.substring(path.lastIndexOf("\\") + 1);
-        }
-
-         */
     }
 
     public DocumentInfo(

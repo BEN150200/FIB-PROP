@@ -31,18 +31,6 @@ public class Document {
         author.addDoc(docID);
     }
 
-    public Document(Title t, Author a, LocalDateTime creationDate, LocalDateTime modificationDate, String filePath, Format format) {
-        this.creationDate = creationDate;
-        this.modificationDate = modificationDate;
-        this.filePath = filePath;
-        this.format = format;
-        title = t;
-        author = a;
-        setDocumentID(DocumentCtrl.getInstance().addDocument(this));
-        title.addDoc(docID);
-        author.addDoc(docID);
-    }
-
     public Document(Title t, Author a, DocumentInfo doc) {
         this.creationDate = doc.getCreationDate();
         this.modificationDate = doc.getModificationDate();
@@ -174,7 +162,6 @@ public class Document {
     }
 
     public void compute() {
-        //HashMap<String,Integer> ocurrences = new HashMap<>();
         ArrayList<String> tokens = new ArrayList<>();
         for (Sentence sentence : sentences) {
             tokens.addAll(sentence.getTokens());

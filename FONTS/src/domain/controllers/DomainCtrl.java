@@ -48,34 +48,6 @@ public class DomainCtrl {
      * Add Elements
      */
 
-
-    /**
-     * Function to add a Document into the System
-     * @param titleName The String of the Name of the Title that identifies the new Document
-     * @param authorName The String of the Name of the Author that identifies the new Document
-     * @param content List of the strings of the Document in order of appearance.
-     * @return True if the document is created sucsesfuly, else if return false, there is a Docuement in the System with this identifier.
-     */
-    public boolean addDocument(String titleName, String authorName, List<String> content) {
-        if (!DocumentCtrl.getInstance().existsDocument(titleName, authorName)) {
-
-            Title title = TitleCtrl.getInstance().getTitle(titleName);
-            Author author = AuthorCtrl.getInstance().getAuthor(authorName);
-            if (title == null) {
-                title = new Title(titleName);
-            }
-            if (author == null) {
-                author = new Author(authorName);
-            }
-
-            Document doc = new Document(title, author);
-            updateDocumentContent(doc, content);
-
-            return true;
-        }
-        return false;
-    }
-
     /**
      * Funciont to add a Boolean Expression into the System
      * @param boolExpName The name of the Boolean expresion that will be saved
@@ -99,21 +71,6 @@ public class DomainCtrl {
      * Update Elements
      **/
 
-    /**
-     *
-     * @param titleName Title Name that identifies the Document to be modified
-     * @param authorName Author Name that identifies the Document to be modified
-     * @param content ArrayList of the Strings that will be the new content of the Document
-     * @return Return false if there is no Document in the System identified by this title and author
-     */
-    public boolean updateDocument(String titleName, String authorName, List<String> content) {
-        Document doc = DocumentCtrl.getInstance().getDocument(titleName, authorName);
-        if (doc == null) return false;
-
-        updateDocumentContent(doc, content);
-
-        return true;
-    }
 
     private void updateDocumentContent(Document doc, List<String> content) {
 
@@ -196,33 +153,7 @@ public class DomainCtrl {
         return authors;
     }
 
-    public ArrayList<DocumentInfo> getAllAuthorDocuments(String authorName) {
-        ArrayList<DocumentInfo> docsInfo = new ArrayList<DocumentInfo>();
-        ArrayList<Author> authors = AuthorCtrl.getInstance().getAuthorsPrefix(authorName);
-        HashSet<Integer> docsID = new HashSet<Integer>();
-        for (Author author : authors) {
-            docsID.addAll(author.getAllDocsID());
-        }
-        for (Integer docID : docsID) {
-            Document doc = DocumentCtrl.getInstance().getDocument(docID);
-            docsInfo.add(doc.getInfo());
-        }
-        return docsInfo;
-    }
 
-    public ArrayList<DocumentInfo> getAllTitleDocuments(String titleName) {
-        ArrayList<DocumentInfo> docsInfo = new ArrayList<DocumentInfo>();
-        ArrayList<Title> titles = TitleCtrl.getInstance().getTitlesPrefix(titleName);
-        HashSet<Integer> docsID = new HashSet<Integer>();
-        for (Title title : titles) {
-            docsID.addAll(title.getAllDocsID());
-        }
-        for (Integer docID : docsID) {
-            Document doc = DocumentCtrl.getInstance().getDocument(docID);
-            docsInfo.add(doc.getInfo());
-        }
-        return docsInfo;
-    }
 
     public ArrayList<DocumentInfo> getDocsByTitleAndAuthor(String titleName, String authorName) {
         ArrayList<Title> titles = new ArrayList<>();
@@ -264,34 +195,7 @@ public class DomainCtrl {
         return null;
     }
 
-    public ArrayList<String> getDocumentContent(Integer docId) {
-        Document doc = DocumentCtrl.getInstance().getDocument(docId);
-        if (doc == null) return null;
-        else {
-            ArrayList<String> sentencesStrings = new ArrayList<String>();
-            ArrayList<Sentence> sentences = doc.getSentences();
-            sentencesStrings.add(doc.getTitle().toString());
-            sentencesStrings.add(doc.getAuthor().toString());
-            for (Sentence sentence : sentences) {
-                sentencesStrings.add(sentence.toString());
-            }
-            return sentencesStrings;
-        }
-    }
 
-    public ArrayList<String> getDocumentContent(String titleName, String authorName){
-        Document doc = DocumentCtrl.getInstance().getDocument(titleName, authorName);
-        if(doc != null){
-            ArrayList<Sentence> sentences = doc.getSentences();
-            ArrayList<String> content = new ArrayList<>();
-            for(Sentence s: sentences){
-                content.add(s.toString());
-            }
-            return content;
-        } else {
-            return null;
-        }
-    }
 
     /**
      * Complex Search
@@ -330,64 +234,6 @@ public class DomainCtrl {
 
     }
 
-
-    /**
-     * presentation functions
-     */
-
-    /**
-     * chech if document exists, if not, adds it in the system and creates the file.
-     */
-    /*
-    public void saveDocument(String title, String author, List<String> content) {
-        Document doc = DocumentCtrl.getInstance().getDocument(title, author);
-        if (doc != null) {
-            updateDocumentContent(doc, content);
-            //TODO: call update the file
-        }
-        else {
-            addDocument(title, author, content);
-            //TODO: create file in the sistem
-        }
-
-    }
-
-    public void saveDocument(DocumentInfo docToBeSaved) {
-        //Document doc = DocumentCtrl.getInstance().getDocument(title, author);
-
-
-
-
-        Title title = TitleCtrl.getInstance().getTitle(docToBeSaved.getTitle());
-        Author author = AuthorCtrl.getInstance().getAuthor(docToBeSaved.getAuthor());
-        if (title == null) {
-            title = new Title(docToBeSaved.getTitle());
-        }
-        if (author == null) {
-            author = new Author(docToBeSaved.getAuthor());
-        }
-
-        Document doc = new Document(title, author, docToBeSaved.getCreationDate(),docToBeSaved.getModificationDate(),docToBeSaved.getPath(), docToBeSaved.getFormat());
-        updateDocumentContent(doc, docToBeSaved.getContent());
-        exportDocument(docToBeSaved.getTitle(), docToBeSaved.getAuthor(), docToBeSaved.getFormat(),docToBeSaved.getPath());
-
-    }
-     */
-
-    /*
-    public DocumentInfo openFile(String path) {
-        //cria al controlador de persistencia per obtenir contingut del document
-        DocumentInfo docInfo; // docInfo = persistencia.openFile(path)
-        System.out.println(path);
-        addDocument(null,null,null);
-        return null;
-    }
-
-     */
-
-    //-------------------------------------------------------------------------------------------------------------------------
-    //  Persistance related methods
-    //-------------------------------------------------------------------------------------------------------------------------
 
     private boolean addDocument(DocumentInfo docToBeSaved) {
         if (DocumentCtrl.getInstance().existsDocument(docToBeSaved.getTitle(), docToBeSaved.getAuthor())) return false;
