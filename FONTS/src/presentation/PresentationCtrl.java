@@ -1,5 +1,6 @@
 package src.presentation;
 
+import javafx.scene.control.Alert;
 import src.domain.controllers.BooleanExpressionCtrl;
 import src.domain.controllers.DomainCtrl;
 import javafx.scene.Parent;
@@ -48,28 +49,6 @@ public class PresentationCtrl {
     public void openDocument(DocumentInfo docToOpen) throws IOException {
         mainViewCtrl.openDocOnTab(docToOpen);
     }
-    /*
-    private void switchScene(String newScene) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource(newScene));
-        Stage newStage = new Stage();
-        newStage.setMinWidth(600);
-        newStage.setMinHeight(400);
-        newStage.setScene(new Scene(root));
-        newStage.show();
-    }
-
-    public void switchToSearch() throws IOException {
-        switchScene("/src/presentation/fxml/titleAuthorPanel.fxml");
-    }
-
-    public void switchToBooleanExpression() throws IOException {
-        switchScene("/src/presentation/fxml/booleanExpressionTab.fxml");
-    }
-
-    public void switchToText() throws IOException {
-
-    }
-     */
 
 
     /**
@@ -201,15 +180,26 @@ public class PresentationCtrl {
     public void deleteData() {
     }
 
-    public void setError(String error) {
-        mainViewCtrl.setError(error);
-    }
+
 
     public void saveAllDocs() {
+        mainViewCtrl.saveAllDocs();
     }
 
     public boolean unsavedDocuments() {
         return mainViewCtrl.unsavedDocuments();
+    }
+
+
+    /**
+     * Tractament de les excepcions
+     */
+
+    public void setError(String error) {
+        mainViewCtrl.setError(error);
+    }
+    public void showExceptionAlert (String message) {
+        mainViewCtrl.showExceptionAlert(message);
     }
 }
 

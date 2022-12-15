@@ -41,6 +41,7 @@
 <?import javafx.scene.control.SeparatorMenuItem?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
@@ -57,7 +58,7 @@
                   <MenuItem fx:id="newDocButton" mnemonicParsing="false" onAction="#newDocTab" text="New" />
                   <MenuItem mnemonicParsing="false" onAction="#openFile" text="Open…" />
                   <SeparatorMenuItem mnemonicParsing="false" />
-                  <MenuItem mnemonicParsing="false" text="Close" />
+                  <MenuItem mnemonicParsing="false" onAction="#deleteDocument" text="Delete Document" />
                   <MenuItem fx:id="saveButton" mnemonicParsing="false" onAction="#saveDocument" text="Save" />
                   <MenuItem mnemonicParsing="false" onAction="#saveAsDocument" text="Save As…" />
                   <SeparatorMenuItem mnemonicParsing="false" />
@@ -136,6 +137,9 @@
                <VBox.margin>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </VBox.margin>
+               <tooltip>
+                  <Tooltip text="All the Documents" />
+               </tooltip>
             </Button>
             <Button id="prefix-search" fx:id="titleAuthorButton" layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0">
                <VBox.margin>

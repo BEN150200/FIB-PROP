@@ -44,10 +44,8 @@ public class BooleanExpressionTabCtrl {
         vbox.getChildren().add(1,table);
         VBox.setVgrow(vbox, Priority.ALWAYS);
 
-        //resultPane.getChildren().add(table);
         resultTableCtrl = loader.getController();
-
-        //setListeners();
+        resultTableCtrl.setForBoolean();
 
         name.getEditor().setOnMouseClicked(mouseEvent -> {
             name.show();
@@ -56,8 +54,6 @@ public class BooleanExpressionTabCtrl {
         initExpr();
 
         //update();
-        resultTableCtrl.setForBoolean();
-
     }
 
     /**
@@ -128,6 +124,7 @@ public class BooleanExpressionTabCtrl {
 
     public void initExpr(){
         expressions = PresentationCtrl.getInstance().getAllBooleanExpresions();
+        getExpressionsNames();
     }
 
     public void putExpression(){

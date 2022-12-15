@@ -129,7 +129,9 @@ public class TitleAuthorSearchCtrl {
 
          */
 
+        titleBox.setOnAction(event -> {
 
+        });
 
         titleField.textProperty().addListener((observable, oldValue, newValue) -> {
             filteredTitles.setPredicate(item -> {

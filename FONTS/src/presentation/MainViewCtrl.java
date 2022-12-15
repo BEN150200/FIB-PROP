@@ -108,7 +108,6 @@ public class MainViewCtrl {
 
         restoreBackup(); //TODO: show a restore dialog if there is a backup
 
-        saveButton.setAccelerator(new KeyCodeCombination(KeyCode.S, KeyCombination.CONTROL_DOWN));
         newDocCounter = 0; // counter initialized at 0
     }
 
@@ -174,6 +173,8 @@ public class MainViewCtrl {
     private void setShortcuts() {
         saveButton.setAccelerator(new KeyCodeCombination(KeyCode.S, KeyCombination.CONTROL_DOWN));
         newDocButton.setAccelerator(new KeyCodeCombination(KeyCode.N, KeyCombination.CONTROL_DOWN));
+        
+
     }
     /**
      * Handler of the side menu buttons, it manages the search panel that is currently opened and the new to be open
@@ -314,9 +315,7 @@ public class MainViewCtrl {
 
         if (currentTabCtrl.isNew()) {
             if (PresentationCtrl.getInstance().existsDocument(currentTabCtrl.getTitle(),currentTabCtrl.getAuthor())) {
-                Alert docExists = new Alert(Alert.AlertType.ERROR);
-                docExists.setContentText("The document is already in the system");
-                docExists.show();
+                showExceptionAlert("The document is already in the system");
                 return;
             }
         }
@@ -357,6 +356,24 @@ public class MainViewCtrl {
         currentTabCtrl.blockTitleAndAuthor();
     }
 
+    @FXML
+    private void deleteDocument() {
+        Tab currentTab = tabPane.getSelectionModel().getSelectedItem();
+        DocumentTabCtrl currentTabCtrl = tabControllers.get(currentTab);
+        PresentationCtrl.getInstance().deleteDocument(currentTabCtrl.getTitle(), currentTabCtrl.getAuthor());
+        tabPane.getTabs().remove(currentTab);
+        updateAllSearchViews();
+    }
+
+    public void saveAllDocs() {
+        tabPane.getSelectionModel().selectFirst();
+        int tabs = tabPane.getTabs().size();
+        for (int i = 0; i < tabs; ++i) {
+            saveDocument();
+            tabPane.getSelectionModel().selectNext();
+        }
+    }
+
 
     /**
      * Export  and Import functions
@@ -395,20 +412,6 @@ public class MainViewCtrl {
         PresentationCtrl.getInstance().export(docToBeSaved);
         updateAllSearchViews();
     }
-
-    /*
-    @FXML
-    private DocumentInfo importFile() throws IOException {
-        FileChooser fileChooser = new FileChooser();
-        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("TEXT files", "*.txt", "*.xml", "*.prop");
-        fileChooser.getExtensionFilters().add(extFilter);
-        Stage fileStage = new Stage();
-        File file = fileChooser.showOpenDialog(fileStage);
-        return importFile(file);
-
-
-    }
-     */
 
     @FXML
     private void importFile() throws IOException {
@@ -514,5 +517,11 @@ public class MainViewCtrl {
             }
         }
         return false;
+    }
+
+    public void showExceptionAlert (String message ) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setContentText(message);
+        alert.show();
     }
 }
