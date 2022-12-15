@@ -490,6 +490,9 @@ public class MainViewCtrl {
             case "prop" :  {
                 return Format.PROP;
             }
+            case "gut": {
+                return Format.GUTEMBERG;
+            }
 
             default :{
                 return Format.PROP;
