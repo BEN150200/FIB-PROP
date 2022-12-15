@@ -23,6 +23,11 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
+import java.util.stream.Stream;
+
+import io.vavr.control.Either;
+import io.vavr.control.Try;
 
 public class MainViewCtrl {
 
@@ -413,11 +418,20 @@ public class MainViewCtrl {
         fileChooser.getExtensionFilters().add(extFilter);
         Stage fileStage = new Stage();
         List<File> fileList = fileChooser.showOpenMultipleDialog(fileStage);
-        for (File file: fileList) {
-            importOneFile(file);
-        }
-        var end = Instant.now();
-        System.out.println("Loaded files in " + Duration.between(start, end).getSeconds() + " secs");
+        
+        CompletableFuture.allOf(
+            fileList.stream()
+                .map(file -> CompletableFuture.supplyAsync(() -> safeImport(file)))
+                .toArray(CompletableFuture[]::new)
+        )
+        .thenRunAsync(() -> {
+            var end = Instant.now();
+            System.out.println("Loaded files in " + Duration.between(start, end).getSeconds() + " secs");
+        });
+    }
+
+    private Try<DocumentInfo> safeImport(File file) {
+        return Try.of(() -> importOneFile(file));
     }
 
     private DocumentInfo importOneFile(File file) throws IOException {
