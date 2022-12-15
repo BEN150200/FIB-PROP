@@ -290,7 +290,7 @@ public class MainViewCtrl {
      */
     public void openFile() throws IOException {
         FileChooser fileChooser = new FileChooser();
-        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("TEXT files", "*.txt", "*.xml", "*.prop");
+        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("TEXT files", "*.gut", "*.txt", "*.xml", "*.prop");
         fileChooser.getExtensionFilters().add(extFilter);
         Stage fileStage = new Stage();
         File file = fileChooser.showOpenDialog(fileStage);
