@@ -52,7 +52,7 @@ public class Parsing {
     }
 
     @SuppressWarnings("deprecation")
-    public static Either<String, Tuple2<String, Double>> parseWeightedTerm(String term) {
+    private static Either<String, Tuple2<String, Double>> parseWeightedTerm(String term) {
         var splited = term.split("\\^");
         if(splited.length > 0 && splited[0].isEmpty() || splited.length < 2 && term.contains("^"))
             return Either.left("Unexpected incomplete '^' found in " + term);
