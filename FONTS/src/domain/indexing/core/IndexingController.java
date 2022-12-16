@@ -45,11 +45,7 @@ public class IndexingController<DocId, SentenceId> {
 
     public void removeSentence(SentenceId sentenceId) {
         this.booleanModel = this.booleanModel.thenApplyAsync(model -> model.remove(sentenceId));
-    }
-
-    public java.util.HashMap<DocId, Double> weightedQuery(Map<String, Double> termsWeights) {
-        return this.vectorialModel.join().querySimilars(HashMap.ofAll(termsWeights)).toJavaMap();
-    }
+    }   
 
     @SuppressWarnings("deprecation")
     public Either<String, java.util.HashMap<DocId, Double>> querySimilarDocuments(DocId docId) {
