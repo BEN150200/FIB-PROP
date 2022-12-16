@@ -7,17 +7,15 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.control.TitledPane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
-import src.domain.expressions.BooleanExpression;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class BooleanExpressionTabCtrl {
+public class BooleanExprSearchCtrl {
     @FXML
     private TextArea textArea;
     @FXML
@@ -26,7 +24,7 @@ public class BooleanExpressionTabCtrl {
     @FXML
     private ComboBox<String> name;
 
-    private ResultTable resultTableCtrl;
+    private ResultTableCtrl resultTableCtrl;
 
     @FXML
     private VBox resultPane;
@@ -71,11 +69,6 @@ public class BooleanExpressionTabCtrl {
     public void setName(String name) {
         this.name.setValue(name);
     }
-
-    public void setContent(String content) {
-        this.textArea.setText(content);
-    }
-
 
     public void SearchBooleanExpression(){
         try {

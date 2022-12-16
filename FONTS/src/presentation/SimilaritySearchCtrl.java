@@ -3,7 +3,6 @@ package src.presentation;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
@@ -46,7 +45,7 @@ public class SimilaritySearchCtrl {
     @FXML
     private VBox vbox;
 
-    private ResultTable resultTableCtrl;
+    private ResultTableCtrl resultTableCtrl;
 
     ArrayList<DocumentInfo> listDocs = new ArrayList<>();
     ArrayList<String> listTitles = new ArrayList<>();
@@ -208,7 +207,7 @@ public class SimilaritySearchCtrl {
     }
 
     @FXML
-    void search() {
+    private void search() {
         if (!titleField.getText().isEmpty() && !authorField.getText().isEmpty()) {
             ArrayList<DocumentInfo> resultDocs = PresentationCtrl.getInstance().similaritySearch(titleField.getText(), authorField.getText(), numSpinner.getValue());
             if (resultDocs == null) PresentationCtrl.getInstance().setError("the document not exists or there are no similar ones");

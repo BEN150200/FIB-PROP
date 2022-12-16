@@ -2,19 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d2991d3d-5c40-4108-ac62-9c44333baa2c" name="Changes" comment="pestanya expressions booleanes casi acabada">
-      <change afterPath="$PROJECT_DIR$/data/DocumentsData.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/booleanExpressionsData.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/doc1.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/doc2.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/pg22566_en_XML.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FONTS/src/domain/core/Document.java" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/src/domain/core/Document.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FONTS/src/persistance/documentimporter/DocumentImporterTXT.java" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/src/persistance/documentimporter/DocumentImporterTXT.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FONTS/src/presentation/DocumentTabCtrl.java" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/src/presentation/DocumentTabCtrl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FONTS/src/presentation/BooleanExpressionTabCtrl.java" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/src/presentation/BooleanExprSearchCtrl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/FONTS/src/presentation/MainViewCtrl.java" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/src/presentation/MainViewCtrl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FONTS/src/presentation/fxml/mainView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/src/presentation/fxml/mainView.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/novels/27531-0.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data/novels/27531-0.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/novels/pg22566.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data/novels/pg22566.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FONTS/src/presentation/ResultTable.java" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/src/presentation/ResultTableCtrl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FONTS/src/presentation/SimilaritySearchCtrl.java" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/src/presentation/SimilaritySearchCtrl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FONTS/src/presentation/TitleAuthorSearchCtrl.java" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/src/presentation/TitleAuthorSearchCtrl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FONTS/src/presentation/WeightedSearch.java" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/src/presentation/WeightedSearchCtrl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FONTS/src/presentation/fxml/booleanExpressionTab.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/src/presentation/fxml/booleanExpressionPane.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FONTS/src/presentation/fxml/resultTable.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/src/presentation/fxml/resultTable.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FONTS/src/presentation/fxml/weightedPanel.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/src/presentation/fxml/weightedPanel.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

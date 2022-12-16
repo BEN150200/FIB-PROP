@@ -62,7 +62,7 @@ public class MainViewCtrl {
 
     //all the search panels with his controllers
     private VBox allDocumentsView;
-    private ResultTable allDocumentsCtrl;
+    private ResultTableCtrl allDocumentsCtrl;
 
     private VBox titleAuthorSearchView;
     private TitleAuthorSearchCtrl titleAuthorSearchCtrl;
@@ -71,10 +71,10 @@ public class MainViewCtrl {
     private SimilaritySearchCtrl similaritySearchCtrl;
 
     private VBox booleanSearchView;
-    private BooleanExpressionTabCtrl booleanSearchCtrl;
+    private BooleanExprSearchCtrl booleanSearchCtrl;
 
     private VBox weightSearchView;
-    private WeightedSearch weightSearchCtrl;
+    private WeightedSearchCtrl weightSearchCtrl;
 
 
     //stores the position of the divider for the search panels to make all open with the same width
@@ -129,7 +129,7 @@ public class MainViewCtrl {
         similaritySearchCtrl = loader3.getController();
         SplitPane.setResizableWithParent(similaritySearchView, false);
 
-        FXMLLoader loader4 = new FXMLLoader(getClass().getResource("/src/presentation/fxml/booleanExpressionTab.fxml"));
+        FXMLLoader loader4 = new FXMLLoader(getClass().getResource("/src/presentation/fxml/booleanExpressionPane.fxml"));
         booleanSearchView = loader4.load();
         booleanSearchCtrl = loader4.getController();
         SplitPane.setResizableWithParent(booleanSearchView, false);
@@ -228,7 +228,7 @@ public class MainViewCtrl {
 
     @FXML
     private void newBoolTab() throws IOException {
-        newEmptyTab("Boolean Search", "booleanExpressionTab.fxml");
+        newEmptyTab("Boolean Search", "booleanExpressionPane.fxml");
     }
 
     /**

@@ -19,7 +19,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-public class ResultTable implements Initializable{
+public class ResultTableCtrl implements Initializable{
     @FXML
     private TableView<DocumentInfo> table;
     @FXML

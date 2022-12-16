@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox fx:id="vbox" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="220.0" prefWidth="250.0" styleClass="search-layout" stylesheets="@../css/search.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="src.presentation.BooleanExpressionTabCtrl">
+<VBox fx:id="vbox" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="220.0" prefWidth="250.0" styleClass="search-layout" stylesheets="@../css/search.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="src.presentation.BooleanExprSearchCtrl">
    <VBox prefHeight="90.0" prefWidth="600.0">
       <children>
          <HBox fx:id="fieldBox" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="40.0" prefHeight="40.0" VBox.vgrow="NEVER">

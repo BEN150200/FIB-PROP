@@ -11,7 +11,7 @@ import javafx.scene.layout.VBox;
 
 import java.io.IOException;
 
-public class WeightedSearch {
+public class WeightedSearchCtrl {
     @FXML
     private TextField input;
 
@@ -23,7 +23,7 @@ public class WeightedSearch {
 
     private int currentNum;
 
-    private ResultTable resultTableCtrl;
+    private ResultTableCtrl resultTableCtrl;
 
     public void initialize() throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/src/presentation/fxml/resultTable.fxml"));

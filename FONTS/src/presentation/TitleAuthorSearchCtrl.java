@@ -29,7 +29,7 @@ public class TitleAuthorSearchCtrl {
     @FXML
     private VBox vbox;
 
-    private ResultTable resultTableCtrl;
+    private ResultTableCtrl resultTableCtrl;
 
     private String currentTitle;
     private String currentAuthor;
