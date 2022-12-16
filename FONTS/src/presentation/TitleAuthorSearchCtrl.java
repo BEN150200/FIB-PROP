@@ -1,7 +1,5 @@
 package src.presentation;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -63,7 +61,7 @@ public class TitleAuthorSearchCtrl {
 
         //resultPane.getChildren().add(table);
         resultTableCtrl = loader.getController();
-        resultTableCtrl.setForTitleAuthorSearch();
+        resultTableCtrl.setForTitleAuthor();
         setListeners();
         update();
     }

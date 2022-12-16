@@ -83,7 +83,7 @@ public class ResultTable implements Initializable{
         updateTable(PresentationCtrl.getInstance().getAllDocuments());
     }
 
-    public void setForTitleAuthorSearch() {
+    public void setForTitleAuthor() {
         tableSimilarity.setVisible(false);
         tableModification.setVisible(false);
         tableCreation.setVisible(false);
@@ -107,7 +107,7 @@ public class ResultTable implements Initializable{
         tableCreation.setVisible(false);
     }
     
-    public void setForWeightedSearch() {
+    public void setForWeighted() {
         tableSimilarity.setVisible(true);
         tableModification.setVisible(false);
         tableCreation.setVisible(false);

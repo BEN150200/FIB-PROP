@@ -21,6 +21,7 @@ public class DocumentTabCtrl {
     public void initialize () {
         setListeners();
         modified = false;
+        newdoc = true;
     }
 
     private void setListeners() {
@@ -38,6 +39,7 @@ public class DocumentTabCtrl {
     }
 
     public void blockTitleAndAuthor() {
+        newdoc = false;
         title.setEditable(false);
         author.setEditable(false);
     }
@@ -70,7 +72,7 @@ public class DocumentTabCtrl {
 
     public void setSaved() {
         modified = false;
-        newdoc = false;
+        if (newdoc) blockTitleAndAuthor();
     }
 
     public void setNew() {

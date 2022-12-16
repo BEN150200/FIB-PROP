@@ -6,13 +6,10 @@ import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
-import src.domain.core.DocumentInfo;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 public class WeightedSearch {
     @FXML
@@ -42,7 +39,7 @@ public class WeightedSearch {
 
 
         resultTableCtrl = loader.getController();
-        resultTableCtrl.setForWeightedSearch();
+        resultTableCtrl.setForWeighted();
 
         setListeners();
     }

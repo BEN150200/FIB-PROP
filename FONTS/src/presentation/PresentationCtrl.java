@@ -1,11 +1,6 @@
 package src.presentation;
 
-import javafx.scene.control.Alert;
-import src.domain.controllers.BooleanExpressionCtrl;
 import src.domain.controllers.DomainCtrl;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
 import src.domain.core.DocumentInfo;
 import src.enums.Format;
 
@@ -19,7 +14,7 @@ public class PresentationCtrl {
     private static PresentationCtrl instance;
 
     private MainViewCtrl mainViewCtrl;
-    private DocumentTabCtrl documentTabCtrl;
+    //private DocumentTabCtrl documentTabCtrl;
 
     public PresentationCtrl() {}
 
@@ -34,6 +29,7 @@ public class PresentationCtrl {
         this.mainViewCtrl = mainViewCtrl;
     }
 
+    /*
     public void setDocumentTabCtrl(DocumentTabCtrl documentTabCtrl) {
         this.documentTabCtrl = documentTabCtrl;
     }
@@ -41,6 +37,7 @@ public class PresentationCtrl {
     private Stage stage;
     private Scene scene;
     private Parent root;
+    */
 
     /**
      * Functions to controll the UI
@@ -196,7 +193,7 @@ public class PresentationCtrl {
      */
 
     public void setError(String error) {
-        mainViewCtrl.setError(error);
+        mainViewCtrl.setMessage(error);
     }
     public void showExceptionAlert (String message) {
         mainViewCtrl.showExceptionAlert(message);

@@ -6,7 +6,6 @@ import src.enums.Format;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCodeCombination;
@@ -24,9 +23,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
-import java.util.stream.Stream;
 
-import io.vavr.control.Either;
 import io.vavr.control.Try;
 
 public class MainViewCtrl {
@@ -180,7 +177,7 @@ public class MainViewCtrl {
      * Handler of the side menu buttons, it manages the search panel that is currently opened and the new to be open
      * @param newView search that wants to be opened if it's not the current one
      */
-    public void contractSearch(VBox newView) {
+    private void contractSearch(VBox newView) {
         // if there are a search panel opened
         if (searchVisible) {
 
@@ -254,7 +251,6 @@ public class MainViewCtrl {
         if (fxmlFileName == "documentTab.fxml") {
             DocumentTabCtrl docController = loader.getController();
             tabControllers.put(tab, docController);
-            docController.setNew();
         }
     }
 
@@ -265,6 +261,21 @@ public class MainViewCtrl {
      */
     public void openDocOnTab(DocumentInfo documentInfo) throws IOException {
         if (documentInfo == null) return;
+
+        for (Tab tab: tabControllers.keySet()) {
+            DocumentTabCtrl tabCtrl = tabControllers.get(tab);
+            System.out.println(documentInfo.getTitle() == tabCtrl.getTitle());
+            System.out.print(documentInfo.getTitle());
+            System.out.print(tabCtrl.getTitle());
+            if (documentInfo.getTitle() == tabCtrl.getTitle()) {
+
+                if (documentInfo.getAuthor() == tabCtrl.getAuthor()) {
+                    System.out.println("is opened");
+                    tabPane.getSelectionModel().select(tab);
+                }
+            }
+        }
+
         Tab tab = new Tab(documentInfo.getFileName());
         //loads the content and gets the controller
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/src/presentation/fxml/documentTab.fxml"));
@@ -276,7 +287,6 @@ public class MainViewCtrl {
         documentTabCtrl.setAuthor(documentInfo.getAuthor());
         documentTabCtrl.setContent(documentInfo.getContent());
         documentTabCtrl.blockTitleAndAuthor();
-        documentTabCtrl.setSaved();
 
         //adds the tab to the tabpane and selects it
         tabPane.getTabs().add(tab);
@@ -468,7 +478,7 @@ public class MainViewCtrl {
         try {
             PresentationCtrl.getInstance().restoreBackup();
         } catch (Exception e) {
-            setError("ERROR: Backup not found");
+            setMessage("ERROR: Backup not found");
         }
     }
 
@@ -508,8 +518,8 @@ public class MainViewCtrl {
         titleAuthorSearchCtrl.update();
     }
 
-    public void setError(String error) {
-        errorLable.setText(error);
+    public void setMessage(String message) {
+        errorLable.setText(message);
     }
 
 
