@@ -9,7 +9,15 @@ import src.persistance.documentimporter.DocumentImporterFactory;
 import src.persistance.datamanagement.BEDataManager;
 import src.persistance.datamanagement.DocumentsDataManager;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
+
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.TransformerConfigurationException;
+import javax.xml.transform.TransformerException;
+
+import org.xml.sax.SAXException;
 
 public class PersistanceCtrl {
     private static PersistanceCtrl instance = null;
@@ -28,44 +36,42 @@ public class PersistanceCtrl {
         return instance;
     }
 
-    public boolean exportToFile(String titleName, String authorName, ArrayList<String> content, Format fileFormat, String path){
+    public void exportToFile(String titleName, String authorName, ArrayList<String> content, Format fileFormat, String path) throws IOException, Exception{
         DocumentExporterFactory exporterFactory = DocumentExporterFactory.getInstance();
         DocumentExporter documentExporter = exporterFactory.getExporter(fileFormat);
-        return documentExporter.exportToFile(titleName, authorName, content, path);
+        documentExporter.exportToFile(titleName, authorName, content, path);
     }
 
-    public DocumentInfo importFromFile(String path, Format fileFormat){
+    public DocumentInfo importFromFile(String path, Format fileFormat) throws FileNotFoundException, IOException, Exception{
         DocumentImporterFactory importerFactory = DocumentImporterFactory.getInstance();
         DocumentImporter documentImporter = importerFactory.getImporter(fileFormat);
         return documentImporter.importFromFile(path);
     }
 
-    public boolean saveDocumentsData(ArrayList<DocumentInfo> docsInfos){
-
-        return documentsDataManager.saveData(docsInfos);
+    public void saveDocumentsData(ArrayList<DocumentInfo> docsInfos) throws ParserConfigurationException, IOException, FileNotFoundException, TransformerConfigurationException, TransformerException{
+        documentsDataManager.saveData(docsInfos);
     }
 
-    public ArrayList<DocumentInfo> loadDocumentsData(){
+    public ArrayList<DocumentInfo> loadDocumentsData() throws ParserConfigurationException, SAXException, IOException{
         return documentsDataManager.loadData();
     }
 
-    public boolean saveBooleanexpressionsData(ArrayList<String> expressionNames, ArrayList<String> expressions){
-        return beDataManager.saveData(expressionNames, expressions);
+    public void saveBooleanexpressionsData(ArrayList<String> expressionNames, ArrayList<String> expressions) throws ParserConfigurationException, IOException, TransformerConfigurationException, TransformerException{
+        beDataManager.saveData(expressionNames, expressions);
     }
 
-    public ArrayList<String> loadExpressionsNames(){
+    public ArrayList<String> loadExpressionsNames() throws ParserConfigurationException, SAXException, IOException{
         return beDataManager.loadExpressionNames();
     }
 
-    public ArrayList<String> loadExpressions(){
+    public ArrayList<String> loadExpressions() throws ParserConfigurationException, SAXException, IOException{
         return beDataManager.loadExpressions();
     }
 
     // Deletes boolean expressions and documents from their backup files.
-    public boolean clearData(){
-        if(!beDataManager.clearData()) return false;
-        if(!documentsDataManager.clearData()) return false;
-        return true;
+    public void clearData() throws ParserConfigurationException, IOException, TransformerConfigurationException, TransformerException{
+        beDataManager.clearData();
+        documentsDataManager.clearData();
     }
 
 }

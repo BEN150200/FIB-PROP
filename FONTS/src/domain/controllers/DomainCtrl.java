@@ -235,8 +235,8 @@ public class DomainCtrl {
     }
 
 
-    private boolean addDocument(DocumentInfo docToBeSaved) {
-        if (DocumentCtrl.getInstance().existsDocument(docToBeSaved.getTitle(), docToBeSaved.getAuthor())) return false;
+    private void addDocument(DocumentInfo docToBeSaved) throws Exception{
+        if (DocumentCtrl.getInstance().existsDocument(docToBeSaved.getTitle(), docToBeSaved.getAuthor())) throw new Exception("A document with this title and author already exists.");
         Title title = TitleCtrl.getInstance().getTitle(docToBeSaved.getTitle());
         Author author = AuthorCtrl.getInstance().getAuthor(docToBeSaved.getAuthor());
         if (title == null) {
@@ -246,26 +246,19 @@ public class DomainCtrl {
             author = new Author(docToBeSaved.getAuthor());
         }
 
-        //Document doc = new Document(title, author, docToBeSaved.getCreationDate(),docToBeSaved.getModificationDate(),docToBeSaved.getPath(), docToBeSaved.getFormat());
         Document doc = new Document(title, author, docToBeSaved);
         updateDocumentContent(doc, docToBeSaved.getContent());
-        return true;
-        //exportDocument(docToBeSaved.getTitle(), docToBeSaved.getAuthor(), docToBeSaved.getFormat(),docToBeSaved.getPath());
-
     }
 
 
-    public boolean saveDocument(String titleName, String authorName, ArrayList<String> content) {
+    public void saveDocument(String titleName, String authorName, ArrayList<String> content) throws Exception{
         Document doc = DocumentCtrl.getInstance().getDocument(titleName, authorName);
-        if (doc != null) {
-            updateDocumentContent(doc, content);
-            exportDocument(titleName, authorName, doc.getFormat(), doc.getPath());
-            return true;
-        }
-        return false;
+        if (doc == null) throw new Exception("A document with this title and author does not exist.");
+        updateDocumentContent(doc, content);
+        exportDocument(titleName, authorName, doc.getFormat(), doc.getPath());
     }
 
-    public void saveAsDocument(DocumentInfo docToBeSaved) {
+    public void saveAsDocument(DocumentInfo docToBeSaved) throws Exception{
         Document doc = DocumentCtrl.getInstance().getDocument(docToBeSaved.getTitle(), docToBeSaved.getAuthor());
         if(doc != null) {
             doc.setPath(docToBeSaved.getPath());
@@ -278,7 +271,7 @@ public class DomainCtrl {
         }
     }
 
-    public void exportDocument(DocumentInfo docToBeSaved) {
+    public void exportDocument(DocumentInfo docToBeSaved) throws Exception{
         Document doc = DocumentCtrl.getInstance().getDocument(docToBeSaved.getTitle(), docToBeSaved.getAuthor());
         if(doc == null) {
             saveAsDocument(docToBeSaved);
@@ -290,10 +283,9 @@ public class DomainCtrl {
     }
 
 
-    public void loadData() throws  Exception{
+    public void loadData() throws Exception{
         // Load documents, titles and authors
         ArrayList<DocumentInfo> docsData = persistanceCtrl.loadDocumentsData();
-        DocumentCtrl documentCtrl = DocumentCtrl.getInstance();
         for(DocumentInfo docInfo: docsData) addDocument(docInfo);
         // Load saved boolean expressions
         ArrayList<String> expressionsNames = persistanceCtrl.loadExpressionsNames();
@@ -303,7 +295,7 @@ public class DomainCtrl {
         }
     }
 
-    public void saveData(){
+    public void saveData() throws Exception{
         // Save documents data
         ArrayList<DocumentInfo> docsData = new ArrayList<DocumentInfo>();
         ArrayList<Document> documents = DocumentCtrl.getInstance().getAllDocuments();
@@ -325,33 +317,25 @@ public class DomainCtrl {
 
 
     // Exports data to file in given path, if the file does not exists, creates it.
-    public boolean exportDocument(String titleName, String authorName, Format fileFormat, String path){
-        if(DocumentCtrl.getInstance().existsDocument(titleName, authorName)){
-            Document doc = DocumentCtrl.getInstance().getDocument(titleName, authorName);
-            ArrayList<Sentence> sentences = doc.getSentences();
-            ArrayList<String> content = new ArrayList<String>();
-            for(Sentence sentence: sentences){
-                content.add(sentence.toString());
-            }
-            return persistanceCtrl.exportToFile(titleName, authorName, content, fileFormat, path);
+    public void exportDocument(String titleName, String authorName, Format fileFormat, String path) throws Exception{
+        if(!DocumentCtrl.getInstance().existsDocument(titleName, authorName)) throw new Exception("A document with this title and author does not exist.");
+        Document doc = DocumentCtrl.getInstance().getDocument(titleName, authorName);
+        ArrayList<Sentence> sentences = doc.getSentences();
+        ArrayList<String> content = new ArrayList<String>();
+        for(Sentence sentence: sentences){
+            content.add(sentence.toString());
         }
-        return false;
+        persistanceCtrl.exportToFile(titleName, authorName, content, fileFormat, path);
     }
 
-    public DocumentInfo importDocumentFromFile(String path, Format fileFormat){
+    public DocumentInfo importDocumentFromFile(String path, Format fileFormat) throws Exception{
         DocumentInfo docInfo = persistanceCtrl.importFromFile(path, fileFormat);
-        if(addDocument(docInfo)){
-            return docInfo;
-            //Document doc = DocumentCtrl.getInstance().getDocument(docInfo.getTitle(), docInfo.getAuthor());
-            //doc.setPath(path);
-            //doc.setFormat(fileFormat);
-            //return true;
-        }
-        return null;
+        addDocument(docInfo);
+        return docInfo;
     }
 
     // Clears all data in the domain and persistance
-    public void clearAllData(){
+    public void clearAllData() throws Exception{
         // Clear domain data
         AuthorCtrl.getInstance().clear();
         TitleCtrl.getInstance().clear();

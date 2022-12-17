@@ -15,29 +15,27 @@ import java.util.Scanner;
 import java.util.ArrayList;
 
 public class DocumentImporterPROP implements DocumentImporter{
-    public DocumentInfo importFromFile(String path) {
-        DocumentInfo docInfo = null;
-        try{
-            File file = new File(path);
-            Scanner scanner = new Scanner(file);
+    public DocumentInfo importFromFile(String path) throws FileNotFoundException, IOException, Exception{
+        File file = new File(path);
+        Scanner scanner = new Scanner(file);
 
-            scanner.nextLine();
-            String title = scanner.nextLine();
+        scanner.nextLine();
+        String title = scanner.nextLine();
 
-            scanner.nextLine();
-            String author = scanner.nextLine();
-            
-            scanner.nextLine();
-            ArrayList<String> content = new ArrayList<String>();
-            while(scanner.hasNextLine()){
-                content.add(scanner.nextLine() + "\n");
-            }
-            scanner.close();
-            FileTime fileCreation = (FileTime) Files.getAttribute(file.toPath(), "creationTime");
-            FileTime fileModification = (FileTime) Files.getAttribute(file.toPath(), "lastModifiedTime");
+        scanner.nextLine();
+        String author = scanner.nextLine();
+        
+        scanner.nextLine();
+        ArrayList<String> content = new ArrayList<String>();
+        while(scanner.hasNextLine()){
+            content.add(scanner.nextLine() + "\n");
+        }
+        scanner.close();
+        FileTime fileCreation = (FileTime) Files.getAttribute(file.toPath(), "creationTime");
+        FileTime fileModification = (FileTime) Files.getAttribute(file.toPath(), "lastModifiedTime");
 
-            docInfo = new DocumentInfo(0, title, author, LocalDateTime.ofInstant(fileCreation.toInstant(), ZoneId.systemDefault()), LocalDateTime.ofInstant(fileModification.toInstant(), ZoneId.systemDefault()), content, path, Format.PROP, file.getName());
-        } catch (IOException ignored) {}
+        DocumentInfo docInfo = new DocumentInfo(0, title, author, LocalDateTime.ofInstant(fileCreation.toInstant(), ZoneId.systemDefault()), LocalDateTime.ofInstant(fileModification.toInstant(), ZoneId.systemDefault()), content, path, Format.PROP, file.getName());
+
         return docInfo;
     }
 }
