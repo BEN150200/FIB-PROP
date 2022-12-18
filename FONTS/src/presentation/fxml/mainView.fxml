@@ -59,6 +59,7 @@
                   <MenuItem mnemonicParsing="false" onAction="#openFile" text="Open…" />
                   <SeparatorMenuItem mnemonicParsing="false" />
                   <MenuItem mnemonicParsing="false" onAction="#deleteDocument" text="Delete Document" />
+                  <MenuItem fx:id="closeDocButton" mnemonicParsing="false" onAction="#closeCurrentTab" text="Close Document" />
                   <MenuItem fx:id="saveButton" mnemonicParsing="false" onAction="#saveDocument" text="Save" />
                   <MenuItem mnemonicParsing="false" onAction="#saveAsDocument" text="Save As…" />
                   <SeparatorMenuItem mnemonicParsing="false" />

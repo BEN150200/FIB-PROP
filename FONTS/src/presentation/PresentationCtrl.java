@@ -84,10 +84,7 @@ public class PresentationCtrl {
     }
 
     public boolean existsDocument(String title, String author) {
-        if (DomainCtrl.getInstance().getOneDocument(title, author) != null) {
-            return true;
-        }
-        return false;
+        return DomainCtrl.getInstance().getOneDocument(title, author) != null;
     }
 
 
@@ -97,6 +94,19 @@ public class PresentationCtrl {
     public void addBooleanExpression (String boolExpName, String boolExp) throws Exception{
         DomainCtrl.getInstance().addBooleanExpression(boolExpName,boolExp);
     }
+
+    public HashMap<String,String> getAllBooleanExpressions() {
+        return DomainCtrl.getInstance().getAllBooleanExpresions();
+    }
+
+    public boolean existsBooleanExpression(String boolExpName){
+        return DomainCtrl.getInstance().existsBooleanExpression(boolExpName);
+    }
+
+    public boolean deleteBooleanExpression(String boolExpName) {
+        return DomainCtrl.getInstance().deleteBooleanExpression(boolExpName);
+    }
+
 
     /**
      * Complex Searches Functions
@@ -112,22 +122,9 @@ public class PresentationCtrl {
         return DomainCtrl.getInstance().similarDocumentsSearch(title, author, k);
     }
 
-    public HashMap<String,String> getAllBooleanExpresions() {
-        return DomainCtrl.getInstance().getAllBooleanExpresions();
-    }
-
-    public boolean existsBooleanExpression(String boolExpName){
-        return DomainCtrl.getInstance().existsBooleanExpression(boolExpName);
-    }
-
-    public boolean deleteBooleanExpression(String boolExpName) {
-        return DomainCtrl.getInstance().deleteBooleanExpression(boolExpName);
-    }
-
     public Either<String, ArrayList<DocumentInfo>> weightedSearch(String query) {
         return DomainCtrl.getInstance().documentsByQuery(query);
     }
-
 
 
     /**
@@ -139,30 +136,57 @@ public class PresentationCtrl {
      */
 
     public boolean saveDocument(String title, String author, ArrayList<String> content) {
-        return DomainCtrl.getInstance().saveDocument(title, author, content);
+        try {
+            DomainCtrl.getInstance().saveDocument(title, author, content);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     public void saveAsDocument(DocumentInfo docToBeSaved) {
-        DomainCtrl.getInstance().saveAsDocument(docToBeSaved);
+        try {
+            DomainCtrl.getInstance().saveAsDocument(docToBeSaved);
+        } catch (Exception e) {
+            showExceptionAlert(e.getMessage());
+        }
     }
 
     public void deleteDocument(String title, String author) {
         DomainCtrl.getInstance().deleteDocument(title, author);
     }
 
+    public void deleteDocument(DocumentInfo documentInfo) {
+        mainViewCtrl.closeTab(documentInfo.getTitle(), documentInfo.getAuthor());
+        deleteDocument(documentInfo.getTitle(), documentInfo.getAuthor());
+    }
+
     public void export(DocumentInfo docToBeSaved) {
-        DomainCtrl.getInstance().exportDocument(docToBeSaved);
+        try {
+            DomainCtrl.getInstance().exportDocument(docToBeSaved);
+        } catch (Exception e) {
+            showExceptionAlert(e.getMessage());
+        }
     }
 
     public DocumentInfo importDocument(String path, Format format) {
-        return DomainCtrl.getInstance().importDocumentFromFile(path, format);
+        try {
+            return DomainCtrl.getInstance().importDocumentFromFile(path, format);
+        } catch (Exception e) {
+            showExceptionAlert(e.getMessage());
+        }
+        return null;
     }
 
     /**
      * Data Persistance Functions
      */
     public void doBackup() {
-        DomainCtrl.getInstance().saveData();
+        try {
+            DomainCtrl.getInstance().saveData();
+        } catch (Exception e) {
+            showExceptionAlert(e.getMessage());
+        }
     }
 
     public void restoreBackup() throws Exception {
@@ -170,30 +194,27 @@ public class PresentationCtrl {
     }
 
     public void deleteBackup() {
-        DomainCtrl.getInstance().clearAllData();
+        try {
+            DomainCtrl.getInstance().clearAllData();
+        } catch (Exception e) {
+            showExceptionAlert(e.getMessage());
+        }
     }
 
     //TODO: afegir funcio per eliminar tot el contingut del sistema
     public void deleteData() {
     }
 
-
-
-    public void saveAllDocs() {
-        mainViewCtrl.saveAllDocs();
+    public void closeAllTabs() {
+        mainViewCtrl.closeAllTabs();
     }
-
-    public boolean unsavedDocuments() {
-        return mainViewCtrl.unsavedDocuments();
-    }
-
 
     /**
      * Tractament de les excepcions
      */
 
-    public void setError(String error) {
-        mainViewCtrl.setMessage(error);
+    public void setMessage(String message) {
+        mainViewCtrl.setMessage(message);
     }
     public void showExceptionAlert (String message) {
         mainViewCtrl.showExceptionAlert(message);

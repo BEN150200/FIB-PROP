@@ -5,6 +5,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class DocumentTabCtrl {
     @FXML
@@ -26,15 +27,15 @@ public class DocumentTabCtrl {
 
     private void setListeners() {
         title.textProperty().addListener((observableValue, oldValue, newValue) -> {
-            if (modified == false && oldValue != newValue) modified = true;
+            if (!modified && !Objects.equals(oldValue, newValue)) modified = true;
         });
 
         author.textProperty().addListener((observableValue, oldValue, newValue) -> {
-            if (modified == false && oldValue != newValue) modified = true;
+            if (!modified && !Objects.equals(oldValue, newValue)) modified = true;
         });
 
         textArea.textProperty().addListener((observableValue, oldValue, newValue) -> {
-            if (modified == false && oldValue != newValue) modified = true;
+            if (!modified && !Objects.equals(oldValue, newValue)) modified = true;
         });
     }
 
@@ -64,6 +65,7 @@ public class DocumentTabCtrl {
 
     public void setContent(ArrayList<String> content) {
         for (String s : content) {
+            System.out.println(s);
             if (s.lastIndexOf("\n") == -1) textArea.appendText(s+"\n");
             else textArea.appendText(s);
         }

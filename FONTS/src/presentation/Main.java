@@ -31,18 +31,17 @@ public class Main extends Application {
 
 
         stage.setOnCloseRequest(windowEvent -> {
-            if (PresentationCtrl.getInstance().unsavedDocuments()) {
-                Alert saveAlert = new Alert(Alert.AlertType.CONFIRMATION, "Save all the files before exit?", ButtonType.YES, ButtonType.NO, ButtonType.CANCEL);
-                saveAlert.setTitle("Save Backup");
-                saveAlert.initModality(Modality.APPLICATION_MODAL);
-                saveAlert.initOwner(stage);
-                saveAlert.showAndWait();
-                if (saveAlert.getResult() == ButtonType.YES) {
-                    PresentationCtrl.getInstance().saveAllDocs();
-                }
-                else if (saveAlert.getResult() == ButtonType.CANCEL) {
-                    windowEvent.consume();
-                }
+
+            Alert saveAlert = new Alert(Alert.AlertType.CONFIRMATION, "Save all the files before exit?", ButtonType.YES, ButtonType.NO);
+            saveAlert.setTitle("Save Backup");
+            saveAlert.initModality(Modality.APPLICATION_MODAL);
+            saveAlert.initOwner(stage);
+            saveAlert.showAndWait();
+            if (saveAlert.getResult() == ButtonType.YES) {
+                PresentationCtrl.getInstance().closeAllTabs();
+            }
+            else if (saveAlert.getResult() == ButtonType.NO) {
+                windowEvent.consume();
             }
             PresentationCtrl.getInstance().doBackup();
 

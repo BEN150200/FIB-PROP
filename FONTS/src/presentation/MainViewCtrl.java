@@ -1,5 +1,17 @@
 package src.presentation;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.event.ActionEvent;
+import javafx.event.Event;
+import javafx.event.EventHandler;
+import javafx.event.EventType;
+import javafx.geometry.Insets;
+import javafx.scene.control.skin.LabelSkin;
+import javafx.scene.control.skin.TabPaneSkin;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.StackPane;
+import javafx.stage.Modality;
 import src.domain.core.DocumentInfo;
 import src.domain.preprocessing.Tokenizer;
 import src.enums.Format;
@@ -22,6 +34,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.CompletableFuture;
 
 import io.vavr.control.Try;
@@ -36,6 +49,9 @@ public class MainViewCtrl {
 
     @FXML
     private MenuItem saveButton;
+
+    @FXML
+    private MenuItem closeDocButton;
 
     @FXML
     private MenuItem newDocButton;
@@ -60,6 +76,7 @@ public class MainViewCtrl {
     private Label errorLable;
 
 
+
     //all the search panels with his controllers
     private VBox allDocumentsView;
     private ResultTableCtrl allDocumentsCtrl;
@@ -73,8 +90,8 @@ public class MainViewCtrl {
     private VBox booleanSearchView;
     private BooleanExprSearchCtrl booleanSearchCtrl;
 
-    private VBox weightSearchView;
-    private WeightedSearchCtrl weightSearchCtrl;
+    private VBox weightedSearchView;
+    private WeightedSearchCtrl weightedSearchCtrl;
 
 
     //stores the position of the divider for the search panels to make all open with the same width
@@ -88,23 +105,15 @@ public class MainViewCtrl {
 
     HashMap<Tab, DocumentTabCtrl> tabControllers = new HashMap<>();
 
-
-
-
-    //String currentTitle;
-    //String currentAuthor;
-
-    public void initialize() throws Exception {
+    public void initialize() {
         //initialize the search menus and the listeners for the buttons
         initializeSearchPanels();
         setListeners();
-        setShortcuts();
         searchVisible = false; //the program starts with the search panels not visible
         dividerPosition = 250.0; //initial position of the search panels
-
-
+        
         restoreBackup(); //TODO: show a restore dialog if there is a backup
-
+        
         newDocCounter = 0; // counter initialized at 0
     }
 
@@ -112,32 +121,57 @@ public class MainViewCtrl {
      * Initialize all the search panels of the side menu and store the controllers
      * @throws IOException
      */
-    private void initializeSearchPanels() throws IOException {
-        FXMLLoader loader1 = new FXMLLoader(getClass().getResource("/src/presentation/fxml/resultTable.fxml"));
-        allDocumentsView = loader1.load();
-        allDocumentsCtrl = loader1.getController();
-        allDocumentsCtrl.setForAllDocs();
-        SplitPane.setResizableWithParent(allDocumentsView, false);
+    private void initializeSearchPanels() {
+        //load the panel that shows all the documents
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/src/presentation/fxml/resultTable.fxml"));
+        try {
+            allDocumentsView = loader.load();
+            allDocumentsCtrl = loader.getController();
+            allDocumentsCtrl.setForAllDocs();
+            SplitPane.setResizableWithParent(allDocumentsView, false);
+        } catch (IOException e) {
+            setMessage("resultTable.fxml file not found, the allDocumentsView could not be loaded");
+        }
 
-        FXMLLoader loader2 = new FXMLLoader(getClass().getResource("/src/presentation/fxml/titleAuthorPanel.fxml"));
-        titleAuthorSearchView = loader2.load();
-        titleAuthorSearchCtrl = loader2.getController();
-        SplitPane.setResizableWithParent(titleAuthorSearchView, false);
+        //load the panel to search by title and author
+        loader = new FXMLLoader(getClass().getResource("/src/presentation/fxml/titleAuthorPanel.fxml"));
+        try {
+            titleAuthorSearchView = loader.load();
+            titleAuthorSearchCtrl = loader.getController();
+            SplitPane.setResizableWithParent(titleAuthorSearchView, false);
+        } catch (IOException e) {
+            setMessage("titleAuthorPanel.fxml file not found, the titleAuthorSearchView could not be loaded");
+        }
 
-        FXMLLoader loader3 = new FXMLLoader(getClass().getResource("/src/presentation/fxml/similarityPanel.fxml"));
-        similaritySearchView = loader3.load();
-        similaritySearchCtrl = loader3.getController();
-        SplitPane.setResizableWithParent(similaritySearchView, false);
+        //load the panel of similarity search
+        loader = new FXMLLoader(getClass().getResource("/src/presentation/fxml/similarityPanel.fxml"));
+        try {
+            similaritySearchView = loader.load();
+            similaritySearchCtrl = loader.getController();
+            SplitPane.setResizableWithParent(similaritySearchView, false);
+        } catch (IOException e) {
+            setMessage("similarityPanel.fxml file not found, the similaritySearchView could not be loaded");
+        }
+        
+        //load the panel of boolean search
+        loader = new FXMLLoader(getClass().getResource("/src/presentation/fxml/booleanExpressionPane.fxml"));
+        try {
+            booleanSearchView = loader.load();
+            booleanSearchCtrl = loader.getController();
+            SplitPane.setResizableWithParent(booleanSearchView, false);
+        } catch (IOException e) {
+            setMessage("booleanExpressionPane.fxml file not found, the booleanSearchCtrl could not be loaded");
+        }
 
-        FXMLLoader loader4 = new FXMLLoader(getClass().getResource("/src/presentation/fxml/booleanExpressionPane.fxml"));
-        booleanSearchView = loader4.load();
-        booleanSearchCtrl = loader4.getController();
-        SplitPane.setResizableWithParent(booleanSearchView, false);
-
-        FXMLLoader loader5 = new FXMLLoader(getClass().getResource("/src/presentation/fxml/weightedPanel.fxml"));
-        weightSearchView = loader5.load();
-        weightSearchCtrl = loader5.getController();
-        SplitPane.setResizableWithParent(weightSearchView, false);
+        //load the panel of weighted search
+        loader = new FXMLLoader(getClass().getResource("/src/presentation/fxml/weightedPanel.fxml"));
+        try {
+            weightedSearchView = loader.load();
+            weightedSearchCtrl = loader.getController();
+            SplitPane.setResizableWithParent(weightedSearchView, false);
+        } catch (IOException e) {
+            setMessage("weightedPanel.fxml file not found, the weightSearchView could not be loaded");
+        }
     }
 
     /**
@@ -160,19 +194,14 @@ public class MainViewCtrl {
 
         similarButton.setOnAction(event -> {
             contractSearch(similaritySearchView);
+            similaritySearchCtrl.update();
         });
 
         weightButton.setOnAction(event -> {
-            contractSearch(weightSearchView);
+            contractSearch(weightedSearchView);
         });
     }
 
-    private void setShortcuts() {
-        saveButton.setAccelerator(new KeyCodeCombination(KeyCode.S, KeyCombination.CONTROL_DOWN));
-        newDocButton.setAccelerator(new KeyCodeCombination(KeyCode.N, KeyCombination.CONTROL_DOWN));
-        
-
-    }
     /**
      * Handler of the side menu buttons, it manages the search panel that is currently opened and the new to be open
      * @param newView search that wants to be opened if it's not the current one
@@ -206,6 +235,7 @@ public class MainViewCtrl {
         }
     }
 
+
     /**
      * Opens a new Document Tab that is empty
      * @throws IOException
@@ -231,16 +261,19 @@ public class MainViewCtrl {
         newEmptyTab("Boolean Search", "booleanExpressionPane.fxml");
     }
 
+
     /**
      *
      * @param tabName Name of the new Tab to be created
      * @param fxmlFileName  String with the name of the FXML file with the content of the tab
+     * @return return the tab created
      * @throws IOException
      */
-    private void newEmptyTab(String tabName, String fxmlFileName) throws IOException {
+    private Tab newEmptyTab(String tabName, String fxmlFileName) throws IOException {
 
         boolean noTabs = tabPane.getTabs().isEmpty();
         Tab tab = new Tab(tabName);
+
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/src/presentation/fxml/" + fxmlFileName));
         tab.setContent(loader.load());
         tabPane.getTabs().add(tab);
@@ -248,10 +281,33 @@ public class MainViewCtrl {
         if (noTabs && searchVisible) {
             splitPane.getDividers().get(0).setPosition(dividerPosition);
         }
-        if (fxmlFileName == "documentTab.fxml") {
-            DocumentTabCtrl docController = loader.getController();
-            tabControllers.put(tab, docController);
+        //if the tab is a doc tab
+        if (Objects.equals(fxmlFileName, "documentTab.fxml")) {
+            //set close handler
+            tab.setOnCloseRequest(event -> {
+                DocumentTabCtrl tabCtrl = tabControllers.get(tab);
+
+                if (tabCtrl.modified()) {
+                    Alert saveAlert = new Alert(Alert.AlertType.CONFIRMATION, "This document is not saved, do you want to save it before close it?", ButtonType.YES, ButtonType.NO, ButtonType.CANCEL);
+                    saveAlert.setTitle("Save before close");
+                    saveAlert.initModality(Modality.APPLICATION_MODAL);
+                    saveAlert.showAndWait();
+                    if (saveAlert.getResult() == ButtonType.YES) {
+                        tabPane.getSelectionModel().select(tab);
+                        saveDocument();
+                    }
+                    else if (saveAlert.getResult() == ButtonType.CANCEL) {
+                        event.consume();
+                        return;
+                    }
+                }
+                tabControllers.remove(tab);
+                tabPane.getTabs().remove(tab);
+            });
+            //save the controller
+            tabControllers.put(tab, loader.getController());
         }
+        return tab;
     }
 
     /**
@@ -262,37 +318,51 @@ public class MainViewCtrl {
     public void openDocOnTab(DocumentInfo documentInfo) throws IOException {
         if (documentInfo == null) return;
 
+        if (selectTab(documentInfo.getTitle(), documentInfo.getAuthor())) return;
+
+        //open the documentInfo on new tab
+        Tab tab = newEmptyTab(documentInfo.getFileName(), "documentTab.fxml");
+        DocumentTabCtrl tabCtrl = tabControllers.get(tab);
+
+        //set the content
+        tabCtrl.setTitle(documentInfo.getTitle());
+        tabCtrl.setAuthor(documentInfo.getAuthor());
+        tabCtrl.setContent(documentInfo.getContent());
+        tabCtrl.blockTitleAndAuthor();
+        tabCtrl.setSaved();
+    }
+
+    private boolean selectTab(String title, String author) {
         for (Tab tab: tabControllers.keySet()) {
             DocumentTabCtrl tabCtrl = tabControllers.get(tab);
-            System.out.println(documentInfo.getTitle() == tabCtrl.getTitle());
-            System.out.print(documentInfo.getTitle());
-            System.out.print(tabCtrl.getTitle());
-            if (documentInfo.getTitle() == tabCtrl.getTitle()) {
-
-                if (documentInfo.getAuthor() == tabCtrl.getAuthor()) {
-                    System.out.println("is opened");
+            if (Objects.equals(title, tabCtrl.getTitle())) {
+                if (Objects.equals(author, tabCtrl.getAuthor())) {
                     tabPane.getSelectionModel().select(tab);
+                    return true;
                 }
             }
         }
+        return false;
+    }
 
-        Tab tab = new Tab(documentInfo.getFileName());
-        //loads the content and gets the controller
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/src/presentation/fxml/documentTab.fxml"));
-        tab.setContent(loader.load());
-        DocumentTabCtrl documentTabCtrl = loader.getController();
 
-        //set the content
-        documentTabCtrl.setTitle(documentInfo.getTitle());
-        documentTabCtrl.setAuthor(documentInfo.getAuthor());
-        documentTabCtrl.setContent(documentInfo.getContent());
-        documentTabCtrl.blockTitleAndAuthor();
 
-        //adds the tab to the tabpane and selects it
-        tabPane.getTabs().add(tab);
-        tabPane.getSelectionModel().select(tab);
-        tabControllers.put(tab, documentTabCtrl);
+    public void closeTab(String title, String author) {
+        if (selectTab(title, author)) {
+            closeCurrentTab();
+        }
+    }
 
+    @FXML
+    private void closeCurrentTab() {
+        Event.fireEvent(tabPane.getSelectionModel().getSelectedItem(), new Event(Tab.TAB_CLOSE_REQUEST_EVENT));
+    }
+
+    public void closeAllTabs() {
+        for (int i = 0; i < tabPane.getTabs().size(); i++) {
+            tabPane.getSelectionModel().select(i);
+            closeCurrentTab();
+        }
     }
 
     /**
@@ -375,6 +445,7 @@ public class MainViewCtrl {
         updateAllSearchViews();
     }
 
+
     public void saveAllDocs() {
         tabPane.getSelectionModel().selectFirst();
         int tabs = tabPane.getTabs().size();
@@ -427,7 +498,7 @@ public class MainViewCtrl {
     private void importFile() throws IOException {
         var start = Instant.now();
         FileChooser fileChooser = new FileChooser();
-        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("TEXT files", "*.txt", "*.xml", "*.prop");
+        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("TEXT files", "*.txt", "*.xml", "*.prop", "*.gut");
         fileChooser.getExtensionFilters().add(extFilter);
         Stage fileStage = new Stage();
         List<File> fileList = fileChooser.showOpenMultipleDialog(fileStage);

@@ -116,7 +116,7 @@ public class BooleanExprSearchCtrl {
     }
 
     public void initExpr(){
-        expressions = PresentationCtrl.getInstance().getAllBooleanExpresions();
+        expressions = PresentationCtrl.getInstance().getAllBooleanExpressions();
         getExpressionsNames();
     }
 

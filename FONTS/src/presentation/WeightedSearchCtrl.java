@@ -63,11 +63,11 @@ public class WeightedSearchCtrl {
                 .peek(
                     error -> {
                         resultTableCtrl.clearTable();
-                        PresentationCtrl.getInstance().setError(error);
+                        PresentationCtrl.getInstance().setMessage(error);
                     },
                     result -> {
                         if(result.isEmpty())
-                            PresentationCtrl.getInstance().setError("No document matches the search");
+                            PresentationCtrl.getInstance().setMessage("No document matches the search");
                         
                         resultTableCtrl.updateTable(result);
                     }

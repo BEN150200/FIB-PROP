@@ -79,18 +79,26 @@ public class TitleAuthorSearchCtrl {
         filteredTitles = new FilteredList<>(obsTitles);
         filteredAuthors = new FilteredList<>(obsAuthors);
 
-        titleBox.setItems(filteredTitles);
-        authorBox.setItems(filteredAuthors);
+        titleBox.setItems(obsTitles);
+        authorBox.setItems(obsAuthors);
 
 
     }
 
+
     private void setListeners() {
 
-        //action
 
-        titleBox.setOnAction(event -> { });
-        authorBox.setOnAction(event -> { });
+
+
+        //action
+        titleBox.setOnAction(event -> {
+            titleField.setText(titleBox.getValue());
+        });
+
+        authorBox.setOnAction(event -> {
+            authorField.setText(authorBox.getValue());
+        });
 
         /*
         titleBox.setOnShown(event -> {
@@ -127,9 +135,9 @@ public class TitleAuthorSearchCtrl {
 
          */
 
-        titleBox.setOnAction(event -> {
 
-        });
+
+
 
         titleField.textProperty().addListener((observable, oldValue, newValue) -> {
             filteredTitles.setPredicate(item -> {
@@ -148,11 +156,9 @@ public class TitleAuthorSearchCtrl {
                 return false;
             });
             ArrayList<DocumentInfo> docs = PresentationCtrl.getInstance().getDocuments(newValue, authorBox.getValue());
-            if (docs.isEmpty()) PresentationCtrl.getInstance().setError("There is no document with this title and author");
+            if (docs.isEmpty()) PresentationCtrl.getInstance().setMessage("There is no document with this title and author");
             resultTableCtrl.updateTable(docs);
         });
-        titleBox.setItems(filteredTitles);
-
 
         authorField.textProperty().addListener((observable, oldValue, newValue) ->{
             filteredAuthors.setPredicate(item -> {
@@ -171,42 +177,53 @@ public class TitleAuthorSearchCtrl {
                 return false;
             });
             ArrayList<DocumentInfo> docs = PresentationCtrl.getInstance().getDocuments(titleBox.getValue(), newValue);
-            if (docs.isEmpty()) PresentationCtrl.getInstance().setError("There is no document with this title and author");
+            if (docs.isEmpty()) PresentationCtrl.getInstance().setMessage("There is no document with this title and author");
             resultTableCtrl.updateTable(docs);
         });
-        authorBox.setItems(filteredAuthors);
+
+
+
+
 
         //funcio per desplegar les opcions quan es faci focus
         titleField.focusedProperty().addListener((obs, wasFocused, isNowFocused) -> {
             if (wasFocused && !isNowFocused) {
-                titleBox.setValue(titleField.getText());
+                //titleBox.setValue(titleField.getText());
                 titleBox.hide();
             }
             else if (!wasFocused && isNowFocused) {
-                if(titleBox.getItems().isEmpty()) PresentationCtrl.getInstance().setError("There are no titles in the System");
+                if(titleBox.getItems().isEmpty()) PresentationCtrl.getInstance().setMessage("There are no titles in the System");
                 titleBox.show();
             }
         });
 
         authorField.focusedProperty().addListener((obs, wasFocused, isNowFocused) -> {
             if (wasFocused && !isNowFocused) {
-                authorBox.setValue(authorField.getText());
+                //authorBox.setValue(authorField.getText());
                 authorBox.hide();
             }
             else if (!wasFocused && isNowFocused) {
-                if(authorBox.getItems().isEmpty()) PresentationCtrl.getInstance().setError("There are no authors in the System");
+                if(authorBox.getItems().isEmpty()) PresentationCtrl.getInstance().setMessage("There are no authors in the System");
                 authorBox.show();
             }
         });
 
+
+
+
+
+
+
+
+
         titleField.setOnMouseClicked(mouseEvent -> {
             //titleBox.show();
-            if(titleBox.getItems().isEmpty()) PresentationCtrl.getInstance().setError("There are no titles in the System");
+            if(titleBox.getItems().isEmpty()) PresentationCtrl.getInstance().setMessage("There are no titles in the System");
             titleBox.show();
         });
         authorField.setOnMouseClicked(mouseEvent -> {
             //authorBox.show();
-            if(authorBox.getItems().isEmpty()) PresentationCtrl.getInstance().setError("There are no authors in the System");
+            if(authorBox.getItems().isEmpty()) PresentationCtrl.getInstance().setMessage("There are no authors in the System");
             authorBox.show();
         });
     }

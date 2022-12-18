@@ -66,12 +66,12 @@ public class ResultTableCtrl implements Initializable{
         table.setRowFactory(tv -> {
             TableRow<DocumentInfo> row = new TableRow<>();
             row.setOnMouseClicked(event -> {
-                if (!row.isEmpty()) {
+                if (event.getClickCount() == 2 && (!row.isEmpty()) ) {
                     DocumentInfo rowData = row.getItem();
                     try {
                         PresentationCtrl.getInstance().openDocument(rowData);
                     } catch (IOException e) {
-                        PresentationCtrl.getInstance().setError("ERROR: document not opened");
+                        PresentationCtrl.getInstance().setMessage("ERROR: document not opened");
                         System.out.println("ERROR: document not opened");
                     }
                 }
@@ -81,6 +81,22 @@ public class ResultTableCtrl implements Initializable{
 
         //docsList = PresentationCtrl.getInstance().getAllDocuments();
         updateTable(PresentationCtrl.getInstance().getAllDocuments());
+    }
+
+
+    @FXML
+    private void openDocument() {
+        try {
+            PresentationCtrl.getInstance().openDocument(table.getFocusModel().getFocusedItem());
+        } catch (IOException e) {
+            PresentationCtrl.getInstance().setMessage("ERROR: document not opened");
+        }
+    }
+
+    @FXML
+    private void deleteDocument() {
+        PresentationCtrl.getInstance().deleteDocument(table.getFocusModel().getFocusedItem());
+        table.getItems().remove(table.getFocusModel().getFocusedCell().getRow());
     }
 
     public void setForTitleAuthor() {

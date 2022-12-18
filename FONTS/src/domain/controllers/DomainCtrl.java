@@ -22,7 +22,7 @@ public class DomainCtrl {
      * Attributes
      **/
     private static DomainCtrl instance = null;
-    private static PersistanceCtrl persistanceCtrl = PersistanceCtrl.getInstance();
+    private static final PersistanceCtrl persistanceCtrl = PersistanceCtrl.getInstance();
 
     /**
      * Constructor
@@ -316,7 +316,7 @@ public class DomainCtrl {
     }
 
 
-    // Exports data to file in given path, if the file does not exists, creates it.
+    // Exports data to file in given path, if the file does not exist, creates it.
     public void exportDocument(String titleName, String authorName, Format fileFormat, String path) throws Exception{
         if(!DocumentCtrl.getInstance().existsDocument(titleName, authorName)) throw new Exception("A document with this title and author does not exist.");
         Document doc = DocumentCtrl.getInstance().getDocument(titleName, authorName);
@@ -334,7 +334,7 @@ public class DomainCtrl {
         return docInfo;
     }
 
-    // Clears all data in the domain and persistance
+    // Clears all data in the domain and persistence
     public void clearAllData() throws Exception{
         // Clear domain data
         AuthorCtrl.getInstance().clear();
@@ -344,7 +344,7 @@ public class DomainCtrl {
         BooleanExpressionCtrl.getInstance().clear();
         SearchCtrl.getInstance().clear();
 
-        // Clear persistance data
+        // Clear persistence data
         persistanceCtrl.clearData();
     }
 }
