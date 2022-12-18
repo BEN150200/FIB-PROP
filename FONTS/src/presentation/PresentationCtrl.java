@@ -219,5 +219,9 @@ public class PresentationCtrl {
     public void showExceptionAlert (String message) {
         mainViewCtrl.showExceptionAlert(message);
     }
+
+    public void doSimilaritySearch(String title, String author) {
+        mainViewCtrl.doSimilaritySearch(title, author);
+    }
 }
 

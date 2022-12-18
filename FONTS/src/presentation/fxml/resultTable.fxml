@@ -24,6 +24,7 @@
             <ContextMenu>
               <items>
                 <MenuItem mnemonicParsing="false" onAction="#openDocument" text="Open on a Tab" />
+                  <MenuItem mnemonicParsing="false" onAction="#searchSimilars" text="Search Similar Documents" />
                   <MenuItem mnemonicParsing="false" onAction="#deleteDocument" text="Delete Document" />
               </items>
             </ContextMenu>

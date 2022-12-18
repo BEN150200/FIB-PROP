@@ -32,8 +32,8 @@ public class Main extends Application {
 
         stage.setOnCloseRequest(windowEvent -> {
 
-            Alert saveAlert = new Alert(Alert.AlertType.CONFIRMATION, "Save all the files before exit?", ButtonType.YES, ButtonType.NO);
-            saveAlert.setTitle("Save Backup");
+            Alert saveAlert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to exit?", ButtonType.YES, ButtonType.NO);
+            saveAlert.setTitle("Exit Confirmation");
             saveAlert.initModality(Modality.APPLICATION_MODAL);
             saveAlert.initOwner(stage);
             saveAlert.showAndWait();

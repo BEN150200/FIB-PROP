@@ -603,9 +603,18 @@ public class MainViewCtrl {
         return false;
     }
 
+    public void doSimilaritySearch(String title, String author) {
+        if (!searchVisible || splitPane.getItems().get(0) != similaritySearchView) {
+            contractSearch(similaritySearchView);
+        }
+        similaritySearchCtrl.search(title, author);
+    }
+
     public void showExceptionAlert (String message ) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setContentText(message);
         alert.show();
     }
+
+
 }

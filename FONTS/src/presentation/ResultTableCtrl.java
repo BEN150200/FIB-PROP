@@ -99,6 +99,15 @@ public class ResultTableCtrl implements Initializable{
         table.getItems().remove(table.getFocusModel().getFocusedCell().getRow());
     }
 
+    @FXML
+    private void searchSimilars() {
+        PresentationCtrl.getInstance().doSimilaritySearch(
+                table.getFocusModel().getFocusedItem().getTitle(),table.getFocusModel().getFocusedItem().getAuthor());
+        table.getItems().remove(table.getFocusModel().getFocusedCell().getRow());
+    }
+
+
+
     public void setForTitleAuthor() {
         tableSimilarity.setVisible(false);
         tableModification.setVisible(false);

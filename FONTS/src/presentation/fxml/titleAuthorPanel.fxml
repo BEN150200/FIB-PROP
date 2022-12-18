@@ -3,30 +3,11 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
 <VBox fx:id="vbox" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="220.0" prefWidth="250.0" styleClass="search-layout" stylesheets="@../css/search.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="src.presentation.TitleAuthorSearchCtrl">
-    <HBox fx:id="fieldBox" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="40.0" prefHeight="40.0" VBox.vgrow="NEVER">
-        <Label alignment="CENTER" contentDisplay="CENTER" maxWidth="45.0" minWidth="45.0" text="Title" textAlignment="CENTER" HBox.hgrow="ALWAYS">
-            <HBox.margin>
-                <Insets left="5.0" right="5.0" />
-            </HBox.margin>
-            <font>
-                <Font size="14.0" />
-            </font>
-        </Label>
-      <TextField fx:id="titleField" HBox.hgrow="ALWAYS" />
-        <ComboBox fx:id="titleBox" maxWidth="1.7976931348623157E308" minHeight="25.0" minWidth="26.0" prefHeight="25.0" prefWidth="26.0" visibleRowCount="100" HBox.hgrow="NEVER" />
-        <VBox.margin>
-            <Insets />
-        </VBox.margin>
-        <padding>
-            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-        </padding>
-    </HBox>
     <HBox fx:id="fieldBox1" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="40.0" prefHeight="40.0" VBox.vgrow="NEVER">
         <children>
             <Label alignment="CENTER" contentDisplay="CENTER" minWidth="45.0" text="Author">
@@ -37,13 +18,29 @@
                <Font size="14.0" />
             </font>
             </Label>
-         <TextField fx:id="authorField" HBox.hgrow="ALWAYS" />
-            <ComboBox fx:id="authorBox" maxWidth="1.7976931348623157E308" minHeight="25.0" minWidth="26.0" prefHeight="25.0" prefWidth="26.0" visibleRowCount="100" HBox.hgrow="NEVER">
+            <ComboBox fx:id="authorBox" editable="true" maxWidth="1.7976931348623157E308" minHeight="25.0" minWidth="26.0" prefHeight="28.0" prefWidth="26.0" visibleRowCount="100" HBox.hgrow="ALWAYS">
                 <HBox.margin>
                     <Insets />
                 </HBox.margin>
             </ComboBox>
         </children>
+        <padding>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+        </padding>
+    </HBox>
+    <HBox fx:id="fieldBox" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="40.0" prefHeight="40.0" VBox.vgrow="NEVER">
+        <Label alignment="CENTER" contentDisplay="CENTER" maxWidth="45.0" minWidth="45.0" text="Title" textAlignment="CENTER" HBox.hgrow="ALWAYS">
+            <HBox.margin>
+                <Insets left="5.0" right="5.0" />
+            </HBox.margin>
+            <font>
+                <Font size="14.0" />
+            </font>
+        </Label>
+        <ComboBox fx:id="titleBox" editable="true" maxWidth="1.7976931348623157E308" minHeight="25.0" minWidth="26.0" prefHeight="28.0" prefWidth="26.0" visibleRowCount="100" HBox.hgrow="ALWAYS" />
+        <VBox.margin>
+            <Insets />
+        </VBox.margin>
         <padding>
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
         </padding>

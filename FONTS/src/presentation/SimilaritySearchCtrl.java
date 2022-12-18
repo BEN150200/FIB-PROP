@@ -1,5 +1,6 @@
 package src.presentation;
 
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -15,20 +16,12 @@ import src.domain.core.DocumentInfo;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class SimilaritySearchCtrl {
 
     @FXML
     private ComboBox<String> authorBox;
-
-    @FXML
-    private TextField authorField;
-
-    @FXML
-    private HBox fieldBox;
-
-    @FXML
-    private HBox fieldBox1;
 
     @FXML
     private Spinner<Integer> numSpinner;
@@ -38,9 +31,6 @@ public class SimilaritySearchCtrl {
 
     @FXML
     private ComboBox<String> titleBox;
-
-    @FXML
-    private TextField titleField;
 
     @FXML
     private VBox vbox;
@@ -55,6 +45,10 @@ public class SimilaritySearchCtrl {
 
     FilteredList<String> filteredTitles = new FilteredList<>(obsTitles);
     FilteredList<String> filteredAuthors = new FilteredList<>(obsAuthors);
+
+    FilteredList<String> tempFiltTitles = new FilteredList<>(obsTitles);
+
+    FilteredList<String> tempFiltdAuthors = new FilteredList<>(obsAuthors);
 
     private int currentNum;
 
@@ -89,99 +83,150 @@ public class SimilaritySearchCtrl {
 
     public void update() {
 
-        listDocs = PresentationCtrl.getInstance().getAllDocuments();
-        listTitles = PresentationCtrl.getInstance().getAllTitles();
-        listAuthors = PresentationCtrl.getInstance().getAllAuthors();
 
-        if (titleBox.getValue() == null && authorBox.getValue() == null) resultTableCtrl.updateTable(listDocs);
+        listTitles.add("");
+        listAuthors.add("");
+
+        listTitles.addAll(PresentationCtrl.getInstance().getAllTitles());
+        listAuthors.addAll(PresentationCtrl.getInstance().getAllAuthors());
 
         ObservableList<String> obsTitles = FXCollections.observableArrayList(listTitles);
         ObservableList<String> obsAuthors = FXCollections.observableArrayList(listAuthors);
-        filteredTitles = new FilteredList<>(obsTitles);
-        filteredAuthors = new FilteredList<>(obsAuthors);
 
+        filteredTitles = new FilteredList<String>(obsTitles, p -> true);
+        filteredAuthors = new FilteredList<String>(obsAuthors, p -> true);
 
-        titleBox.setItems(obsTitles);
-        authorBox.setItems(obsAuthors);
+        titleBox.setItems(filteredTitles);
+        authorBox.setItems(filteredAuthors);
 
 
     }
     private void setListeners() {
-
         //action
+        titleBox.getEditor().textProperty().addListener((obs, oldValue, newValue) -> {
+            final TextField editor = titleBox.getEditor();
+            final String selected = titleBox.getSelectionModel().getSelectedItem();
 
+            Platform.runLater(() -> {
 
-        titleBox.setOnAction(event -> {
-            titleField.setText(titleBox.getValue());
+                if (selected == null || !selected.equals(editor.getText())) {
+                    filteredTitles.setPredicate(item -> {
+
+                        if (item.toUpperCase().startsWith(newValue.toUpperCase())) {
+                            return true;
+                        } else {
+                            return false;
+                        }
+                    });
+                }
+            });
         });
 
-        authorBox.setOnAction(event -> {
-            authorField.setText(authorBox.getValue());
+        authorBox.getEditor().textProperty().addListener((obs, oldValue, newValue) -> {
+            final TextField editor = authorBox.getEditor();
+            final String selected = authorBox.getSelectionModel().getSelectedItem();
+
+            Platform.runLater(() -> {
+
+                if (selected == null || !selected.equals(editor.getText())) {
+                    filteredAuthors.setPredicate(item -> {
+
+                        if (item.toUpperCase().startsWith(newValue.toUpperCase())) {
+                            return true;
+                        } else {
+                            return false;
+                        }
+                    });
+                }
+            });
         });
 
-
-        titleField.setOnKeyPressed(keyEvent -> {
-            if (keyEvent.getCode() == KeyCode.ENTER) {
-                search();
-            }
-        });
-
-        authorField.setOnKeyPressed(keyEvent -> {
-            if (keyEvent.getCode() == KeyCode.ENTER) {
-                search();
-            }
-        });
-
-
-
-        //funcio per desplegar les opcions quan es faci focus
-        titleField.focusedProperty().addListener((obs, wasFocused, isNowFocused) -> {
+        titleBox.focusedProperty().addListener((obs, wasFocused, isNowFocused) -> {
             if (wasFocused && !isNowFocused) {
                 titleBox.hide();
             }
             else if (!wasFocused && isNowFocused) {
-                if(titleBox.getItems().isEmpty()) PresentationCtrl.getInstance().setMessage("There are no titles in the System");
+                if (titleBox.getItems().isEmpty())
+                    PresentationCtrl.getInstance().setMessage("There are no titles in the System");
                 titleBox.show();
             }
         });
 
-        authorField.focusedProperty().addListener((obs, wasFocused, isNowFocused) -> {
+        authorBox.focusedProperty().addListener((obs, wasFocused, isNowFocused) -> {
             if (wasFocused && !isNowFocused) {
                 authorBox.hide();
             }
             else if (!wasFocused && isNowFocused) {
-                if(authorBox.getItems().isEmpty()) PresentationCtrl.getInstance().setMessage("There are no authors in the System");
+                if (authorBox.getItems().isEmpty())
+                    PresentationCtrl.getInstance().setMessage("There are no titles in the System");
                 authorBox.show();
             }
         });
 
-        titleField.setOnMouseClicked(mouseEvent -> {
-            //titleBox.show();
-            if(titleBox.getItems().isEmpty()) PresentationCtrl.getInstance().setMessage("There are no titles in the System");
+        titleBox.getEditor().setOnMouseClicked(mouseEvent -> {
             titleBox.show();
         });
-        authorField.setOnMouseClicked(mouseEvent -> {
-            //authorBox.show();
-            if(authorBox.getItems().isEmpty()) PresentationCtrl.getInstance().setMessage("There are no authors in the System");
+
+        authorBox.getEditor().setOnMouseClicked(mouseEvent -> {
             authorBox.show();
         });
+
+        titleBox.setOnAction(actionEvent ->  {
+            if (authorBox.getEditor().getText().isEmpty()) {
+                if (!Objects.equals(titleBox.getEditor().getText(), "") || !titleBox.getEditor().getText().isEmpty()) {
+                    ArrayList<String> tempAuthors = new ArrayList<>();
+                    tempAuthors.add("");
+                    tempAuthors.addAll(PresentationCtrl.getInstance().getAuthorsByTitle(titleBox.getEditor().getText()));
+                    tempFiltdAuthors = new FilteredList<>(FXCollections.observableArrayList(tempAuthors), p -> true);
+                    authorBox.setItems(tempFiltdAuthors);
+                } else {
+                    authorBox.setItems(filteredAuthors);
+                }
+            }
+            if (Objects.equals(titleBox.getEditor().getText(), "") || titleBox.getEditor().getText().isEmpty()) {
+                String temp = authorBox.getEditor().getText();
+                authorBox.setItems(filteredAuthors);
+                authorBox.getEditor().setText(temp);
+            }
+        });
+
+        authorBox.setOnAction(actionEvent ->  {
+            if (titleBox.getEditor().getText().isEmpty()) {
+                if (!Objects.equals(authorBox.getEditor().getText(), "") || !authorBox.getEditor().getText().isEmpty()) {
+                    ArrayList<String> tempTitles = new ArrayList<>();
+                    tempTitles.add("");
+                    tempTitles.addAll(PresentationCtrl.getInstance().getTitlesByAuthor(authorBox.getEditor().getText()));
+                    tempFiltTitles = new FilteredList<>(FXCollections.observableArrayList(tempTitles), p -> true);
+                    titleBox.setItems(tempFiltTitles);
+                }
+                else {
+                    titleBox.setItems(filteredTitles);
+                }
+            }
+            if (Objects.equals(authorBox.getEditor().getText(), "") || authorBox.getEditor().getText().isEmpty()) {
+                String temp = titleBox.getEditor().getText();
+                titleBox.setItems(filteredTitles);
+                titleBox.getEditor().setText(temp);
+            }
+
+        });
+
+
     }
 
     @FXML
     private void search() {
-        if (!titleField.getText().isEmpty() && !authorField.getText().isEmpty()) {
-            ArrayList<DocumentInfo> resultDocs = PresentationCtrl.getInstance().similaritySearch(titleField.getText(), authorField.getText(), numSpinner.getValue());
+        if (!titleBox.getEditor().getText().isEmpty() && !authorBox.getEditor().getText().isEmpty()) {
+            ArrayList<DocumentInfo> resultDocs = PresentationCtrl.getInstance().similaritySearch(titleBox.getEditor().getText(), authorBox.getEditor().getText(), numSpinner.getValue());
             if (resultDocs == null) PresentationCtrl.getInstance().setMessage("the document not exists or there are no similar ones");
             else resultTableCtrl.updateTable(resultDocs);
         }
     }
 
-    public void setTitle(String title) {
-
-    }
-
-    public void setAuthor(String author) {
-
+    public void search(String title, String author) {
+        titleBox.setValue(title);
+        authorBox.setValue(author);
+        search();
     }
 
 }
