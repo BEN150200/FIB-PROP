@@ -593,16 +593,6 @@ public class MainViewCtrl {
         errorLable.setText(message);
     }
 
-
-    public boolean unsavedDocuments() {
-        for (Tab docTab : tabPane.getTabs()) {
-            if (tabControllers.get(docTab).modified()) {
-                return true;
-            }
-        }
-        return false;
-    }
-
     public void doSimilaritySearch(String title, String author) {
         if (!searchVisible || splitPane.getItems().get(0) != similaritySearchView) {
             contractSearch(similaritySearchView);

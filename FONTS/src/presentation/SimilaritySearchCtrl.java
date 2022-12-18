@@ -177,14 +177,18 @@ public class SimilaritySearchCtrl {
                     ArrayList<String> tempAuthors = new ArrayList<>();
                     tempAuthors.add("");
                     tempAuthors.addAll(PresentationCtrl.getInstance().getAuthorsByTitle(titleBox.getEditor().getText()));
-                    tempFiltdAuthors = new FilteredList<>(FXCollections.observableArrayList(tempAuthors), p -> true);
+                    FilteredList<String> tempFiltdAuthors = new FilteredList<>(FXCollections.observableArrayList(tempAuthors), p -> true);
                     authorBox.setItems(tempFiltdAuthors);
                 } else {
+                    String temp = authorBox.getEditor().getText();
+                    authorBox.getItems().clear();
                     authorBox.setItems(filteredAuthors);
+                    authorBox.getEditor().setText(temp);
                 }
             }
             if (Objects.equals(titleBox.getEditor().getText(), "") || titleBox.getEditor().getText().isEmpty()) {
                 String temp = authorBox.getEditor().getText();
+                authorBox.getItems().clear();
                 authorBox.setItems(filteredAuthors);
                 authorBox.getEditor().setText(temp);
             }
@@ -196,11 +200,14 @@ public class SimilaritySearchCtrl {
                     ArrayList<String> tempTitles = new ArrayList<>();
                     tempTitles.add("");
                     tempTitles.addAll(PresentationCtrl.getInstance().getTitlesByAuthor(authorBox.getEditor().getText()));
-                    tempFiltTitles = new FilteredList<>(FXCollections.observableArrayList(tempTitles), p -> true);
+                    FilteredList<String> tempFiltTitles = new FilteredList<>(FXCollections.observableArrayList(tempTitles), p -> true);
                     titleBox.setItems(tempFiltTitles);
                 }
                 else {
+                    String temp = titleBox.getEditor().getText();
+                    titleBox.getItems().clear();
                     titleBox.setItems(filteredTitles);
+                    titleBox.getEditor().setText(temp);
                 }
             }
             if (Objects.equals(authorBox.getEditor().getText(), "") || authorBox.getEditor().getText().isEmpty()) {
