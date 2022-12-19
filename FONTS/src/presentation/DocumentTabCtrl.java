@@ -6,6 +6,7 @@ import javafx.scene.control.TextField;
 
 import java.util.ArrayList;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class DocumentTabCtrl {
     @FXML
@@ -64,10 +65,11 @@ public class DocumentTabCtrl {
     }
 
     public void setContent(ArrayList<String> content) {
-        for (String s : content) {
-            if (s.lastIndexOf("\n") == -1) textArea.appendText(s+"\n");
-            else textArea.appendText(s);
-        }
+        var text = content.stream()
+            .map(s -> s.replace('\n', ' ').stripTrailing())
+            .collect(Collectors.joining("\n"));
+
+        textArea.setText(text);
         newdoc = false;
     }
 
