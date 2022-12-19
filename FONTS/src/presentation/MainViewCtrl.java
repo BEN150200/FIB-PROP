@@ -369,13 +369,19 @@ public class MainViewCtrl {
      * Imports a file and opens it in a new tab
      * @throws IOException
      */
-    public void openFile() throws IOException {
+    public void openFile() {
         FileChooser fileChooser = new FileChooser();
         FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("TEXT files", "*.gut", "*.txt", "*.xml", "*.prop");
         fileChooser.getExtensionFilters().add(extFilter);
         Stage fileStage = new Stage();
         File file = fileChooser.showOpenDialog(fileStage);
-        openDocOnTab(importOneFile(file));
+        if(file != null)
+            try {
+                openDocOnTab(importOneFile(file));
+            }
+            catch(IOException exception) {
+                PresentationCtrl.getInstance().setMessage("ERROR: Unable to open new tab");
+            }
     }
 
     /**
@@ -423,17 +429,20 @@ public class MainViewCtrl {
         fileChooser.getExtensionFilters().add(extFilter);
         Stage fileStage = new Stage();
         File file = fileChooser.showSaveDialog(fileStage);
-        String path = file.getPath();
-        Format format = extractFormat(path);
 
-        ArrayList<String> content = Tokenizer.splitSentences(currentTabCtrl.getContent());
-        DocumentInfo docToBeSaved = new DocumentInfo(null, currentTabCtrl.getTitle(), currentTabCtrl.getAuthor(), LocalDateTime.now(), LocalDateTime.now(), content, path, format, file.getName());
+        if(file != null) {
+            String path = file.getPath();
+            Format format = extractFormat(path);
 
-        PresentationCtrl.getInstance().saveAsDocument(docToBeSaved);
-        tabPane.getSelectionModel().getSelectedItem().setText(file.getName());
-        updateAllSearchViews();
-        currentTabCtrl.setSaved();
-        currentTabCtrl.blockTitleAndAuthor();
+            ArrayList<String> content = Tokenizer.splitSentences(currentTabCtrl.getContent());
+            DocumentInfo docToBeSaved = new DocumentInfo(null, currentTabCtrl.getTitle(), currentTabCtrl.getAuthor(), LocalDateTime.now(), LocalDateTime.now(), content, path, format, file.getName());
+
+            PresentationCtrl.getInstance().saveAsDocument(docToBeSaved);
+            tabPane.getSelectionModel().getSelectedItem().setText(file.getName());
+            updateAllSearchViews();
+            currentTabCtrl.setSaved();
+            currentTabCtrl.blockTitleAndAuthor();
+        }
     }
 
     @FXML
@@ -483,19 +492,22 @@ public class MainViewCtrl {
         fileChooser.getExtensionFilters().add(extFilter);
         Stage fileStage = new Stage();
         File file = fileChooser.showSaveDialog(fileStage);
-        String path = file.getPath();
-        String name = file.getName();
 
-        ArrayList<String> content = Tokenizer.splitSentences(currentTabCtrl.getContent());
+        if(file != null) {
+            String path = file.getPath();
+            String name = file.getName();
 
-        DocumentInfo docToBeSaved = new DocumentInfo(null, currentTabCtrl.getTitle(), currentTabCtrl.getAuthor(), LocalDateTime.now(), LocalDateTime.now(), content, path, format, file.getName());
+            ArrayList<String> content = Tokenizer.splitSentences(currentTabCtrl.getContent());
 
-        PresentationCtrl.getInstance().export(docToBeSaved);
-        updateAllSearchViews();
+            DocumentInfo docToBeSaved = new DocumentInfo(null, currentTabCtrl.getTitle(), currentTabCtrl.getAuthor(), LocalDateTime.now(), LocalDateTime.now(), content, path, format, file.getName());
+
+            PresentationCtrl.getInstance().export(docToBeSaved);
+            updateAllSearchViews();
+        }
     }
 
     @FXML
-    private void importFile() throws IOException {
+    private void importFile() {
         var start = Instant.now();
         FileChooser fileChooser = new FileChooser();
         FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("TEXT files", "*.txt", "*.xml", "*.prop", "*.gut");
@@ -518,7 +530,7 @@ public class MainViewCtrl {
         return Try.of(() -> importOneFile(file));
     }
 
-    private DocumentInfo importOneFile(File file) throws IOException {
+    private DocumentInfo importOneFile(File file) {
 
         String path = file.getPath();
         Format format = extractFormat(path);
