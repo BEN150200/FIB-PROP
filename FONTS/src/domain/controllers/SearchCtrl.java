@@ -112,22 +112,7 @@ public class SearchCtrl {
     }
 
     @SuppressWarnings("deprecation")
-    /*public Either<String, ArrayList<DocumentInfo>> documentsByQuery(String query) {
-        return indexingCtrl
-            .weightedQuery(query)
-            .map(
-                results
-                ->
-                results.map(value
-                (
-                    (docId, similarity) -> DocumentCtrl.getInstance()
-                        .getDocument(docId)
-                        .getInfo().withSimilarity(similarity)
-                ))
-                .values()
-                .collect(Collectors.toCollection(ArrayList::new))
-            );
-    }*/
+
     public Either<String, ArrayList<DocumentInfo>> documentsByQuery(String query) {
         return indexingCtrl
             .weightedQuery(query)
@@ -144,49 +129,6 @@ public class SearchCtrl {
                 .collect(Collectors.toCollection(ArrayList::new))
             );
     }
-    /*public ArrayList<DocumentInfo> similarDocumentsSearch(String titleName, String authorName, Integer k) {
-        Integer docId = DocumentCtrl.getInstance().getDocumentID(titleName, authorName);
-        if(docId != null) {
-            Either<String, HashMap<Integer, Double>> similar = indexingCtrl.querySimilarDocuments(docId);
-            if (similar.isLeft()) {
-                return null;
-            }
-            else {
-                if (k == 0) k = 5; //default
-                LinkedHashMap<Integer, Double> sortedMap = new LinkedHashMap<>();
-                ArrayList<Double> list = new ArrayList<Double>();
-                for (Entry<Integer, Double> entry : similar.get().entrySet()) {
-                    if (entry.getKey() != docId) list.add(entry.getValue());
-                }
-                Collections.sort(list);
-
-                int numDocs;
-                if (list.size() < k) {
-                    numDocs = list.size();
-                }
-                else numDocs = k;
-
-                for (int i = list.size()-1; i >= list.size() - numDocs; --i) {
-                    Double num = list.get(i);
-                    for (Entry<Integer, Double> entry : similar.get().entrySet()) {
-                        if(entry.getValue().equals(num)) {
-                            sortedMap.put(entry.getKey(), num);
-                        }
-                    }
-                }
-                ArrayList<DocumentInfo> docsInfo = new ArrayList<>();
-                sortedMap.forEach((id, value) -> {
-                    DocumentInfo docInf = DocumentCtrl.getInstance().getDocument(id).getInfo();
-                    docInf.setSimilarity(value);
-                    docsInfo.add(docInf);
-                });
-
-                return docsInfo;
-            }
-        }
-
-        return null;
-    }*/
 
     public void addDocument(Integer docId, Iterable<String> content) {
         indexingCtrl.addDocument(docId, content);

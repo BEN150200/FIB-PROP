@@ -1,34 +1,19 @@
 package src.domain.expressions;
-//import java.io.*;
-//import java.util.*;
-
 public class BooleanExpression{
-    //Estructures de la classe
     private String expression;
-    ExpressionTreeNode root;
+    private ExpressionTreeNode root;
 
-
-    //funcions publiques
-
-    /**
-     * @cost 0(1) 
-     * @param //the string of the expression
-     */
-    private BooleanExpression(String expr,ExpressionTreeNode rot){
+    private BooleanExpression(String expr,ExpressionTreeNode rot){ //creadora privada per només crear expressions vàlides
         expression=expr.trim();
         root=rot;
     }
 
-    static public BooleanExpression createBooleanExpression(String expr) throws Exception{
+    static public BooleanExpression createBooleanExpression(String expr) throws Exception{ //creadora que només crea expressions válides
         ExpressionTreeNode rot=new ExpressionTreeNode();
         buildTree(rot,expr);
         return new BooleanExpression(expr,rot);
     }
 
-    /**
-     * @cost 0(1) 
-     * @return the string of the expression 
-     */
     public String getExpression(){
         return expression;
     }
@@ -36,40 +21,20 @@ public class BooleanExpression{
     public ExpressionTreeNode getRoot(){
         return root;
     }
-    /**
-     * @cost 
-     * @return true if the expression is valid, else false
-     */
-    /*private boolean checkExpression(){
-        root=new ExpressionTreeNode();
-        return buildTree(root,expression);
-    }*/
- 
-    public String printTree(){//nomes per veure si va be, eliminar desprs
-        return print(root);
-    }
 
-    //funcions privades
-    /**
-     * @cost 
-     * @param  //the root of the tree and the expression to be converted to a tree
-     * @return true if the expression is correct, else false
-     */
-    static private void buildTree(ExpressionTreeNode rot,String s)throws Exception{
-        while(parentesis(s)){
+    static private void buildTree(ExpressionTreeNode rot,String s)throws Exception{ //funció recursiva encarregada de crear l'arbre mentre comprova que la expressió és correcte
+        while(parentesis(s)){//treu els paréntesis que engloben tota la expressió
             s=s.substring(1,s.length()-1);
         }
         if(s.length()==0) throw new Exception("Incorrect expression: missing operand");
-        int index =findLastOperation(s);//també fa control d'errors
-        if(index==-1) throw new Exception("Algo passa");//no haura de saltar mai aquesta
-        if(index==-2){
-            
-            if(missingOperator(s)) throw new Exception("Incorrect expression: missing operator");
+        int index =findLastOperation(s);//busca la última operació que caldria realitzar de la expressió, també fa control d'errors
+        if(index==-2){//indica que no queda cap operador
+            if(missingOperator(s)) throw new Exception("Incorrect expression: missing operator"); //si la expressió no té operadors i no és un operand válid és incorrecte
             rot.setValue(s);
             return;
         }
         else{
-
+            //subdividim la expressió en dues (o una si la operació es un "!") a partir de la ultima operació a realitzar que hem trobat abans
             String val=String.valueOf(s.charAt(index));
             rot.setValue(val);
             String s1= s.substring(0,index).trim();
@@ -81,17 +46,13 @@ public class BooleanExpression{
                  ExpressionTreeNode r = new ExpressionTreeNode();
                 buildTree(r, s2);
                  rot.setRight(r);
-                 //Exception exc = new Exception("aaasaaa"); 
-
-                //return build(s.l).map(l -> build(r).map(r -> new Node(rot, l, r) per tornar excepcions
-                return;
+                 return;
             }
             else{
                  ExpressionTreeNode r = new ExpressionTreeNode();
                  buildTree(r, s2);
                  rot.setRight(r);
                  if(s1.length()>0) throw new Exception("Incorrect expression: missing operator");
-
                 return;
             }
             
@@ -100,7 +61,7 @@ public class BooleanExpression{
         }
     }
 
-    static private boolean missingOperator(String s){
+    static private boolean missingOperator(String s){ //comprova que s sigui un operand correcte
         char[] x = s.trim().toCharArray();
         if(x[0]=='{'){
             int count=0;
@@ -137,12 +98,7 @@ public class BooleanExpression{
         return false;
     }
 
-    /**
-     * @cost 
-     * @param //a expression
-     * @return the index of the last operation that should be computed, -1 if its not correct, -2 if there arent any operations
-     */
-    static private int findLastOperation(String s) throws Exception{
+    static private int findLastOperation(String s) throws Exception{ //troba la última operació a realitzar en s
         char[] x = s.toCharArray();
         int[] ranking = new int[s.length()];
         int rank = 0;
@@ -150,8 +106,7 @@ public class BooleanExpression{
         boolean cntrCorxetes=false;
         boolean cntrCometes=false;
         int ultimParentesi=0;
-        for(char c : x)
-        { // Increment through every character in your string.
+        for(char c : x) {
             if(!cntrCorxetes && !cntrCometes && (c == '&' || c == '|' || c == '!')) ranking[index] = rank;
             else if(!cntrCorxetes && !cntrCometes && c =='('){
                     ranking[index] = -1;
@@ -201,12 +156,7 @@ public class BooleanExpression{
         return indexMin;//si torna -2 vol dir que no queden operacions 
     }
 
-    /**
-     * @cost 0(1)
-     * @param //two operators (|,&,!)
-     * @return true if iact has lower preference, else return false
-     */
-    static private Boolean hasLowerPreference(char iact, char imin) {
+    static private Boolean hasLowerPreference(char iact, char imin) { //compara la preferencia entre dos operadors
         if (imin == '|') return false;
         if (iact == '|') return true;
         if (imin == '&') return false;
@@ -214,22 +164,7 @@ public class BooleanExpression{
         else return false;
     }
 
-    private String print(ExpressionTreeNode r){
-        if(r.getRight()!=null & r.getLeft()!=null){
-            return "["+ print(r.getLeft())+"]"+r.getValue()+"["+print(r.getRight())+"]";
-        }
-        else if(r.getValue().equals("!")){
-            return r.getValue()+"["+print(r.getRight())+"]";
-        }
-        else return r.getValue();
-    }
-
-    /**
-     * @cost 0(n) ,n=mida s
-     * @param //a string s
-     * @return returns true if it has a parentesis that contains everything else
-     */
-    static private boolean parentesis(String s){//comprova si hi ha un parentesis que conté la expressió sencera
+    static private boolean parentesis(String s){ //comprova si hi ha un parentesis que conté la expressió sencera
         int count=0;
         if(s.length()>1 && s.charAt(0)=='(' && s.charAt(s.length()-1)==')'){
             for(int i=0;i<s.length();i++){
@@ -243,8 +178,4 @@ public class BooleanExpression{
         }
         else return false;
     }
-
-
-    
-    
 }

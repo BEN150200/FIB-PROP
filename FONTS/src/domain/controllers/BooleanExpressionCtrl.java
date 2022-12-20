@@ -8,8 +8,6 @@ import java.util.*;
 
 public class BooleanExpressionCtrl {
     private Map<String,BooleanExpression> savedExpressions= new HashMap<String,BooleanExpression>();//no val la pena ordenarho no?, potser valdria la pena un map
-    //private ArrayList<BooleanExpression> historial=new ArrayList<BooleanExpression>();//aqui si que un vector aixi queden ordenats per entrada, aixo o una queue i quan poso 1 trec el primer si la cua te mida 10 (o la del historial)
-    //private int midaHistorial=10;
 
     private static BooleanExpressionCtrl instance = null;
 
@@ -21,10 +19,7 @@ public class BooleanExpressionCtrl {
     }
 
     public BooleanExpressionCtrl(){}
-    /**
-     * @cost 0(n) n=number of saved expressions
-     * @return Names and expression of all the saved expressions 
-     */
+
     public HashMap<String,String> getSavedExpressionsNames(){//Torna els noms i expressio de les expressions guardades
         HashMap<String,String> names= new HashMap<String,String>();
         for(Map.Entry<String, BooleanExpression> i : savedExpressions.entrySet() ){
@@ -35,75 +30,31 @@ public class BooleanExpressionCtrl {
         return names;
     }
 
-    /**
-     * @cost 0(1)
-     * @param //The name of the desired expression
-     * @return If it exists returns the expression, else exception
-     */
-    public String getExpression(String name){//retorna una string buida si no existeix
+    public String getExpression(String name){//retorna la expressio associada al nom o una string buida si no existeix
         BooleanExpression aux=savedExpressions.get(name);
         if(aux==null) return null;
         return aux.getExpression(); 
     }
 
-    /**
-     * @cost 0(1)
-     * @return The most recent expressions
-     */
-    /*public ArrayList<String> getHistorialExpressions(){//Torna les expressions recents
-        ArrayList<String> exp= new ArrayList<String>(0);
-        for(int i=0; i<historial.size();i++){
-            BooleanExpression s=historial.get(i);
-            exp.add(s.getExpression());
-            //System.out.println(s.getExpression());
-        }
-        return exp;
-    }*/
-
-    /**
-     * @cost 
-     * @param //The expression and its name
-     * @return Return true if the expression is valid, false if invalid
-     */
-    public void saveExpression(String exp, String name) throws Exception {
+    public void saveExpression(String exp, String name) throws Exception {//guarda una nova expressio si es correcte
         BooleanExpression newexp = BooleanExpression.createBooleanExpression(exp);
-        //if(newexp==null) return false;
         savedExpressions.put(name,newexp);
     }
 
-    /**
-     * @cost 
-     * @param //Name of the expression that you want the tree of
-     * @return Return null if the expression do not exist, else returns the root of the expressions tree
-     */
-    public ExpressionTreeNode getSavedExpressionTree(String name){
+    public ExpressionTreeNode getSavedExpressionTree(String name){ //retorna la arrel del arbre associat a la expressió identificada per name
         BooleanExpression aux=savedExpressions.get(name);
-        if(aux==null) return null; //si no existeix return null (canviare a excepcio)
-        //addHistorial(aux);
+        if(aux==null) return null;
         return aux.getRoot();
     }
 
-    /**
-     * @cost 
-     * @param //The expression to be solved
-     * @return returns null if the expression is not correct, else returns the root of the expressions tree
-     */
-    public ExpressionTreeNode createExpressionTree(String exp) throws Exception{
-
+    public ExpressionTreeNode createExpressionTree(String exp) throws Exception{ //crea l'arbre de la expressió i torna la seva arrel si aquest és correcte
         BooleanExpression newexp = BooleanExpression.createBooleanExpression(exp);
-        //if(newexp==null) return null;//haura de retornar excepcio si no es correcte
-        //addHistorial(newexp);
         return newexp.getRoot();
     }
-    
-    /**
-     * @cost 0(1)
-     * @param //The name of the expression to be deleted
-     * @return false if the expression did not exist, else true
-     */
+
     public boolean deleteExpression (String name){
         BooleanExpression aux=savedExpressions.get(name);
-        if(aux==null)  return false;//si no existeix return excepcio
+        if(aux==null)  return false;
         else savedExpressions.remove(name);
         return true;
     }
@@ -112,18 +63,8 @@ public class BooleanExpressionCtrl {
         return (savedExpressions.get(boolExpName)!=null);
     }
 
-    /**
-     * @cost 0(1)
-     * @param //a boolean expression
-     */
-    /*
-    private void addHistorial(BooleanExpression expr) {
-        historial.add(expr);
-        if(historial.size()>midaHistorial) historial.remove(0);
-    }*/
 
-    public void clear(){
+    public void clear(){ //buida la informació guardada
         savedExpressions.clear();
-        //historial.clear();
     }
 }
