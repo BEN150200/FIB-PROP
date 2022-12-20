@@ -8,8 +8,8 @@ import java.util.*;
 
 public class BooleanExpressionCtrl {
     private Map<String,BooleanExpression> savedExpressions= new HashMap<String,BooleanExpression>();//no val la pena ordenarho no?, potser valdria la pena un map
-    private ArrayList<BooleanExpression> historial=new ArrayList<BooleanExpression>();//aqui si que un vector aixi queden ordenats per entrada, aixo o una queue i quan poso 1 trec el primer si la cua te mida 10 (o la del historial)
-    private int midaHistorial=10;
+    //private ArrayList<BooleanExpression> historial=new ArrayList<BooleanExpression>();//aqui si que un vector aixi queden ordenats per entrada, aixo o una queue i quan poso 1 trec el primer si la cua te mida 10 (o la del historial)
+    //private int midaHistorial=10;
 
     private static BooleanExpressionCtrl instance = null;
 
@@ -50,7 +50,7 @@ public class BooleanExpressionCtrl {
      * @cost 0(1)
      * @return The most recent expressions
      */
-    public ArrayList<String> getHistorialExpressions(){//Torna les expressions recents
+    /*public ArrayList<String> getHistorialExpressions(){//Torna les expressions recents
         ArrayList<String> exp= new ArrayList<String>(0);
         for(int i=0; i<historial.size();i++){
             BooleanExpression s=historial.get(i);
@@ -58,7 +58,7 @@ public class BooleanExpressionCtrl {
             //System.out.println(s.getExpression());
         }
         return exp;
-    }
+    }*/
 
     /**
      * @cost 
@@ -116,13 +116,14 @@ public class BooleanExpressionCtrl {
      * @cost 0(1)
      * @param //a boolean expression
      */
+    /*
     private void addHistorial(BooleanExpression expr) {
         historial.add(expr);
         if(historial.size()>midaHistorial) historial.remove(0);
-    }
+    }*/
 
     public void clear(){
         savedExpressions.clear();
-        historial.clear();
+        //historial.clear();
     }
 }

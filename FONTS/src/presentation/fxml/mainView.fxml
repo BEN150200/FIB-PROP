@@ -142,25 +142,37 @@
                   <Tooltip text="All the Documents" />
                </tooltip>
             </Button>
-            <Button id="prefix-search" fx:id="titleAuthorButton" layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0">
+            <Button id="prefix-search" fx:id="titleAuthorButton" layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" text="Search">
                <VBox.margin>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </VBox.margin>
+               <tooltip>
+                  <Tooltip text="Title autor search" />
+               </tooltip>
             </Button>
             <Button id="boolean-query" fx:id="booleanButton" layoutX="10.0" layoutY="60.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0">
                <VBox.margin>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </VBox.margin>
+               <tooltip>
+                  <Tooltip text="Boolean search" />
+               </tooltip>
             </Button>
             <Button id="similar-query" fx:id="similarButton" layoutX="10.0" layoutY="110.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0">
                <VBox.margin>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </VBox.margin>
+               <tooltip>
+                  <Tooltip text="Similarity search" />
+               </tooltip>
             </Button>
             <Button id="weighted-query" fx:id="weightButton" layoutX="10.0" layoutY="160.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0">
                <VBox.margin>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </VBox.margin>
+               <tooltip>
+                  <Tooltip text="Weighted search" />
+               </tooltip>
             </Button>
          </children>
       </VBox>
