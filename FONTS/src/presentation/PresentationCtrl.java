@@ -107,16 +107,26 @@ public class PresentationCtrl {
         return DomainCtrl.getInstance().deleteBooleanExpression(boolExpName);
     }
 
+    public String getExpression(String name){
+        return DomainCtrl.getInstance().getExpression(name);
+    }
+
 
     /**
      * Complex Searches Functions
      */
-    public ArrayList<DocumentInfo> storedBooleanExpressionSearch(String boolExpName) {
-        return DomainCtrl.getInstance().storedBooleanExpressionSearch(boolExpName);
-    }
+
+
+
+
     public ArrayList<DocumentInfo> tempBooleanExpressionSearch(String boolExp)throws Exception{
         return DomainCtrl.getInstance().tempBooleanExpressionSearch(boolExp);
     }
+
+    public ArrayList<DocumentInfo> savedBooleanExpressionSearch(String name)throws Exception{
+        return DomainCtrl.getInstance().savedBooleanExpressionSearch(name);
+    }
+
 
     public ArrayList<DocumentInfo> similaritySearch(String title, String author, int k) {
         return DomainCtrl.getInstance().similarDocumentsSearch(title, author, k);

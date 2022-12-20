@@ -17,17 +17,12 @@ import java.util.Map;
 
 public class BooleanExprSearchCtrl {
     @FXML
-    private TextArea textArea;
-    @FXML
     private TextField expression;
 
     @FXML
     private ComboBox<String> name;
 
     private ResultTableCtrl resultTableCtrl;
-
-    @FXML
-    private VBox resultPane;
 
     private HashMap<String,String> expressions = new HashMap<>();
     @FXML
@@ -48,20 +43,7 @@ public class BooleanExprSearchCtrl {
         name.getEditor().setOnMouseClicked(mouseEvent -> {
             name.show();
         });
-
-        initExpr();
-
-        //update();
     }
-
-    /**
-     * Setters
-     */
-
-    /**
-     *
-     * @param //title
-     */
     public void setExpression(String expression) {
         this.expression.setText(expression);
     }
@@ -70,9 +52,16 @@ public class BooleanExprSearchCtrl {
         this.name.setValue(name);
     }
 
-    public void SearchBooleanExpression(){
+    public void SearchBooleanExpression(){ //realitza la cerca, si és una expressió no guardada crea l'arbre
         try {
-            resultTableCtrl.updateTable( PresentationCtrl.getInstance().tempBooleanExpressionSearch(expression.getText()));
+            if(PresentationCtrl.getInstance().existsBooleanExpression(name.getValue()) &&
+                    PresentationCtrl.getInstance().getExpression(name.getValue()).equals(expression.getText())){
+                resultTableCtrl.updateTable( PresentationCtrl.getInstance().savedBooleanExpressionSearch(name.getValue()));
+            }
+            else {
+                resultTableCtrl.updateTable( PresentationCtrl.getInstance().tempBooleanExpressionSearch(expression.getText()));
+            }
+            System.out.println("Cerca correcte");
         }
         catch (Exception e){
             System.out.println(e);
@@ -80,22 +69,20 @@ public class BooleanExprSearchCtrl {
     }
 
 
-    public void ModifyExpression(){
+    public void ModifyExpression(){ //modifica la expressió amb aquest nom si la nova expressio es correcte
         if(!PresentationCtrl.getInstance().existsBooleanExpression(name.getValue())){
             System.out.println("no existeix");
             return;
         }
         try{
             PresentationCtrl.getInstance().addBooleanExpression (name.getValue(),  expression.getText());
-            initExpr();
-            System.out.println(expressions.size());
             System.out.println("Expressio modificada");
         }
         catch (Exception e){
             System.out.println(e);
         }
     }
-    public void SaveExpression(){
+    public void SaveExpression(){ //guarda la expressió si no existeix cap amb aquest nom i és correcte
 
         if(name.getValue().length()==0) {
             System.out.println("falta un nom");
@@ -107,7 +94,6 @@ public class BooleanExprSearchCtrl {
         }
         try{
             PresentationCtrl.getInstance().addBooleanExpression (name.getValue(),  expression.getText());
-            initExpr();
             System.out.println("Expressio guardada");
         }
         catch (Exception e){
@@ -115,49 +101,30 @@ public class BooleanExprSearchCtrl {
         }
     }
 
-    public void initExpr(){
+    public void initExpr(){ //inicialitza les expressions a la comboBox
         expressions = PresentationCtrl.getInstance().getAllBooleanExpressions();
         getExpressionsNames();
     }
 
     public void putExpression(){
         String expr = expressions.get(name.getValue());
-
         if(expr!= null) setExpression(expr);
     }
 
-    public void deleteExpression(){
+    public void deleteExpression(){ //elimina la expressio
         if(!PresentationCtrl.getInstance().deleteBooleanExpression(name.getValue())) {
             System.out.println("no existeixx");
         }
         else {
             System.out.println("expressio eliminada");
-            initExpr();
         }
     }
     public void getExpressionsNames(){
-        //System.out.println("agafant expressionsss: " + expr.size());
         ArrayList<String> noms = new ArrayList<>();
         for(Map.Entry<String, String> i : expressions.entrySet() ){
-            //if(i.getKey().compareTo(name.getValue()) >= 0 )noms.add(i.getKey());
-            //System.out.println("valor= " + name.getValue());
             noms.add(i.getKey());
         }
         ObservableList<String> nameList = FXCollections.observableArrayList(noms);
         name.setItems(nameList);
     }
-
-    /**
-     * Getters
-     */
-
-    /**
-     *
-     * @return
-     */
-
-    public String getExpression() {
-        return expression.getText();
-    }
-
 }

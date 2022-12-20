@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="d2991d3d-5c40-4108-ac62-9c44333baa2c" name="Changes" comment="de expr booleanes nomes queda el feedback">
+    <list default="true" id="d2991d3d-5c40-4108-ac62-9c44333baa2c" name="Changes" comment="explicacio elements posada">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FONTS/src/domain/controllers/BooleanExpressionCtrl.java" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/src/domain/controllers/BooleanExpressionCtrl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FONTS/src/presentation/fxml/mainView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/src/presentation/fxml/mainView.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/DocumentsData.xml" beforeDir="false" afterPath="$PROJECT_DIR$/data/DocumentsData.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FONTS/src/domain/controllers/DomainCtrl.java" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/src/domain/controllers/DomainCtrl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FONTS/src/domain/controllers/SearchCtrl.java" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/src/domain/controllers/SearchCtrl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FONTS/src/presentation/BooleanExprSearchCtrl.java" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/src/presentation/BooleanExprSearchCtrl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FONTS/src/presentation/PresentationCtrl.java" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/src/presentation/PresentationCtrl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FONTS/src/presentation/fxml/booleanExpressionPane.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/src/presentation/fxml/booleanExpressionPane.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/booleanExpressionsData.xml" beforeDir="false" afterPath="$PROJECT_DIR$/data/booleanExpressionsData.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -123,7 +125,14 @@
       <option name="project" value="LOCAL" />
       <updated>1670521330107</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="explicacio elements posada">
+      <created>1671529568372</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1671529568372</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -142,7 +151,8 @@
     <MESSAGE value="pestanya expressions booleanes creada" />
     <MESSAGE value="pestanya expressions booleanes millorada" />
     <MESSAGE value="pestanya expressions booleanes casi acabada" />
-    <option name="LAST_COMMIT_MESSAGE" value="pestanya expressions booleanes casi acabada" />
+    <MESSAGE value="explicacio elements posada" />
+    <option name="LAST_COMMIT_MESSAGE" value="explicacio elements posada" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

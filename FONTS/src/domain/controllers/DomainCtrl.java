@@ -212,8 +212,8 @@ public class DomainCtrl {
         return SearchCtrl.getInstance().similarDocumentsSearch(titleName, authorName, k);
     }
 
-    public ArrayList<DocumentInfo> storedBooleanExpressionSearch (String boolExpName) {
-        return SearchCtrl.getInstance().storedBooleanExpressionSearch(boolExpName);
+    public ArrayList<DocumentInfo> savedBooleanExpressionSearch(String name){
+        return SearchCtrl.getInstance().savedBooleanExpressionSearch(name);
     }
 
     public ArrayList<DocumentInfo> tempBooleanExpressionSearch (String boolExp) throws Exception {
@@ -233,7 +233,9 @@ public class DomainCtrl {
         return SearchCtrl.getInstance().documentsByQuery(query);
 
     }
-
+    public String getExpression(String name){
+        return BooleanExpressionCtrl.getInstance().getExpression(name);
+    }
 
     private void addDocument(DocumentInfo docToBeSaved) throws Exception{
         if (DocumentCtrl.getInstance().existsDocument(docToBeSaved.getTitle(), docToBeSaved.getAuthor())) throw new Exception("A document with this title and author already exists.");
