@@ -61,43 +61,43 @@ public class BooleanExprSearchCtrl {
             else {
                 resultTableCtrl.updateTable( PresentationCtrl.getInstance().tempBooleanExpressionSearch(expression.getText()));
             }
-            System.out.println("Cerca correcte");
+            PresentationCtrl.getInstance().setMessage("Search done");
         }
         catch (Exception e){
-            System.out.println(e);
+            PresentationCtrl.getInstance().showExceptionAlert(e.getMessage());
         }
     }
 
 
     public void ModifyExpression(){ //modifica la expressió amb aquest nom si la nova expressio es correcte
         if(!PresentationCtrl.getInstance().existsBooleanExpression(name.getValue())){
-            System.out.println("no existeix");
+            PresentationCtrl.getInstance().showExceptionAlert("The expression "+ name.getValue() +" does not exists");
             return;
         }
         try{
             PresentationCtrl.getInstance().addBooleanExpression (name.getValue(),  expression.getText());
-            System.out.println("Expressio modificada");
+            PresentationCtrl.getInstance().setMessage("Expression modified");
         }
         catch (Exception e){
-            System.out.println(e);
+            PresentationCtrl.getInstance().showExceptionAlert(e.getMessage());
         }
     }
     public void SaveExpression(){ //guarda la expressió si no existeix cap amb aquest nom i és correcte
 
         if(name.getValue().length()==0) {
-            System.out.println("falta un nom");
+            PresentationCtrl.getInstance().showExceptionAlert("The expression needs a name to be saved");
             return;
         }
         if(PresentationCtrl.getInstance().existsBooleanExpression(name.getValue())){
-            System.out.println("ja existeix");
+            PresentationCtrl.getInstance().showExceptionAlert("There is already a expression named " + name.getValue());
             return;
         }
         try{
             PresentationCtrl.getInstance().addBooleanExpression (name.getValue(),  expression.getText());
-            System.out.println("Expressio guardada");
+            PresentationCtrl.getInstance().setMessage("Expression saved");
         }
         catch (Exception e){
-            System.out.println(e);
+            PresentationCtrl.getInstance().showExceptionAlert(e.getMessage());
         }
     }
 
@@ -113,10 +113,10 @@ public class BooleanExprSearchCtrl {
 
     public void deleteExpression(){ //elimina la expressio
         if(!PresentationCtrl.getInstance().deleteBooleanExpression(name.getValue())) {
-            System.out.println("no existeixx");
+            PresentationCtrl.getInstance().showExceptionAlert(" no existeix");
         }
         else {
-            System.out.println("expressio eliminada");
+            PresentationCtrl.getInstance().setMessage("expressio eliminada");
         }
     }
     public void getExpressionsNames(){

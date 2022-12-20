@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <Expressions>
-    <BooleanExpression expression="hola" name="ex2"/>
-    <BooleanExpression expression="caca" name="ex1"/>
+    <BooleanExpression expression="a|(b &amp;! c)" name="ex1"/>
 </Expressions>
