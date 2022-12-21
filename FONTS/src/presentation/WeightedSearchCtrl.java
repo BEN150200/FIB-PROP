@@ -40,6 +40,7 @@ public class WeightedSearchCtrl {
 
         resultTableCtrl = loader.getController();
         resultTableCtrl.setForWeighted();
+        resultTableCtrl.setK(currentNum);
 
         setListeners();
     }
@@ -50,6 +51,8 @@ public class WeightedSearchCtrl {
                 search(input.getText());
             }
         });
+
+        numSpinner.valueProperty().addListener((_1, _2, k) -> resultTableCtrl.setK(k));
 
         input.textProperty().addListener((_1, _2, query) -> search(query));
     }

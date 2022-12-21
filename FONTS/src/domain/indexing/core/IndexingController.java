@@ -48,8 +48,8 @@ public class IndexingController<DocId, SentenceId> {
     }   
 
     @SuppressWarnings("deprecation")
-    public Either<String, java.util.HashMap<DocId, Double>> querySimilarDocuments(DocId docId) {
-        return this.vectorialModel.join().querySimilars(docId).map(HashMap::toJavaMap).toEither("DocId " + docId + " does not exist");
+    public CompletableFuture<Either<String, HashMap<DocId, Double>>> querySimilarDocuments(DocId docId) {
+        return this.vectorialModel.thenApply(model -> model.querySimilars(docId).toEither("DocId " + docId + " does not exist"));
     }
 
     public HashSet<SentenceId> booleanQuery(ExpressionTreeNode root) {

@@ -34,7 +34,7 @@ public class DocumentImporterGutemberg {
             scanner.close();
             FileTime fileCreation = (FileTime) Files.getAttribute(file.toPath(), "creationTime");
             FileTime fileModification = (FileTime) Files.getAttribute(file.toPath(), "lastModifiedTime");
-            docInfo = new DocumentInfo(0, title, author, LocalDateTime.ofInstant(fileCreation.toInstant(), ZoneId.systemDefault()), LocalDateTime.ofInstant(fileModification.toInstant(), ZoneId.systemDefault()), content, path, Format.TXT, file.getName());
+            docInfo = new DocumentInfo(0, title, author, LocalDateTime.ofInstant(fileCreation.toInstant(), ZoneId.systemDefault()), LocalDateTime.ofInstant(fileModification.toInstant(), ZoneId.systemDefault()), content, path, Format.GUTEMBERG, file.getName());
         } catch (IOException ignored) {}
         return docInfo;
     }

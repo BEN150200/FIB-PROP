@@ -503,26 +503,21 @@ public class MainViewCtrl {
         Stage fileStage = new Stage();
         List<File> fileList = fileChooser.showOpenMultipleDialog(fileStage);
         
-        CompletableFuture.allOf(
-            fileList.stream()
-                .map(file -> CompletableFuture.supplyAsync(() -> safeImport(file)))
-                .toArray(CompletableFuture[]::new)
+        CompletableFuture.runAsync(
+            () -> fileList.stream()
+                .forEach(this::importOneFile)
         )
         .thenRunAsync(() -> {
             var end = Instant.now();
             System.out.println("Loaded files in " + Duration.between(start, end).getSeconds() + " secs");
         });
     }
-
-    private Try<DocumentInfo> safeImport(File file) {
-        return Try.of(() -> importOneFile(file));
-    }
-
+    
     private DocumentInfo importOneFile(File file) {
-
+        
         String path = file.getPath();
         Format format = extractFormat(path);
-
+        
         DocumentInfo docInfo = PresentationCtrl.getInstance().importDocument(path,format);
         if (docInfo == null) {
             Alert docExists = new Alert(Alert.AlertType.ERROR);

@@ -13,6 +13,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.CompletableFuture;
 
 import io.vavr.control.Either;
 
@@ -205,11 +206,10 @@ public class DomainCtrl {
      *
      * @param titleName title that identifies the document
      * @param authorName author that identifies the document
-     * @param k number of document to be showed
-     * @return Return the k documents more similars to the document identified by titleName and authorName
+     * @return Return the similar to the document identified by titleName and authorName (order is not guaranteed)
      */
-    public ArrayList<DocumentInfo> similarDocumentsSearch(String titleName, String authorName, int k) {
-        return SearchCtrl.getInstance().similarDocumentsSearch(titleName, authorName, k);
+    public CompletableFuture<Either<String, List<DocumentInfo>>> similarDocumentsSearch(String titleName, String authorName) {
+        return SearchCtrl.getInstance().similarDocumentsSearch(titleName, authorName);
     }
 
     public ArrayList<DocumentInfo> savedBooleanExpressionSearch(String name){

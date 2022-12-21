@@ -15,7 +15,7 @@
             <TableColumn fx:id="tableCreation" minWidth="0.0" prefWidth="126.0" text="Creation Date" />
             <TableColumn fx:id="tableModification" prefWidth="147.0" text="Modification Date" />
             <TableColumn fx:id="tableName" minWidth="0.0" prefWidth="102.0" text="File Name" />
-            <TableColumn fx:id="tableSimilarity" minWidth="0.0" prefWidth="126.0" text="Similarity" />
+            <TableColumn fx:id="tableSimilarity" minWidth="0.0" prefWidth="126.0" text="Similarity (%)" />
          </columns>
          <columnResizePolicy>
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
