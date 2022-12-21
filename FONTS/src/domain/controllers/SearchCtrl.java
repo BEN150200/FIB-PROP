@@ -10,14 +10,21 @@ import static src.helpers.Functional.value;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Optional;
 import java.util.Map.Entry;
+import java.util.concurrent.CompletableFuture;
 import java.util.stream.Collectors;
 
+import io.vavr.collection.HashMap;
 import io.vavr.collection.HashSet;
+import io.vavr.collection.Stream;
+import io.vavr.concurrent.Future;
 import io.vavr.control.Either;
+import io.vavr.control.Option;
 
+@SuppressWarnings("deprecation")
 public class SearchCtrl {
 
     private static SearchCtrl instance = null;
@@ -36,40 +43,33 @@ public class SearchCtrl {
         return instance;
     }
 
-    public Either<String, ArrayList<DocumentInfo>> similarDocumentsSearch(String titleName, String authorName) {
+    /**
+     * 
+     * @param titleName
+     * @param authorName
+     * @return either the info of the resultsing documents' info (sorted by similarity), or a string describing an error
+     */
 
-        Integer docId = DocumentCtrl.getInstance().getDocumentID(titleName, authorName);
+    // Either<err, id> -> CompletableFuture<Either<err, res>>
+    public CompletableFuture<Either<String, List<DocumentInfo>>> similarDocumentsSearch(String titleName, String authorName) {
+        var docId  = DocumentCtrl.getInstance().getDocumentID(titleName, authorName);
         if(docId == null)
-            return Either.left("Document " + titleName + " (by " + authorName + ") doesn't exist");
+            return CompletableFuture.supplyAsync(() -> Either.left("Document " + titleName + " (by " + authorName + ") doesn't exist"));
 
-        var similar = indexingCtrl.querySimilarDocuments(docId);
-        if(similar.isLeft())
-            return Either.left(similar.getLeft());
-        
-        LinkedHashMap<Integer, Double> sortedMap = new LinkedHashMap<>();
-        ArrayList<Double> list = new ArrayList<Double>();
-        for (Entry<Integer, Double> entry : similar.get().entrySet()) {
-            if (entry.getKey() != docId) list.add(entry.getValue());
-        }
-        Collections.sort(list);
-
-        for (int i = list.size()-1; i >= 0; --i) {
-            Double num = list.get(i);
-            for (Entry<Integer, Double> entry : similar.get().entrySet()) {
-                if(entry.getValue().equals(num)) {
-                    sortedMap.put(entry.getKey(), num);
-                }
-            }
-        }
-        
-        ArrayList<DocumentInfo> docsInfo = new ArrayList<>(); 
-        sortedMap.forEach((id, value) -> {
-            DocumentInfo docInf = DocumentCtrl.getInstance().getDocument(id).getInfo();
-            docInf.setSimilarity(value);
-            docsInfo.add(docInf);
-        });
-
-        return Either.right(docsInfo);
+        return indexingCtrl.querySimilarDocuments(docId)
+            .thenApply(
+                maybeResult -> maybeResult.map(
+                    result -> result.map(value
+                    (
+                        (id, sim) -> DocumentCtrl.getInstance()
+                        .getDocument(id)
+                        .getInfo()
+                        .withSimilarity(sim)
+                    ))
+                )
+                .map(HashMap::values)
+                .map(Stream::toJavaList)
+            );
     }
 
     public ArrayList<DocumentInfo> storedBooleanExpressionSearch (String boolExpName) {
@@ -106,6 +106,11 @@ public class SearchCtrl {
 
     @SuppressWarnings("deprecation")
 
+    /**
+     * 
+     * @param query
+     * @return either the info of the resultsing documents' info (sorted by similarity), or a string describing a query syntax error
+     */
     public Either<String, ArrayList<DocumentInfo>> documentsByQuery(String query) {
         return indexingCtrl
             .weightedQuery(query)

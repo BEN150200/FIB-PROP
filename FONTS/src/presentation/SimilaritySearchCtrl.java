@@ -231,8 +231,11 @@ public class SimilaritySearchCtrl {
         if (!Objects.equals(titleBoxNoEdit.getEditor().getText(), "")
         && !Objects.equals(authorBoxNoEdit.getEditor().getText(), "")) {
             PresentationCtrl.getInstance().similaritySearch(titleBoxNoEdit.getEditor().getText(), authorBoxNoEdit.getEditor().getText())
-                .peek(resultTableCtrl::updateTable)
-                .peekLeft(PresentationCtrl.getInstance()::setMessage);
+                .thenAccept(
+                    maybeResult -> maybeResult
+                        .peek(resultTableCtrl::updateTable)
+                        .peekLeft(PresentationCtrl.getInstance()::setMessage)
+                );
         }
     }
 

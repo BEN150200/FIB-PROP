@@ -149,7 +149,7 @@ public class ResultTableCtrl implements Initializable{
         table.setItems(obsDocs);
     }
 
-    public void updateTable(ArrayList<DocumentInfo> newDocsList) {
+    public void updateTable(List<DocumentInfo> newDocsList) {
         this.docsList = newDocsList.stream().map(d -> d.withSimilarity(Maths.round(100*d.getSimilarity(), 2))).collect(Collectors.toList());
         int k = Math.min(this.size, docsList.size());
         ObservableList<DocumentInfo> obsDocs = FXCollections.observableArrayList(docsList.subList(0, k));

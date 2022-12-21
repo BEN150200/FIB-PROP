@@ -7,6 +7,8 @@ import src.enums.Format;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 import io.vavr.control.Either;
 
@@ -128,7 +130,7 @@ public class PresentationCtrl {
     }
 
 
-    public Either<String, ArrayList<DocumentInfo>> similaritySearch(String title, String author) {
+    public CompletableFuture<Either<String, List<DocumentInfo>>> similaritySearch(String title, String author) {
         return DomainCtrl.getInstance().similarDocumentsSearch(title, author);
     }
 
