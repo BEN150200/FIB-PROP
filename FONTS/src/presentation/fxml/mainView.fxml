@@ -42,6 +42,7 @@
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.input.KeyCodeCombination?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
@@ -55,15 +56,27 @@
          <menus>
             <Menu mnemonicParsing="false" styleClass="menu-item" text="File">
                <items>
-                  <MenuItem fx:id="newDocButton" mnemonicParsing="false" onAction="#newDocTab" text="New" />
-                  <MenuItem mnemonicParsing="false" onAction="#openFile" text="Open…" />
+                  <MenuItem fx:id="newDocButton" mnemonicParsing="false" onAction="#newDocTab" text="New">
+                     <accelerator>
+                        <KeyCodeCombination alt="UP" code="N" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator></MenuItem>
+                  <MenuItem mnemonicParsing="false" onAction="#openFile" text="Open…">
+                     <accelerator>
+                        <KeyCodeCombination alt="UP" code="O" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator></MenuItem>
                   <SeparatorMenuItem mnemonicParsing="false" />
                   <MenuItem mnemonicParsing="false" onAction="#deleteDocument" text="Delete Document" />
                   <MenuItem fx:id="closeDocButton" mnemonicParsing="false" onAction="#closeCurrentTab" text="Close Document" />
-                  <MenuItem fx:id="saveButton" mnemonicParsing="false" onAction="#saveDocument" text="Save" />
+                  <MenuItem fx:id="saveButton" mnemonicParsing="false" onAction="#saveDocument" text="Save">
+                     <accelerator>
+                        <KeyCodeCombination alt="UP" code="S" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator></MenuItem>
                   <MenuItem mnemonicParsing="false" onAction="#saveAsDocument" text="Save As…" />
                   <SeparatorMenuItem mnemonicParsing="false" />
-                  <MenuItem mnemonicParsing="false" onAction="#importFile" text="Import" />
+                  <MenuItem mnemonicParsing="false" onAction="#importFile" text="Import">
+                     <accelerator>
+                        <KeyCodeCombination alt="UP" code="I" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator></MenuItem>
                   <Menu mnemonicParsing="false" text="Export As...">
                      <items>
                         <MenuItem mnemonicParsing="false" onAction="#exportTXT" text="TXT" />
@@ -91,8 +104,6 @@
             <Menu mnemonicParsing="false" text="Search">
                <items>
                   <MenuItem mnemonicParsing="false" onAction="#newSearchTab" text="Search on New Tab" />
-                  <SeparatorMenuItem mnemonicParsing="false" />
-                  <MenuItem mnemonicParsing="false" text="Unselect All" />
                </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Data">
@@ -100,13 +111,12 @@
                   <MenuItem mnemonicParsing="false" onAction="#doBackup" text="Do a Backup" />
                   <MenuItem mnemonicParsing="false" onAction="#restoreBackup" text="Restore Last Backup" />
                   <SeparatorMenuItem mnemonicParsing="false" />
-                  <MenuItem mnemonicParsing="false" onAction="#deleteBackup" text="Delete Last Backup" />
-                  <MenuItem mnemonicParsing="false" onAction="#deleteData" text="Delete Current System Data" />
+                  <MenuItem mnemonicParsing="false" onAction="#deleteBackup" text="Delete Backup" />
                </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Help">
                <items>
-                  <MenuItem mnemonicParsing="false" text="About MyHelloApp" />
+                  <MenuItem mnemonicParsing="false" text="See Help" />
                </items>
             </Menu>
          </menus>
@@ -142,7 +152,7 @@
                   <Tooltip text="All the Documents" />
                </tooltip>
             </Button>
-            <Button id="prefix-search" fx:id="titleAuthorButton" layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0" text="Search">
+            <Button id="prefix-search" fx:id="titleAuthorButton" layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0">
                <VBox.margin>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </VBox.margin>

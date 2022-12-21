@@ -22,6 +22,7 @@ public class DocumentTabCtrl {
 
     public void initialize () {
         setListeners();
+        textArea.setWrapText(true);
         modified = false;
         newdoc = true;
     }
