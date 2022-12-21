@@ -18,7 +18,7 @@ public class DocumentInfo {
 
     private String fileName;
 
-    private Double similarity;
+    private Double similarity = 0.0d;
 
     public DocumentInfo(Integer docID, String titleName, String authorName, LocalDateTime creationDate, LocalDateTime modificationDate, ArrayList<String> content, String path, Format fileFormat, String fileName) {
         this.docID = docID;
@@ -99,10 +99,7 @@ public class DocumentInfo {
     }
 
     public void setSimilarity(Double s) {
-
-        if (s == 0.0) similarity = 100.0;
-        else similarity = s*100;
-
+        similarity = s;
     }
 
 }

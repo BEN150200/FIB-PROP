@@ -9,6 +9,7 @@ import static src.helpers.Functional.value;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map.Entry;
@@ -35,48 +36,40 @@ public class SearchCtrl {
         return instance;
     }
 
-    public ArrayList<DocumentInfo> similarDocumentsSearch(String titleName, String authorName, Integer k) {
+    public Either<String, ArrayList<DocumentInfo>> similarDocumentsSearch(String titleName, String authorName) {
+
         Integer docId = DocumentCtrl.getInstance().getDocumentID(titleName, authorName);
-        if(docId != null) {
-            Either<String, HashMap<Integer, Double>> similar = indexingCtrl.querySimilarDocuments(docId);
-            if (similar.isLeft()) {
-                return null;
-            }
-            else {
-                if (k == 0) k = 5; //default
-                LinkedHashMap<Integer, Double> sortedMap = new LinkedHashMap<>();
-                ArrayList<Double> list = new ArrayList<Double>();
-                for (Entry<Integer, Double> entry : similar.get().entrySet()) {
-                    if (entry.getKey() != docId) list.add(entry.getValue());
-                }
-                Collections.sort(list);
+        if(docId == null)
+            return Either.left("Document " + titleName + " (by " + authorName + ") doesn't exist");
 
-                int numDocs;
-                if (list.size() < k) {
-                    numDocs = list.size();
-                }
-                else numDocs = k;
-
-                for (int i = list.size()-1; i >= list.size() - numDocs; --i) {
-                    Double num = list.get(i);
-                    for (Entry<Integer, Double> entry : similar.get().entrySet()) {
-                        if(entry.getValue().equals(num)) {
-                            sortedMap.put(entry.getKey(), num);
-                        }
-                    }
-                }
-                ArrayList<DocumentInfo> docsInfo = new ArrayList<>(); 
-                sortedMap.forEach((id, value) -> {
-                    DocumentInfo docInf = DocumentCtrl.getInstance().getDocument(id).getInfo();
-                    docInf.setSimilarity(value);
-                    docsInfo.add(docInf);
-                });
-
-                return docsInfo;
-            } 
+        var similar = indexingCtrl.querySimilarDocuments(docId);
+        if(similar.isLeft())
+            return Either.left(similar.getLeft());
+        
+        LinkedHashMap<Integer, Double> sortedMap = new LinkedHashMap<>();
+        ArrayList<Double> list = new ArrayList<Double>();
+        for (Entry<Integer, Double> entry : similar.get().entrySet()) {
+            if (entry.getKey() != docId) list.add(entry.getValue());
         }
+        Collections.sort(list);
 
-        return null;
+        for (int i = list.size()-1; i >= 0; --i) {
+            Double num = list.get(i);
+            for (Entry<Integer, Double> entry : similar.get().entrySet()) {
+                if(entry.getValue().equals(num)) {
+                    sortedMap.put(entry.getKey(), num);
+                }
+            }
+        }
+        
+        ArrayList<DocumentInfo> docsInfo = new ArrayList<>(); 
+        sortedMap.forEach((id, value) -> {
+            DocumentInfo docInf = DocumentCtrl.getInstance().getDocument(id).getInfo();
+            docInf.setSimilarity(value);
+            docsInfo.add(docInf);
+        });
+
+        return Either.right(docsInfo);
     }
 
     public ArrayList<DocumentInfo> storedBooleanExpressionSearch (String boolExpName) {
@@ -126,6 +119,8 @@ public class SearchCtrl {
                         .getInfo().withSimilarity(similarity)
                 ))
                 .values()
+                .sortBy(DocumentInfo::getSimilarity)
+                .reverse()
                 .collect(Collectors.toCollection(ArrayList::new))
             );
     }

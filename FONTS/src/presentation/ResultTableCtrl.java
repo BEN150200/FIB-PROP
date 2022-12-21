@@ -12,12 +12,16 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.skin.TableHeaderRow;
 import src.domain.core.DocumentInfo;
+import src.helpers.Maths;
 
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 public class ResultTableCtrl implements Initializable{
     @FXML
@@ -35,9 +39,9 @@ public class ResultTableCtrl implements Initializable{
     @FXML
     private TableColumn<DocumentInfo, Double> tableSimilarity;
 
-    //ArrayList<DocumentInfo> docsList = new ArrayList<>();
+    List<DocumentInfo> docsList = new ArrayList<>();
 
-
+    private int size = 100;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -79,7 +83,7 @@ public class ResultTableCtrl implements Initializable{
             return row ;
         });
 
-        //docsList = PresentationCtrl.getInstance().getAllDocuments();
+        docsList = PresentationCtrl.getInstance().getAllDocuments();
         updateTable(PresentationCtrl.getInstance().getAllDocuments());
     }
 
@@ -138,8 +142,17 @@ public class ResultTableCtrl implements Initializable{
         tableCreation.setVisible(false);
     }
 
+    public void setK(int k) {
+        this.size = k;
+        int rows = Math.min(k, docsList.size());
+        ObservableList<DocumentInfo> obsDocs = FXCollections.observableArrayList(docsList.subList(0, rows));
+        table.setItems(obsDocs);
+    }
+
     public void updateTable(ArrayList<DocumentInfo> newDocsList) {
-        ObservableList<DocumentInfo> obsDocs = FXCollections.observableArrayList(newDocsList);
+        this.docsList = newDocsList.stream().map(d -> d.withSimilarity(Maths.round(100*d.getSimilarity(), 2))).collect(Collectors.toList());
+        int k = Math.min(this.size, docsList.size());
+        ObservableList<DocumentInfo> obsDocs = FXCollections.observableArrayList(docsList.subList(0, k));
         table.setItems(obsDocs);
     }
 

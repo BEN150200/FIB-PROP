@@ -84,8 +84,11 @@ public class SimilaritySearchCtrl {
         authorBoxNoEdit.getEditor().setFont(f);
         authorBoxNoEdit.getEditor().setEditable(false);
 
-        setListeners(); //set listeners
-        update(); //Update the title and author lists
+        resultTableCtrl = loader.getController();
+        resultTableCtrl.setForSimilarity();
+        resultTableCtrl.setK(currentNum);
+        setListeners();
+        update();
     }
 
     /**
@@ -114,6 +117,8 @@ public class SimilaritySearchCtrl {
      * set the listeners for the two combobox
      */
     private void setListeners() {
+
+        numSpinner.valueProperty().addListener((_1, _2, k) -> resultTableCtrl.setK(k));
 
         titleBoxNoEdit.getEditor().setOnMouseClicked(mouseEvent -> {
             titleBoxNoEdit.show();
@@ -224,17 +229,10 @@ public class SimilaritySearchCtrl {
     @FXML
     private void search() {
         if (!Objects.equals(titleBoxNoEdit.getEditor().getText(), "")
-                && !Objects.equals(authorBoxNoEdit.getEditor().getText(), "")) {
-
-            ArrayList<DocumentInfo> resultDocs = PresentationCtrl.getInstance()
-                    .similaritySearch(
-                            titleBoxNoEdit.getEditor().getText(),
-                            authorBoxNoEdit.getEditor().getText(),
-                            numSpinner.getValue()
-                    );
-
-            if (resultDocs == null) PresentationCtrl.getInstance().setMessage("the document not exists or there are no similar ones");
-            else resultTableCtrl.updateTable(resultDocs);
+        && !Objects.equals(authorBoxNoEdit.getEditor().getText(), "")) {
+            PresentationCtrl.getInstance().similaritySearch(titleBoxNoEdit.getEditor().getText(), authorBoxNoEdit.getEditor().getText())
+                .peek(resultTableCtrl::updateTable)
+                .peekLeft(PresentationCtrl.getInstance()::setMessage);
         }
     }
 

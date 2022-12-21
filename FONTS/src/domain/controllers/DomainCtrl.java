@@ -208,8 +208,8 @@ public class DomainCtrl {
      * @param k number of document to be showed
      * @return Return the k documents more similars to the document identified by titleName and authorName
      */
-    public ArrayList<DocumentInfo> similarDocumentsSearch(String titleName, String authorName, int k) {
-        return SearchCtrl.getInstance().similarDocumentsSearch(titleName, authorName, k);
+    public Either<String, ArrayList<DocumentInfo>> similarDocumentsSearch(String titleName, String authorName) {
+        return SearchCtrl.getInstance().similarDocumentsSearch(titleName, authorName);
     }
 
     public ArrayList<DocumentInfo> savedBooleanExpressionSearch(String name){

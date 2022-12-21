@@ -128,8 +128,8 @@ public class PresentationCtrl {
     }
 
 
-    public ArrayList<DocumentInfo> similaritySearch(String title, String author, int k) {
-        return DomainCtrl.getInstance().similarDocumentsSearch(title, author, k);
+    public Either<String, ArrayList<DocumentInfo>> similaritySearch(String title, String author) {
+        return DomainCtrl.getInstance().similarDocumentsSearch(title, author);
     }
 
     public Either<String, ArrayList<DocumentInfo>> weightedSearch(String query) {
