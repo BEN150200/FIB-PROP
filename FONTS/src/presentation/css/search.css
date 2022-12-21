@@ -16,8 +16,12 @@
     -fx-border-radius: 4px;
 }
 
+.spinner {
+    -fx-background-radius: 4px;
+}
+
 .spinner:focused {
-  -fx-background-color: transparent;
+    -fx-background-color: transparent;
 }
 
 .text-field:focused,
@@ -48,7 +52,14 @@
 }
 
 .combo-box-popup .list-cell {
+    -fx-cursor: hand;
     -fx-background-color: -text-field-color;
+    -fx-text-fill: -font-color;
+}
+
+.combo-box-popup .list-cell:hover {
+    -fx-cursor: hand;
+    -fx-background-color: -focus-blue;
     -fx-text-fill: -font-color;
 }
 
@@ -58,4 +69,8 @@
     -fx-text-fill: -font-color;
     -fx-alignment: center;
     -fx-content-display: left;
+}
+
+#titleBoxNoEdit .text-field, #authorBoxNoEdit  .text-field {
+    -fx-cursor: hand;
 }

@@ -599,6 +599,7 @@ public class MainViewCtrl {
     private void updateAllSearchViews() {
         allDocumentsCtrl.updateTable(PresentationCtrl.getInstance().getAllDocuments());
         titleAuthorSearchCtrl.update();
+        similaritySearchCtrl.update();
     }
 
     public void setMessage(String message) {

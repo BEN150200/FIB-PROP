@@ -17,10 +17,10 @@ import java.util.Objects;
 public class SimilaritySearchCtrl {
 
     @FXML
-    private ComboBox<String> authorBox;
+    private ComboBox<String> authorBoxNoEdit;
 
     @FXML
-    private ComboBox<String> titleBox;
+    private ComboBox<String> titleBoxNoEdit;
 
     @FXML
     private Spinner<Integer> numSpinner;
@@ -45,6 +45,7 @@ public class SimilaritySearchCtrl {
      * stores if the list of the authors in the authorBox is the modified one
      */
     private boolean authorMod;
+
 
     /**
      * Creator
@@ -78,10 +79,10 @@ public class SimilaritySearchCtrl {
 
         //set the text editor of the combobox non editable
         Font f = new Font(14);
-        titleBox.getEditor().setFont(f);
-        titleBox.getEditor().setEditable(false);
-        authorBox.getEditor().setFont(f);
-        authorBox.getEditor().setEditable(false);
+        titleBoxNoEdit.getEditor().setFont(f);
+        titleBoxNoEdit.getEditor().setEditable(false);
+        authorBoxNoEdit.getEditor().setFont(f);
+        authorBoxNoEdit.getEditor().setEditable(false);
 
         setListeners(); //set listeners
         update(); //Update the title and author lists
@@ -99,11 +100,11 @@ public class SimilaritySearchCtrl {
         listAuthors.add("");
         listAuthors.addAll(PresentationCtrl.getInstance().getAllAuthors());
 
-        titleBox.setItems(FXCollections.observableArrayList(listTitles));
-        titleBox.getSelectionModel().select("");
+        titleBoxNoEdit.setItems(FXCollections.observableArrayList(listTitles));
+        titleBoxNoEdit.getSelectionModel().select("");
 
-        authorBox.setItems(FXCollections.observableArrayList(listAuthors));
-        authorBox.getSelectionModel().select("");
+        authorBoxNoEdit.setItems(FXCollections.observableArrayList(listAuthors));
+        authorBoxNoEdit.getSelectionModel().select("");
 
         titleMod = false;
         authorMod = false;
@@ -114,42 +115,104 @@ public class SimilaritySearchCtrl {
      */
     private void setListeners() {
 
-        titleBox.getEditor().setOnMouseClicked(mouseEvent -> {
-            titleBox.show();
+        titleBoxNoEdit.getEditor().setOnMouseClicked(mouseEvent -> {
+            titleBoxNoEdit.show();
         });
 
-        authorBox.getEditor().setOnMouseClicked(mouseEvent -> {
-            authorBox.show();
+        authorBoxNoEdit.getEditor().setOnMouseClicked(mouseEvent -> {
+            authorBoxNoEdit.show();
         });
 
-        titleBox.setOnAction(actionEvent -> {
-            if (Objects.equals(titleBox.getSelectionModel().getSelectedItem(), "") && authorMod) {
-                authorBox.setItems(FXCollections.observableArrayList(listAuthors));
-                authorMod = false;
-            }
-            else if (Objects.equals(authorBox.getSelectionModel().getSelectedItem(), "")) {
-                ArrayList<String> tempAuthors = new ArrayList<>();
-                tempAuthors.add("");
-                tempAuthors.addAll(PresentationCtrl.getInstance().getAuthorsByTitle(titleBox.getEditor().getText()));
+        titleBoxNoEdit.setOnAction(actionEvent -> {
+            try {
+                if (Objects.equals(titleBoxNoEdit.getEditor().getText(), "") && authorMod) {
+                    authorBoxNoEdit.setItems(FXCollections.observableArrayList(listAuthors));
+                    authorBoxNoEdit.setVisibleRowCount(Math.min(listAuthors.size(), 10));
+                    authorMod = false;
+                }
 
-                authorBox.setItems(FXCollections.observableArrayList(tempAuthors));
-                authorMod = true;
+                else if (authorMod && !titleMod) {
+                    ArrayList<String> tempAuthors = new ArrayList<>();
+                    tempAuthors.add("");
+                    tempAuthors.addAll(PresentationCtrl.getInstance().getAuthorsByTitle(titleBoxNoEdit.getEditor().getText()));
+                    authorBoxNoEdit.setItems(FXCollections.observableArrayList(tempAuthors));
+                    authorBoxNoEdit.setVisibleRowCount(Math.min(tempAuthors.size(), 10));
+                }
+                else if (Objects.equals(authorBoxNoEdit.getEditor().getText(), "") && !titleMod) {
+                    ArrayList<String> tempAuthors = new ArrayList<>();
+                    tempAuthors.add("");
+                    tempAuthors.addAll(PresentationCtrl.getInstance().getAuthorsByTitle(titleBoxNoEdit.getEditor().getText()));
+                    authorBoxNoEdit.setItems(FXCollections.observableArrayList(tempAuthors));
+                    authorBoxNoEdit.setVisibleRowCount(Math.min(tempAuthors.size(), 10));
+                    authorMod = true;
+
+                }
+                else if (Objects.equals(authorBoxNoEdit.getEditor().getText(), "") && titleMod) {
+                    titleBoxNoEdit.setItems(FXCollections.observableArrayList(listTitles));
+                    titleBoxNoEdit.setVisibleRowCount(Math.min(listTitles.size(), 10));
+                    ArrayList<String> tempAuthors = new ArrayList<>();
+                    tempAuthors.add("");
+                    tempAuthors.addAll(PresentationCtrl.getInstance().getAuthorsByTitle(titleBoxNoEdit.getEditor().getText()));
+                    authorBoxNoEdit.setItems(FXCollections.observableArrayList(tempAuthors));
+                    authorBoxNoEdit.setVisibleRowCount(Math.min(tempAuthors.size(), 10));
+                    authorMod = true;
+                    titleMod = false;
+                }
+                else if (Objects.equals(authorBoxNoEdit.getEditor().getText(), "") &&
+                        Objects.equals(titleBoxNoEdit.getEditor().getText(), "")) {
+                    titleMod = false;
+                    authorMod = false;
+                }
+            }
+            catch (StackOverflowError e) {
 
             }
         });
 
-        authorBox.setOnAction(actionEvent -> {
-            if (Objects.equals(authorBox.getSelectionModel().getSelectedItem(), "") && titleMod) {
-                titleBox.setItems(FXCollections.observableArrayList(listTitles));
-                titleMod = false;
+        authorBoxNoEdit.setOnAction(actionEvent -> {
+            try {
+                //if the author is not selected but the title modified, restore the title
+                if (Objects.equals(authorBoxNoEdit.getEditor().getText(), "") && titleMod) {
+                    titleBoxNoEdit.setItems(FXCollections.observableArrayList(listTitles));
+                    titleBoxNoEdit.setVisibleRowCount(Math.min(listTitles.size(), 10));
+                    titleMod = false;
+                }
+                //if title is modified and author not change the modified title list by the new one
+                else if (titleMod && !authorMod) {
+                    ArrayList<String> tempTitles = new ArrayList<>();
+                    tempTitles.add("");
+                    tempTitles.addAll(PresentationCtrl.getInstance().getTitlesByAuthor(authorBoxNoEdit.getEditor().getText()));
+                    titleBoxNoEdit.setItems(FXCollections.observableArrayList(tempTitles));
+                    titleBoxNoEdit.setVisibleRowCount(Math.min(tempTitles.size(), 10));
+                }
+                //else if it is not selected, modifie it
+                else if (Objects.equals(titleBoxNoEdit.getEditor().getText(), "") && !authorMod) {
+                    ArrayList<String> tempTitles = new ArrayList<>();
+                    tempTitles.add("");
+                    tempTitles.addAll(PresentationCtrl.getInstance().getTitlesByAuthor(authorBoxNoEdit.getEditor().getText()));
+                    titleBoxNoEdit.setItems(FXCollections.observableArrayList(tempTitles));
+                    titleBoxNoEdit.setVisibleRowCount(Math.min(tempTitles.size(), 10));
+                    titleMod = true;
+                } else if (Objects.equals(titleBoxNoEdit.getEditor().getText(), "") && authorMod) {
+                    authorBoxNoEdit.setItems(FXCollections.observableArrayList(listAuthors));
+                    authorBoxNoEdit.setVisibleRowCount(Math.min(listAuthors.size(), 10));
+                    ArrayList<String> tempTitles = new ArrayList<>();
+                    tempTitles.add("");
+                    tempTitles.addAll(PresentationCtrl.getInstance().getTitlesByAuthor(authorBoxNoEdit.getEditor().getText()));
+                    titleBoxNoEdit.setItems(FXCollections.observableArrayList(tempTitles));
+                    titleBoxNoEdit.setVisibleRowCount(Math.min(tempTitles.size(), 10));
+                    titleMod = true;
+                    authorMod = false;
+                }
+                //if the two ar not selected, neither is modified
+                else if (Objects.equals(authorBoxNoEdit.getEditor().getText(), "") &&
+                        Objects.equals(titleBoxNoEdit.getEditor().getText(), "")) {
+                    titleMod = false;
+                    authorMod = false;
+                }
             }
-            else if (Objects.equals(titleBox.getSelectionModel().getSelectedItem(), "")) {
-                ArrayList<String> tempTitles = new ArrayList<>();
-                tempTitles.add("");
-                tempTitles.addAll(PresentationCtrl.getInstance().getTitlesByAuthor(authorBox.getEditor().getText()));
+            catch (StackOverflowError e) {
 
-                titleBox.setItems(FXCollections.observableArrayList(tempTitles));
-                titleMod = true;
             }
         });
     }
@@ -160,13 +223,13 @@ public class SimilaritySearchCtrl {
      */
     @FXML
     private void search() {
-        if (!Objects.equals(titleBox.getEditor().getText(), "")
-                && !Objects.equals(authorBox.getEditor().getText(), "")) {
+        if (!Objects.equals(titleBoxNoEdit.getEditor().getText(), "")
+                && !Objects.equals(authorBoxNoEdit.getEditor().getText(), "")) {
 
             ArrayList<DocumentInfo> resultDocs = PresentationCtrl.getInstance()
                     .similaritySearch(
-                            titleBox.getEditor().getText(),
-                            authorBox.getEditor().getText(),
+                            titleBoxNoEdit.getEditor().getText(),
+                            authorBoxNoEdit.getEditor().getText(),
                             numSpinner.getValue()
                     );
 
@@ -181,9 +244,10 @@ public class SimilaritySearchCtrl {
      * @param author author of the document of the search
      */
     public void search(String title, String author) {
-        titleBox.getSelectionModel().select(title);
-        authorBox.getSelectionModel().select(author);
+        titleBoxNoEdit.getSelectionModel().select(title);
+        authorBoxNoEdit.getSelectionModel().select(author);
         search();
     }
+
 
 }
