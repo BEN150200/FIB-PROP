@@ -1,16 +1,7 @@
 package src.presentation;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.event.ActionEvent;
+
 import javafx.event.Event;
-import javafx.event.EventHandler;
-import javafx.event.EventType;
-import javafx.geometry.Insets;
-import javafx.scene.control.skin.LabelSkin;
-import javafx.scene.control.skin.TabPaneSkin;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Modality;
 import src.domain.core.DocumentInfo;
 import src.domain.preprocessing.Tokenizer;
@@ -19,9 +10,6 @@ import src.enums.Format;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyCodeCombination;
-import javafx.scene.input.KeyCombination;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -111,7 +99,7 @@ public class MainViewCtrl {
         setListeners();
         searchVisible = false; //the program starts with the search panels not visible
         dividerPosition = 250.0; //initial position of the search panels
-        
+
         restoreBackup(); //TODO: show a restore dialog if there is a backup
         
         newDocCounter = 0; // counter initialized at 0

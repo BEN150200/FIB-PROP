@@ -87,20 +87,6 @@
                   <MenuItem mnemonicParsing="false" text="Quit" />
                </items>
             </Menu>
-            <Menu mnemonicParsing="false" text="Edit">
-               <items>
-                  <MenuItem mnemonicParsing="false" text="Undo" />
-                  <MenuItem mnemonicParsing="false" text="Redo" />
-                  <SeparatorMenuItem mnemonicParsing="false" />
-                  <MenuItem mnemonicParsing="false" text="Cut" />
-                  <MenuItem mnemonicParsing="false" text="Copy" />
-                  <MenuItem mnemonicParsing="false" text="Paste" />
-                  <MenuItem mnemonicParsing="false" text="Delete" />
-                  <SeparatorMenuItem mnemonicParsing="false" />
-                  <MenuItem mnemonicParsing="false" text="Select All" />
-                  <MenuItem mnemonicParsing="false" text="Unselect All" />
-               </items>
-            </Menu>
             <Menu mnemonicParsing="false" text="Search">
                <items>
                   <MenuItem mnemonicParsing="false" onAction="#newSearchTab" text="Search on New Tab" />
@@ -125,7 +111,7 @@
    <bottom>
       <HBox id="HBox" alignment="CENTER_LEFT" maxHeight="-Infinity" spacing="5.0" BorderPane.alignment="CENTER">
          <children>
-            <Label maxHeight="16.0" maxWidth="-1.0" prefHeight="16.0" text="Left status" HBox.hgrow="ALWAYS">
+            <Label maxHeight="16.0" maxWidth="-1.0" prefHeight="16.0" HBox.hgrow="ALWAYS">
                <font>
                   <Font size="11.0" fx:id="x3" />
                </font>
