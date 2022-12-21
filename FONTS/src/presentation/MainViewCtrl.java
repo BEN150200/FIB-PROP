@@ -119,7 +119,6 @@ public class MainViewCtrl {
 
     /**
      * Initialize all the search panels of the side menu and store the controllers
-     * @throws IOException
      */
     private void initializeSearchPanels() {
         //load the panel that shows all the documents
@@ -150,7 +149,8 @@ public class MainViewCtrl {
             similaritySearchCtrl = loader.getController();
             SplitPane.setResizableWithParent(similaritySearchView, false);
         } catch (IOException e) {
-            setMessage("similarityPanel.fxml file not found, the similaritySearchView could not be loaded");
+            throw new RuntimeException(e);
+            //setMessage("similarityPanel.fxml file not found, the similaritySearchView could not be loaded");
         }
         
         //load the panel of boolean search

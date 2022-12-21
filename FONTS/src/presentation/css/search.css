@@ -47,6 +47,11 @@
     -fx-text-fill: -font-color;
 }
 
+.combo-box-popup .list-cell {
+    -fx-background-color: -text-field-color;
+    -fx-text-fill: -font-color;
+}
+
 .combo-box {
     -fx-border-radius: 4px;
     -fx-background-color: -left-panel-color;

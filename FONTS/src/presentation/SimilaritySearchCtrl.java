@@ -1,14 +1,9 @@
 package src.presentation;
 
-import javafx.application.Platform;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.collections.transformation.FilteredList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
-import javafx.scene.input.KeyCode;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
@@ -18,10 +13,14 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Objects;
 
+
 public class SimilaritySearchCtrl {
 
     @FXML
     private ComboBox<String> authorBox;
+
+    @FXML
+    private ComboBox<String> titleBox;
 
     @FXML
     private Spinner<Integer> numSpinner;
@@ -30,145 +29,91 @@ public class SimilaritySearchCtrl {
     private Button searchButton;
 
     @FXML
-    private ComboBox<String> titleBox;
-
-    @FXML
     private VBox vbox;
 
     private ResultTableCtrl resultTableCtrl;
 
-    ArrayList<DocumentInfo> listDocs = new ArrayList<>();
-    ArrayList<String> listTitles = new ArrayList<>();
-    ObservableList<String> obsTitles = FXCollections.observableArrayList();
-    ArrayList<String> listAuthors = new ArrayList<>();
-    ObservableList<String> obsAuthors = FXCollections.observableArrayList();
+    private final ArrayList<String> listTitles = new ArrayList<>();
 
-    FilteredList<String> filteredTitles = new FilteredList<>(obsTitles);
-    FilteredList<String> filteredAuthors = new FilteredList<>(obsAuthors);
+    private final ArrayList<String> listAuthors = new ArrayList<>();
 
-    FilteredList<String> tempFiltTitles = new FilteredList<>(obsTitles);
+    /**
+     * stores if the list of the titles in the titleBox is the modified one
+     */
+    private boolean titleMod;
+    /**
+     * stores if the list of the authors in the authorBox is the modified one
+     */
+    private boolean authorMod;
 
-    FilteredList<String> tempFiltdAuthors = new FilteredList<>(obsAuthors);
-
-    private int currentNum;
-
-
+    /**
+     * Creator
+     */
     public SimilaritySearchCtrl() {
     }
 
-    public void initialize() throws IOException {
+    /**
+     * initialize all the parameters and elements and update the content
+     */
+    public void initialize() {
         //load Result Table
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/src/presentation/fxml/resultTable.fxml"));
-        VBox table = loader.load();
+        VBox table;
+        try {
+            table = loader.load();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        VBox.setVgrow(table, Priority.ALWAYS);
+        vbox.getChildren().add(3,table);
+        VBox.setVgrow(vbox, Priority.ALWAYS);
+        resultTableCtrl = loader.getController();
+        resultTableCtrl.setForSimilarity();
 
-        currentNum = 5;
-
+        //let spinner min and max number
+        int currentNum = 5;
         SpinnerValueFactory<Integer> spinnerFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 100);
         spinnerFactory.setValue(currentNum);
         numSpinner.setValueFactory(spinnerFactory);
 
-        VBox.setVgrow(table, Priority.ALWAYS);
-        vbox.getChildren().add(3,table);
-        VBox.setVgrow(vbox, Priority.ALWAYS);
+        //set the text editor of the combobox non editable
         Font f = new Font(14);
         titleBox.getEditor().setFont(f);
+        titleBox.getEditor().setEditable(false);
         authorBox.getEditor().setFont(f);
+        authorBox.getEditor().setEditable(false);
 
-
-        resultTableCtrl = loader.getController();
-        resultTableCtrl.setForSimilarity();
-        setListeners();
-        update();
+        setListeners(); //set listeners
+        update(); //Update the title and author lists
     }
 
+    /**
+     * Update the list of the titles and authors
+     */
     public void update() {
-
-
-        //listTitles.add("");
-        //listAuthors.add("");
-
+        listTitles.clear();
+        listTitles.add("");
         listTitles.addAll(PresentationCtrl.getInstance().getAllTitles());
+
+        listAuthors.clear();
+        listAuthors.add("");
         listAuthors.addAll(PresentationCtrl.getInstance().getAllAuthors());
 
-        ObservableList<String> obsTitles = FXCollections.observableArrayList(listTitles);
-        ObservableList<String> obsAuthors = FXCollections.observableArrayList(listAuthors);
+        titleBox.setItems(FXCollections.observableArrayList(listTitles));
+        titleBox.getSelectionModel().select("");
 
-        //filteredTitles = new FilteredList<String>(obsTitles, p -> true);
-        //filteredAuthors = new FilteredList<String>(obsAuthors, p -> true);
+        authorBox.setItems(FXCollections.observableArrayList(listAuthors));
+        authorBox.getSelectionModel().select("");
 
-        titleBox.setItems(obsTitles);
-        authorBox.setItems(obsAuthors);
-
-
+        titleMod = false;
+        authorMod = false;
     }
+
+    /**
+     * set the listeners for the two combobox
+     */
     private void setListeners() {
-        //action
-        /*
-        titleBox.getEditor().textProperty().addListener((obs, oldValue, newValue) -> {
-            final TextField editor = titleBox.getEditor();
-            final String selected = titleBox.getSelectionModel().getSelectedItem();
 
-            Platform.runLater(() -> {
-
-                if (selected == null || !selected.equals(editor.getText())) {
-                    filteredTitles.setPredicate(item -> {
-
-                        if (item.toUpperCase().startsWith(newValue.toUpperCase())) {
-                            return true;
-                        } else {
-                            return false;
-                        }
-                    });
-                }
-            });
-        });
-
-        authorBox.getEditor().textProperty().addListener((obs, oldValue, newValue) -> {
-            final TextField editor = authorBox.getEditor();
-            final String selected = authorBox.getSelectionModel().getSelectedItem();
-
-            Platform.runLater(() -> {
-
-                if (selected == null || !selected.equals(editor.getText())) {
-                    filteredAuthors.setPredicate(item -> {
-
-                        if (item.toUpperCase().startsWith(newValue.toUpperCase())) {
-                            return true;
-                        } else {
-                            return false;
-                        }
-                    });
-                }
-            });
-        });
-
-         */
-        /*
-        titleBox.focusedProperty().addListener((obs, wasFocused, isNowFocused) -> {
-            if (wasFocused && !isNowFocused) {
-                titleBox.hide();
-            }
-            else if (!wasFocused && isNowFocused) {
-                if (titleBox.getItems().isEmpty())
-                    PresentationCtrl.getInstance().setMessage("There are no titles in the System");
-                titleBox.show();
-            }
-        });
-
-        authorBox.focusedProperty().addListener((obs, wasFocused, isNowFocused) -> {
-            if (wasFocused && !isNowFocused) {
-                authorBox.hide();
-            }
-            else if (!wasFocused && isNowFocused) {
-                if (authorBox.getItems().isEmpty())
-                    PresentationCtrl.getInstance().setMessage("There are no titles in the System");
-                authorBox.show();
-            }
-        });
-
-         */
-
-        /*
         titleBox.getEditor().setOnMouseClicked(mouseEvent -> {
             titleBox.show();
         });
@@ -176,70 +121,68 @@ public class SimilaritySearchCtrl {
         authorBox.getEditor().setOnMouseClicked(mouseEvent -> {
             authorBox.show();
         });
-         */
 
-        titleBox.setOnAction(actionEvent ->  {
-            if (authorBox.getValue().isEmpty()) {
-                if (!titleBox.getValue().isEmpty()) {
-                    ArrayList<String> tempAuthors = PresentationCtrl.getInstance().getAuthorsByTitle(titleBox.getValue());
-                    //tempAuthors.add("");
-                    //tempAuthors = PresentationCtrl.getInstance().getAuthorsByTitle(titleBox.getValue());
-                    //FilteredList<String> tempFiltdAuthors = new FilteredList<>(FXCollections.observableArrayList(tempAuthors), p -> true);
-                    authorBox.setItems(FXCollections.observableArrayList(tempAuthors));
-                } else {
-                    String temp = authorBox.getValue();
-                    authorBox.getItems().clear();
-                    authorBox.setItems(obsAuthors);
-                    authorBox.setValue(temp);
-                }
+        titleBox.setOnAction(actionEvent -> {
+            if (Objects.equals(titleBox.getSelectionModel().getSelectedItem(), "") && authorMod) {
+                authorBox.setItems(FXCollections.observableArrayList(listAuthors));
+                authorMod = false;
             }
-            if (titleBox.getValue().isEmpty()) {
-                String temp = authorBox.getValue();
-                authorBox.getItems().clear();
-                authorBox.setItems(obsAuthors);
-                authorBox.setValue(temp);
+            else if (Objects.equals(authorBox.getSelectionModel().getSelectedItem(), "")) {
+                ArrayList<String> tempAuthors = new ArrayList<>();
+                tempAuthors.add("");
+                tempAuthors.addAll(PresentationCtrl.getInstance().getAuthorsByTitle(titleBox.getEditor().getText()));
+
+                authorBox.setItems(FXCollections.observableArrayList(tempAuthors));
+                authorMod = true;
+
             }
         });
 
-        authorBox.setOnAction(actionEvent ->  {
-            if (titleBox.getValue().isEmpty()) {
-                if (!authorBox.getValue().isEmpty()) {
-                    ArrayList<String> tempTitles = PresentationCtrl.getInstance().getTitlesByAuthor(authorBox.getValue());
-                    //tempTitles.add("");
-                    //tempTitles.addAll(PresentationCtrl.getInstance().getTitlesByAuthor(authorBox.getEditor().getText()));
-                    //FilteredList<String> tempFiltTitles = new FilteredList<>(FXCollections.observableArrayList(tempTitles), p -> true);
-                    titleBox.setItems(FXCollections.observableArrayList(tempTitles));
-                }
-                else {
-                    String temp = titleBox.getValue();
-                    titleBox.getItems().clear();
-                    titleBox.setItems(obsTitles);
-                    titleBox.setValue(temp);
-                }
+        authorBox.setOnAction(actionEvent -> {
+            if (Objects.equals(authorBox.getSelectionModel().getSelectedItem(), "") && titleMod) {
+                titleBox.setItems(FXCollections.observableArrayList(listTitles));
+                titleMod = false;
             }
-            if (authorBox.getValue().isEmpty()) {
-                String temp = titleBox.getValue();
-                titleBox.setItems(obsTitles);
-                titleBox.setValue(temp);
-            }
+            else if (Objects.equals(titleBox.getSelectionModel().getSelectedItem(), "")) {
+                ArrayList<String> tempTitles = new ArrayList<>();
+                tempTitles.add("");
+                tempTitles.addAll(PresentationCtrl.getInstance().getTitlesByAuthor(authorBox.getEditor().getText()));
 
+                titleBox.setItems(FXCollections.observableArrayList(tempTitles));
+                titleMod = true;
+            }
         });
-
-
     }
 
+    /**
+     * search the documents similar at the one with the title and author specified in the combobox
+     * and show only the number of documents in the spinner that are more similars
+     */
     @FXML
     private void search() {
-        if (!titleBox.getValue().isEmpty() && !authorBox.getValue().isEmpty()) {
-            ArrayList<DocumentInfo> resultDocs = PresentationCtrl.getInstance().similaritySearch(titleBox.getValue(), authorBox.getValue(), numSpinner.getValue());
+        if (!Objects.equals(titleBox.getEditor().getText(), "")
+                && !Objects.equals(authorBox.getEditor().getText(), "")) {
+
+            ArrayList<DocumentInfo> resultDocs = PresentationCtrl.getInstance()
+                    .similaritySearch(
+                            titleBox.getEditor().getText(),
+                            authorBox.getEditor().getText(),
+                            numSpinner.getValue()
+                    );
+
             if (resultDocs == null) PresentationCtrl.getInstance().setMessage("the document not exists or there are no similar ones");
             else resultTableCtrl.updateTable(resultDocs);
         }
     }
 
+    /**
+     * do the search by similarity of the document represented by the parameters
+     * @param title title of the document of the search
+     * @param author author of the document of the search
+     */
     public void search(String title, String author) {
-        titleBox.setValue(title);
-        authorBox.setValue(author);
+        titleBox.getSelectionModel().select(title);
+        authorBox.getSelectionModel().select(author);
         search();
     }
 

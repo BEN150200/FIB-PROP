@@ -18,7 +18,7 @@
                <Font size="14.0" />
             </font>
             </Label>
-            <ComboBox fx:id="authorBox" editable="true" maxWidth="1.7976931348623157E308" minHeight="25.0" minWidth="26.0" prefHeight="28.0" prefWidth="26.0" visibleRowCount="100" HBox.hgrow="ALWAYS">
+            <ComboBox fx:id="authorBox" editable="true" maxWidth="1.7976931348623157E308" minHeight="25.0" minWidth="26.0" prefHeight="28.0" prefWidth="26.0" HBox.hgrow="ALWAYS">
                 <HBox.margin>
                     <Insets />
                 </HBox.margin>
@@ -37,7 +37,7 @@
                 <Font size="14.0" />
             </font>
         </Label>
-        <ComboBox fx:id="titleBox" editable="true" maxWidth="1.7976931348623157E308" minHeight="25.0" minWidth="26.0" prefHeight="28.0" prefWidth="26.0" visibleRowCount="100" HBox.hgrow="ALWAYS" />
+        <ComboBox fx:id="titleBox" editable="true" maxWidth="1.7976931348623157E308" minHeight="25.0" minWidth="26.0" prefHeight="28.0" prefWidth="26.0" HBox.hgrow="ALWAYS" />
         <VBox.margin>
             <Insets />
         </VBox.margin>
