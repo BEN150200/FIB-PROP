@@ -59,16 +59,18 @@ public class SearchCtrl {
         return indexingCtrl.querySimilarDocuments(docId)
             .thenApply(
                 maybeResult -> maybeResult.map(
-                    result -> result.map(value
+                    result -> result
+                    .filterKeys(id -> id != docId)
+                    .map(value
                     (
                         (id, sim) -> DocumentCtrl.getInstance()
                         .getDocument(id)
                         .getInfo()
                         .withSimilarity(sim)
                     ))
+                    .values()
+                    .toJavaList()
                 )
-                .map(HashMap::values)
-                .map(Stream::toJavaList)
             );
     }
 
