@@ -69,6 +69,8 @@ public class SearchCtrl {
                         .withSimilarity(sim)
                     ))
                     .values()
+                    .sortBy(DocumentInfo::getSimilarity)
+                    .reverse()
                     .toJavaList()
                 )
             );
