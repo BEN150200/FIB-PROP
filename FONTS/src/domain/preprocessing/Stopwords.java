@@ -1,5 +1,6 @@
 package src.domain.preprocessing;
 
+import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
@@ -13,7 +14,7 @@ public class Stopwords {
     private static Try<HashSet<String>> readFile(String filepath) {
         return  Try.of(() -> Files.readAllLines(Paths.get(filepath)))
             .map(HashSet::ofAll)
-            .onFailure(System.out::println);
+            .onFailure(System.err::println);
     }
 
     private static List<HashSet<String>> stopwords = List.of(
@@ -21,7 +22,7 @@ public class Stopwords {
         "stopwords-es.txt",
         "stopwords-en.txt"
     )
-    .map(filename -> "src/domain/preprocessing/" + filename)
+    .map(filename -> "src/domain/preprocessing/res/" + filename)
     .map(Stopwords::readFile)
     .map(maybeSet -> maybeSet.getOrElse(HashSet::empty));
 
