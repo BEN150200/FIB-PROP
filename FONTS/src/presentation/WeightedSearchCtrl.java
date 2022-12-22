@@ -72,7 +72,7 @@ public class WeightedSearchCtrl {
                         if(result.isEmpty())
                             PresentationCtrl.getInstance().setMessage("No document matches the search");
                         
-                        resultTableCtrl.updateTable(result);
+                        resultTableCtrl.updateTable(result,numSpinner.getValue());
                     }
                 );
         }

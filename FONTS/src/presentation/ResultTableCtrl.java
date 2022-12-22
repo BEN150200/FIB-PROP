@@ -156,6 +156,14 @@ public class ResultTableCtrl implements Initializable{
         table.setItems(obsDocs);
     }
 
+    public void updateTable(ArrayList<DocumentInfo> newDocsList, int k) {
+        System.out.println("Numero "+ k);
+        if(newDocsList.size()<k) k=newDocsList.size();
+        ObservableList<DocumentInfo> obsDocs = FXCollections.observableArrayList(newDocsList.subList(0,k));
+        table.setItems(obsDocs);
+    }
+
+
     public void clearTable() {
         table.getItems().clear();
     }
