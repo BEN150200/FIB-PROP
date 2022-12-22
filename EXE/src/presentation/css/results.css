@@ -1,0 +1,43 @@
+@import "theme.css";
+
+.table-view {
+    -fx-background-color: -left-panel-color;
+}
+
+.table-view .column-header {
+    -fx-background-color: -left-panel-color;
+}
+
+.table-view .table-column {
+    -fx-border-color: transparent;
+}
+
+.table-view .column-header-background .label{
+    -fx-text-fill: -font-color;
+}
+
+.table-view .table-cell {
+    -fx-text-fill: -font-color;
+}
+
+.table-row-cell{
+    -fx-background-color: -cell-color;
+    -fx-background-insets: 0, 0 0 1 0;
+    -fx-border-color: transparent;
+    -fx-cursor: hand;
+}
+
+.table-row-cell:selected{
+    -fx-background-color: -focus-blue;
+}
+.table-row-cell:odd:selected{
+    -fx-background-color: -focus-blue;
+}
+
+.table-row-cell:empty {
+    -fx-cursor: default;
+}
+
+.table-row-cell:odd{
+    -fx-background-color: -alt-cell-color;
+}

@@ -1,0 +1,38 @@
+@import "theme.css";
+
+.menu-bar {
+    -fx-background-color: -menu-color;
+}
+
+.menu-bar > .container > .menu-button {
+    -fx-background-color: -menu-color;
+    -fx-background-radius: 0.3em;
+    -fx-background-insets: 0.3em;
+}
+
+.menu-bar > .container > .menu-button > .label {
+    -fx-text-fill: -font-color;
+}
+
+.menu-bar > .container > .menu-button:hover,
+.menu-bar > .container > .menu-button:focused,
+.menu-bar > .container > .menu-button:showing {
+    -fx-background-color: -hover-menu-color;
+}
+
+.menu-item {
+    -fx-background-color: -menu-color; 
+    -fx-cursor: hand;
+}
+
+.menu-item .label {
+    -fx-text-fill: -font-color;
+}
+
+.menu-item:focused, .menu-item:hovered {
+    -fx-background-color: -hover-menu-color; 
+}
+
+.context-menu { 
+    -fx-background-color: -menu-color; 
+}

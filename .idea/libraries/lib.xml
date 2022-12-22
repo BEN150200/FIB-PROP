@@ -1,17 +1,20 @@
 <component name="libraryTable">
   <library name="lib">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/lib/hamcrest-core-1.3.jar!/" />
-      <root url="jar://$PROJECT_DIR$/lib/junit-4.13.2.jar!/" />
-      <root url="jar://$PROJECT_DIR$/lib/vavr-1.0.0-alpha-4.jar!/" />
-      <root url="file://$PROJECT_DIR$/lib/JavaFx" />
-      <root url="jar://$PROJECT_DIR$/lib/controlsfx-11.1.2.jar!/" />
+      <root url="file://$PROJECT_DIR$/FONTS/lib" />
+      <root url="jar://$PROJECT_DIR$/FONTS/lib/JavaFx/javafx-swt.jar!/" />
+      <root url="jar://$PROJECT_DIR$/FONTS/lib/JavaFx/javafx.base.jar!/" />
+      <root url="jar://$PROJECT_DIR$/FONTS/lib/JavaFx/javafx.controls.jar!/" />
+      <root url="jar://$PROJECT_DIR$/FONTS/lib/JavaFx/javafx.fxml.jar!/" />
+      <root url="jar://$PROJECT_DIR$/FONTS/lib/JavaFx/javafx.graphics.jar!/" />
+      <root url="jar://$PROJECT_DIR$/FONTS/lib/JavaFx/javafx.media.jar!/" />
+      <root url="jar://$PROJECT_DIR$/FONTS/lib/JavaFx/javafx.swing.jar!/" />
+      <root url="jar://$PROJECT_DIR$/FONTS/lib/JavaFx/javafx.web.jar!/" />
+      <root url="file://$PROJECT_DIR$/FONTS/lib" />
     </CLASSES>
     <JAVADOC />
-    <SOURCES>
-      <root url="file://$PROJECT_DIR$/lib/javafx-sdk-19" />
-    </SOURCES>
-    <jarDirectory url="file://$PROJECT_DIR$/lib/JavaFx" recursive="false" />
-    <jarDirectory url="file://$PROJECT_DIR$/lib/javafx-sdk-19" recursive="false" type="SOURCES" />
+    <SOURCES />
+    <jarDirectory url="file://$PROJECT_DIR$/FONTS/lib" recursive="false" />
+    <jarDirectory url="file://$PROJECT_DIR$/FONTS/lib" recursive="false" />
   </library>
 </component>
