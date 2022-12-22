@@ -50,28 +50,33 @@ public class SearchCtrl {
      * @return either the info of the resultsing documents' info (sorted by similarity), or a string describing an error
      */
 
-    // Either<err, id> -> CompletableFuture<Either<err, res>>
     public CompletableFuture<Either<String, List<DocumentInfo>>> similarDocumentsSearch(String titleName, String authorName) {
         var docId  = DocumentCtrl.getInstance().getDocumentID(titleName, authorName);
         if(docId == null)
             return CompletableFuture.supplyAsync(() -> Either.left("Document " + titleName + " (by " + authorName + ") doesn't exist"));
 
-        return indexingCtrl.querySimilarDocuments(docId)
-            .thenApply(
-                maybeResult -> maybeResult.map(
-                    result -> result
-                    .filterKeys(id -> id != docId)
-                    .map(value
-                    (
-                        (id, sim) -> DocumentCtrl.getInstance()
-                        .getDocument(id)
-                        .getInfo()
-                        .withSimilarity(sim)
-                    ))
-                    .values()
-                    .toJavaList()
-                )
-            );
+        return obtainDocuments(docId, indexingCtrl.querySimilarDocuments(docId));
+
+    }
+
+    private CompletableFuture<Either<String, List<DocumentInfo>>> obtainDocuments(int docId, CompletableFuture<Either<String, HashMap<Integer, Double>>> query) {
+        return query.thenApply(
+            maybeResult -> maybeResult.map(
+                result -> result
+                .filterKeys(id -> id != docId)
+                .map(value
+                (
+                    (id, sim) -> DocumentCtrl.getInstance()
+                    .getDocument(id)
+                    .getInfo()
+                    .withSimilarity(sim)
+                ))
+                .values()
+                .sortBy(DocumentInfo::getSimilarity)
+                .reverse()
+                .toJavaList()
+            )
+        );
     }
 
     public ArrayList<DocumentInfo> storedBooleanExpressionSearch (String boolExpName) {
@@ -113,23 +118,8 @@ public class SearchCtrl {
      * @param query
      * @return either the info of the resultsing documents' info (sorted by similarity), or a string describing a query syntax error
      */
-    public Either<String, ArrayList<DocumentInfo>> documentsByQuery(String query) {
-        return indexingCtrl
-            .weightedQuery(query)
-            .map(
-                results
-                ->
-                results.map(value
-                (
-                    (docId, similarity) -> DocumentCtrl.getInstance()
-                        .getDocument(docId)
-                        .getInfo().withSimilarity(similarity)
-                ))
-                .values()
-                .sortBy(DocumentInfo::getSimilarity)
-                .reverse()
-                .collect(Collectors.toCollection(ArrayList::new))
-            );
+    public CompletableFuture<Either<String, List<DocumentInfo>>> documentsByQuery(String query) {
+        return obtainDocuments(-1, indexingCtrl.weightedQuery(query));
     }
 
     public void addDocument(Integer docId, Iterable<String> content) {

@@ -1,13 +1,106 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="subgrup-prop33.2:jar" />
+    </artifacts-to-build>
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="d2991d3d-5c40-4108-ac62-9c44333baa2c" name="Changes" comment="comentaris afegits">
+    <list default="true" id="d2991d3d-5c40-4108-ac62-9c44333baa2c" name="Changes" comment="feedback expressions booleanes fet">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FONTS/src/presentation/BooleanExprSearchCtrl.java" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/src/presentation/BooleanExprSearchCtrl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FONTS/src/presentation/ResultTableCtrl.java" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/src/presentation/ResultTableCtrl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FONTS/src/presentation/WeightedSearchCtrl.java" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/src/presentation/WeightedSearchCtrl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/DocumentsData.xml" beforeDir="false" afterPath="$PROJECT_DIR$/data/DocumentsData.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/booleanExpressionsData.xml" beforeDir="false" afterPath="$PROJECT_DIR$/data/booleanExpressionsData.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/Makefile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/compiler.bat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/run.bat" beforeDir="false" afterPath="$PROJECT_DIR$/EXE/run.bat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/Launcher.class" beforeDir="false" afterPath="$PROJECT_DIR$/EXE/src/Launcher.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/domain/controllers/AuthorCtrl.class" beforeDir="false" afterPath="$PROJECT_DIR$/EXE/src/domain/controllers/AuthorCtrl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/domain/controllers/BooleanExpressionCtrl.class" beforeDir="false" afterPath="$PROJECT_DIR$/EXE/src/domain/controllers/BooleanExpressionCtrl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/domain/controllers/DocumentCtrl.class" beforeDir="false" afterPath="$PROJECT_DIR$/EXE/src/domain/controllers/DocumentCtrl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/domain/controllers/DomainCtrl.class" beforeDir="false" afterPath="$PROJECT_DIR$/EXE/src/domain/controllers/DomainCtrl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/domain/controllers/SearchCtrl.class" beforeDir="false" afterPath="$PROJECT_DIR$/EXE/src/domain/controllers/SearchCtrl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/domain/controllers/SentenceCtrl.class" beforeDir="false" afterPath="$PROJECT_DIR$/EXE/src/domain/controllers/SentenceCtrl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/domain/controllers/TitleCtrl.class" beforeDir="false" afterPath="$PROJECT_DIR$/EXE/src/domain/controllers/TitleCtrl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/domain/core/Author.class" beforeDir="false" afterPath="$PROJECT_DIR$/EXE/src/domain/core/Author.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/domain/core/Document.class" beforeDir="false" afterPath="$PROJECT_DIR$/EXE/src/domain/core/Document.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/domain/core/DocumentInfo.class" beforeDir="false" afterPath="$PROJECT_DIR$/EXE/src/domain/core/DocumentInfo.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/domain/core/Sentence.class" beforeDir="false" afterPath="$PROJECT_DIR$/EXE/src/domain/core/Sentence.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/domain/core/Title.class" beforeDir="false" afterPath="$PROJECT_DIR$/EXE/src/domain/core/Title.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/domain/expressions/BooleanExpression.class" beforeDir="false" afterPath="$PROJECT_DIR$/EXE/src/domain/expressions/BooleanExpression.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/domain/expressions/ExpressionTreeNode.class" beforeDir="false" afterPath="$PROJECT_DIR$/EXE/src/domain/expressions/ExpressionTreeNode.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/domain/index.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/domain/indexing/booleanmodel/BooleanModel.class" beforeDir="false" afterPath="$PROJECT_DIR$/EXE/src/domain/indexing/booleanmodel/BooleanModel.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/domain/indexing/core/Index.class" beforeDir="false" afterPath="$PROJECT_DIR$/EXE/src/domain/indexing/core/Index.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/domain/indexing/core/IndexingController.class" beforeDir="false" afterPath="$PROJECT_DIR$/EXE/src/domain/indexing/core/IndexingController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/domain/indexing/core/Parsing.class" beforeDir="false" afterPath="$PROJECT_DIR$/EXE/src/domain/indexing/core/Parsing.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/domain/indexing/index.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/domain/indexing/vectorial/TFIDF.class" beforeDir="false" afterPath="$PROJECT_DIR$/EXE/src/domain/indexing/vectorial/TFIDF.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/domain/indexing/vectorial/VectorialModel.class" beforeDir="false" afterPath="$PROJECT_DIR$/EXE/src/domain/indexing/vectorial/VectorialModel.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/domain/preprocessing/Stemmer.class" beforeDir="false" afterPath="$PROJECT_DIR$/EXE/src/domain/preprocessing/Stemmer.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/domain/preprocessing/Stopwords.class" beforeDir="false" afterPath="$PROJECT_DIR$/EXE/src/domain/preprocessing/Stopwords.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/domain/preprocessing/TokenFilter.class" beforeDir="false" afterPath="$PROJECT_DIR$/EXE/src/domain/preprocessing/TokenFilter.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/domain/preprocessing/Tokenizer.class" beforeDir="false" afterPath="$PROJECT_DIR$/EXE/src/domain/preprocessing/Tokenizer.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/domain/preprocessing/stopwords-ca.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/domain/preprocessing/stopwords-en.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/domain/preprocessing/stopwords-es.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/enums/Format.class" beforeDir="false" afterPath="$PROJECT_DIR$/EXE/src/enums/Format.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/helpers/Functional.class" beforeDir="false" afterPath="$PROJECT_DIR$/EXE/src/helpers/Functional.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/helpers/Maps.class" beforeDir="false" afterPath="$PROJECT_DIR$/EXE/src/helpers/Maps.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/helpers/Maths.class" beforeDir="false" afterPath="$PROJECT_DIR$/EXE/src/helpers/Maths.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/helpers/Sets.class" beforeDir="false" afterPath="$PROJECT_DIR$/EXE/src/helpers/Sets.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/helpers/Strings.class" beforeDir="false" afterPath="$PROJECT_DIR$/EXE/src/helpers/Strings.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/persistance/controllers/PersistanceCtrl.class" beforeDir="false" afterPath="$PROJECT_DIR$/EXE/src/persistance/controllers/PersistanceCtrl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/persistance/datamanagement/BEDataManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/EXE/src/persistance/datamanagement/BEDataManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/persistance/datamanagement/DocumentsDataManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/EXE/src/persistance/datamanagement/DocumentsDataManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/persistance/documentexporter/DocumentExporterFactory.class" beforeDir="false" afterPath="$PROJECT_DIR$/EXE/src/persistance/documentexporter/DocumentExporterFactory.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/persistance/documentexporter/DocumentExporterPROP.class" beforeDir="false" afterPath="$PROJECT_DIR$/EXE/src/persistance/documentexporter/DocumentExporterPROP.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/persistance/documentexporter/DocumentExporterTXT.class" beforeDir="false" afterPath="$PROJECT_DIR$/EXE/src/persistance/documentexporter/DocumentExporterTXT.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/persistance/documentexporter/DocumentExporterXML.class" beforeDir="false" afterPath="$PROJECT_DIR$/EXE/src/persistance/documentexporter/DocumentExporterXML.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/persistance/documentimporter/DocumentImporterFactory.class" beforeDir="false" afterPath="$PROJECT_DIR$/EXE/src/persistance/documentimporter/DocumentImporterFactory.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/persistance/documentimporter/DocumentImporterGutemberg.class" beforeDir="false" afterPath="$PROJECT_DIR$/EXE/src/persistance/documentimporter/DocumentImporterGutemberg.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/persistance/documentimporter/DocumentImporterPROP.class" beforeDir="false" afterPath="$PROJECT_DIR$/EXE/src/persistance/documentimporter/DocumentImporterPROP.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/persistance/documentimporter/DocumentImporterTXT.class" beforeDir="false" afterPath="$PROJECT_DIR$/EXE/src/persistance/documentimporter/DocumentImporterTXT.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/persistance/documentimporter/DocumentImporterXML.class" beforeDir="false" afterPath="$PROJECT_DIR$/EXE/src/persistance/documentimporter/DocumentImporterXML.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/presentation/BooleanExprSearchCtrl.class" beforeDir="false" afterPath="$PROJECT_DIR$/EXE/src/presentation/BooleanExprSearchCtrl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/presentation/DocumentTabCtrl.class" beforeDir="false" afterPath="$PROJECT_DIR$/EXE/src/presentation/DocumentTabCtrl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/presentation/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/EXE/src/presentation/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/presentation/MainViewCtrl.class" beforeDir="false" afterPath="$PROJECT_DIR$/EXE/src/presentation/MainViewCtrl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/presentation/PresentationCtrl.class" beforeDir="false" afterPath="$PROJECT_DIR$/EXE/src/presentation/PresentationCtrl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/presentation/ResultTableCtrl$1$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/EXE/src/presentation/ResultTableCtrl$1$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/presentation/ResultTableCtrl$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/EXE/src/presentation/ResultTableCtrl$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/presentation/ResultTableCtrl.class" beforeDir="false" afterPath="$PROJECT_DIR$/EXE/src/presentation/ResultTableCtrl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/presentation/SimilaritySearchCtrl.class" beforeDir="false" afterPath="$PROJECT_DIR$/EXE/src/presentation/SimilaritySearchCtrl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/presentation/TitleAuthorSearchCtrl.class" beforeDir="false" afterPath="$PROJECT_DIR$/EXE/src/presentation/TitleAuthorSearchCtrl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/presentation/WeightedSearchCtrl.class" beforeDir="false" afterPath="$PROJECT_DIR$/EXE/src/presentation/WeightedSearchCtrl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/presentation/css/document-tab.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/presentation/css/main.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/presentation/css/results.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/presentation/css/search.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/presentation/css/side-bar.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/presentation/css/tabs.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/presentation/css/theme.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/presentation/css/top-bar.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/presentation/css/weighted.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/presentation/fxml/booleanExpressionPane.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/presentation/fxml/documentTab.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/presentation/fxml/helpTab.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/presentation/fxml/mainView.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/presentation/fxml/proba de help.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/presentation/fxml/resultTable.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/presentation/fxml/similarityPanel.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/presentation/fxml/titleAuthorPanel.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/presentation/fxml/weightedPanel.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/presentation/img/approx-gray.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/presentation/img/approx-lightgray.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/presentation/img/folder-gray.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/presentation/img/folder-lightgray.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/presentation/img/list-search-gray.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/presentation/img/list-search-lightgray.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/presentation/img/target-gray.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/presentation/img/target-lightgray.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/presentation/img/weighted-gray.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/presentation/img/weighted-lightgray.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sources.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/subgrup-prop33.2.iml" beforeDir="false" afterPath="$PROJECT_DIR$/subgrup-prop33.2.iml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,7 +118,6 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-    <option name="UPDATE_TYPE" value="REBASE" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -38,29 +130,31 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;11&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/Descarregues Jan/SceneBuilder/SceneBuilder.exe&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.10548526&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.11806375&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "jdk.selected.JAVA_MODULE": "11",
+    "last_opened_file_path": "C:/Users/biele/OneDrive/Documents/GitHub/subgrup-prop33.2",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.10548526",
+    "project.structure.side.proportion": "0.26714158",
+    "settings.editor.selected.configurable": "preferences.pluginManager"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/FONTS" />
+      <recent name="$PROJECT_DIR$/EXE/src/presentation" />
       <recent name="C:\Users\jansa\IdeaProjects\subgrup-prop33.2\FONTS\src\presentation\fxml" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/FONTS" />
       <recent name="C:\Users\biele\OneDrive\Documents\GitHub\subgrup-prop33.2\FONTS\src\presentation" />
       <recent name="$PROJECT_DIR$/lib/JavaFx" />
-      <recent name="$PROJECT_DIR$/FONTS" />
       <recent name="$PROJECT_DIR$/FONTS/src/resources" />
       <recent name="$PROJECT_DIR$/FONTS/src" />
     </key>
@@ -72,7 +166,7 @@
     <configuration name="Main" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="src.presentation.Main" />
       <module name="subgrup-prop33.2" />
-      <option name="VM_PARAMETERS" value="--module-path &quot;.\lib\javafx-sdk-19\lib&quot; --add-modules javafx.controls,javafx.fxml --add-exports javafx.base/com.sun.javafx.event=ALL-UNNAMED" />
+      <option name="VM_PARAMETERS" value="--module-path ./FONTS/lib --add-modules javafx.controls,javafx.fxml --add-exports javafx.base/com.sun.javafx.event=ALL-UNNAMED" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="src.presentation.*" />
@@ -146,26 +240,8 @@
       <option name="project" value="LOCAL" />
       <updated>1671578358726</updated>
     </task>
-    <task id="LOCAL-00007" summary="comentaris afegits">
-      <created>1671579700586</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1671579700586</updated>
-    </task>
-    <option name="localTasksCounter" value="8" />
+    <option name="localTasksCounter" value="7" />
     <servers />
-  </component>
-  <component name="Vcs.Log.History.Properties">
-    <option name="COLUMN_ID_ORDER">
-      <list>
-        <option value="Default.Root" />
-        <option value="Default.Author" />
-        <option value="Default.Date" />
-        <option value="Default.Subject" />
-        <option value="Space.CommitStatus" />
-      </list>
-    </option>
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -186,8 +262,7 @@
     <MESSAGE value="explicacio elements posada" />
     <MESSAGE value="cerca booleana mes eficient" />
     <MESSAGE value="feedback expressions booleanes fet" />
-    <MESSAGE value="comentaris afegits" />
-    <option name="LAST_COMMIT_MESSAGE" value="comentaris afegits" />
+    <option name="LAST_COMMIT_MESSAGE" value="feedback expressions booleanes fet" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

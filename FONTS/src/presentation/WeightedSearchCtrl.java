@@ -63,17 +63,21 @@ public class WeightedSearchCtrl {
         else {
             PresentationCtrl.getInstance()
                 .weightedSearch(query)
-                .peek(
-                    error -> {
-                        resultTableCtrl.clearTable();
-                        PresentationCtrl.getInstance().setMessage(error);
-                    },
-                    result -> {
-                        if(result.isEmpty())
+                .thenAccept(
+                    maybeResult ->
+                    maybeResult
+                    .peek(
+                        error -> {
+                            resultTableCtrl.clearTable();
+                            PresentationCtrl.getInstance().setMessage(error);
+                        },
+                        result -> {
+                            if(result.isEmpty())
                             PresentationCtrl.getInstance().setMessage("No document matches the search");
-                        
-                        resultTableCtrl.updateTable(result,numSpinner.getValue());
-                    }
+                            
+                            resultTableCtrl.updateTable(result);
+                        }
+                    )
                 );
         }
     }

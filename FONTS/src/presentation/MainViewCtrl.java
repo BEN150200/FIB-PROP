@@ -543,6 +543,7 @@ public class MainViewCtrl {
     private void restoreBackup() {
         try {
             PresentationCtrl.getInstance().restoreBackup();
+            updateAllSearchViews();
         } catch (Exception e) {
             setMessage("ERROR: Backup not found");
         }
@@ -551,6 +552,7 @@ public class MainViewCtrl {
     @FXML
     private void deleteBackup() {
         PresentationCtrl.getInstance().deleteBackup();
+        updateAllSearchViews();
     }
 
     @FXML
