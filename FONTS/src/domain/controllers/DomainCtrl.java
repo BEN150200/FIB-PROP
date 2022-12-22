@@ -229,7 +229,7 @@ public class DomainCtrl {
         return info;
     }
 
-    public Either<String, ArrayList<DocumentInfo>> documentsByQuery(String query){
+    public CompletableFuture<Either<String, List<DocumentInfo>>> documentsByQuery(String query){
         return SearchCtrl.getInstance().documentsByQuery(query);
 
     }

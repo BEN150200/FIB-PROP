@@ -4,4 +4,7 @@
     "java.test.config": {
         "workingDirectory": "${workspaceFolder}\\FONTS",
     },
+    "java.project.referencedLibraries": [
+        "FONTS/lib/**/*.jar"
+    ],
 }

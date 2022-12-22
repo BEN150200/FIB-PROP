@@ -134,7 +134,7 @@ public class PresentationCtrl {
         return DomainCtrl.getInstance().similarDocumentsSearch(title, author);
     }
 
-    public Either<String, ArrayList<DocumentInfo>> weightedSearch(String query) {
+    public CompletableFuture<Either<String, List<DocumentInfo>>> weightedSearch(String query) {
         return DomainCtrl.getInstance().documentsByQuery(query);
     }
 

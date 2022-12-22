@@ -56,9 +56,11 @@ public class IndexingController<DocId, SentenceId> {
         return booleanModel.join().query(root);
     }
 
-    public Either<String, HashMap<DocId, Double>> weightedQuery(String query) {
-        return  Parsing
-            .weightedQuery(query)
-            .map(termsWeights -> vectorialModel.join().querySimilars(termsWeights));
+    public CompletableFuture<Either<String, HashMap<DocId, Double>>> weightedQuery(String query) {
+        var parsedQuery = Parsing.weightedQuery(query);
+        if(parsedQuery.isLeft())
+            return CompletableFuture.supplyAsync(() -> Either.left(parsedQuery.getLeft()));
+        
+        return vectorialModel.thenApply(model -> Either.right(model.querySimilars(parsedQuery.get())));
     }
 }

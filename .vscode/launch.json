@@ -17,7 +17,7 @@
             "request": "launch",
             "mainClass": "src.presentation.Main",
             "projectName": "subgrup-prop33.2_6e65a139",
-            "vmArgs": "--module-path ${workspaceFolder}\\lib\\javafx-sdk-19\\lib --add-modules javafx.controls,javafx.fxml",
+            "vmArgs": "--module-path ${workspaceFolder}\\FONTS\\lib\\javafx-sdk-19\\lib --add-modules javafx.controls,javafx.fxml",
             "cwd": "${workspaceFolder}\\FONTS",
         }
     ]
