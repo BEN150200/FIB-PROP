@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  Copyright (c) 2015, 2019, Gluon and/or its affiliates.
+  All rights reserved. Use is subject to license terms.
+
+  This file is available and licensed under the following license:
+
+  Redistribution and use in source and binary forms, with or without
+  modification, are permitted provided that the following conditions
+  are met:
+
+  - Redistributions of source code must retain the above copyright
+    notice, this list of conditions and the following disclaimer.
+  - Redistributions in binary form must reproduce the above copyright
+    notice, this list of conditions and the following disclaimer in
+    the documentation and/or other materials provided with the distribution.
+  - Neither the name of Oracle Corporation nor the names of its
+    contributors may be used to endorse or promote products derived
+    from this software without specific prior written permission.
+
+  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+  "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+  LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+  A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+  OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+  SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+  DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+  THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+-->
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.input.KeyCodeCombination?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane prefHeight="351.0" prefWidth="649.0" style="-fx-background-color: #333333;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="src.presentation.MainViewCtrl">
+   <top>
+      <MenuBar styleClass="top-bar" stylesheets="@../css/top-bar.css" useSystemMenuBar="true" BorderPane.alignment="CENTER">
+         <menus>
+            <Menu mnemonicParsing="false" styleClass="menu-item" text="File">
+               <items>
+                  <MenuItem fx:id="newDocButton" mnemonicParsing="false" onAction="#newDocTab" text="New">
+                     <accelerator>
+                        <KeyCodeCombination alt="UP" code="N" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator></MenuItem>
+                  <MenuItem mnemonicParsing="false" onAction="#openFile" text="Open…">
+                     <accelerator>
+                        <KeyCodeCombination alt="UP" code="O" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator></MenuItem>
+                  <SeparatorMenuItem mnemonicParsing="false" />
+                  <MenuItem mnemonicParsing="false" onAction="#deleteDocument" text="Delete Document" />
+                  <MenuItem fx:id="closeDocButton" mnemonicParsing="false" onAction="#closeCurrentTab" text="Close Document" />
+                  <MenuItem fx:id="saveButton" mnemonicParsing="false" onAction="#saveDocument" text="Save">
+                     <accelerator>
+                        <KeyCodeCombination alt="UP" code="S" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator></MenuItem>
+                  <MenuItem mnemonicParsing="false" onAction="#saveAsDocument" text="Save As…" />
+                  <SeparatorMenuItem mnemonicParsing="false" />
+                  <MenuItem mnemonicParsing="false" onAction="#importFile" text="Import">
+                     <accelerator>
+                        <KeyCodeCombination alt="UP" code="I" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator></MenuItem>
+                  <Menu mnemonicParsing="false" text="Export As...">
+                     <items>
+                        <MenuItem mnemonicParsing="false" onAction="#exportTXT" text="TXT" />
+                        <MenuItem mnemonicParsing="false" onAction="#exportXML" text="XML" />
+                        <MenuItem mnemonicParsing="false" onAction="#exportPROP" text="PROP" />
+                     </items>
+                  </Menu>
+                  <MenuItem mnemonicParsing="false" text="Quit" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Search">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#newSearchTab" text="Search on New Tab" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Data">
+               <items>
+                  <MenuItem mnemonicParsing="false" onAction="#doBackup" text="Do a Backup" />
+                  <MenuItem mnemonicParsing="false" onAction="#restoreBackup" text="Restore Last Backup" />
+                  <SeparatorMenuItem mnemonicParsing="false" />
+                  <MenuItem mnemonicParsing="false" onAction="#deleteBackup" text="Delete Backup" />
+               </items>
+            </Menu>
+            <Menu mnemonicParsing="false" text="Help">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="See Help" />
+               </items>
+            </Menu>
+         </menus>
+      </MenuBar>
+   </top>
+   <bottom>
+      <HBox id="HBox" alignment="CENTER_LEFT" maxHeight="-Infinity" spacing="5.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label maxHeight="16.0" maxWidth="-1.0" prefHeight="16.0" HBox.hgrow="ALWAYS">
+               <font>
+                  <Font size="11.0" fx:id="x3" />
+               </font>
+               <textFill>
+                  <Color red="0.625" green="0.625" blue="0.625" fx:id="x4" />
+               </textFill>
+            </Label>
+            <Pane maxHeight="20.0" minHeight="20.0" prefHeight="20.0" HBox.hgrow="ALWAYS" />
+            <Label fx:id="errorLable" font="$x3" maxHeight="16.0" maxWidth="-1.0" prefHeight="16.0" textFill="RED" HBox.hgrow="NEVER" />
+         </children>
+         <padding>
+            <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
+         </padding>
+      </HBox>
+   </bottom>
+   <left>
+      <VBox maxHeight="1.7976931348623157E308" maxWidth="65.0" minWidth="65.0" prefWidth="65.0" styleClass="side-bar" stylesheets="@../css/side-bar.css" BorderPane.alignment="CENTER">
+         <children>
+            <Button id="files" fx:id="allDocsButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0">
+               <VBox.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </VBox.margin>
+               <tooltip>
+                  <Tooltip text="All the Documents" />
+               </tooltip>
+            </Button>
+            <Button id="prefix-search" fx:id="titleAuthorButton" layoutX="10.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0">
+               <VBox.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </VBox.margin>
+               <tooltip>
+                  <Tooltip text="Title autor search" />
+               </tooltip>
+            </Button>
+            <Button id="boolean-query" fx:id="booleanButton" layoutX="10.0" layoutY="60.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0">
+               <VBox.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </VBox.margin>
+               <tooltip>
+                  <Tooltip text="Boolean search" />
+               </tooltip>
+            </Button>
+            <Button id="similar-query" fx:id="similarButton" layoutX="10.0" layoutY="110.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0">
+               <VBox.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </VBox.margin>
+               <tooltip>
+                  <Tooltip text="Similarity search" />
+               </tooltip>
+            </Button>
+            <Button id="weighted-query" fx:id="weightButton" layoutX="10.0" layoutY="160.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="50.0" prefWidth="50.0">
+               <VBox.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </VBox.margin>
+               <tooltip>
+                  <Tooltip text="Weighted search" />
+               </tooltip>
+            </Button>
+         </children>
+      </VBox>
+   </left>
+   <center>
+      <SplitPane fx:id="splitPane" prefHeight="-1.0" prefWidth="-1.0" stylesheets="@../css/main.css" BorderPane.alignment="CENTER">
+         <items>
+            <TabPane fx:id="tabPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="100.0" minWidth="300.0" prefHeight="551.0" prefWidth="704.0" stylesheets="@../css/tabs.css" tabClosingPolicy="ALL_TABS" />
+         </items>
+      </SplitPane>
+   </center>
+</BorderPane>

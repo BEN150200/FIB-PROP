@@ -1,0 +1,22 @@
+@import "theme.css";
+
+.root{
+    -fx-background-color: -bg-color;
+}
+
+.split-pane {
+    -fx-box-border: transparent;
+}
+
+.split-pane > .split-pane-divider {  
+    -fx-padding: 0;  
+} 
+
+.horizontal-grabber {
+    -fx-padding: 0.5em;
+}
+
+.tab-pane,
+.split-pane-divider {
+    -fx-background-color: -tabs-color;
+}

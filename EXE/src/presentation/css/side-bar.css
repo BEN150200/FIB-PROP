@@ -1,0 +1,59 @@
+@import "theme.css";
+
+.side-bar {
+    -fx-background-color: -side-bar-color;
+}
+
+.button{
+    -fx-background-color: -side-bar-color;
+    -fx-alignment: center;
+    -fx-cursor: hand;
+    -fx-opacity: 0.8;
+    -fx-background-size: 60%;
+    -fx-background-position: center;
+    -fx-background-repeat: stretch;
+}
+
+.button:hover {
+    -fx-opacity: 1;
+}
+
+#files {
+    -fx-background-image: url("../img/folder-gray.png");
+}
+
+#files:hover {
+    -fx-background-image: url("../img/folder-lightgray.png");
+}
+
+#prefix-search {
+    -fx-background-image: url("../img/list-search-gray.png");
+}
+
+#prefix-search:hover {
+    -fx-background-image: url("../img/list-search-lightgray.png");
+}
+
+#boolean-query {
+    -fx-background-image: url("../img/target-gray.png");
+}
+
+#boolean-query:hover {
+    -fx-background-image: url("../img/target-lightgray.png");
+}
+
+#similar-query {
+    -fx-background-image: url("../img/approx-gray.png");
+}
+
+#similar-query:hover {
+    -fx-background-image: url("../img/approx-lightgray.png");
+}
+
+#weighted-query {
+    -fx-background-image: url("../img/weighted-gray.png");
+}
+
+#weighted-query:hover {
+    -fx-background-image: url("../img/weighted-lightgray.png");
+}

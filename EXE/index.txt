@@ -1,0 +1,7 @@
+- src.presentation.Driver.java:	Implementació del driver per provar les funcionalitats.
+- Makefile:	Arxiu makefile per compilar.
+- compiler.bat:	Arxiu de comandes per recompilar el driver.
+- run.bat:	Arxiu de comandes per executar el driver.
+- lib:		Directori amb les llibreries externes utilitzades.
+- src:		Directori amb les implementacions de les classes.
+- tests:	Directori amb les implementacions dels tests.

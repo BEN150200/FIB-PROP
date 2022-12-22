@@ -1,0 +1,30 @@
+* {
+    /* text */
+    -font-color: #d3d3d3;
+    -disabled-font-color: #808080;
+    
+    /* panes */
+    -side-bar-color: #333333;
+    -tabs-color: #252525;
+    -text-field-color: #444444;
+    -lighter-field-color: #404040;
+    -bg-color: -side-bar-color;
+    -menu-color: #373737;
+    -left-panel-color: #303030;              
+
+    /* top-bar */
+    -hover-menu-color: #444;
+
+    /* tabs */
+    -inactive-tab-color: #323232;
+    -active-tab-color: -tabs-color;
+
+    /* results table */
+    -cell-color: #404040;
+    -alt-cell-color: #444444;
+
+
+
+    /* text fields */
+    -focus-blue: rgb(6, 81, 219);
+}
