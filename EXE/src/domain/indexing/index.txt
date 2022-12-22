@@ -1,3 +1,0 @@
-- booleanmodel: BooleanModel
-- core:         Index, IndexingController and Parsing 
-- vectorial:    VectorialModel and TFIDF

@@ -7,161 +7,99 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d2991d3d-5c40-4108-ac62-9c44333baa2c" name="Changes" comment="feedback expressions booleanes fet">
-      <change afterPath="$PROJECT_DIR$/.classpath" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/ant.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/artifacts/subgrup_prop33_2_jar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/artifacts/subgrup_prop33_2_jar2.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/lib__2_.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.project" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FONTS/META-INF/MANIFEST.MF" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FONTS/Makefile" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FONTS/compiler.bat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FONTS/run.bat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bulid.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/sources.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/subgrup-prop33.2.eml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/subgrup-prop33.2.userlibraries" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/lib.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/lib.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FONTS/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/src/Launcher.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FONTS/src/presentation/MainViewCtrl.java" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/src/presentation/MainViewCtrl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FONTS/tests/StemmerTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/DocumentsData.xml" beforeDir="false" afterPath="$PROJECT_DIR$/data/DocumentsData.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/booleanExpressionsData.xml" beforeDir="false" afterPath="$PROJECT_DIR$/data/booleanExpressionsData.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/JavaFx/javafx-swt.jar" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/lib/JavaFx/javafx-swt.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/JavaFx/javafx.base.jar" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/lib/JavaFx/javafx.base.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/JavaFx/javafx.controls.jar" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/lib/JavaFx/javafx.controls.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/JavaFx/javafx.fxml.jar" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/lib/JavaFx/javafx.fxml.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/JavaFx/javafx.graphics.jar" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/lib/JavaFx/javafx.graphics.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/JavaFx/javafx.media.jar" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/lib/JavaFx/javafx.media.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/JavaFx/javafx.properties" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/lib/JavaFx/javafx.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/JavaFx/javafx.swing.jar" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/lib/JavaFx/javafx.swing.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/JavaFx/javafx.web.jar" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/lib/JavaFx/javafx.web.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/JavaFx/libavplugin-54.so" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/lib/JavaFx/libavplugin-54.so" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/JavaFx/libavplugin-56.so" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/lib/JavaFx/libavplugin-56.so" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/JavaFx/libavplugin-57.so" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/lib/JavaFx/libavplugin-57.so" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/JavaFx/libavplugin-ffmpeg-56.so" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/lib/JavaFx/libavplugin-ffmpeg-56.so" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/JavaFx/libavplugin-ffmpeg-57.so" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/lib/JavaFx/libavplugin-ffmpeg-57.so" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/JavaFx/libavplugin-ffmpeg-58.so" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/lib/JavaFx/libavplugin-ffmpeg-58.so" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/JavaFx/libdecora_sse.so" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/lib/JavaFx/libdecora_sse.so" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/JavaFx/libfxplugins.so" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/lib/JavaFx/libfxplugins.so" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/JavaFx/libglass.so" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/lib/JavaFx/libglass.so" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/JavaFx/libglassgtk2.so" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/lib/JavaFx/libglassgtk2.so" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/JavaFx/libglassgtk3.so" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/lib/JavaFx/libglassgtk3.so" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/JavaFx/libgstreamer-lite.so" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/lib/JavaFx/libgstreamer-lite.so" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/JavaFx/libjavafx_font.so" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/lib/JavaFx/libjavafx_font.so" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/JavaFx/libjavafx_font_freetype.so" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/lib/JavaFx/libjavafx_font_freetype.so" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/JavaFx/libjavafx_font_pango.so" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/lib/JavaFx/libjavafx_font_pango.so" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/JavaFx/libjavafx_iio.so" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/lib/JavaFx/libjavafx_iio.so" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/JavaFx/libjfxmedia.so" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/lib/JavaFx/libjfxmedia.so" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/JavaFx/libjfxwebkit.so" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/lib/JavaFx/libjfxwebkit.so" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/JavaFx/libprism_common.so" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/lib/JavaFx/libprism_common.so" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/JavaFx/libprism_es2.so" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/lib/JavaFx/libprism_es2.so" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/JavaFx/libprism_sw.so" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/lib/JavaFx/libprism_sw.so" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/controlsfx-11.1.2.jar" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/lib/controlsfx-11.1.2.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/hamcrest-core-1.3.jar" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/lib/hamcrest-core-1.3.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/javafx-sdk-19/bin/api-ms-win-core-console-l1-1-0.dll" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/lib/javafx-sdk-19/bin/api-ms-win-core-console-l1-1-0.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/javafx-sdk-19/bin/api-ms-win-core-console-l1-2-0.dll" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/lib/javafx-sdk-19/bin/api-ms-win-core-console-l1-2-0.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/javafx-sdk-19/bin/api-ms-win-core-datetime-l1-1-0.dll" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/lib/javafx-sdk-19/bin/api-ms-win-core-datetime-l1-1-0.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/javafx-sdk-19/bin/api-ms-win-core-debug-l1-1-0.dll" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/lib/javafx-sdk-19/bin/api-ms-win-core-debug-l1-1-0.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/javafx-sdk-19/bin/api-ms-win-core-errorhandling-l1-1-0.dll" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/lib/javafx-sdk-19/bin/api-ms-win-core-errorhandling-l1-1-0.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/javafx-sdk-19/bin/api-ms-win-core-file-l1-1-0.dll" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/lib/javafx-sdk-19/bin/api-ms-win-core-file-l1-1-0.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/javafx-sdk-19/bin/api-ms-win-core-file-l1-2-0.dll" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/lib/javafx-sdk-19/bin/api-ms-win-core-file-l1-2-0.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/javafx-sdk-19/bin/api-ms-win-core-file-l2-1-0.dll" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/lib/javafx-sdk-19/bin/api-ms-win-core-file-l2-1-0.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/javafx-sdk-19/bin/api-ms-win-core-handle-l1-1-0.dll" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/lib/javafx-sdk-19/bin/api-ms-win-core-handle-l1-1-0.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/javafx-sdk-19/bin/api-ms-win-core-heap-l1-1-0.dll" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/lib/javafx-sdk-19/bin/api-ms-win-core-heap-l1-1-0.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/javafx-sdk-19/bin/api-ms-win-core-interlocked-l1-1-0.dll" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/lib/javafx-sdk-19/bin/api-ms-win-core-interlocked-l1-1-0.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/javafx-sdk-19/bin/api-ms-win-core-libraryloader-l1-1-0.dll" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/lib/javafx-sdk-19/bin/api-ms-win-core-libraryloader-l1-1-0.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/javafx-sdk-19/bin/api-ms-win-core-localization-l1-2-0.dll" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/lib/javafx-sdk-19/bin/api-ms-win-core-localization-l1-2-0.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/javafx-sdk-19/bin/api-ms-win-core-memory-l1-1-0.dll" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/lib/javafx-sdk-19/bin/api-ms-win-core-memory-l1-1-0.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/javafx-sdk-19/bin/api-ms-win-core-namedpipe-l1-1-0.dll" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/lib/javafx-sdk-19/bin/api-ms-win-core-namedpipe-l1-1-0.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/javafx-sdk-19/bin/api-ms-win-core-processenvironment-l1-1-0.dll" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/lib/javafx-sdk-19/bin/api-ms-win-core-processenvironment-l1-1-0.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/javafx-sdk-19/bin/api-ms-win-core-processthreads-l1-1-0.dll" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/lib/javafx-sdk-19/bin/api-ms-win-core-processthreads-l1-1-0.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/javafx-sdk-19/bin/api-ms-win-core-processthreads-l1-1-1.dll" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/lib/javafx-sdk-19/bin/api-ms-win-core-processthreads-l1-1-1.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/javafx-sdk-19/bin/api-ms-win-core-profile-l1-1-0.dll" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/lib/javafx-sdk-19/bin/api-ms-win-core-profile-l1-1-0.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/javafx-sdk-19/bin/api-ms-win-core-rtlsupport-l1-1-0.dll" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/lib/javafx-sdk-19/bin/api-ms-win-core-rtlsupport-l1-1-0.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/javafx-sdk-19/bin/api-ms-win-core-string-l1-1-0.dll" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/lib/javafx-sdk-19/bin/api-ms-win-core-string-l1-1-0.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/javafx-sdk-19/bin/api-ms-win-core-synch-l1-1-0.dll" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/lib/javafx-sdk-19/bin/api-ms-win-core-synch-l1-1-0.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/javafx-sdk-19/bin/api-ms-win-core-synch-l1-2-0.dll" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/lib/javafx-sdk-19/bin/api-ms-win-core-synch-l1-2-0.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/javafx-sdk-19/bin/api-ms-win-core-sysinfo-l1-1-0.dll" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/lib/javafx-sdk-19/bin/api-ms-win-core-sysinfo-l1-1-0.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/javafx-sdk-19/bin/api-ms-win-core-timezone-l1-1-0.dll" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/lib/javafx-sdk-19/bin/api-ms-win-core-timezone-l1-1-0.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/javafx-sdk-19/bin/api-ms-win-core-util-l1-1-0.dll" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/lib/javafx-sdk-19/bin/api-ms-win-core-util-l1-1-0.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/javafx-sdk-19/bin/api-ms-win-crt-conio-l1-1-0.dll" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/lib/javafx-sdk-19/bin/api-ms-win-crt-conio-l1-1-0.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/javafx-sdk-19/bin/api-ms-win-crt-convert-l1-1-0.dll" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/lib/javafx-sdk-19/bin/api-ms-win-crt-convert-l1-1-0.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/javafx-sdk-19/bin/api-ms-win-crt-environment-l1-1-0.dll" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/lib/javafx-sdk-19/bin/api-ms-win-crt-environment-l1-1-0.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/javafx-sdk-19/bin/api-ms-win-crt-filesystem-l1-1-0.dll" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/lib/javafx-sdk-19/bin/api-ms-win-crt-filesystem-l1-1-0.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/javafx-sdk-19/bin/api-ms-win-crt-heap-l1-1-0.dll" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/lib/javafx-sdk-19/bin/api-ms-win-crt-heap-l1-1-0.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/javafx-sdk-19/bin/api-ms-win-crt-locale-l1-1-0.dll" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/lib/javafx-sdk-19/bin/api-ms-win-crt-locale-l1-1-0.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/javafx-sdk-19/bin/api-ms-win-crt-math-l1-1-0.dll" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/lib/javafx-sdk-19/bin/api-ms-win-crt-math-l1-1-0.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/javafx-sdk-19/bin/api-ms-win-crt-multibyte-l1-1-0.dll" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/lib/javafx-sdk-19/bin/api-ms-win-crt-multibyte-l1-1-0.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/javafx-sdk-19/bin/api-ms-win-crt-private-l1-1-0.dll" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/lib/javafx-sdk-19/bin/api-ms-win-crt-private-l1-1-0.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/javafx-sdk-19/bin/api-ms-win-crt-process-l1-1-0.dll" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/lib/javafx-sdk-19/bin/api-ms-win-crt-process-l1-1-0.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/javafx-sdk-19/bin/api-ms-win-crt-runtime-l1-1-0.dll" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/lib/javafx-sdk-19/bin/api-ms-win-crt-runtime-l1-1-0.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/javafx-sdk-19/bin/api-ms-win-crt-stdio-l1-1-0.dll" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/lib/javafx-sdk-19/bin/api-ms-win-crt-stdio-l1-1-0.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/javafx-sdk-19/bin/api-ms-win-crt-string-l1-1-0.dll" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/lib/javafx-sdk-19/bin/api-ms-win-crt-string-l1-1-0.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/javafx-sdk-19/bin/api-ms-win-crt-time-l1-1-0.dll" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/lib/javafx-sdk-19/bin/api-ms-win-crt-time-l1-1-0.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/javafx-sdk-19/bin/api-ms-win-crt-utility-l1-1-0.dll" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/lib/javafx-sdk-19/bin/api-ms-win-crt-utility-l1-1-0.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/javafx-sdk-19/bin/decora_sse.dll" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/lib/javafx-sdk-19/bin/decora_sse.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/javafx-sdk-19/bin/fxplugins.dll" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/lib/javafx-sdk-19/bin/fxplugins.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/javafx-sdk-19/bin/glass.dll" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/lib/javafx-sdk-19/bin/glass.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/javafx-sdk-19/bin/glib-lite.dll" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/lib/javafx-sdk-19/bin/glib-lite.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/javafx-sdk-19/bin/gstreamer-lite.dll" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/lib/javafx-sdk-19/bin/gstreamer-lite.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/javafx-sdk-19/bin/javafx_font.dll" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/lib/javafx-sdk-19/bin/javafx_font.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/javafx-sdk-19/bin/javafx_iio.dll" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/lib/javafx-sdk-19/bin/javafx_iio.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/javafx-sdk-19/bin/jfxmedia.dll" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/lib/javafx-sdk-19/bin/jfxmedia.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/javafx-sdk-19/bin/jfxwebkit.dll" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/lib/javafx-sdk-19/bin/jfxwebkit.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/javafx-sdk-19/bin/msvcp140.dll" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/lib/javafx-sdk-19/bin/msvcp140.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/javafx-sdk-19/bin/msvcp140_1.dll" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/lib/javafx-sdk-19/bin/msvcp140_1.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/javafx-sdk-19/bin/msvcp140_2.dll" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/lib/javafx-sdk-19/bin/msvcp140_2.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/javafx-sdk-19/bin/prism_common.dll" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/lib/javafx-sdk-19/bin/prism_common.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/javafx-sdk-19/bin/prism_d3d.dll" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/lib/javafx-sdk-19/bin/prism_d3d.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/javafx-sdk-19/bin/prism_sw.dll" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/lib/javafx-sdk-19/bin/prism_sw.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/javafx-sdk-19/bin/ucrtbase.dll" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/lib/javafx-sdk-19/bin/ucrtbase.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/javafx-sdk-19/bin/vcruntime140.dll" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/lib/javafx-sdk-19/bin/vcruntime140.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/javafx-sdk-19/bin/vcruntime140_1.dll" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/lib/javafx-sdk-19/bin/vcruntime140_1.dll" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/javafx-sdk-19/legal/javafx.base/ADDITIONAL_LICENSE_INFO" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/lib/javafx-sdk-19/legal/javafx.base/ADDITIONAL_LICENSE_INFO" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/javafx-sdk-19/legal/javafx.base/ASSEMBLY_EXCEPTION" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/lib/javafx-sdk-19/legal/javafx.base/ASSEMBLY_EXCEPTION" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/javafx-sdk-19/legal/javafx.base/LICENSE" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/lib/javafx-sdk-19/legal/javafx.base/LICENSE" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/javafx-sdk-19/legal/javafx.controls/ADDITIONAL_LICENSE_INFO" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/lib/javafx-sdk-19/legal/javafx.controls/ADDITIONAL_LICENSE_INFO" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/javafx-sdk-19/legal/javafx.controls/ASSEMBLY_EXCEPTION" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/lib/javafx-sdk-19/legal/javafx.controls/ASSEMBLY_EXCEPTION" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/javafx-sdk-19/legal/javafx.controls/LICENSE" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/lib/javafx-sdk-19/legal/javafx.controls/LICENSE" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/javafx-sdk-19/legal/javafx.fxml/ADDITIONAL_LICENSE_INFO" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/lib/javafx-sdk-19/legal/javafx.fxml/ADDITIONAL_LICENSE_INFO" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/javafx-sdk-19/legal/javafx.fxml/ASSEMBLY_EXCEPTION" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/lib/javafx-sdk-19/legal/javafx.fxml/ASSEMBLY_EXCEPTION" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/javafx-sdk-19/legal/javafx.fxml/LICENSE" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/lib/javafx-sdk-19/legal/javafx.fxml/LICENSE" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/javafx-sdk-19/legal/javafx.graphics/ADDITIONAL_LICENSE_INFO" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/lib/javafx-sdk-19/legal/javafx.graphics/ADDITIONAL_LICENSE_INFO" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/javafx-sdk-19/legal/javafx.graphics/ASSEMBLY_EXCEPTION" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/lib/javafx-sdk-19/legal/javafx.graphics/ASSEMBLY_EXCEPTION" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/javafx-sdk-19/legal/javafx.graphics/LICENSE" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/lib/javafx-sdk-19/legal/javafx.graphics/LICENSE" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/javafx-sdk-19/legal/javafx.graphics/jpeg_fx.md" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/lib/javafx-sdk-19/legal/javafx.graphics/jpeg_fx.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/javafx-sdk-19/legal/javafx.graphics/mesa3d.md" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/lib/javafx-sdk-19/legal/javafx.graphics/mesa3d.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/javafx-sdk-19/legal/javafx.media/ADDITIONAL_LICENSE_INFO" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/lib/javafx-sdk-19/legal/javafx.media/ADDITIONAL_LICENSE_INFO" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/javafx-sdk-19/legal/javafx.media/ASSEMBLY_EXCEPTION" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/lib/javafx-sdk-19/legal/javafx.media/ASSEMBLY_EXCEPTION" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/javafx-sdk-19/legal/javafx.media/LICENSE" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/lib/javafx-sdk-19/legal/javafx.media/LICENSE" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/javafx-sdk-19/legal/javafx.media/directshow.md" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/lib/javafx-sdk-19/legal/javafx.media/directshow.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/javafx-sdk-19/legal/javafx.media/glib.md" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/lib/javafx-sdk-19/legal/javafx.media/glib.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/javafx-sdk-19/legal/javafx.media/gstreamer.md" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/lib/javafx-sdk-19/legal/javafx.media/gstreamer.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/javafx-sdk-19/legal/javafx.media/libffi.md" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/lib/javafx-sdk-19/legal/javafx.media/libffi.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/javafx-sdk-19/legal/javafx.swing/ADDITIONAL_LICENSE_INFO" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/lib/javafx-sdk-19/legal/javafx.swing/ADDITIONAL_LICENSE_INFO" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/javafx-sdk-19/legal/javafx.swing/ASSEMBLY_EXCEPTION" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/lib/javafx-sdk-19/legal/javafx.swing/ASSEMBLY_EXCEPTION" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/javafx-sdk-19/legal/javafx.swing/LICENSE" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/lib/javafx-sdk-19/legal/javafx.swing/LICENSE" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/javafx-sdk-19/legal/javafx.web/ADDITIONAL_LICENSE_INFO" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/lib/javafx-sdk-19/legal/javafx.web/ADDITIONAL_LICENSE_INFO" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/javafx-sdk-19/legal/javafx.web/ASSEMBLY_EXCEPTION" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/lib/javafx-sdk-19/legal/javafx.web/ASSEMBLY_EXCEPTION" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/javafx-sdk-19/legal/javafx.web/LICENSE" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/lib/javafx-sdk-19/legal/javafx.web/LICENSE" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/javafx-sdk-19/legal/javafx.web/icu_web.md" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/lib/javafx-sdk-19/legal/javafx.web/icu_web.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/javafx-sdk-19/legal/javafx.web/libxml2.md" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/lib/javafx-sdk-19/legal/javafx.web/libxml2.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/javafx-sdk-19/legal/javafx.web/libxslt.md" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/lib/javafx-sdk-19/legal/javafx.web/libxslt.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/javafx-sdk-19/legal/javafx.web/webkit.md" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/lib/javafx-sdk-19/legal/javafx.web/webkit.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/javafx-sdk-19/lib/javafx-swt.jar" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/lib/javafx-sdk-19/lib/javafx-swt.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/javafx-sdk-19/lib/javafx.base.jar" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/lib/javafx-sdk-19/lib/javafx.base.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/javafx-sdk-19/lib/javafx.controls.jar" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/lib/javafx-sdk-19/lib/javafx.controls.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/javafx-sdk-19/lib/javafx.fxml.jar" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/lib/javafx-sdk-19/lib/javafx.fxml.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/javafx-sdk-19/lib/javafx.graphics.jar" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/lib/javafx-sdk-19/lib/javafx.graphics.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/javafx-sdk-19/lib/javafx.media.jar" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/lib/javafx-sdk-19/lib/javafx.media.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/javafx-sdk-19/lib/javafx.properties" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/lib/javafx-sdk-19/lib/javafx.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/javafx-sdk-19/lib/javafx.swing.jar" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/lib/javafx-sdk-19/lib/javafx.swing.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/javafx-sdk-19/lib/javafx.web.jar" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/lib/javafx-sdk-19/lib/javafx.web.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/javafx-sdk-19/src.zip" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/lib/javafx-sdk-19/src.zip" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/junit-4.13.2.jar" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/lib/junit-4.13.2.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/vavr-1.0.0-alpha-4.jar" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/lib/vavr-1.0.0-alpha-4.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/Makefile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/compiler.bat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/run.bat" beforeDir="false" afterPath="$PROJECT_DIR$/EXE/run.bat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/Launcher.class" beforeDir="false" afterPath="$PROJECT_DIR$/EXE/src/Launcher.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/domain/controllers/AuthorCtrl.class" beforeDir="false" afterPath="$PROJECT_DIR$/EXE/src/domain/controllers/AuthorCtrl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/domain/controllers/BooleanExpressionCtrl.class" beforeDir="false" afterPath="$PROJECT_DIR$/EXE/src/domain/controllers/BooleanExpressionCtrl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/domain/controllers/DocumentCtrl.class" beforeDir="false" afterPath="$PROJECT_DIR$/EXE/src/domain/controllers/DocumentCtrl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/domain/controllers/DomainCtrl.class" beforeDir="false" afterPath="$PROJECT_DIR$/EXE/src/domain/controllers/DomainCtrl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/domain/controllers/SearchCtrl.class" beforeDir="false" afterPath="$PROJECT_DIR$/EXE/src/domain/controllers/SearchCtrl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/domain/controllers/SentenceCtrl.class" beforeDir="false" afterPath="$PROJECT_DIR$/EXE/src/domain/controllers/SentenceCtrl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/domain/controllers/TitleCtrl.class" beforeDir="false" afterPath="$PROJECT_DIR$/EXE/src/domain/controllers/TitleCtrl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/domain/core/Author.class" beforeDir="false" afterPath="$PROJECT_DIR$/EXE/src/domain/core/Author.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/domain/core/Document.class" beforeDir="false" afterPath="$PROJECT_DIR$/EXE/src/domain/core/Document.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/domain/core/DocumentInfo.class" beforeDir="false" afterPath="$PROJECT_DIR$/EXE/src/domain/core/DocumentInfo.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/domain/core/Sentence.class" beforeDir="false" afterPath="$PROJECT_DIR$/EXE/src/domain/core/Sentence.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/domain/core/Title.class" beforeDir="false" afterPath="$PROJECT_DIR$/EXE/src/domain/core/Title.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/domain/expressions/BooleanExpression.class" beforeDir="false" afterPath="$PROJECT_DIR$/EXE/src/domain/expressions/BooleanExpression.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/domain/expressions/ExpressionTreeNode.class" beforeDir="false" afterPath="$PROJECT_DIR$/EXE/src/domain/expressions/ExpressionTreeNode.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/domain/index.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/domain/indexing/booleanmodel/BooleanModel.class" beforeDir="false" afterPath="$PROJECT_DIR$/EXE/src/domain/indexing/booleanmodel/BooleanModel.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/domain/indexing/core/Index.class" beforeDir="false" afterPath="$PROJECT_DIR$/EXE/src/domain/indexing/core/Index.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/domain/indexing/core/IndexingController.class" beforeDir="false" afterPath="$PROJECT_DIR$/EXE/src/domain/indexing/core/IndexingController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/domain/indexing/core/Parsing.class" beforeDir="false" afterPath="$PROJECT_DIR$/EXE/src/domain/indexing/core/Parsing.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/domain/indexing/index.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/domain/indexing/vectorial/TFIDF.class" beforeDir="false" afterPath="$PROJECT_DIR$/EXE/src/domain/indexing/vectorial/TFIDF.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/domain/indexing/vectorial/VectorialModel.class" beforeDir="false" afterPath="$PROJECT_DIR$/EXE/src/domain/indexing/vectorial/VectorialModel.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/domain/preprocessing/Stemmer.class" beforeDir="false" afterPath="$PROJECT_DIR$/EXE/src/domain/preprocessing/Stemmer.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/domain/preprocessing/Stopwords.class" beforeDir="false" afterPath="$PROJECT_DIR$/EXE/src/domain/preprocessing/Stopwords.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/domain/preprocessing/TokenFilter.class" beforeDir="false" afterPath="$PROJECT_DIR$/EXE/src/domain/preprocessing/TokenFilter.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/domain/preprocessing/Tokenizer.class" beforeDir="false" afterPath="$PROJECT_DIR$/EXE/src/domain/preprocessing/Tokenizer.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/domain/preprocessing/stopwords-ca.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/domain/preprocessing/stopwords-en.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/domain/preprocessing/stopwords-es.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/enums/Format.class" beforeDir="false" afterPath="$PROJECT_DIR$/EXE/src/enums/Format.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/helpers/Functional.class" beforeDir="false" afterPath="$PROJECT_DIR$/EXE/src/helpers/Functional.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/helpers/Maps.class" beforeDir="false" afterPath="$PROJECT_DIR$/EXE/src/helpers/Maps.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/helpers/Maths.class" beforeDir="false" afterPath="$PROJECT_DIR$/EXE/src/helpers/Maths.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/helpers/Sets.class" beforeDir="false" afterPath="$PROJECT_DIR$/EXE/src/helpers/Sets.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/helpers/Strings.class" beforeDir="false" afterPath="$PROJECT_DIR$/EXE/src/helpers/Strings.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/persistance/controllers/PersistanceCtrl.class" beforeDir="false" afterPath="$PROJECT_DIR$/EXE/src/persistance/controllers/PersistanceCtrl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/persistance/datamanagement/BEDataManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/EXE/src/persistance/datamanagement/BEDataManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/persistance/datamanagement/DocumentsDataManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/EXE/src/persistance/datamanagement/DocumentsDataManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/persistance/documentexporter/DocumentExporterFactory.class" beforeDir="false" afterPath="$PROJECT_DIR$/EXE/src/persistance/documentexporter/DocumentExporterFactory.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/persistance/documentexporter/DocumentExporterPROP.class" beforeDir="false" afterPath="$PROJECT_DIR$/EXE/src/persistance/documentexporter/DocumentExporterPROP.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/persistance/documentexporter/DocumentExporterTXT.class" beforeDir="false" afterPath="$PROJECT_DIR$/EXE/src/persistance/documentexporter/DocumentExporterTXT.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/persistance/documentexporter/DocumentExporterXML.class" beforeDir="false" afterPath="$PROJECT_DIR$/EXE/src/persistance/documentexporter/DocumentExporterXML.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/persistance/documentimporter/DocumentImporterFactory.class" beforeDir="false" afterPath="$PROJECT_DIR$/EXE/src/persistance/documentimporter/DocumentImporterFactory.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/persistance/documentimporter/DocumentImporterGutemberg.class" beforeDir="false" afterPath="$PROJECT_DIR$/EXE/src/persistance/documentimporter/DocumentImporterGutemberg.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/persistance/documentimporter/DocumentImporterPROP.class" beforeDir="false" afterPath="$PROJECT_DIR$/EXE/src/persistance/documentimporter/DocumentImporterPROP.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/persistance/documentimporter/DocumentImporterTXT.class" beforeDir="false" afterPath="$PROJECT_DIR$/EXE/src/persistance/documentimporter/DocumentImporterTXT.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/persistance/documentimporter/DocumentImporterXML.class" beforeDir="false" afterPath="$PROJECT_DIR$/EXE/src/persistance/documentimporter/DocumentImporterXML.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/presentation/BooleanExprSearchCtrl.class" beforeDir="false" afterPath="$PROJECT_DIR$/EXE/src/presentation/BooleanExprSearchCtrl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/presentation/DocumentTabCtrl.class" beforeDir="false" afterPath="$PROJECT_DIR$/EXE/src/presentation/DocumentTabCtrl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/presentation/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/EXE/src/presentation/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/presentation/MainViewCtrl.class" beforeDir="false" afterPath="$PROJECT_DIR$/EXE/src/presentation/MainViewCtrl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/presentation/PresentationCtrl.class" beforeDir="false" afterPath="$PROJECT_DIR$/EXE/src/presentation/PresentationCtrl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/presentation/ResultTableCtrl$1$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/EXE/src/presentation/ResultTableCtrl$1$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/presentation/ResultTableCtrl$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/EXE/src/presentation/ResultTableCtrl$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/presentation/ResultTableCtrl.class" beforeDir="false" afterPath="$PROJECT_DIR$/EXE/src/presentation/ResultTableCtrl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/presentation/SimilaritySearchCtrl.class" beforeDir="false" afterPath="$PROJECT_DIR$/EXE/src/presentation/SimilaritySearchCtrl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/presentation/TitleAuthorSearchCtrl.class" beforeDir="false" afterPath="$PROJECT_DIR$/EXE/src/presentation/TitleAuthorSearchCtrl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/presentation/WeightedSearchCtrl.class" beforeDir="false" afterPath="$PROJECT_DIR$/EXE/src/presentation/WeightedSearchCtrl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/presentation/css/document-tab.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/presentation/css/main.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/presentation/css/results.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/presentation/css/search.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/presentation/css/side-bar.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/presentation/css/tabs.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/presentation/css/theme.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/presentation/css/top-bar.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/presentation/css/weighted.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/presentation/fxml/booleanExpressionPane.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/presentation/fxml/documentTab.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/presentation/fxml/helpTab.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/presentation/fxml/mainView.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/presentation/fxml/proba de help.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/presentation/fxml/resultTable.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/presentation/fxml/similarityPanel.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/presentation/fxml/titleAuthorPanel.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/presentation/fxml/weightedPanel.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/presentation/img/approx-gray.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/presentation/img/approx-lightgray.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/presentation/img/folder-gray.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/presentation/img/folder-lightgray.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/presentation/img/list-search-gray.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/presentation/img/list-search-lightgray.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/presentation/img/target-gray.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/presentation/img/target-lightgray.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/presentation/img/weighted-gray.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/presentation/img/weighted-lightgray.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sources.txt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/subgrup-prop33.2.iml" beforeDir="false" afterPath="$PROJECT_DIR$/subgrup-prop33.2.iml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -200,8 +138,8 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "jdk.selected.JAVA_MODULE": "11",
-    "last_opened_file_path": "/home/biel/Documents/Q5/PROP/subgrup-prop33.2/FONTS/lib/JavaFx/libprism_sw.so",
-    "project.structure.last.edited": "Artifacts",
+    "last_opened_file_path": "C:/Users/biele/OneDrive/Documents/GitHub/subgrup-prop33.2",
+    "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.10548526",
     "project.structure.side.proportion": "0.26714158",
     "settings.editor.selected.configurable": "preferences.pluginManager"
