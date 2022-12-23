@@ -5,6 +5,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
@@ -65,7 +66,7 @@ public class DocumentTabCtrl {
         newdoc = false;
     }
 
-    public void setContent(ArrayList<String> content) {
+    public void setContent(List<String> content) {
         var text = content.stream()
             .map(s -> s.replace('\n', ' ').stripTrailing())
             .collect(Collectors.joining("\n"));

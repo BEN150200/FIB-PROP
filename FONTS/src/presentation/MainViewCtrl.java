@@ -25,7 +25,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.CompletableFuture;
 
-import io.vavr.control.Try;
 
 public class MainViewCtrl {
 
@@ -385,24 +384,25 @@ public class MainViewCtrl {
         Tab currentTab = tabPane.getSelectionModel().getSelectedItem();
         DocumentTabCtrl currentTabCtrl = tabControllers.get(currentTab);
 
-        ArrayList<String> content = Tokenizer.splitSentences(currentTabCtrl.getContent());
-
-        if (currentTabCtrl.isNew()) {
-            if (PresentationCtrl.getInstance().existsDocument(currentTabCtrl.getTitle(),currentTabCtrl.getAuthor())) {
-                showExceptionAlert("The document is already in the system");
-                return;
+        //if the content of the document id modified try to save it, else don't
+        if (currentTabCtrl.modified()) {
+            //if it's a new tab check if it can be saved
+            if (currentTabCtrl.isNew()) {
+                //check if there is another documents with the same title and author
+                if (PresentationCtrl.getInstance().existsDocument(currentTabCtrl.getTitle(), currentTabCtrl.getAuthor())) {
+                    //if there is, show an error
+                    showExceptionAlert("The document is already in the system");
+                } else {
+                    saveAsDocument();
+                }
             }
-        }
-
-        else PresentationCtrl.getInstance().saveDocument(currentTabCtrl.getTitle(), currentTabCtrl.getAuthor(), content);
-
-        //try to save it, if it exists
-        boolean exists = PresentationCtrl.getInstance().saveDocument(currentTabCtrl.getTitle(), currentTabCtrl.getAuthor(), content);
-
-        if (!exists) saveAsDocument();
-        else  {
-            updateAllSearchViews();
-            currentTabCtrl.setSaved();
+            //else save the changes and mark it as saved
+            else {
+                var content = Tokenizer.splitSentences(currentTabCtrl.getContent());
+                PresentationCtrl.getInstance().saveDocument(currentTabCtrl.getTitle(), currentTabCtrl.getAuthor(), content);
+                currentTabCtrl.setSaved();
+                updateAllSearchViews();
+            }
         }
     }
 
@@ -422,7 +422,7 @@ public class MainViewCtrl {
             String path = file.getPath();
             Format format = extractFormat(path);
 
-            ArrayList<String> content = Tokenizer.splitSentences(currentTabCtrl.getContent());
+            var content = Tokenizer.splitSentences(currentTabCtrl.getContent());
             DocumentInfo docToBeSaved = new DocumentInfo(null, currentTabCtrl.getTitle(), currentTabCtrl.getAuthor(), LocalDateTime.now(), LocalDateTime.now(), content, path, format, file.getName());
 
             PresentationCtrl.getInstance().saveAsDocument(docToBeSaved);
@@ -485,9 +485,9 @@ public class MainViewCtrl {
             String path = file.getPath();
             String name = file.getName();
 
-            ArrayList<String> content = Tokenizer.splitSentences(currentTabCtrl.getContent());
+            var content = Tokenizer.splitSentences(currentTabCtrl.getContent());
 
-            DocumentInfo docToBeSaved = new DocumentInfo(null, currentTabCtrl.getTitle(), currentTabCtrl.getAuthor(), LocalDateTime.now(), LocalDateTime.now(), content, path, format, file.getName());
+            DocumentInfo docToBeSaved = new DocumentInfo(null, currentTabCtrl.getTitle(), currentTabCtrl.getAuthor(), LocalDateTime.now(), LocalDateTime.now(), content, path, format, name);
 
             PresentationCtrl.getInstance().export(docToBeSaved);
             updateAllSearchViews();

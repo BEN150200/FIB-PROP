@@ -24,7 +24,7 @@ public class DocumentExporterXML implements DocumentExporter{
         Element root = doc.createElement("DOCCONFIGURATION");
         doc.appendChild(root);
 
-        Element title = doc.createElement("títol");
+        Element title = doc.createElement("titol");
         title.setTextContent(titleName);
         root.appendChild(title);
 
