@@ -25,7 +25,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.CompletableFuture;
 
-import io.vavr.control.Try;
 
 public class MainViewCtrl {
 
@@ -385,22 +384,25 @@ public class MainViewCtrl {
         Tab currentTab = tabPane.getSelectionModel().getSelectedItem();
         DocumentTabCtrl currentTabCtrl = tabControllers.get(currentTab);
 
-        var content = Tokenizer.splitSentences(currentTabCtrl.getContent());
-
-        if (currentTabCtrl.isNew()) {
-            if (PresentationCtrl.getInstance().existsDocument(currentTabCtrl.getTitle(),currentTabCtrl.getAuthor())) {
-                showExceptionAlert("The document is already in the system");
-                return;
+        //if the content of the document id modified try to save it, else don't
+        if (currentTabCtrl.modified()) {
+            //if it's a new tab check if it can be saved
+            if (currentTabCtrl.isNew()) {
+                //check if there is another documents with the same title and author
+                if (PresentationCtrl.getInstance().existsDocument(currentTabCtrl.getTitle(), currentTabCtrl.getAuthor())) {
+                    //if there is, show an error
+                    showExceptionAlert("The document is already in the system");
+                } else {
+                    saveAsDocument();
+                }
             }
-        }
-
-        //try to save it, if it exists
-        boolean exists = PresentationCtrl.getInstance().saveDocument(currentTabCtrl.getTitle(), currentTabCtrl.getAuthor(), content);
-
-        if (!exists) saveAsDocument();
-        else  {
-            updateAllSearchViews();
-            currentTabCtrl.setSaved();
+            //else save the changes and mark it as saved
+            else {
+                var content = Tokenizer.splitSentences(currentTabCtrl.getContent());
+                PresentationCtrl.getInstance().saveDocument(currentTabCtrl.getTitle(), currentTabCtrl.getAuthor(), content);
+                currentTabCtrl.setSaved();
+                updateAllSearchViews();
+            }
         }
     }
 
