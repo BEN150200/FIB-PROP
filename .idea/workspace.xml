@@ -7,27 +7,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d2991d3d-5c40-4108-ac62-9c44333baa2c" name="Changes" comment="feedback expressions booleanes fet">
-      <change afterPath="$PROJECT_DIR$/FONTS/compiler.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/artifacts/subgrup_prop33_2_jar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/subgrup_prop33_2_jar.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/artifacts/subgrup_prop33_2_jar2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/subgrup_prop33_2_jar2.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/javafx.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/JavaFx_Linux.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/lib.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/lib1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/lib2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/JavaFx_Win.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/lib__2_.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/src.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/EXE/run.bat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/EXE/src/domain/preprocessing/Stopwords.class" beforeDir="false" afterPath="$PROJECT_DIR$/EXE/src/domain/preprocessing/Stopwords.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/EXE/src/persistance/documentexporter/DocumentExporterXML.class" beforeDir="false" afterPath="$PROJECT_DIR$/EXE/src/persistance/documentexporter/DocumentExporterXML.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/EXE/src/persistance/documentimporter/DocumentImporterXML.class" beforeDir="false" afterPath="$PROJECT_DIR$/EXE/src/persistance/documentimporter/DocumentImporterXML.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FONTS/Makefile" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FONTS/compiler.bat" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/compiler.bat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FONTS/lib/controlsfx-11.1.2.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FONTS/lib/hamcrest-core-1.3.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/FONTS/lib/junit-4.13.2.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/DocumentsData.xml" beforeDir="false" afterPath="$PROJECT_DIR$/data/DocumentsData.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/subgrup-prop33.2.iml" beforeDir="false" afterPath="$PROJECT_DIR$/subgrup-prop33.2.iml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -57,24 +37,23 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "jdk.selected.JAVA_MODULE": "11",
-    "last_opened_file_path": "/home/biel/Documents/Q5/PROP/subgrup-prop33.2/EXE",
-    "project.structure.last.edited": "Problems",
-    "project.structure.proportion": "0.10548526",
-    "project.structure.side.proportion": "0.26714158",
-    "settings.editor.selected.configurable": "preferences.pluginManager"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;11&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/biele/OneDrive/Documents/GitHub/subgrup-prop33.2&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.10548526&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.26714158&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/EXE" />
       <recent name="$PROJECT_DIR$/FONTS" />
       <recent name="$PROJECT_DIR$/EXE/src/presentation" />
       <recent name="C:\Users\jansa\IdeaProjects\subgrup-prop33.2\FONTS\src\presentation\fxml" />
@@ -94,7 +73,7 @@
     <configuration name="Main" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="src.presentation.Main" />
       <module name="subgrup-prop33.2" />
-      <option name="VM_PARAMETERS" value="--module-path ./FONTS/lib/JavaFx --add-modules javafx.controls,javafx.fxml" />
+      <option name="VM_PARAMETERS" value="--module-path ./FONTS/lib/javafx-sdk-19/lib --add-modules javafx.controls,javafx.fxml --add-exports javafx.base/com.sun.javafx.event=ALL-UNNAMED" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="src.presentation.*" />
