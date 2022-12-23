@@ -1,7 +1,9 @@
 package src.presentation;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Label;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.control.TextField;
@@ -21,6 +23,9 @@ public class WeightedSearchCtrl {
     @FXML
     private Spinner<Integer> numSpinner;
 
+    @FXML
+    private Label errorLabel;
+
     private int currentNum;
 
     private ResultTableCtrl resultTableCtrl;
@@ -31,7 +36,7 @@ public class WeightedSearchCtrl {
         currentNum = 5;
 
         VBox.setVgrow(table, Priority.ALWAYS);
-        layout.getChildren().add(1,table);
+        layout.getChildren().add(2,table);
         VBox.setVgrow(layout, Priority.ALWAYS);
         SpinnerValueFactory<Integer> spinnerFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 100);
         spinnerFactory.setValue(currentNum);
@@ -59,7 +64,10 @@ public class WeightedSearchCtrl {
 
     @FXML
     private void search(String query) {
-        if (query.isEmpty()) resultTableCtrl.clearTable();
+        if (query.isEmpty()) {
+            resultTableCtrl.clearTable();
+            Platform.runLater(() -> errorLabel.setText(""));
+        }
         else {
             PresentationCtrl.getInstance()
                 .weightedSearch(query)
@@ -69,11 +77,13 @@ public class WeightedSearchCtrl {
                     .peek(
                         error -> {
                             resultTableCtrl.clearTable();
-                            PresentationCtrl.getInstance().setMessage(error);
+                            Platform.runLater(() -> errorLabel.setText("ERROR: " + error));
                         },
                         result -> {
                             if(result.isEmpty())
-                            PresentationCtrl.getInstance().setMessage("No document matches the search");
+                                Platform.runLater(() -> errorLabel.setText("No match"));
+                            else
+                                Platform.runLater(() -> errorLabel.setText(""));
                             
                             resultTableCtrl.updateTable(result);
                         }

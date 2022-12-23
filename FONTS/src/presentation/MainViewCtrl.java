@@ -19,7 +19,6 @@ import java.io.IOException;
 import java.time.Duration;
 import java.time.Instant;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
@@ -33,15 +32,6 @@ public class MainViewCtrl {
 
     @FXML
     private SplitPane splitPane;
-
-    @FXML
-    private MenuItem saveButton;
-
-    @FXML
-    private MenuItem closeDocButton;
-
-    @FXML
-    private MenuItem newDocButton;
 
     @FXML
     private Button allDocsButton;
@@ -75,10 +65,8 @@ public class MainViewCtrl {
     private SimilaritySearchCtrl similaritySearchCtrl;
 
     private VBox booleanSearchView;
-    private BooleanExprSearchCtrl booleanSearchCtrl;
 
     private VBox weightedSearchView;
-    private WeightedSearchCtrl weightedSearchCtrl;
 
 
     //stores the position of the divider for the search panels to make all open with the same width
@@ -144,7 +132,7 @@ public class MainViewCtrl {
         loader = new FXMLLoader(getClass().getResource("/src/presentation/fxml/booleanExpressionPane.fxml"));
         try {
             booleanSearchView = loader.load();
-            booleanSearchCtrl = loader.getController();
+            //booleanSearchCtrl = loader.getController();
             SplitPane.setResizableWithParent(booleanSearchView, false);
         } catch (IOException e) {
             setMessage("booleanExpressionPane.fxml file not found, the booleanSearchCtrl could not be loaded");
@@ -154,7 +142,7 @@ public class MainViewCtrl {
         loader = new FXMLLoader(getClass().getResource("/src/presentation/fxml/weightedPanel.fxml"));
         try {
             weightedSearchView = loader.load();
-            weightedSearchCtrl = loader.getController();
+            //weightedSearchCtrl = loader.getController();
             SplitPane.setResizableWithParent(weightedSearchView, false);
         } catch (IOException e) {
             setMessage("weightedPanel.fxml file not found, the weightSearchView could not be loaded");
@@ -246,6 +234,16 @@ public class MainViewCtrl {
     @FXML
     private void newBoolTab() throws IOException {
         newEmptyTab("Boolean Search", "booleanExpressionPane.fxml");
+    }
+
+    @FXML
+    private void newSimilarityTab() throws IOException {
+        newEmptyTab("Weighted Search", "similarityPane.fxml");
+    }
+
+    @FXML
+    private void newWeightedTab() throws IOException {
+        newEmptyTab("Weighted Search", "weightedPane.fxml");
     }
 
 
@@ -342,6 +340,7 @@ public class MainViewCtrl {
 
     @FXML
     private void closeCurrentTab() {
+        if (tabPane.getTabs().isEmpty()) return;
         Event.fireEvent(tabPane.getSelectionModel().getSelectedItem(), new Event(Tab.TAB_CLOSE_REQUEST_EVENT));
     }
 
@@ -381,6 +380,7 @@ public class MainViewCtrl {
     @FXML
     private void saveDocument() {
         //get the content of the current tab
+        if (tabPane.getTabs().isEmpty()) return;
         Tab currentTab = tabPane.getSelectionModel().getSelectedItem();
         DocumentTabCtrl currentTabCtrl = tabControllers.get(currentTab);
 
@@ -408,7 +408,7 @@ public class MainViewCtrl {
 
     @FXML
     private void saveAsDocument() {
-
+        if (tabPane.getTabs().isEmpty()) return;
         Tab currentTab = tabPane.getSelectionModel().getSelectedItem();
         DocumentTabCtrl currentTabCtrl = tabControllers.get(currentTab);
 
@@ -435,23 +435,13 @@ public class MainViewCtrl {
 
     @FXML
     private void deleteDocument() {
+        if (tabPane.getTabs().isEmpty()) return;
         Tab currentTab = tabPane.getSelectionModel().getSelectedItem();
         DocumentTabCtrl currentTabCtrl = tabControllers.get(currentTab);
         PresentationCtrl.getInstance().deleteDocument(currentTabCtrl.getTitle(), currentTabCtrl.getAuthor());
         tabPane.getTabs().remove(currentTab);
         updateAllSearchViews();
     }
-
-
-    public void saveAllDocs() {
-        tabPane.getSelectionModel().selectFirst();
-        int tabs = tabPane.getTabs().size();
-        for (int i = 0; i < tabs; ++i) {
-            saveDocument();
-            tabPane.getSelectionModel().selectNext();
-        }
-    }
-
 
     /**
      * Export  and Import functions
@@ -472,6 +462,7 @@ public class MainViewCtrl {
     }
 
     private void export(Format format) {
+        if (tabPane.getTabs().isEmpty()) return;
         Tab currentTab = tabPane.getSelectionModel().getSelectedItem();
         DocumentTabCtrl currentTabCtrl = tabControllers.get(currentTab);
 

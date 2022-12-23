@@ -7,7 +7,6 @@ import static src.helpers.Functional.*;
 
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.concurrent.CompletableFuture;
 
 import io.vavr.collection.HashSet;
 import io.vavr.collection.List;
@@ -21,18 +20,33 @@ public class BooleanModel<SentenceId> {
         this.index = index;
     }
 
+    /**
+     * 
+     * @return a new empty model
+     */
     public static <SentenceId> BooleanModel<SentenceId> empty() {
         return new BooleanModel<SentenceId>(Index.empty());
     }
 
+    /**
+     * 
+     * @return a new model associated to the given index
+     */
     public static <SentenceId> BooleanModel<SentenceId> of(Index<SentenceId> index) {
         return new BooleanModel<SentenceId>(index);
     }
 
+    /**
+     * 
+     * @return a new model with the sentence and its content inserted
+     */
     public BooleanModel<SentenceId> insert(SentenceId sentenceId, Iterable<String> content) {
         return BooleanModel.of(this.index.insert(sentenceId, content));
     }
 
+    /**
+     * @return a new model with the sentence removed
+     */
     public BooleanModel<SentenceId> remove(SentenceId sentenceId) {
         return BooleanModel.of(this.index.remove(sentenceId));
     }
@@ -101,6 +115,11 @@ public class BooleanModel<SentenceId> {
         return Arrays.asList(terms.substring(1, terms.length()-1).split(" "));
     } 
 
+    /**
+     * 
+     * @param root the root of an expression tree to search
+     * @return a set of the sentence ids matching the expression
+     */
     public HashSet<SentenceId> query(ExpressionTreeNode root) {
         if(root == null) return HashSet.empty();
         

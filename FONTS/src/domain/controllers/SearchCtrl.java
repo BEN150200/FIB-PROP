@@ -79,6 +79,11 @@ public class SearchCtrl {
         );
     }
 
+    /**
+     * 
+     * @param boolExpName
+     * @return the result of searching the stored expresison, or null if an expression with said name doesn't exist
+     */
     public ArrayList<DocumentInfo> storedBooleanExpressionSearch (String boolExpName) {
         if(BooleanExpressionCtrl.getInstance().existsBooleanExpression(boolExpName)) {
             ExpressionTreeNode root = BooleanExpressionCtrl.getInstance().getSavedExpressionTree(boolExpName);
@@ -87,11 +92,23 @@ public class SearchCtrl {
         else return null;
     }
 
+    /**
+     * 
+     * @param name
+     * @return the result of searching the stored expresison (throws if it doesn't exist)
+     */
     public ArrayList<DocumentInfo> savedBooleanExpressionSearch (String name) {
         ExpressionTreeNode root = BooleanExpressionCtrl.getInstance().getSavedExpressionTree(name);
         return booleanExpressionSearch(root);
     }
-    public ArrayList<DocumentInfo> tempBooleanExpressionSearch (String boolExp) throws Exception {
+
+    /**
+     * 
+     * @param boolExp a raw boolean expression
+     * @return the result of searching the expression
+     * @throws Exception if the expression is sintactically incorrect
+     */
+    public ArrayList<DocumentInfo> booleanExpressionSearch (String boolExp) throws Exception {
         ExpressionTreeNode root = BooleanExpressionCtrl.getInstance().createExpressionTree(boolExp);
         return booleanExpressionSearch(root);
     }
@@ -122,22 +139,43 @@ public class SearchCtrl {
         return obtainDocuments(-1, indexingCtrl.weightedQuery(query));
     }
 
+    /**
+     * adds a document to the models
+     * @param docId
+     * @param content
+     */
     public void addDocument(Integer docId, Iterable<String> content) {
         indexingCtrl.addDocument(docId, content);
     }
 
+    /**
+     * adds a sentence to the models
+     * @param sentenceId
+     * @param content
+     */
     public void addSentence(Integer sentenceId, Iterable<String> content) {
         indexingCtrl.addSentence(sentenceId, content);
     }
     
+    /**
+     * removes a document to the models
+     * @param docId
+     */
     public void removeDocument(Integer docId) {
         indexingCtrl.removeDocument(docId);
     }
 
+    /**
+     * removes a sentence to the models
+     * @param sentenceId
+     */
     public void removeSentence(Integer sentenceId) {
         indexingCtrl.removeSentence(sentenceId);
     }
     
+    /**
+     *  empties the models
+     */
     public void clear(){
         indexingCtrl = new IndexingController<Integer, Integer>();
     }
