@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -53,6 +54,8 @@ public class Main extends Application {
         stage.setWidth(1000);
         stage.setMinHeight(800);
         stage.setMinWidth(1200);
+
+        stage.getIcons().add(new Image("src/presentation/img/icon.png"));
 
         stage.setScene(scene);
         stage.sizeToScene();
