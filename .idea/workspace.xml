@@ -7,7 +7,36 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d2991d3d-5c40-4108-ac62-9c44333baa2c" name="Changes" comment="feedback expressions booleanes fet">
+      <change afterPath="$PROJECT_DIR$/FONTS/sources.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/data/DocumentsData.xml" beforeDir="false" afterPath="$PROJECT_DIR$/EXE/data/DocumentsData.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/domain/controllers/DomainCtrl.class" beforeDir="false" afterPath="$PROJECT_DIR$/EXE/src/domain/controllers/DomainCtrl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/domain/controllers/SearchCtrl.class" beforeDir="false" afterPath="$PROJECT_DIR$/EXE/src/domain/controllers/SearchCtrl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/domain/core/Document.class" beforeDir="false" afterPath="$PROJECT_DIR$/EXE/src/domain/core/Document.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/domain/core/DocumentInfo.class" beforeDir="false" afterPath="$PROJECT_DIR$/EXE/src/domain/core/DocumentInfo.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/domain/indexing/booleanmodel/BooleanModel.class" beforeDir="false" afterPath="$PROJECT_DIR$/EXE/src/domain/indexing/booleanmodel/BooleanModel.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/domain/indexing/core/IndexingController.class" beforeDir="false" afterPath="$PROJECT_DIR$/EXE/src/domain/indexing/core/IndexingController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/domain/indexing/core/Parsing.class" beforeDir="false" afterPath="$PROJECT_DIR$/EXE/src/domain/indexing/core/Parsing.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/domain/indexing/vectorial/VectorialModel.class" beforeDir="false" afterPath="$PROJECT_DIR$/EXE/src/domain/indexing/vectorial/VectorialModel.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/domain/preprocessing/Stopwords.class" beforeDir="false" afterPath="$PROJECT_DIR$/EXE/src/domain/preprocessing/Stopwords.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/domain/preprocessing/TokenFilter.class" beforeDir="false" afterPath="$PROJECT_DIR$/EXE/src/domain/preprocessing/TokenFilter.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/domain/preprocessing/Tokenizer.class" beforeDir="false" afterPath="$PROJECT_DIR$/EXE/src/domain/preprocessing/Tokenizer.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/persistance/datamanagement/DocumentsDataManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/EXE/src/persistance/datamanagement/DocumentsDataManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/persistance/documentimporter/DocumentImporterGutemberg.class" beforeDir="false" afterPath="$PROJECT_DIR$/EXE/src/persistance/documentimporter/DocumentImporterGutemberg.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/persistance/documentimporter/DocumentImporterPROP.class" beforeDir="false" afterPath="$PROJECT_DIR$/EXE/src/persistance/documentimporter/DocumentImporterPROP.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/persistance/documentimporter/DocumentImporterTXT.class" beforeDir="false" afterPath="$PROJECT_DIR$/EXE/src/persistance/documentimporter/DocumentImporterTXT.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/persistance/documentimporter/DocumentImporterXML.class" beforeDir="false" afterPath="$PROJECT_DIR$/EXE/src/persistance/documentimporter/DocumentImporterXML.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/presentation/BooleanExprSearchCtrl.class" beforeDir="false" afterPath="$PROJECT_DIR$/EXE/src/presentation/BooleanExprSearchCtrl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/presentation/DocumentTabCtrl.class" beforeDir="false" afterPath="$PROJECT_DIR$/EXE/src/presentation/DocumentTabCtrl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/presentation/MainViewCtrl.class" beforeDir="false" afterPath="$PROJECT_DIR$/EXE/src/presentation/MainViewCtrl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/presentation/PresentationCtrl.class" beforeDir="false" afterPath="$PROJECT_DIR$/EXE/src/presentation/PresentationCtrl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/presentation/ResultTableCtrl.class" beforeDir="false" afterPath="$PROJECT_DIR$/EXE/src/presentation/ResultTableCtrl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/presentation/SimilaritySearchCtrl.class" beforeDir="false" afterPath="$PROJECT_DIR$/EXE/src/presentation/SimilaritySearchCtrl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/presentation/WeightedSearchCtrl.class" beforeDir="false" afterPath="$PROJECT_DIR$/EXE/src/presentation/WeightedSearchCtrl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/presentation/css/search.css" beforeDir="false" afterPath="$PROJECT_DIR$/EXE/src/presentation/css/search.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/presentation/fxml/mainView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/EXE/src/presentation/fxml/mainView.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EXE/src/presentation/fxml/weightedPanel.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/EXE/src/presentation/fxml/weightedPanel.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FONTS/compiler.bat" beforeDir="false" afterPath="$PROJECT_DIR$/FONTS/compiler.bat" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

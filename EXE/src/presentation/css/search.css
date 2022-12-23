@@ -5,7 +5,9 @@
 }
 
 .label {
+    -fx-background-color: -left-panel-color;
     -fx-text-fill: -font-color;
+    -fx-padding: 0px 4px 4px 20px;
 }
 
 .text-input, .text-field {
