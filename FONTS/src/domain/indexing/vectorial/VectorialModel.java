@@ -143,8 +143,6 @@ public class VectorialModel<DocId> {
             )
         );
 
-        System.out.println(newTfidfVectors);
-
         return new VectorialModel<DocId>(newIndex, newMaxFrequencies, newTfidfVectors, _tokenFilter);
     }
     
