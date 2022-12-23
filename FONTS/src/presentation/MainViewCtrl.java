@@ -271,6 +271,10 @@ public class MainViewCtrl {
         if (noTabs && searchVisible) {
             splitPane.getDividers().get(0).setPosition(dividerPosition);
         }
+        if (Objects.equals(fxmlFileName, "resultTable.fxml")) {
+            ResultTableCtrl tabCtrl = loader.getController();
+            tabCtrl.setForAllDocs();
+        }
         //if the tab is a doc tab
         if (Objects.equals(fxmlFileName, "documentTab.fxml")) {
             //set close handler
