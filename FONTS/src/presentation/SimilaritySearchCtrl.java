@@ -1,5 +1,6 @@
 package src.presentation;
 
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -234,7 +235,7 @@ public class SimilaritySearchCtrl {
                 .thenAccept(
                     maybeResult -> maybeResult
                         .peek(resultTableCtrl::updateTable)
-                        .peekLeft(PresentationCtrl.getInstance()::setMessage)
+                        .peekLeft(err -> Platform.runLater(() -> PresentationCtrl.getInstance().setMessage(err)))
                 );
         }
     }
