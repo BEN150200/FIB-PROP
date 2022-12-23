@@ -216,8 +216,8 @@ public class DomainCtrl {
         return SearchCtrl.getInstance().savedBooleanExpressionSearch(name);
     }
 
-    public ArrayList<DocumentInfo> tempBooleanExpressionSearch (String boolExp) throws Exception {
-        return SearchCtrl.getInstance().tempBooleanExpressionSearch(boolExp);
+    public ArrayList<DocumentInfo> booleanExpressionSearch (String boolExp) throws Exception {
+        return SearchCtrl.getInstance().booleanExpressionSearch(boolExp);
     }
 
     public ArrayList<DocumentInfo> getAllDocumentsInfo() {

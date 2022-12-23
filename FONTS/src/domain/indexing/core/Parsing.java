@@ -19,21 +19,18 @@ import src.helpers.Strings;
 
 public class Parsing {
 
-    /**
-     * 
-     * @param idContents
-     * @return
-     */
+    // used for testing
     public static HashMap<String, Iterable<String>> makeCollection(String... idContents) {
         return Stream.of(idContents).grouped(2).foldLeft(
             HashMap.<String, String>empty(),
             (map, idContent) -> map.put(idContent.get(0), idContent.get(1))
-        )
-        .mapValues(Tokenizer::tokenize)
-        .mapValues(Arrays::asList);
-    }
-
-
+            )
+            .mapValues(Tokenizer::tokenize)
+            .mapValues(Arrays::asList);
+        }
+        
+        
+    // used for testing
     static public Tuple2<String, ? extends Iterable<String>> parseDocument(Path filepath) {
         return Try.of(() -> Files.readString(filepath, Charset.forName("ISO-8859-1")))
             .map(Tokenizer::tokenize)
@@ -69,8 +66,13 @@ public class Parsing {
                 .toEither("Invalid weight '" + splited[1] + "'");
     }
 
+    /**
+     * 
+     * @param query
+     * @return the terms-weights vectors represented by the query, or an error if sintactically incorrect
+     */
     public static Either<String, HashMap<String, Double>> weightedQuery(String query) {
-        if(query.isEmpty())
+        if(query.isBlank())
             return Either.left("Empty query");
         
         var terms = Stream.of(

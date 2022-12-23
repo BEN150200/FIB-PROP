@@ -58,7 +58,7 @@ public class BooleanExprSearchCtrl {
                 resultTableCtrl.updateTable( PresentationCtrl.getInstance().savedBooleanExpressionSearch(name.getValue()));
             }
             else {
-                resultTableCtrl.updateTable( PresentationCtrl.getInstance().tempBooleanExpressionSearch(expression.getText()));
+                resultTableCtrl.updateTable( PresentationCtrl.getInstance().booleanExpressionSearch(expression.getText()));
             }
             PresentationCtrl.getInstance().setMessage("Search done");
         }
