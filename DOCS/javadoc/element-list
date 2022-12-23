@@ -1,0 +1,15 @@
+src
+src.domain.controllers
+src.domain.core
+src.domain.expressions
+src.domain.indexing.booleanmodel
+src.domain.indexing.core
+src.domain.indexing.vectorial
+src.domain.preprocessing
+src.enums
+src.helpers
+src.persistance.controllers
+src.persistance.datamanagement
+src.persistance.documentexporter
+src.persistance.documentimporter
+src.presentation
