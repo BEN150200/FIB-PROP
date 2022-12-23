@@ -1,0 +1,1 @@
+fitxer perque no s'esborri la carpeta al git
