@@ -80,45 +80,6 @@ public class DocumentTabCtrl {
         if (newdoc) blockTitleAndAuthor();
     }
 
-    public void setNew() {
-        newdoc = true;
-    }
-
-    /*
-    @FXML
-    public void save() {
-
-        FileChooser fileChooser = new FileChooser();
-        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("TEXT files", "*.txt", "*.xml", "*.prop");
-        fileChooser.getExtensionFilters().add(extFilter);
-        //Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        Stage fileStage = new Stage();
-        File file = fileChooser.showSaveDialog(fileStage);
-        String path = file.getPath();
-        String name = file.getName();
-        Format format = null;
-        switch (path.substring(path.lastIndexOf(".") + 1)) {
-            case "txt" : {
-                format = Format.TXT;
-                break;
-            }
-            case "xml" :  {
-                format = Format.XML;
-                break;
-            }
-            default :{
-                format = Format.TXT;
-            }
-        }
-
-        ArrayList<String> content = Tokenizer.splitSentences(textArea.getText());
-
-        DocumentInfo docToBeSaved = new DocumentInfo(null, title.getText(), author.getText(), LocalDateTime.now(), LocalDateTime.now(), content, path, format);
-
-        PresentationCtrl.getInstance().saveAsDocument(docToBeSaved);
-    }
-     */
-
     /**
      * Getters
      */
@@ -146,5 +107,9 @@ public class DocumentTabCtrl {
 
     public boolean isNew() {
         return newdoc;
+    }
+
+    public boolean isBlanck() {
+        return title.getText().isBlank() || author.getText().isBlank();
     }
 }
