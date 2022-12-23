@@ -394,8 +394,6 @@ public class MainViewCtrl {
             }
         }
 
-        else PresentationCtrl.getInstance().saveDocument(currentTabCtrl.getTitle(), currentTabCtrl.getAuthor(), content);
-
         //try to save it, if it exists
         boolean exists = PresentationCtrl.getInstance().saveDocument(currentTabCtrl.getTitle(), currentTabCtrl.getAuthor(), content);
 
