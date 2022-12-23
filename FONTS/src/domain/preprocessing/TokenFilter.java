@@ -2,6 +2,8 @@ package src.domain.preprocessing;
 
 import java.util.Optional;
 
+import src.helpers.Strings;
+
 public class TokenFilter {
 
     /**
@@ -14,6 +16,9 @@ public class TokenFilter {
      */
     public static Optional<String> filter(String token) {
         return Optional.of(token)
+            .map(String::trim)
+            .filter(s -> !s.isBlank())
+            .filter(Strings::isAlphaNumeric)
             .map(String::toLowerCase)
             .filter(Stopwords::filter)
             .map(Stemmer::stem);
