@@ -15,7 +15,6 @@
       <element id="extracted-dir" path="$PROJECT_DIR$/FONTS/lib/JavaFx/javafx.media.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$PROJECT_DIR$/FONTS/lib/JavaFx/javafx.swing.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$PROJECT_DIR$/FONTS/lib/JavaFx/javafx.controls.jar" path-in-jar="/" />
-      <element id="library" level="project" name="lib" />
       <element id="file-copy" path="$PROJECT_DIR$/FONTS/lib/JavaFx/javafx-swt.jar" />
       <element id="file-copy" path="$PROJECT_DIR$/FONTS/lib/JavaFx/javafx.base.jar" />
       <element id="file-copy" path="$PROJECT_DIR$/FONTS/lib/JavaFx/javafx.controls.jar" />
@@ -25,7 +24,6 @@
       <element id="file-copy" path="$PROJECT_DIR$/FONTS/lib/JavaFx/javafx.swing.jar" />
       <element id="file-copy" path="$PROJECT_DIR$/FONTS/lib/JavaFx/javafx.web.jar" />
       <element id="file-copy" path="$PROJECT_DIR$/FONTS/lib/vavr-1.0.0-alpha-4.jar" />
-      <element id="library" level="project" name="lib (2)" />
       <element id="file-copy" path="$PROJECT_DIR$/FONTS/lib/javafx-sdk-19/bin/api-ms-win-core-console-l1-1-0.dll" />
       <element id="file-copy" path="$PROJECT_DIR$/FONTS/lib/javafx-sdk-19/bin/api-ms-win-core-console-l1-2-0.dll" />
       <element id="file-copy" path="$PROJECT_DIR$/FONTS/lib/javafx-sdk-19/bin/api-ms-win-core-datetime-l1-1-0.dll" />

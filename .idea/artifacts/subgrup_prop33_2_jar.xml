@@ -15,7 +15,6 @@
       <element id="extracted-dir" path="$PROJECT_DIR$/FONTS/lib/junit-4.13.2.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$PROJECT_DIR$/FONTS/lib/controlsfx-11.1.2.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$PROJECT_DIR$/FONTS/lib/hamcrest-core-1.3.jar" path-in-jar="/" />
-      <element id="library" level="project" name="lib" />
       <element id="file-copy" path="$PROJECT_DIR$/FONTS/lib/JavaFx/javafx-swt.jar" />
       <element id="file-copy" path="$PROJECT_DIR$/FONTS/lib/JavaFx/javafx.base.jar" />
       <element id="file-copy" path="$PROJECT_DIR$/FONTS/lib/JavaFx/javafx.controls.jar" />
