@@ -1,3 +1,0 @@
-
-executar el jar de windows amb:
-    java --module-path .\lib\javafx-sdk-19\lib --add-modules javafx.controls,javafx.fxml -jar .\out\artifacts\subgrup_prop33_2_jar\subgrup-prop33.2.jar
