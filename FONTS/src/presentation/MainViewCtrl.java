@@ -271,6 +271,10 @@ public class MainViewCtrl {
         if (noTabs && searchVisible) {
             splitPane.getDividers().get(0).setPosition(dividerPosition);
         }
+        if (Objects.equals(fxmlFileName, "resultTable.fxml")) {
+            ResultTableCtrl tabCtrl = loader.getController();
+            tabCtrl.setForAllDocs();
+        }
         //if the tab is a doc tab
         if (Objects.equals(fxmlFileName, "documentTab.fxml")) {
             //set close handler
@@ -367,7 +371,7 @@ public class MainViewCtrl {
      */
     public void openFile() {
         FileChooser fileChooser = new FileChooser();
-        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("TEXT files", "*.gut", "*.txt", "*.xml", "*.prop");
+        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("TEXT files", "*.txt", "*.xml", "*.prop");
         fileChooser.getExtensionFilters().add(extFilter);
         Stage fileStage = new Stage();
         File file = fileChooser.showOpenDialog(fileStage);
@@ -511,7 +515,7 @@ public class MainViewCtrl {
     private void importFile() {
         var start = Instant.now();
         FileChooser fileChooser = new FileChooser();
-        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("TEXT files", "*.txt", "*.xml", "*.prop", "*.gut");
+        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("TEXT files", "*.txt", "*.xml", "*.prop");
         fileChooser.getExtensionFilters().add(extFilter);
         Stage fileStage = new Stage();
         List<File> fileList = fileChooser.showOpenMultipleDialog(fileStage);
@@ -584,10 +588,6 @@ public class MainViewCtrl {
             case "prop" :  {
                 return Format.PROP;
             }
-            case "gut": {
-                return Format.GUTEMBERG;
-            }
-
             default :{
                 return Format.PROP;
             }
