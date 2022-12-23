@@ -121,8 +121,8 @@ public class PresentationCtrl {
 
 
 
-    public ArrayList<DocumentInfo> tempBooleanExpressionSearch(String boolExp)throws Exception{
-        return DomainCtrl.getInstance().tempBooleanExpressionSearch(boolExp);
+    public ArrayList<DocumentInfo> booleanExpressionSearch(String boolExp)throws Exception{
+        return DomainCtrl.getInstance().booleanExpressionSearch(boolExp);
     }
 
     public ArrayList<DocumentInfo> savedBooleanExpressionSearch(String name)throws Exception{
