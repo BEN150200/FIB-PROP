@@ -5,3 +5,8 @@
     -fx-padding: 0 10px;
     -fx-background-color: -left-panel-color;
 }
+
+.label {
+    -fx-background-color: -left-panel-color;
+    -fx-padding: 0px 4px 4px 20px;
+}
