@@ -29,7 +29,7 @@ public class DocumentImporterXML implements DocumentImporter{
         Document doc = db.parse(file);  
         doc.getDocumentElement().normalize();  
         String title = "";
-        NodeList nodeList = doc.getElementsByTagName("títol");  
+        NodeList nodeList = doc.getElementsByTagName("titol");  
         for (int i = 0; i < nodeList.getLength(); i++){
             title = nodeList.item(i).getTextContent(); 
         }

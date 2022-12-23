@@ -33,8 +33,6 @@ jar xf "..\..\FONTS\lib\javafx-sdk-19\lib\javafx.swing.jar"
 jar xf "..\..\FONTS\lib\javafx-sdk-19\lib\javafx.web.jar"
 jar xf "..\..\FONTS\lib\javafx-sdk-19\lib\javafx-swt.jar"
 jar xf "..\..\FONTS\lib\controlsfx-11.1.2.jar"
-jar xf "..\..\FONTS\lib\hamcrest-core-1.3.jar"
-jar xf "..\..\FONTS\lib\junit-4.13.2.jar"
 jar xf "..\..\FONTS\lib\vavr-1.0.0-alpha-4.jar"
 
 cd ..\..\FONTS
@@ -47,7 +45,6 @@ copy .\lib\javafx-sdk-19\bin\api*.dll ..\EXE\src
 copy .\lib\javafx-sdk-19\bin\fxplugins.dll ..\EXE\src
 copy .\lib\javafx-sdk-19\bin\glib-lite.dll ..\EXE\src
 copy .\lib\javafx-sdk-19\bin\gstreamer-lite.dll ..\EXE\src
-copy .\lib\javafx-sdk-19\bin\jfx*.dll ..\EXE\src
 copy .\lib\javafx-sdk-19\bin\msvcp*.dll ..\EXE\src
 copy .\lib\javafx-sdk-19\bin\ucrtbase.dll ..\EXE\src
 copy .\lib\javafx-sdk-19\bin\vcruntime*.dll ..\EXE\src
