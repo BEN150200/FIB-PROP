@@ -1,7 +1,15 @@
 - DescripcioEquip: Descripció de l'equip (noms i correus electronics).
 
-- EXE: 	Executables de les classes i el driver.
+- EXE: 	
+    - Fitxers .bat executables
+    - Carpeta src amb les classes compilades
+    - Carpeta data amb els fitxers necessaris per al backup de l'aplicació
+    - Carpeta amb els documents de jocs de prova i els documents de prova.
 
-- DOCS:	Conté un document amb tota la informacio del lliurament.
+- DOCS:
+    - Carpeta de la documentació generada per Javadoc
+    - Relació de llibreries externes utilitzades
+    - Relació de feina feta per cada membre
+    - Manual d'usuari
 
-- FONTS:Aquest directori conté la implementació fins al moment de totes les classes.
+- FONTS: Aquest directori conté la implementació fins al moment de totes les classes.
