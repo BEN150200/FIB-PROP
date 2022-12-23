@@ -256,6 +256,11 @@ public class MainViewCtrl {
      */
     private Tab newEmptyTab(String tabName, String fxmlFileName) throws IOException {
 
+        if (tabPane.getTabs().size() >= 20) {
+            showExceptionAlert("Too many Tabs, close some in order to open new ones");
+            return null;
+        }
+
         boolean noTabs = tabPane.getTabs().isEmpty();
         Tab tab = new Tab(tabName);
 
@@ -304,6 +309,11 @@ public class MainViewCtrl {
         if (documentInfo == null) return;
 
         if (selectTab(documentInfo.getTitle(), documentInfo.getAuthor())) return;
+
+        if (tabPane.getTabs().size() >= 20) {
+            showExceptionAlert("Too many Tabs, close some in order to open new ones");
+            return;
+        }
 
         //open the documentInfo on new tab
         Tab tab = newEmptyTab(documentInfo.getFileName(), "documentTab.fxml");
@@ -383,6 +393,10 @@ public class MainViewCtrl {
         if (tabPane.getTabs().isEmpty()) return;
         Tab currentTab = tabPane.getSelectionModel().getSelectedItem();
         DocumentTabCtrl currentTabCtrl = tabControllers.get(currentTab);
+        if (currentTabCtrl.isBlanck()) {
+            showExceptionAlert("The Title and the Author fields can't be empty");
+            return;
+        }
 
         //if the content of the document id modified try to save it, else don't
         if (currentTabCtrl.modified()) {
@@ -411,6 +425,10 @@ public class MainViewCtrl {
         if (tabPane.getTabs().isEmpty()) return;
         Tab currentTab = tabPane.getSelectionModel().getSelectedItem();
         DocumentTabCtrl currentTabCtrl = tabControllers.get(currentTab);
+        if (currentTabCtrl.isBlanck()) {
+            showExceptionAlert("The Title and the Author fields can't be empty");
+            return;
+        }
 
         FileChooser fileChooser = new FileChooser();
         FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("TEXT files", "*.txt", "*.xml", "*.prop");
@@ -465,6 +483,10 @@ public class MainViewCtrl {
         if (tabPane.getTabs().isEmpty()) return;
         Tab currentTab = tabPane.getSelectionModel().getSelectedItem();
         DocumentTabCtrl currentTabCtrl = tabControllers.get(currentTab);
+        if (currentTabCtrl.isBlanck()) {
+            showExceptionAlert("The Title and the Author fields can't be empty");
+            return;
+        }
 
         FileChooser fileChooser = new FileChooser();
         FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("TEXT files", "*.txt", "*.xml", "*.prop");
