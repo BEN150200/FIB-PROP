@@ -367,7 +367,7 @@ public class MainViewCtrl {
      */
     public void openFile() {
         FileChooser fileChooser = new FileChooser();
-        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("TEXT files", "*.gut", "*.txt", "*.xml", "*.prop");
+        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("TEXT files", "*.txt", "*.xml", "*.prop");
         fileChooser.getExtensionFilters().add(extFilter);
         Stage fileStage = new Stage();
         File file = fileChooser.showOpenDialog(fileStage);
@@ -511,7 +511,7 @@ public class MainViewCtrl {
     private void importFile() {
         var start = Instant.now();
         FileChooser fileChooser = new FileChooser();
-        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("TEXT files", "*.txt", "*.xml", "*.prop", "*.gut");
+        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("TEXT files", "*.txt", "*.xml", "*.prop");
         fileChooser.getExtensionFilters().add(extFilter);
         Stage fileStage = new Stage();
         List<File> fileList = fileChooser.showOpenMultipleDialog(fileStage);
@@ -584,10 +584,6 @@ public class MainViewCtrl {
             case "prop" :  {
                 return Format.PROP;
             }
-            case "gut": {
-                return Format.GUTEMBERG;
-            }
-
             default :{
                 return Format.PROP;
             }
