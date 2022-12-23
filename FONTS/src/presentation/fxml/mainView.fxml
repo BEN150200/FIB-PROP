@@ -89,7 +89,11 @@
             </Menu>
             <Menu mnemonicParsing="false" text="Search">
                <items>
-                  <MenuItem mnemonicParsing="false" onAction="#newSearchTab" text="Search on New Tab" />
+                  <MenuItem mnemonicParsing="false" onAction="#newAllDocsTab" text="All Documents on New Tab" />
+                  <MenuItem mnemonicParsing="false" onAction="#newSearchTab" text="Search by Title and Author on New Tab" />
+                  <MenuItem mnemonicParsing="false" onAction="#newBoolTab" text="Boolean Search on New Tab" />
+                  <MenuItem mnemonicParsing="false" onAction="#newSimilarityTab" text="Similarity Search on New Tab" />
+                  <MenuItem mnemonicParsing="false" onAction="#newWeightedTab" text="Weighted Search on New Tab" />
                </items>
             </Menu>
             <Menu mnemonicParsing="false" text="Data">
