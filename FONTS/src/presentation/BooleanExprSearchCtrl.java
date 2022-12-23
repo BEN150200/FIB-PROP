@@ -112,10 +112,12 @@ public class BooleanExprSearchCtrl {
 
     public void deleteExpression(){ //elimina la expressio
         if(!PresentationCtrl.getInstance().deleteBooleanExpression(name.getValue())) {
-            PresentationCtrl.getInstance().showExceptionAlert(" no existeix");
+            PresentationCtrl.getInstance().showExceptionAlert("There is no expression named " + name.getValue());
         }
         else {
-            PresentationCtrl.getInstance().setMessage("expressio eliminada");
+            expression.setText("");
+            name.setValue("");
+            PresentationCtrl.getInstance().setMessage("Expression deleted");
         }
     }
     public void getExpressionsNames(){

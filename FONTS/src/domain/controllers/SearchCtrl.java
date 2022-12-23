@@ -8,21 +8,12 @@ import src.domain.indexing.core.IndexingController;
 import static src.helpers.Functional.value;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Optional;
-import java.util.Map.Entry;
 import java.util.concurrent.CompletableFuture;
-import java.util.stream.Collectors;
 
 import io.vavr.collection.HashMap;
 import io.vavr.collection.HashSet;
-import io.vavr.collection.Stream;
-import io.vavr.concurrent.Future;
 import io.vavr.control.Either;
-import io.vavr.control.Option;
 
 @SuppressWarnings("deprecation")
 public class SearchCtrl {
