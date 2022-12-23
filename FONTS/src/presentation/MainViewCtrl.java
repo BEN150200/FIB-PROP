@@ -385,7 +385,7 @@ public class MainViewCtrl {
         Tab currentTab = tabPane.getSelectionModel().getSelectedItem();
         DocumentTabCtrl currentTabCtrl = tabControllers.get(currentTab);
 
-        ArrayList<String> content = Tokenizer.splitSentences(currentTabCtrl.getContent());
+        var content = Tokenizer.splitSentences(currentTabCtrl.getContent());
 
         if (currentTabCtrl.isNew()) {
             if (PresentationCtrl.getInstance().existsDocument(currentTabCtrl.getTitle(),currentTabCtrl.getAuthor())) {
@@ -422,7 +422,7 @@ public class MainViewCtrl {
             String path = file.getPath();
             Format format = extractFormat(path);
 
-            ArrayList<String> content = Tokenizer.splitSentences(currentTabCtrl.getContent());
+            var content = Tokenizer.splitSentences(currentTabCtrl.getContent());
             DocumentInfo docToBeSaved = new DocumentInfo(null, currentTabCtrl.getTitle(), currentTabCtrl.getAuthor(), LocalDateTime.now(), LocalDateTime.now(), content, path, format, file.getName());
 
             PresentationCtrl.getInstance().saveAsDocument(docToBeSaved);
@@ -485,9 +485,9 @@ public class MainViewCtrl {
             String path = file.getPath();
             String name = file.getName();
 
-            ArrayList<String> content = Tokenizer.splitSentences(currentTabCtrl.getContent());
+            var content = Tokenizer.splitSentences(currentTabCtrl.getContent());
 
-            DocumentInfo docToBeSaved = new DocumentInfo(null, currentTabCtrl.getTitle(), currentTabCtrl.getAuthor(), LocalDateTime.now(), LocalDateTime.now(), content, path, format, file.getName());
+            DocumentInfo docToBeSaved = new DocumentInfo(null, currentTabCtrl.getTitle(), currentTabCtrl.getAuthor(), LocalDateTime.now(), LocalDateTime.now(), content, path, format, name);
 
             PresentationCtrl.getInstance().export(docToBeSaved);
             updateAllSearchViews();

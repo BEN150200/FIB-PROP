@@ -147,7 +147,7 @@ public class PresentationCtrl {
      * File Management Functions
      */
 
-    public boolean saveDocument(String title, String author, ArrayList<String> content) {
+    public boolean saveDocument(String title, String author, List<String> content) {
         try {
             DomainCtrl.getInstance().saveDocument(title, author, content);
             return true;

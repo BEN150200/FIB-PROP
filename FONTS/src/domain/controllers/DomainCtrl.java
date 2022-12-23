@@ -253,7 +253,7 @@ public class DomainCtrl {
     }
 
 
-    public void saveDocument(String titleName, String authorName, ArrayList<String> content) throws Exception{
+    public void saveDocument(String titleName, String authorName, List<String> content) throws Exception{
         Document doc = DocumentCtrl.getInstance().getDocument(titleName, authorName);
         if (doc == null) throw new Exception("A document with this title and author does not exist.");
         updateDocumentContent(doc, content);

@@ -3,6 +3,8 @@ package src.domain.core;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.List;
+
 import src.enums.Format;
 
 public class DocumentInfo {
@@ -11,7 +13,7 @@ public class DocumentInfo {
     private String author;
     private LocalDateTime creationDate;
     private LocalDateTime modificationDate;
-    private ArrayList<String> content;
+    private List<String> content;
 
     private String path;
     private Format fileFormat;
@@ -20,7 +22,7 @@ public class DocumentInfo {
 
     private Double similarity = 0.0d;
 
-    public DocumentInfo(Integer docID, String titleName, String authorName, LocalDateTime creationDate, LocalDateTime modificationDate, ArrayList<String> content, String path, Format fileFormat, String fileName) {
+    public DocumentInfo(Integer docID, String titleName, String authorName, LocalDateTime creationDate, LocalDateTime modificationDate, List<String> content, String path, Format fileFormat, String fileName) {
         this.docID = docID;
         this.title = titleName;
         this.author = authorName;
@@ -35,7 +37,7 @@ public class DocumentInfo {
     public DocumentInfo(
             Integer docID, String titleName, String authorName,
             LocalDateTime creationDate, LocalDateTime modificationDate,
-            ArrayList<String> content, String path, Format fileFormat, String fileName, double similarity)
+            List<String> content, String path, Format fileFormat, String fileName, double similarity)
     {
         this.docID = docID;
         this.title = titleName;
@@ -70,7 +72,7 @@ public class DocumentInfo {
         return author;
     }
 
-    public ArrayList<String> getContent(){
+    public List<String> getContent(){
         return content;
     }
 
